@@ -1,0 +1,25 @@
+header.container-header {
+  height: 100px;
+  width: 100%;
+  background-color: #c4c4c4;
+  display: flex;
+
+  div.logo {
+    height: 100%;
+    width: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    p {
+      font-size: 1.8rem;
+      font-weight: bold;
+    }
+  }
+  div.title {
+    height: 100%;
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
