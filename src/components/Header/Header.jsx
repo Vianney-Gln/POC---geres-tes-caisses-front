@@ -1,6 +1,6 @@
 import React from 'react';
+// style css
 import './header.scss';
-
 const Header = () => {
   return (
     <header className="container-header">
