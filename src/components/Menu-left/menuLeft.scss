@@ -4,4 +4,20 @@ div.menu-left {
   height: 85vh;
   border: 1px solid black;
   border-top: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  select {
+    width: 90%;
+    margin-top: 30px;
+    background-color: #c4c4c4;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 10px;
+
+    option {
+      background-color: white;
+    }
+  }
 }
