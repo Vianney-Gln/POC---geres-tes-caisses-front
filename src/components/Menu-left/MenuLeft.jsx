@@ -10,6 +10,14 @@ const MenuLeft = () => {
         <option>Caisses total</option>
         <option>Fagots</option>
       </select>
+      <ul className="list-article">
+        <li>première article</li>
+        <li>deuxième article</li>
+        <li>troisième article</li>
+      </ul>
+      <div className="quantity">
+        <p>Nombre caisses:</p>
+      </div>
     </div>
   );
 };
