@@ -41,7 +41,15 @@ const Stock = () => {
   return (
     <div className="container-stock">
       <table>
-        <caption>Consultation des stocks</caption>
+        {typeStock === 'caisses-vrac' ? (
+          <caption>Consultation des stocks vrac</caption>
+        ) : typeStock === 'caisses-total' ? (
+          <caption>consultation des stock total</caption>
+        ) : typeStock === 'fagots' ? (
+          <caption>consultation des fagots</caption>
+        ) : (
+          ''
+        )}
         <thead>
           <tr align="center">
             <th>identifiant</th>
