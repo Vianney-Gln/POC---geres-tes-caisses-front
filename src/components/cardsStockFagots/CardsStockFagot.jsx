@@ -2,14 +2,20 @@
 import React from 'react';
 // import PropTypes
 import PropTypes from 'prop-types';
+// import style css
+import './cardsStockFagot.scss';
 
 const CardsStockFagot = ({ stock }) => {
-  console.log(stock);
-  return <div className="card-fagot">CardsStockFagot</div>;
+  return (
+    <li className="card-fagot">
+      <span>{stock.uuid}</span>
+      <span>{stock.fagotType}</span>
+    </li>
+  );
 };
 
 CardsStockFagot.propTypes = {
-  stock: PropTypes.array
+  stock: PropTypes.object
 };
 
 export default CardsStockFagot;

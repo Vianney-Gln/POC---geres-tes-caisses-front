@@ -50,9 +50,14 @@ const Stock = () => {
   return (
     <div className="container-stock">
       {typeStock === 'caisses-vrac' || typeStock === 'caisses-total' ? (
-        <TableStock stock={stock} />
+        <TableStock stock={stock} typeStock={typeStock} />
       ) : typeStock === 'fagots' ? (
-        <CardsStockFagot stock={stock} />
+        <>
+          <ul className="list-cards">
+            <h2>Consultation des fagots</h2>
+            {stock.length ? stock.map((elt) => <CardsStockFagot key={elt.id} stock={elt} />) : null}
+          </ul>
+        </>
       ) : null}
     </div>
   );

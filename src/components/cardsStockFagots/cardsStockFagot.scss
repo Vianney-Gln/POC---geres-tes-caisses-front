@@ -1,0 +1,22 @@
+li.card-fagot {
+  width: 200px;
+  height: 150px;
+  background-color: #f0eeee;
+  border: 1px solid black;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  cursor: pointer;
+  margin: 0 10px;
+
+  span {
+    font-size: 1.4rem;
+    font-weight: bold;
+  }
+}
+
+li.card-fagot:hover {
+  background-color: #c4c4c4;
+}
