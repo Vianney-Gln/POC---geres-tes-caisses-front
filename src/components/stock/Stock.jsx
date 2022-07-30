@@ -4,25 +4,30 @@ import React, { useState, useEffect, useContext } from 'react';
 import './stock.scss';
 // service
 import getStockVrac from '../../services/stock';
-// import components
-import ContextArticles from '../../context/ContextArticles';
+// import components context
+import ContextStock from '../../context/ContextStock';
 
 const Stock = () => {
   // States
   const [stock, setStock] = useState([]); // state getting stock
 
   // get Context
-  const contextArticles = useContext(ContextArticles);
-  const { typeStock } = contextArticles;
+  const contextStock = useContext(ContextStock);
+  const { typeStock } = contextStock;
 
   // function getting stock calling api
 
   useEffect(() => {
-    getStockVrac()
-      .then((result) => {
-        setStock(result.data);
-      })
-      .catch((err) => console.log(err));
+    console.log(typeStock);
+    if (typeStock === 'caisses-vrac') {
+      getStockVrac()
+        .then((result) => {
+          setStock(result.data);
+        })
+        .catch((err) => console.log(err));
+    } else {
+      setStock([]);
+    }
   }, [typeStock]);
   return (
     <div className="container-stock">

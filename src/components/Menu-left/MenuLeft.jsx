@@ -2,13 +2,16 @@
 import React, { useContext } from 'react';
 // import style css
 import './menuLeft.scss';
-// import components
+// import components context
 import ContextArticles from '../../context/ContextArticles';
+import ContextStock from '../../context/ContextStock';
 
 const MenuLeft = () => {
   // use context
-  const contextArticles = useContext(ContextArticles);
-  const { articles, setTypeStock } = contextArticles;
+  const contextArticles = useContext(ContextArticles); // context articles;
+  const contextStock = useContext(ContextStock); // context stock
+  const { articles } = contextArticles;
+  const { setTypeStock } = contextStock;
   return (
     <div className="menu-left">
       <select onChange={(e) => setTypeStock(e.target.value)}>

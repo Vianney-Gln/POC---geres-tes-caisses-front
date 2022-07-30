@@ -8,14 +8,17 @@ import './index.css';
 import App from './components/App/App';
 // import context
 import { ContextArticlesProvider } from './context/ContextArticles';
+import { ContextStockProvider } from './context/ContextStock';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <ContextArticlesProvider>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </ContextArticlesProvider>
+    <ContextStockProvider>
+      <ContextArticlesProvider>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </ContextArticlesProvider>
+    </ContextStockProvider>
   </React.StrictMode>
 );
