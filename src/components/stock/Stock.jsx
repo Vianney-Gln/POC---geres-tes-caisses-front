@@ -3,7 +3,7 @@ import React, { useState, useEffect, useContext } from 'react';
 // import style css;
 import './stock.scss';
 // service
-import getStockVrac from '../../services/stock';
+import getStockVrac, { getStockTotal } from '../../services/stock';
 // import components context
 import ContextStock from '../../context/ContextStock';
 
@@ -25,6 +25,15 @@ const Stock = () => {
           setStock(result.data);
         })
         .catch((err) => console.log(err));
+    } else if (typeStock === 'caisses-total') {
+      getStockTotal()
+        .then((result) => {
+          setStock(result.data);
+          console.log(result.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     } else {
       setStock([]);
     }
@@ -37,6 +46,7 @@ const Stock = () => {
           <tr align="center">
             <th>identifiant</th>
             <th>désignation</th>
+            {typeStock === 'caisses-total' ? <th>fagot</th> : ''}
           </tr>
         </thead>
         <tbody>
@@ -44,6 +54,7 @@ const Stock = () => {
             <tr align="center">
               <td></td>
               <td></td>
+              {typeStock === 'caisses-total' ? <td></td> : ''}
             </tr>
           )}
           {stock &&
@@ -52,6 +63,7 @@ const Stock = () => {
                 <tr key={index}>
                   <td align="center">{element.uuid}</td>
                   <td align="center">{element.name}</td>
+                  {typeStock === 'caisses-total' ? <td align="center">{element.idFagot}</td> : ''}
                 </tr>
               );
             })}
