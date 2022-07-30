@@ -8,6 +8,7 @@ import getStockVrac, { getStockTotal, getFagots } from '../../services/stock';
 import ContextStock from '../../context/ContextStock';
 // import components
 import TableStock from '../tableStock/TableStock';
+import CardsStockFagot from '../cardsStockFagots/CardsStockFagot';
 
 const Stock = () => {
   // States
@@ -30,7 +31,6 @@ const Stock = () => {
       getStockTotal()
         .then((result) => {
           setStock(result.data);
-          console.log(result.data);
         })
         .catch((err) => {
           console.log(err);
@@ -49,7 +49,11 @@ const Stock = () => {
   }, [typeStock]);
   return (
     <div className="container-stock">
-      <TableStock stock={stock} />
+      {typeStock === 'caisses-vrac' || typeStock === 'caisses-total' ? (
+        <TableStock stock={stock} />
+      ) : typeStock === 'fagots' ? (
+        <CardsStockFagot stock={stock} />
+      ) : null}
     </div>
   );
 };
