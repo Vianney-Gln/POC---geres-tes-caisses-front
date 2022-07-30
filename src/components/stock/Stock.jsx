@@ -19,7 +19,36 @@ const Stock = () => {
       })
       .catch((err) => console.log(err));
   }, []);
-  return <div className="container-stock">Stock</div>;
+  return (
+    <div className="container-stock">
+      <table>
+        <caption>Consultation des stocks</caption>
+        <thead>
+          <tr align="center">
+            <th>identifiant</th>
+            <th>désignation</th>
+          </tr>
+        </thead>
+        <tbody>
+          {stock.length < 1 && (
+            <tr align="center">
+              <td></td>
+              <td></td>
+            </tr>
+          )}
+          {stock &&
+            stock.map((element) => {
+              return (
+                <tr key={element.id}>
+                  <td align="center">{element.uuid}</td>
+                  <td align="center">{element.name}</td>
+                </tr>
+              );
+            })}
+        </tbody>
+      </table>
+    </div>
+  );
 };
 
 export default Stock;
