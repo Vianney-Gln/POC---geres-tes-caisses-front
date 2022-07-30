@@ -1,22 +1,14 @@
-import React, { useState, useEffect } from 'react';
-// style css
+// import react hooks
+import React, { useContext } from 'react';
+// import style css
 import './menuLeft.scss';
-// service
-import getArticles from '../../services/articles';
+// import components
+import ContextArticles from '../../context/ContextArticles';
 
 const MenuLeft = () => {
-  const [articles, setArticles] = useState([]); // states getting articles
-
-  // Function getting all articles and update articles state
-  useEffect(() => {
-    getArticles()
-      .then((result) => {
-        setArticles(result.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
+  // use context
+  const contextArticles = useContext(ContextArticles);
+  const { articles } = contextArticles;
   return (
     <div className="menu-left">
       <select>
