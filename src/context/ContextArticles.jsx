@@ -8,7 +8,8 @@ import getArticles from '../services/articles';
 const ContextArticles = createContext(null);
 export const ContextArticlesProvider = ({ children }) => {
   // States
-  const [articles, setArticles] = useState([]);
+  const [articles, setArticles] = useState([]); // state getting differents articles
+  const [typeStock, setTypeStock] = useState('caisses-vrac'); // state getting the type of stock (vrac, total, fagots) --- default caisses-vrac
 
   // Function getting all articles and update articles state
   useEffect(() => {
@@ -20,11 +21,20 @@ export const ContextArticlesProvider = ({ children }) => {
         console.log(err);
       });
   }, []);
-  return <ContextArticles.Provider value={{ articles }}>{children}</ContextArticles.Provider>;
+  return (
+    <ContextArticles.Provider value={{ articles, typeStock, setTypeStock }}>
+      {children}
+    </ContextArticles.Provider>
+  );
 };
 
 ContextArticlesProvider.propTypes = {
-  children: PropTypes.node,
-  articles: PropTypes.array
+  children: PropTypes.node
+};
+
+ContextArticles.propTypes = {
+  articles: PropTypes.array,
+  typeStock: PropTypes.string,
+  setTypeStock: PropTypes.func
 };
 export default ContextArticles;

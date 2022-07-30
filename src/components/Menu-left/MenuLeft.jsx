@@ -8,13 +8,13 @@ import ContextArticles from '../../context/ContextArticles';
 const MenuLeft = () => {
   // use context
   const contextArticles = useContext(ContextArticles);
-  const { articles } = contextArticles;
+  const { articles, setTypeStock } = contextArticles;
   return (
     <div className="menu-left">
-      <select>
-        <option>Caisses vracs</option>
-        <option>Caisses total</option>
-        <option>Fagots</option>
+      <select onChange={(e) => setTypeStock(e.target.value)}>
+        <option value="caisses-vrac">Caisses vracs</option>
+        <option value="caisses-total">Caisses total</option>
+        <option value="fagots">Fagots</option>
       </select>
       <ul className="list-article">
         {articles.length
