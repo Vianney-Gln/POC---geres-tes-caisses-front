@@ -1,5 +1,6 @@
 //import react router dom
 import { Routes, Route } from 'react-router-dom';
+import ContentFagot from '../contentFagot/ContentFagot';
 // Components imports
 import Header from '../Header/Header';
 import MenuLeft from '../Menu-left/MenuLeft';
@@ -17,6 +18,7 @@ const App = () => {
         <MenuTop />
         <Routes>
           <Route exact path="/" element={<Stock />} />
+          <Route exact path="/fagot-content/:uuid" element={<ContentFagot />} />
         </Routes>
       </div>
     </div>
