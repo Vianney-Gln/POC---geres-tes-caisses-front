@@ -11,7 +11,7 @@ const MenuLeft = () => {
   const contextArticles = useContext(ContextArticles); // context articles;
   const contextStock = useContext(ContextStock); // context stock
   const { articles } = contextArticles;
-  const { setTypeStock } = contextStock;
+  const { typeStock, setTypeStock, numberBoxes } = contextStock;
   return (
     <div className="menu-left">
       <select onChange={(e) => setTypeStock(e.target.value)}>
@@ -27,7 +27,16 @@ const MenuLeft = () => {
           : ''}
       </ul>
       <div className="quantity">
-        <p>Nombre caisses:</p>
+        <p>
+          {typeStock === 'caisses-vrac'
+            ? 'Nombre caisses vrac:'
+            : typeStock === 'caisses-total'
+            ? 'Nombre caisses total:'
+            : typeStock === 'fagots'
+            ? 'Nombre de fagots:'
+            : ''}{' '}
+          <span>{numberBoxes}</span>
+        </p>
       </div>
     </div>
   );

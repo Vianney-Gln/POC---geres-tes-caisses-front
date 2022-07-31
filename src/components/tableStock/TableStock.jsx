@@ -38,7 +38,13 @@ const TableStock = ({ typeStock, stock }) => {
               <tr key={index}>
                 <td align="center">{element.uuid}</td>
                 <td align="center">{element.name}</td>
-                {typeStock === 'caisses-total' ? <td align="center">{element.idFagot}</td> : ''}
+                {typeStock === 'caisses-total' ? (
+                  <td align="center">
+                    {element.idFagot ? 'fag-' + element.idFagot : 'non fagotée'}
+                  </td>
+                ) : (
+                  ''
+                )}
               </tr>
             );
           })}

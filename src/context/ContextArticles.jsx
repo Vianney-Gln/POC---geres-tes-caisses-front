@@ -27,7 +27,4 @@ ContextArticlesProvider.propTypes = {
   children: PropTypes.node
 };
 
-ContextArticles.propTypes = {
-  articles: PropTypes.array
-};
 export default ContextArticles;

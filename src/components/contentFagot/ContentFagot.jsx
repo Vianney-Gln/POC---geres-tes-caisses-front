@@ -27,7 +27,7 @@ const ContentFagot = () => {
   return (
     <div className="container-contentFagot">
       <table className="table-boxes-fagots">
-        <caption>Constitution du fagot</caption>
+        <caption>{`Constitution du fagot fag-${param.id}`}</caption>
         <thead>
           <tr align="center">
             <th>identifiant</th>
