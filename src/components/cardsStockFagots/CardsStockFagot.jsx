@@ -9,7 +9,7 @@ import './cardsStockFagot.scss';
 
 const CardsStockFagot = ({ stock }) => {
   return (
-    <Link to={`/fagot-content/${stock.uuid}`}>
+    <Link to={`/fagot-content/${stock.id}`}>
       <li className="card-fagot">
         <span>{stock.uuid}</span>
         <span>{stock.fagotType}</span>

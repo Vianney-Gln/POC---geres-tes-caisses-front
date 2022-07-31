@@ -18,7 +18,7 @@ const App = () => {
         <MenuTop />
         <Routes>
           <Route exact path="/" element={<Stock />} />
-          <Route exact path="/fagot-content/:uuid" element={<ContentFagot />} />
+          <Route exact path="/fagot-content/:id" element={<ContentFagot />} />
         </Routes>
       </div>
     </div>
