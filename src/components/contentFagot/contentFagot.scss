@@ -1,0 +1,31 @@
+div.container-contentFagot {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  max-height: 500px;
+  overflow-y: auto;
+
+  table.table-boxes-fagots {
+    width: 80%;
+    margin-top: 40px;
+    border-collapse: collapse;
+    background-color: whitesmoke;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 0px 8px;
+
+    caption {
+      padding: 15px;
+      font-size: 1.4rem;
+      margin-bottom: 20px;
+    }
+
+    td,
+    th {
+      border: 1px solid black;
+      padding: 10px;
+    }
+    th {
+      background-color: white;
+    }
+  }
+}

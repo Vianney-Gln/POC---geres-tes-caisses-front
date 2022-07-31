@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 
 const TableStock = ({ typeStock, stock }) => {
   return (
-    <table>
+    <table className="table-stock">
       {typeStock === 'caisses-vrac' ? (
         <caption>Consultation des stocks vrac</caption>
       ) : typeStock === 'caisses-total' ? (
