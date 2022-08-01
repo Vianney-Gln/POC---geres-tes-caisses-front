@@ -3,4 +3,11 @@ div.App {
   width: 100%;
   display: flex;
   flex-wrap: wrap;
+
+  div.centre-app {
+    width: 85%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+  }
 }

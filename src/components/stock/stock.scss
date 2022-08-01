@@ -1,0 +1,28 @@
+div.container-stock {
+  background-color: white;
+  padding-bottom: 40px;
+  width: 100%;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  max-height: 500px;
+  overflow-y: auto;
+
+  ul.list-cards {
+    width: 100%;
+    display: flex;
+    align-items: space-around;
+    flex-wrap: wrap;
+    list-style: none;
+
+    h2 {
+      width: 100%;
+      text-align: center;
+      margin: 0;
+      margin-bottom: 20px;
+      margin-top: 40px;
+      font-weight: normal;
+    }
+  }
+}
