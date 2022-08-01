@@ -6,6 +6,7 @@ import './stock.scss';
 import getStockVrac, { getStockTotal, getFagots } from '../../services/stock';
 // import components context
 import ContextStock from '../../context/ContextStock';
+import ContextArticles from '../../context/ContextArticles';
 // import components
 import TableStock from '../tableStock/TableStock';
 import CardsStockFagot from '../cardsStockFagots/CardsStockFagot';
@@ -17,17 +18,21 @@ const Stock = () => {
   // get Context
   const contextStock = useContext(ContextStock);
   const { typeStock } = contextStock;
+  const contextArticle = useContext(ContextArticles);
+  const { setActivate } = contextArticle;
 
   // function getting stock calling api
 
   useEffect(() => {
     if (typeStock === 'caisses-vrac') {
+      setActivate(true);
       getStockVrac()
         .then((result) => {
           setStock(result.data);
         })
         .catch((err) => console.log(err));
     } else if (typeStock === 'caisses-total') {
+      setActivate(true);
       getStockTotal()
         .then((result) => {
           setStock(result.data);
@@ -36,6 +41,7 @@ const Stock = () => {
           console.log(err);
         });
     } else if (typeStock === 'fagots') {
+      setActivate(false);
       getFagots()
         .then((result) => {
           setStock(result.data);

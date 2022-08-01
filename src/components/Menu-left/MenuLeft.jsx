@@ -1,5 +1,6 @@
 // import react hooks
 import React, { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 // import style css
 import './menuLeft.scss';
 // import components context
@@ -7,14 +8,20 @@ import ContextArticles from '../../context/ContextArticles';
 import ContextStock from '../../context/ContextStock';
 
 const MenuLeft = () => {
+  //useNavigate
+  const navigate = useNavigate();
   // use context
   const contextArticles = useContext(ContextArticles); // context articles;
   const contextStock = useContext(ContextStock); // context stock
-  const { articles } = contextArticles;
+  const { articles, activate } = contextArticles;
   const { typeStock, setTypeStock, numberBoxes } = contextStock;
   return (
     <div className="menu-left">
-      <select onChange={(e) => setTypeStock(e.target.value)}>
+      <select
+        onChange={(e) => {
+          setTypeStock(e.target.value);
+          navigate('/');
+        }}>
         <option value="caisses-vrac">Caisses vracs</option>
         <option value="caisses-total">Caisses total</option>
         <option value="fagots">Fagots</option>
@@ -22,7 +29,11 @@ const MenuLeft = () => {
       <ul className="list-article">
         {articles.length
           ? articles.map((article) => {
-              return <li key={article.id}>{article.name}</li>;
+              return (
+                <li className={activate ? 'unable' : 'disable'} key={article.id}>
+                  {article.name}
+                </li>
+              );
             })
           : ''}
       </ul>

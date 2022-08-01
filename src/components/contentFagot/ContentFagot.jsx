@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 // react router dom
 import { useParams } from 'react-router-dom';
+
 // import style css
 import './contentFagot.scss';
 // import service
@@ -12,12 +13,11 @@ const ContentFagot = () => {
   const param = useParams();
   // Sates
   const [fagotBoxes, setFagotBoxes] = useState([]); // state getting boxes from one fagot
-  // Function getting boxes from one fagot and setting the boxes statement
+  // Function getting boxes from one fagot, setting the boxes statement and disable filters
   useEffect(() => {
     getBoxeByFagot(param.id)
       .then((result) => {
         setFagotBoxes(result.data);
-        console.log(result.data);
       })
       .catch((err) => {
         console.log(err);
