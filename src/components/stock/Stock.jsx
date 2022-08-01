@@ -19,21 +19,21 @@ const Stock = () => {
   const contextStock = useContext(ContextStock);
   const { typeStock } = contextStock;
   const contextArticle = useContext(ContextArticles);
-  const { setActivate } = contextArticle;
+  const { setActivate, idArticles } = contextArticle;
 
   // function getting stock calling api
 
   useEffect(() => {
     if (typeStock === 'caisses-vrac') {
       setActivate(true);
-      getStockVrac()
+      getStockVrac(idArticles)
         .then((result) => {
           setStock(result.data);
         })
         .catch((err) => console.log(err));
     } else if (typeStock === 'caisses-total') {
       setActivate(true);
-      getStockTotal()
+      getStockTotal(idArticles)
         .then((result) => {
           setStock(result.data);
         })
@@ -42,7 +42,7 @@ const Stock = () => {
         });
     } else if (typeStock === 'fagots') {
       setActivate(false);
-      getFagots()
+      getFagots(idArticles)
         .then((result) => {
           setStock(result.data);
         })
@@ -52,7 +52,7 @@ const Stock = () => {
     } else {
       setStock([]);
     }
-  }, [typeStock]);
+  }, [typeStock, idArticles]);
   return (
     <div className="container-stock">
       {typeStock === 'caisses-vrac' || typeStock === 'caisses-total' ? (

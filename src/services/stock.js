@@ -6,16 +6,16 @@ const baseUrl = 'http://localhost:3001';
  * Function getting stock vrac
  * @returns {promise}
  */
-const getStockVrac = () => {
-  return axios.get(`${baseUrl}/api/gereTesCaisses/vrac`).then((result) => result);
+const getStockVrac = (idArticle) => {
+  return axios.get(`${baseUrl}/api/gereTesCaisses/vrac/${idArticle}`).then((result) => result);
 };
 
 /**
  * Function getting stock total
  * @returns {promise}
  */
-export const getStockTotal = () => {
-  return axios.get(`${baseUrl}/api/gereTesCaisses/total`).then((result) => result);
+export const getStockTotal = (idArticle) => {
+  return axios.get(`${baseUrl}/api/gereTesCaisses/total/${idArticle}`).then((result) => result);
 };
 
 /**
