@@ -15,6 +15,14 @@ const MenuLeft = () => {
   const contextStock = useContext(ContextStock); // context stock
   const { articles, activate } = contextArticles;
   const { typeStock, setTypeStock, numberBoxes } = contextStock;
+
+  /**
+   * Function filtering stock by boxes length
+   */
+  const filter = () => {
+    // change this function
+    if (activate) console.log('filter');
+  };
   return (
     <div className="menu-left">
       <select
@@ -30,7 +38,7 @@ const MenuLeft = () => {
         {articles.length
           ? articles.map((article) => {
               return (
-                <li className={activate ? 'unable' : 'disable'} key={article.id}>
+                <li className={activate ? 'unable' : 'disable'} key={article.id} onClick={filter}>
                   {article.name}
                 </li>
               );
