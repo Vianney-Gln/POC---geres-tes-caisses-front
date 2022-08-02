@@ -37,3 +37,19 @@ div.container-stock {
     font-weight: bold;
   }
 }
+
+@media screen and (max-width: 730px) {
+  div.container-stock {
+    max-height: none;
+    min-height: none;
+    padding: none;
+    width: 100vw;
+    height: auto;
+
+    ul.list-cards {
+      h2 {
+        font-size: 1rem;
+      }
+    }
+  }
+}
