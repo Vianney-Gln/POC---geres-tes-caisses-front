@@ -45,6 +45,9 @@ div.menu-left {
       color: grey;
       margin-left: 15px;
     }
+    li.current {
+      text-decoration: underline;
+    }
   }
   div.quantity {
     width: 100%;

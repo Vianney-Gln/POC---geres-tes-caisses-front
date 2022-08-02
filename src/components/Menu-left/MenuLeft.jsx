@@ -13,7 +13,7 @@ const MenuLeft = () => {
   // use context
   const contextArticles = useContext(ContextArticles); // context articles;
   const contextStock = useContext(ContextStock); // context stock
-  const { articles, activate, setIdArticles } = contextArticles;
+  const { articles, activate, setIdArticles, idArticles } = contextArticles;
   const { typeStock, setTypeStock, numberBoxes } = contextStock;
 
   /**
@@ -42,7 +42,15 @@ const MenuLeft = () => {
           ? articles.map((article) => {
               return (
                 <li
-                  className={activate ? 'unable' : 'disable'}
+                  className={
+                    activate && idArticles === article.id
+                      ? 'unable current'
+                      : activate && idArticles !== article.id
+                      ? 'unable'
+                      : !activate
+                      ? 'disable'
+                      : ''
+                  }
                   key={article.id}
                   onClick={() => filter(article.id)}>
                   {article.name}
