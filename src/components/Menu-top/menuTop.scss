@@ -33,3 +33,17 @@ div.menu-top {
     }
   }
 }
+
+@media screen and (max-width: 730px) {
+  div.menu-top {
+    border: none;
+    width: 100vw;
+    nav.navbar {
+      ul.list-navbar {
+        li {
+          font-size: 0.8rem;
+        }
+      }
+    }
+  }
+}
