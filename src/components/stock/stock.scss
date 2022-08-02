@@ -41,7 +41,7 @@ div.container-stock {
 @media screen and (max-width: 730px) {
   div.container-stock {
     max-height: none;
-    min-height: none;
+    min-height: 300px;
     padding: none;
     width: 100vw;
     height: auto;

@@ -75,13 +75,23 @@ div.menu-left {
     }
 
     ul.list-article {
-      width: 60%;
+      width: 100%;
+      flex-direction: row;
       margin: 0;
       border: none;
+      height: auto;
+
+      li.unable,
+      li.disable {
+        margin: 0;
+        padding: 5px;
+        background-color: white;
+        border-radius: 5px;
+      }
     }
     div.quantity {
+      justify-content: center;
       p {
-        text-align: center;
         margin: 0;
       }
     }
