@@ -7,7 +7,12 @@ const baseUrl = 'http://localhost:3001';
  * @returns {promise}
  */
 const getStockVrac = (idArticle) => {
-  return axios.get(`${baseUrl}/api/gereTesCaisses/vrac/${idArticle}`).then((result) => result);
+  if (idArticle) {
+    return axios
+      .get(`${baseUrl}/api/gereTesCaisses/vrac/?article=${idArticle}`)
+      .then((result) => result);
+  }
+  return axios.get(`${baseUrl}/api/gereTesCaisses/vrac`).then((result) => result);
 };
 
 /**
