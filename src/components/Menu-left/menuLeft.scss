@@ -61,3 +61,29 @@ div.menu-left {
     }
   }
 }
+
+@media screen and (max-width: 730px) {
+  div.menu-left {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+    height: 40vh;
+
+    select {
+      margin: 0;
+    }
+
+    ul.list-article {
+      width: 60%;
+      margin: 0;
+      border: none;
+    }
+    div.quantity {
+      p {
+        text-align: center;
+        margin: 0;
+      }
+    }
+  }
+}
