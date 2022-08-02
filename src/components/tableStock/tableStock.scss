@@ -1,6 +1,6 @@
 table.table-stock {
   width: 80%;
-  margin-top: 40px;
+  margin-top: 20px;
   border-collapse: collapse;
   background-color: whitesmoke;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 0px 8px;
@@ -16,7 +16,10 @@ table.table-stock {
     border: 1px solid black;
     padding: 10px;
   }
-  th {
+  tr:nth-child(2n) {
     background-color: white;
+  }
+  th {
+    background-color: rgb(151, 150, 255);
   }
 }

@@ -1,14 +1,17 @@
 div.container-contentFagot {
   width: 100%;
+  background-color: white;
+  padding-bottom: 40px;
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  max-height: 500px;
+  max-height: 75vh;
+  min-height: 75vh;
   overflow-y: auto;
 
   table.table-boxes-fagots {
     width: 80%;
-    margin-top: 40px;
+    margin-top: 20px;
     border-collapse: collapse;
     background-color: whitesmoke;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 0px 8px;
@@ -24,8 +27,12 @@ div.container-contentFagot {
       border: 1px solid black;
       padding: 10px;
     }
-    th {
+
+    tr:nth-child(2n) {
       background-color: white;
+    }
+    th {
+      background-color: rgb(151, 150, 255);
     }
   }
 }
