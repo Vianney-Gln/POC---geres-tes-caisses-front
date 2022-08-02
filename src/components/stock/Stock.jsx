@@ -73,7 +73,11 @@ const Stock = () => {
         <>
           <ul className="list-cards">
             <h2>{`Fagots ${manageTitle(idArticles)}`}</h2>
-            {stock.length ? stock.map((elt) => <CardsStockFagot key={elt.id} stock={elt} />) : null}
+            {stock.length ? (
+              stock.map((elt) => <CardsStockFagot key={elt.id} stock={elt} />)
+            ) : (
+              <p className="no-fagot-found">Aucun fagot trouvé</p>
+            )}
           </ul>
         </>
       ) : null}
