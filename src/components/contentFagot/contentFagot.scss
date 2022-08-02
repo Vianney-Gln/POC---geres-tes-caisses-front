@@ -36,3 +36,17 @@ div.container-contentFagot {
     }
   }
 }
+
+@media screen and (max-width: 730px) {
+  div.container-contentFagot {
+    width: 100vw;
+    max-height: none;
+    min-height: none;
+    padding: none;
+    table.table-boxes-fagots {
+      caption {
+        font-size: 1rem;
+      }
+    }
+  }
+}

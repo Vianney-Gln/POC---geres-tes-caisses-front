@@ -23,3 +23,11 @@ table.table-stock {
     background-color: rgb(151, 150, 255);
   }
 }
+
+@media screen and (max-width: 730px) {
+  table.table-stock {
+    caption {
+      font-size: 1rem;
+    }
+  }
+}
