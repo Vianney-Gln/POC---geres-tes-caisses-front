@@ -16,13 +16,19 @@ export const ContextStockProvider = ({ children }) => {
   useEffect(() => {
     switch (typeStock) {
       case 'caisses-vrac':
-        getCountVrac().then((result) => setNumberBoxes(result.nbVrac));
+        getCountVrac()
+          .then((result) => setNumberBoxes(result.nbVrac))
+          .catch((err) => console.log(err));
         break;
       case 'caisses-total':
-        getCountTotal().then((result) => setNumberBoxes(result.numberTotal));
+        getCountTotal()
+          .then((result) => setNumberBoxes(result.numberTotal))
+          .catch((err) => console.log(err));
         break;
       case 'fagots':
-        getCountFagot().then((result) => setNumberBoxes(result.nbFagots));
+        getCountFagot()
+          .then((result) => setNumberBoxes(result.nbFagots))
+          .catch((err) => console.log(err));
         break;
     }
   }, [typeStock]);

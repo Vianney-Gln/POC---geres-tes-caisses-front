@@ -6,6 +6,7 @@ import './stock.scss';
 import getStockVrac, { getStockTotal, getFagots } from '../../services/stock';
 // import components context
 import ContextStock from '../../context/ContextStock';
+import ContextArticles from '../../context/ContextArticles';
 // import components
 import TableStock from '../tableStock/TableStock';
 import CardsStockFagot from '../cardsStockFagots/CardsStockFagot';
@@ -17,18 +18,34 @@ const Stock = () => {
   // get Context
   const contextStock = useContext(ContextStock);
   const { typeStock } = contextStock;
+  const contextArticle = useContext(ContextArticles);
+  const { setActivate, idArticles } = contextArticle;
+
+  /**
+   * Function managing title of tables depending of idArticles
+   * @param {number} idArticle
+   * @returns {string}
+   */
+  const manageTitle = (idArticle) => {
+    if (idArticle === 1) return ' caisses 4m';
+    if (idArticle === 2) return ' caisses 4m20';
+    if (idArticle === 3) return ' caisses 4m60';
+    return ' toutes caisses';
+  };
 
   // function getting stock calling api
 
   useEffect(() => {
     if (typeStock === 'caisses-vrac') {
-      getStockVrac()
+      setActivate(true);
+      getStockVrac(idArticles)
         .then((result) => {
           setStock(result.data);
         })
         .catch((err) => console.log(err));
     } else if (typeStock === 'caisses-total') {
-      getStockTotal()
+      setActivate(true);
+      getStockTotal(idArticles)
         .then((result) => {
           setStock(result.data);
         })
@@ -36,7 +53,8 @@ const Stock = () => {
           console.log(err);
         });
     } else if (typeStock === 'fagots') {
-      getFagots()
+      setActivate(true);
+      getFagots(idArticles)
         .then((result) => {
           setStock(result.data);
         })
@@ -46,16 +64,20 @@ const Stock = () => {
     } else {
       setStock([]);
     }
-  }, [typeStock]);
+  }, [typeStock, idArticles]);
   return (
     <div className="container-stock">
       {typeStock === 'caisses-vrac' || typeStock === 'caisses-total' ? (
-        <TableStock stock={stock} typeStock={typeStock} />
+        <TableStock manageTitle={manageTitle} stock={stock} typeStock={typeStock} />
       ) : typeStock === 'fagots' ? (
         <>
           <ul className="list-cards">
-            <h2>Consultation des fagots</h2>
-            {stock.length ? stock.map((elt) => <CardsStockFagot key={elt.id} stock={elt} />) : null}
+            <h2>{`Fagots ${manageTitle(idArticles)}`}</h2>
+            {stock.length ? (
+              stock.map((elt) => <CardsStockFagot key={elt.id} stock={elt} />)
+            ) : (
+              <p className="no-fagot-found">Aucun fagot trouvé</p>
+            )}
           </ul>
         </>
       ) : null}

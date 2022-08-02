@@ -34,13 +34,18 @@ div.menu-left {
     border-right: none;
     border-top: none;
 
-    li {
+    li.unable {
       font-weight: bold;
       cursor: pointer;
       margin-left: 15px;
     }
-    li:hover {
+    li.unable:hover {
       text-decoration: underline;
+    }
+    li.disable {
+      font-weight: normal;
+      color: grey;
+      margin-left: 15px;
     }
   }
   div.quantity {
