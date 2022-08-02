@@ -32,7 +32,12 @@ export const getStockTotal = (idArticle) => {
  * Function getting fagots
  * @returns {promise}
  */
-export const getFagots = () => {
+export const getFagots = (idArticle) => {
+  if (idArticle) {
+    return axios
+      .get(`${baseUrl}/api/gereTesCaisses/fagots/?article=${idArticle}`)
+      .then((result) => result);
+  }
   return axios.get(`${baseUrl}/api/gereTesCaisses/fagots`).then((result) => result);
 };
 
