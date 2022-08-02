@@ -21,6 +21,18 @@ const Stock = () => {
   const contextArticle = useContext(ContextArticles);
   const { setActivate, idArticles } = contextArticle;
 
+  /**
+   * Function managing title of tables depending of idArticles
+   * @param {number} idArticle
+   * @returns {string}
+   */
+  const manageTitle = (idArticle) => {
+    if (idArticle === 1) return ' caisses 4m';
+    if (idArticle === 2) return ' caisses 4m20';
+    if (idArticle === 3) return ' caisses 4m60';
+    return ' toutes caisses';
+  };
+
   // function getting stock calling api
 
   useEffect(() => {
@@ -56,11 +68,11 @@ const Stock = () => {
   return (
     <div className="container-stock">
       {typeStock === 'caisses-vrac' || typeStock === 'caisses-total' ? (
-        <TableStock stock={stock} typeStock={typeStock} />
+        <TableStock manageTitle={manageTitle} stock={stock} typeStock={typeStock} />
       ) : typeStock === 'fagots' ? (
         <>
           <ul className="list-cards">
-            <h2>Consultation des fagots</h2>
+            <h2>{`Fagots ${manageTitle(idArticles)}`}</h2>
             {stock.length ? stock.map((elt) => <CardsStockFagot key={elt.id} stock={elt} />) : null}
           </ul>
         </>
