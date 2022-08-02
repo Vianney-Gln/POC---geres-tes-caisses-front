@@ -12,6 +12,26 @@ div.App {
     flex-direction: column;
   }
 }
+/* ----- Manage display components depending responsive ------  */
+#root > div > div.menu-top {
+  display: none;
+}
 
 @media screen and (max-width: 730px) {
+  #root > div > header {
+    order: -2;
+  }
+  #root > div > div.centre-app > div.menu-top {
+    display: none;
+  }
+  #root > div > div.menu-top {
+    display: flex;
+    order: -1;
+  }
+  #root > div > div.menu-left {
+    order: 0;
+  }
+  #root > div > div.centre-app > div {
+    order: 3;
+  }
 }

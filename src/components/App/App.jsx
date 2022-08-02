@@ -14,7 +14,9 @@ const App = () => {
     <div className="App">
       <Header />
       <MenuLeft />
+      <MenuTop /> {/*Menu top mobile*/}
       <div className="centre-app">
+        {/*Menu top desktop*/}
         <MenuTop />
         <Routes>
           <Route exact path="/" element={<Stock />} />
