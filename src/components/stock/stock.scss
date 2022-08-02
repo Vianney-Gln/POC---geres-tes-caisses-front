@@ -2,11 +2,11 @@ div.container-stock {
   background-color: white;
   padding-bottom: 40px;
   width: 100%;
-  flex: 1;
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  max-height: 500px;
+  max-height: 70vh;
+  min-height: 70vh;
   overflow-y: auto;
 
   ul.list-cards {
