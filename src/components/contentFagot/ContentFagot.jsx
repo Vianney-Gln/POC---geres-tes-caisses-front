@@ -1,20 +1,25 @@
 // import react hooks
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 // react router dom
 import { useParams } from 'react-router-dom';
-
+// import Components
+import ContextArticles from '../../context/ContextArticles';
 // import style css
 import './contentFagot.scss';
 // import service
 import { getBoxeByFagot } from '../../services/stock';
 
 const ContentFagot = () => {
+  // context
+  const contextArticles = useContext(ContextArticles);
+  const { setActivate } = contextArticles; // able - disable filters
   // params
   const param = useParams();
   // Sates
   const [fagotBoxes, setFagotBoxes] = useState([]); // state getting boxes from one fagot
   // Function getting boxes from one fagot, setting the boxes statement and disable filters
   useEffect(() => {
+    setActivate(false);
     getBoxeByFagot(param.id)
       .then((result) => {
         setFagotBoxes(result.data);

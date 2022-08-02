@@ -41,7 +41,7 @@ const Stock = () => {
           console.log(err);
         });
     } else if (typeStock === 'fagots') {
-      setActivate(false);
+      setActivate(true);
       getFagots(idArticles)
         .then((result) => {
           setStock(result.data);
