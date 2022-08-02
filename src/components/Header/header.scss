@@ -22,3 +22,22 @@ header.container-header {
     align-items: center;
   }
 }
+
+@media screen and (max-width: 730px) {
+  header.container-header {
+    height: 10vh;
+    div.logo {
+      height: 100%;
+      img {
+        height: 100%;
+      }
+    }
+    div.title {
+      width: 80vw;
+      height: auto;
+      h1 {
+        font-size: 1.4rem;
+      }
+    }
+  }
+}
