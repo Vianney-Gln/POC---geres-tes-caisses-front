@@ -11,11 +11,16 @@ const getStockVrac = (idArticle) => {
 };
 
 /**
- * Function getting stock total
+ * Function getting stock total - can be sorted by length
  * @returns {promise}
  */
 export const getStockTotal = (idArticle) => {
-  return axios.get(`${baseUrl}/api/gereTesCaisses/total/${idArticle}`).then((result) => result);
+  if (idArticle) {
+    return axios
+      .get(`${baseUrl}/api/gereTesCaisses/total/?article=${idArticle}`)
+      .then((result) => result);
+  }
+  return axios.get(`${baseUrl}/api/gereTesCaisses/total`).then((result) => result);
 };
 
 /**
