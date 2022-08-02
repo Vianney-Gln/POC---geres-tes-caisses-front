@@ -10,18 +10,22 @@ div.container-stock {
   overflow-y: auto;
 
   ul.list-cards {
-    width: 100%;
+    width: 80%;
+    margin: 0;
+    margin-top: 20px;
     display: flex;
     align-items: space-around;
     flex-wrap: wrap;
     list-style: none;
+    border-radius: 5px;
+    padding: 10px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 
     h2 {
       width: 100%;
       text-align: center;
       margin: 0;
       margin-bottom: 20px;
-      margin-top: 20px;
       font-weight: normal;
     }
   }

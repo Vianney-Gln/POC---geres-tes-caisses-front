@@ -22,10 +22,13 @@ div.menu-top {
       li {
         font-size: 1.4rem;
         font-weight: bold;
+        padding: 5px;
         cursor: pointer;
       }
-      li:hover {
-        text-decoration: underline;
+      li.current {
+        color: white;
+        background-color: rgb(151, 150, 255);
+        border-radius: 5px;
       }
     }
   }
