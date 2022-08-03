@@ -2,6 +2,8 @@
 import React, { useState, useEffect, useContext } from 'react';
 // import style css;
 import './stock.scss';
+// import useParams
+import { useParams } from 'react-router-dom';
 // service
 import getStockVrac, { getStockTotal, getFagots } from '../../services/stock';
 // import components context
@@ -15,27 +17,20 @@ const Stock = () => {
   // States
   const [stock, setStock] = useState([]); // state getting stock
 
+  //useParams
+  const param = useParams();
+
   // get Context
   const contextStock = useContext(ContextStock);
   const { typeStock } = contextStock;
   const contextArticle = useContext(ContextArticles);
-  const { setActivate, idArticles } = contextArticle;
-
-  /**
-   * Function managing title of tables depending of idArticles
-   * @param {number} idArticle
-   * @returns {string}
-   */
-  const manageTitle = (idArticle) => {
-    if (idArticle === 1) return ' caisses 4m';
-    if (idArticle === 2) return ' caisses 4m20';
-    if (idArticle === 3) return ' caisses 4m60';
-    return ' toutes caisses';
-  };
+  const { setActivate, setArticleName, idArticles } = contextArticle;
 
   // function getting stock calling api
 
   useEffect(() => {
+    setArticleName(param.articleName);
+
     if (typeStock === 'caisses-vrac') {
       setActivate(true);
       getStockVrac(idArticles)
@@ -64,15 +59,15 @@ const Stock = () => {
     } else {
       setStock([]);
     }
-  }, [typeStock, idArticles]);
+  }, [typeStock, param.articleName]);
   return (
     <div className="container-stock">
       {typeStock === 'caisses-vrac' || typeStock === 'caisses-total' ? (
-        <TableStock manageTitle={manageTitle} stock={stock} typeStock={typeStock} />
+        <TableStock captionName={param.articleName} stock={stock} typeStock={typeStock} />
       ) : typeStock === 'fagots' ? (
         <>
           <ul className="list-cards">
-            <h2>{`Fagots ${manageTitle(idArticles)}`}</h2>
+            <h2>{`Fagots ${param.articleName ? param.articleName : 'toutes caisses'}`}</h2>
             {stock.length ? (
               stock.map((elt) => <CardsStockFagot key={elt.id} stock={elt} />)
             ) : (

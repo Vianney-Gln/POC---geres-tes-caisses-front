@@ -11,6 +11,7 @@ export const ContextArticlesProvider = ({ children }) => {
   const [articles, setArticles] = useState([]); // state getting differents articles
   const [activate, setActivate] = useState(true); // state active or inactive filter
   const [idArticles, setIdArticles] = useState(null); // state filters stock by articles
+  const [articleName, setArticleName] = useState('');
 
   // Function getting all articles and update articles state
   useEffect(() => {
@@ -24,7 +25,15 @@ export const ContextArticlesProvider = ({ children }) => {
   }, []);
   return (
     <ContextArticles.Provider
-      value={{ articles, idArticles, setIdArticles, activate, setActivate }}>
+      value={{
+        articles,
+        idArticles,
+        articleName,
+        setArticleName,
+        setIdArticles,
+        activate,
+        setActivate
+      }}>
       {children}
     </ContextArticles.Provider>
   );

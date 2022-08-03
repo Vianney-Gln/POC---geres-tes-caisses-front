@@ -1,6 +1,6 @@
 // import react hooks
 import React, { useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 // import style css
 import './menuLeft.scss';
 // import components context
@@ -13,19 +13,9 @@ const MenuLeft = () => {
   // use context
   const contextArticles = useContext(ContextArticles); // context articles;
   const contextStock = useContext(ContextStock); // context stock
-  const { articles, activate, setIdArticles, idArticles } = contextArticles;
+  const { articles, activate, idArticles, setIdArticles } = contextArticles;
   const { typeStock, setTypeStock, numberBoxes } = contextStock;
 
-  /**
-   * Function filtering stock by boxes length
-   * @param {number} id
-   */
-  const filter = (id) => {
-    // change this function
-    if (activate) {
-      setIdArticles(id);
-    }
-  };
   return (
     <div className="menu-left">
       <select
@@ -42,6 +32,7 @@ const MenuLeft = () => {
           ? articles.map((article) => {
               return (
                 <li
+                  onClick={() => setIdArticles(article.id)}
                   className={
                     activate && idArticles === article.id
                       ? 'unable current'
@@ -51,9 +42,8 @@ const MenuLeft = () => {
                       ? 'disable'
                       : ''
                   }
-                  key={article.id}
-                  onClick={() => filter(article.id)}>
-                  {article.name}
+                  key={article.id}>
+                  <Link to={`/${article.name}`}>{article.name}</Link>
                 </li>
               );
             })

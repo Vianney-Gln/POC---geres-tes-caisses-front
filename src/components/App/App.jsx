@@ -20,6 +20,7 @@ const App = () => {
         <MenuTop />
         <Routes>
           <Route exact path="/" element={<Stock />} />
+          <Route exact path="/:articleName" element={<Stock />} />
           <Route exact path="/fagot-content/:id" element={<ContentFagot />} />
         </Routes>
       </div>

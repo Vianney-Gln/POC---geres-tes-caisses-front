@@ -1,23 +1,22 @@
 // import rect hooks
-import React, { useContext } from 'react';
+import React from 'react';
 // import style css
 import './tableStock.scss';
 // import proptypes
 import PropTypes from 'prop-types';
-// import Components
-import ContextArticles from '../../context/ContextArticles';
 
-const TableStock = ({ typeStock, stock, manageTitle }) => {
-  // context
-  const contextArticles = useContext(ContextArticles);
-  const { idArticles } = contextArticles;
-
+const TableStock = ({ typeStock, stock, captionName }) => {
+  // function managin caption title
+  const manageCaptionTitle = () => {
+    if (captionName) return captionName;
+    return 'toutes caisses';
+  };
   return (
     <table className="table-stock">
       {typeStock === 'caisses-vrac' ? (
-        <caption>{`Stock vrac${manageTitle(idArticles)}`}</caption>
+        <caption>{`Stock vrac ${manageCaptionTitle()}`}</caption>
       ) : typeStock === 'caisses-total' ? (
-        <caption>{`Stock total${manageTitle(idArticles)}`}</caption>
+        <caption>{`Stock total ${manageCaptionTitle()}`}</caption>
       ) : (
         ''
       )}
@@ -59,6 +58,7 @@ const TableStock = ({ typeStock, stock, manageTitle }) => {
 TableStock.propTypes = {
   typeStock: PropTypes.string,
   stock: PropTypes.array,
-  manageTitle: PropTypes.func
+  manageTitle: PropTypes.func,
+  captionName: PropTypes.string
 };
 export default TableStock;
