@@ -90,9 +90,11 @@ div.menu-left {
       li.unable,
       li.disable {
         margin: 0;
-        padding: 5px;
         background-color: white;
         border-radius: 5px;
+        text-align: center;
+        padding: 4px;
+        font-size: 0.8rem;
       }
     }
     div.quantity {
