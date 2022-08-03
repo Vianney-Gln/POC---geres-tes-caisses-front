@@ -56,8 +56,13 @@ export const getBoxeByFagot = (id) => {
  * @returns {promise}
  */
 export const getCountVrac = (idArticleCount) => {
-  console.log(idArticleCount);
-  return axios.get(`${baseUrl}/api/gereTesCaisses/vrac/count`).then((result) => result.data);
+  if (idArticleCount) {
+    return axios
+      .get(`${baseUrl}/api/gereTesCaisses/vrac/count/?article=${idArticleCount}`)
+      .then((result) => result.data);
+  } else {
+    return axios.get(`${baseUrl}/api/gereTesCaisses/vrac/count`).then((result) => result.data);
+  }
 };
 
 /**
@@ -66,8 +71,13 @@ export const getCountVrac = (idArticleCount) => {
  * @returns {promise}
  */
 export const getCountTotal = (idArticleCount) => {
-  console.log(idArticleCount);
-  return axios.get(`${baseUrl}/api/gereTesCaisses/total/count`).then((result) => result.data);
+  if (idArticleCount) {
+    return axios
+      .get(`${baseUrl}/api/gereTesCaisses/total/count/?article=${idArticleCount}`)
+      .then((result) => result.data);
+  } else {
+    return axios.get(`${baseUrl}/api/gereTesCaisses/total/count`).then((result) => result.data);
+  }
 };
 
 /**
