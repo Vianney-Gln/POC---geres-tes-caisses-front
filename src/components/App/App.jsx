@@ -14,10 +14,13 @@ const App = () => {
     <div className="App">
       <Header />
       <MenuLeft />
+      <MenuTop /> {/*Menu top mobile*/}
       <div className="centre-app">
+        {/*Menu top desktop*/}
         <MenuTop />
         <Routes>
           <Route exact path="/" element={<Stock />} />
+          <Route exact path="/:articleName" element={<Stock />} />
           <Route exact path="/fagot-content/:id" element={<ContentFagot />} />
         </Routes>
       </div>

@@ -7,7 +7,7 @@ const MenuTop = () => {
     <div className="menu-top">
       <nav className="navbar">
         <ul className="list-navbar">
-          <li>Consulter les stocks</li>
+          <li className="current">Consulter les stocks</li>
           <li>Gérer les stocks</li>
           <li>Création d&apos;articles</li>
         </ul>
