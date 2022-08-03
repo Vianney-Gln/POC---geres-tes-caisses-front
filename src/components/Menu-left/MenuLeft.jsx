@@ -16,6 +16,23 @@ const MenuLeft = () => {
   const { articles, activate, idArticles, setIdArticles } = contextArticles;
   const { typeStock, setTypeStock, numberBoxes, setIdArticleCount } = contextStock;
 
+  /**
+   * Function generating the type of boxes as a string, depending of idArticles statement
+   * @returns {string}
+   */
+  const generateStringCount = () => {
+    switch (idArticles) {
+      case 1:
+        return ' 4m';
+      case 2:
+        return ' 4m20';
+      case 3:
+        return ' 4m60';
+      default:
+        return ' toutes caisses';
+    }
+  };
+
   return (
     <div className="menu-left">
       <select
@@ -71,14 +88,14 @@ const MenuLeft = () => {
       <div className="quantity">
         <p>
           {typeStock === 'caisses-vrac'
-            ? 'Nombre caisses vrac:'
+            ? 'Nombre vrac' + generateStringCount() + ':'
             : typeStock === 'caisses-total'
-            ? 'Nombre caisses total:'
+            ? 'Nombre total' + generateStringCount() + ':'
             : typeStock === 'fagots'
-            ? 'Nombre de fagots:'
+            ? 'Nombre fagots' + generateStringCount() + ':'
             : ''}{' '}
-          <span>{numberBoxes}</span>
         </p>
+        <span>{numberBoxes}</span>
       </div>
     </div>
   );
