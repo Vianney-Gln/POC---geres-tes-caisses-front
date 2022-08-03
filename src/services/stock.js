@@ -76,8 +76,13 @@ export const getCountTotal = (idArticleCount) => {
  * @returns {promise}
  */
 export const getCountFagot = (idArticleCount) => {
-  console.log(idArticleCount);
-  return axios.get(`${baseUrl}/api/gereTesCaisses/fagots/count`).then((result) => result.data);
+  if (idArticleCount) {
+    return axios
+      .get(`${baseUrl}/api/gereTesCaisses/fagots/count/?article=${idArticleCount}`)
+      .then((result) => result.data);
+  } else {
+    return axios.get(`${baseUrl}/api/gereTesCaisses/fagots/count`).then((result) => result.data);
+  }
 };
 
 export default getStockVrac;
