@@ -25,6 +25,17 @@ Le client demande à l'équipe A (basée chez le client sans accés à REFLEX) d
 L'équipe A doit alors attendre que l'équipe B (qui est à l'entrepôt avec un accés à REFLEX) envoie les infos.
 Avec cette application, l'équipe A a directement accés aux informations, à condition que l'équipe B travaille avec cette application.
 
-L'application codée ici n'est encore qu'à l'état de concept, et évoluera de jours en jours.
+# Note
+
+L'application codée ici n'est encore qu'au début de son dévelopement.
+Pour l'instant l'utilisateur peut consulter les stocks, mais ne peut pas encore créer de fagots ou faire une réception.
+
+
+# Technologies utilisées
+
+- React
+- Express js
+- MySql
+- Scss
 
 
