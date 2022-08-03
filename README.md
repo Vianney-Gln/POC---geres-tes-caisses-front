@@ -3,7 +3,7 @@
 En référence à mon ancien métier, je développe actuellement une application qui répondra à une problématique que j'ai pu rencontré.
 Les caisses de transport sont déjà gérées par un logiciel très connu en logistique (REFLEX).
 
-Ici il ne s'agit pas de le remplacer mais d'apporter un outil de gestion supplémentaire exclusif à la gestion des caisses qui aura pour but de faciliter leur gestion   par les opérateurs sur le terrain.
+Ici il ne s'agit pas de le remplacer mais d'apporter un outil de gestion supplémentaire exclusif à la gestion des caisses qui aura pour but de faciliter leur gestion   par les opérateurs sur le terrain et d'améliorer la communiquation entre l'entreprise utilisatrice et le client.
 
 # Les différences de fonctionnalités
 
