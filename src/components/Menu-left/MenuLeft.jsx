@@ -28,6 +28,19 @@ const MenuLeft = () => {
         <option value="fagots">Fagots</option>
       </select>
       <ul className="list-article">
+        <li
+          onClick={() => setIdArticles(null)}
+          className={
+            activate && !idArticles
+              ? 'unable current'
+              : activate && idArticles
+              ? 'unable'
+              : !activate
+              ? 'disable'
+              : ''
+          }>
+          <Link to="/toutes caisses">Toutes caisses</Link>
+        </li>
         {articles.length
           ? articles.map((article) => {
               return (

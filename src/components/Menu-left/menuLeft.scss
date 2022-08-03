@@ -42,6 +42,12 @@ div.menu-left {
       font-weight: normal;
       color: grey;
       margin-left: 15px;
+      a {
+        text-decoration: none;
+        color: grey;
+        pointer-events: none;
+        cursor: default;
+      }
     }
     li.current {
       text-decoration: underline;

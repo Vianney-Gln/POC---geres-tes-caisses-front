@@ -69,7 +69,7 @@ const Stock = () => {
           <ul className="list-cards">
             <h2>{`Fagots ${param.articleName ? param.articleName : 'toutes caisses'}`}</h2>
             {stock.length ? (
-              stock.map((elt) => <CardsStockFagot key={elt.id} stock={elt} />)
+              stock.map((elt, index) => <CardsStockFagot key={index} stock={elt} />)
             ) : (
               <p className="no-fagot-found">Aucun fagot trouvé</p>
             )}
