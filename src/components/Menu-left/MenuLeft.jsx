@@ -14,7 +14,7 @@ const MenuLeft = () => {
   const contextArticles = useContext(ContextArticles); // context articles;
   const contextStock = useContext(ContextStock); // context stock
   const { articles, activate, idArticles, setIdArticles } = contextArticles;
-  const { typeStock, setTypeStock, numberBoxes } = contextStock;
+  const { typeStock, setTypeStock, numberBoxes, setIdArticleCount } = contextStock;
 
   return (
     <div className="menu-left">
@@ -29,7 +29,10 @@ const MenuLeft = () => {
       </select>
       <ul className="list-article">
         <li
-          onClick={() => setIdArticles(null)}
+          onClick={() => {
+            setIdArticles(null);
+            setIdArticleCount(null);
+          }}
           className={
             activate && !idArticles
               ? 'unable current'
@@ -45,7 +48,10 @@ const MenuLeft = () => {
           ? articles.map((article) => {
               return (
                 <li
-                  onClick={() => setIdArticles(article.id)}
+                  onClick={() => {
+                    setIdArticles(article.id);
+                    setIdArticleCount(article.id);
+                  }}
                   className={
                     activate && idArticles === article.id
                       ? 'unable current'

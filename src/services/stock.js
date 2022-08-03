@@ -52,25 +52,31 @@ export const getBoxeByFagot = (id) => {
 
 /**
  * Function counting boxes in vrac stock
+ * @param {number} idArticleCount
  * @returns {promise}
  */
-export const getCountVrac = () => {
+export const getCountVrac = (idArticleCount) => {
+  console.log(idArticleCount);
   return axios.get(`${baseUrl}/api/gereTesCaisses/vrac/count`).then((result) => result.data);
 };
 
 /**
  * Function counting boxes in total stock
+ * @param {number} idArticleCount
  * @returns {promise}
  */
-export const getCountTotal = () => {
+export const getCountTotal = (idArticleCount) => {
+  console.log(idArticleCount);
   return axios.get(`${baseUrl}/api/gereTesCaisses/total/count`).then((result) => result.data);
 };
 
 /**
  * Function counting fagots
+ *  @param {number} idArticleCount
  * @returns {promise}
  */
-export const getCountFagot = () => {
+export const getCountFagot = (idArticleCount) => {
+  console.log(idArticleCount);
   return axios.get(`${baseUrl}/api/gereTesCaisses/fagots/count`).then((result) => result.data);
 };
 
