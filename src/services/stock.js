@@ -52,26 +52,47 @@ export const getBoxeByFagot = (id) => {
 
 /**
  * Function counting boxes in vrac stock
+ * @param {number} idArticleCount
  * @returns {promise}
  */
-export const getCountVrac = () => {
-  return axios.get(`${baseUrl}/api/gereTesCaisses/vrac/count`).then((result) => result.data);
+export const getCountVrac = (idArticleCount) => {
+  if (idArticleCount) {
+    return axios
+      .get(`${baseUrl}/api/gereTesCaisses/vrac/count/?article=${idArticleCount}`)
+      .then((result) => result.data);
+  } else {
+    return axios.get(`${baseUrl}/api/gereTesCaisses/vrac/count`).then((result) => result.data);
+  }
 };
 
 /**
  * Function counting boxes in total stock
+ * @param {number} idArticleCount
  * @returns {promise}
  */
-export const getCountTotal = () => {
-  return axios.get(`${baseUrl}/api/gereTesCaisses/total/count`).then((result) => result.data);
+export const getCountTotal = (idArticleCount) => {
+  if (idArticleCount) {
+    return axios
+      .get(`${baseUrl}/api/gereTesCaisses/total/count/?article=${idArticleCount}`)
+      .then((result) => result.data);
+  } else {
+    return axios.get(`${baseUrl}/api/gereTesCaisses/total/count`).then((result) => result.data);
+  }
 };
 
 /**
  * Function counting fagots
+ *  @param {number} idArticleCount
  * @returns {promise}
  */
-export const getCountFagot = () => {
-  return axios.get(`${baseUrl}/api/gereTesCaisses/fagots/count`).then((result) => result.data);
+export const getCountFagot = (idArticleCount) => {
+  if (idArticleCount) {
+    return axios
+      .get(`${baseUrl}/api/gereTesCaisses/fagots/count/?article=${idArticleCount}`)
+      .then((result) => result.data);
+  } else {
+    return axios.get(`${baseUrl}/api/gereTesCaisses/fagots/count`).then((result) => result.data);
+  }
 };
 
 export default getStockVrac;

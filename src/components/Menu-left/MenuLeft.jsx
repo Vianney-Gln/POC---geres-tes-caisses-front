@@ -14,7 +14,24 @@ const MenuLeft = () => {
   const contextArticles = useContext(ContextArticles); // context articles;
   const contextStock = useContext(ContextStock); // context stock
   const { articles, activate, idArticles, setIdArticles } = contextArticles;
-  const { typeStock, setTypeStock, numberBoxes } = contextStock;
+  const { typeStock, setTypeStock, numberBoxes, setIdArticleCount } = contextStock;
+
+  /**
+   * Function generating the type of boxes as a string, depending of idArticles statement
+   * @returns {string}
+   */
+  const generateStringCount = () => {
+    switch (idArticles) {
+      case 1:
+        return ' 4m';
+      case 2:
+        return ' 4m20';
+      case 3:
+        return ' 4m60';
+      default:
+        return ' toutes caisses';
+    }
+  };
 
   return (
     <div className="menu-left">
@@ -29,7 +46,10 @@ const MenuLeft = () => {
       </select>
       <ul className="list-article">
         <li
-          onClick={() => setIdArticles(null)}
+          onClick={() => {
+            setIdArticles(null);
+            setIdArticleCount(null);
+          }}
           className={
             activate && !idArticles
               ? 'unable current'
@@ -45,7 +65,10 @@ const MenuLeft = () => {
           ? articles.map((article) => {
               return (
                 <li
-                  onClick={() => setIdArticles(article.id)}
+                  onClick={() => {
+                    setIdArticles(article.id);
+                    setIdArticleCount(article.id);
+                  }}
                   className={
                     activate && idArticles === article.id
                       ? 'unable current'
@@ -65,14 +88,14 @@ const MenuLeft = () => {
       <div className="quantity">
         <p>
           {typeStock === 'caisses-vrac'
-            ? 'Nombre caisses vrac:'
+            ? 'Nombre vrac' + generateStringCount() + ':'
             : typeStock === 'caisses-total'
-            ? 'Nombre caisses total:'
+            ? 'Nombre total' + generateStringCount() + ':'
             : typeStock === 'fagots'
-            ? 'Nombre de fagots:'
+            ? 'Nombre fagots' + generateStringCount() + ':'
             : ''}{' '}
-          <span>{numberBoxes}</span>
         </p>
+        <span>{numberBoxes}</span>
       </div>
     </div>
   );
