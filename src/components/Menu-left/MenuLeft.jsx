@@ -48,8 +48,10 @@ const MenuLeft = () => {
       <ul className="list-article">
         <li
           onClick={() => {
-            setIdArticles(null);
-            setIdArticleCount(null);
+            if (activate) {
+              setIdArticles(null);
+              setIdArticleCount(null);
+            }
           }}
           className={
             activate && !idArticles
@@ -67,8 +69,10 @@ const MenuLeft = () => {
               return (
                 <li
                   onClick={() => {
-                    setIdArticles(article.id);
-                    setIdArticleCount(article.id);
+                    if (activate) {
+                      setIdArticles(article.id);
+                      setIdArticleCount(article.id);
+                    }
                   }}
                   className={
                     activate && idArticles === article.id
