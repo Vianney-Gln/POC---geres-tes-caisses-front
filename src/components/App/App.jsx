@@ -15,7 +15,7 @@ const App = () => {
   return (
     <div className="App">
       <Header />
-      <MenuLeft />
+      <MenuLeft location={location.pathname} />
       <MenuTop location={location.pathname} /> {/*Menu top mobile*/}
       <div className="centre-app">
         {/*Menu top desktop*/}

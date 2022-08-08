@@ -36,6 +36,7 @@ const MenuLeft = () => {
   return (
     <div className="menu-left">
       <select
+        disabled={!activate}
         onChange={(e) => {
           setTypeStock(e.target.value);
           navigate('/');
