@@ -1,5 +1,8 @@
 import React, { useContext, useEffect } from 'react';
+// import context
 import ContextArticles from '../../context/ContextArticles';
+// import style css
+import './reception.scss';
 
 const Reception = () => {
   const contextArticles = useContext(ContextArticles);
@@ -9,7 +12,7 @@ const Reception = () => {
   useEffect(() => {
     setActivate(false);
   }, []);
-  return <div>Reception</div>;
+  return <div className="container-reception">Reception</div>;
 };
 
 export default Reception;
