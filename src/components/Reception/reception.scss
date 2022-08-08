@@ -1,4 +1,4 @@
-.container-reception {
+div.container-reception {
   background-color: white;
   padding-bottom: 40px;
   width: 100%;
@@ -8,4 +8,13 @@
   max-height: 75vh;
   min-height: 75vh;
   overflow-y: auto;
+}
+
+@media screen and (max-width: 730px) {
+  div.container-reception {
+    max-height: none;
+    padding: none;
+    width: 100vw;
+    height: auto;
+  }
 }

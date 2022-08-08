@@ -18,6 +18,9 @@ div.App {
 }
 
 @media screen and (max-width: 730px) {
+  div.App {
+    height: auto;
+  }
   #root > div > header {
     order: -2;
   }
