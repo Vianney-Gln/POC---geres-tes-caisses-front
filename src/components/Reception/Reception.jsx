@@ -34,14 +34,22 @@ const Reception = () => {
                     <option>Value 1</option>
                   </select>
                 </label>
-                <label htmlFor="button-next-article">
-                  <button
-                    onClick={() => setLine((old) => [...old, elt])}
-                    name="button-next-article"
-                    type="button">
-                    Article suivant
-                  </button>
-                </label>
+                {index === line.length - 1 ? (
+                  <label htmlFor="button-next-article">
+                    <button
+                      onClick={() => setLine((old) => [...old, elt])}
+                      name="button-next-article"
+                      type="button">
+                      Article suivant
+                    </button>
+                  </label>
+                ) : (
+                  <label htmlFor="button-cancel">
+                    <button className="red-button" name="button-cancel" type="button">
+                      Annuler article
+                    </button>
+                  </label>
+                )}
               </div>
             );
           })}

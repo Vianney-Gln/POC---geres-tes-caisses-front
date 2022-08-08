@@ -10,6 +10,9 @@ div.container-reception {
   overflow-y: auto;
 
   form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     border-radius: 5px;
     width: 80%;
     height: 100%;
@@ -18,15 +21,19 @@ div.container-reception {
       width: 100%;
       display: flex;
       flex-direction: column;
+      align-items: center;
 
       div.newLine {
         width: 100%;
         display: flex;
-        justify-content: space-evenly;
+        justify-content: center;
       }
 
       label {
         margin-top: 20px;
+        margin-left: 15px;
+        margin-right: 15px;
+
         input,
         select {
           margin-left: 5px;
