@@ -13,3 +13,19 @@ code {
 * {
   box-sizing: border-box;
 }
+
+/* Button */
+button {
+  background-color: blue;
+  color: white;
+  padding: 5px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.5s ease;
+}
+
+button:hover {
+  background-color: #9796ff;
+  transform: scale(1.1);
+}
