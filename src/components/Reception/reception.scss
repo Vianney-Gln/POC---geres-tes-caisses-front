@@ -15,9 +15,15 @@ div.container-reception {
     height: 100%;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 0px 8px;
     div.container-form {
-      display: flex;
-      justify-content: space-evenly;
       width: 100%;
+      display: flex;
+      flex-direction: column;
+
+      div.newLine {
+        width: 100%;
+        display: flex;
+        justify-content: space-evenly;
+      }
 
       label {
         margin-top: 20px;
