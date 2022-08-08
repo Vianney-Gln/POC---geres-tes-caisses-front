@@ -91,7 +91,7 @@ const MenuLeft = () => {
           : ''}
       </ul>
       <div className="quantity">
-        <p>
+        <p className={!activate ? 'number-boxes-disable' : 'number-boxes-unable'}>
           {typeStock === 'caisses-vrac'
             ? 'Nombre vrac' + generateStringCount() + ':'
             : typeStock === 'caisses-total'
@@ -100,7 +100,7 @@ const MenuLeft = () => {
             ? 'Nombre fagots' + generateStringCount() + ':'
             : ''}{' '}
         </p>
-        <span>{numberBoxes}</span>
+        {activate ? <span>{numberBoxes}</span> : ''}
       </div>
     </div>
   );
