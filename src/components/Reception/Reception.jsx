@@ -5,6 +5,8 @@ import ContextArticles from '../../context/ContextArticles';
 import './reception.scss';
 // import Components
 import NewLineForm from '../NewLineForm/NewLineForm';
+// import service
+import validateReception from '../../services/reception';
 
 const Reception = () => {
   // Context
@@ -27,7 +29,12 @@ const Reception = () => {
   return (
     <div className="container-reception">
       <h2>Reception</h2>
-      <form className="form-reception">
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          validateReception(dataInputs);
+        }}
+        className="form-reception">
         <div className="container-form">
           {dataInputs.length
             ? dataInputs.map((elt, index) => (
