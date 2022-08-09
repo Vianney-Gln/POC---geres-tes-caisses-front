@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 // import service
 import getArticles from '../../services/articles';
 
-const NewLineForm = ({ addNewLine, index, dataInputs, setDataInputs }) => {
+const NewLineForm = ({ addNewLine, index, dataInputs, setDataInputs, line }) => {
   const [articles, setArticles] = useState([]); // state articles
 
   useEffect(() => {
@@ -20,6 +20,7 @@ const NewLineForm = ({ addNewLine, index, dataInputs, setDataInputs }) => {
     const newDataInputs = [...dataInputs];
     newDataInputs.splice(index, 1);
     setDataInputs(newDataInputs);
+    console.log(line);
   };
 
   /**
@@ -39,6 +40,7 @@ const NewLineForm = ({ addNewLine, index, dataInputs, setDataInputs }) => {
         <span>Identifiant caisse:</span>
         <input
           onChange={(e) => getInputData(e.target.value, 'uuid')}
+          value={line.uuid}
           type="text"
           name="idBoxe"></input>
       </label>
@@ -65,7 +67,7 @@ const NewLineForm = ({ addNewLine, index, dataInputs, setDataInputs }) => {
         ''
       )}
 
-      {index === dataInputs.length - 1 && index > 0 ? (
+      {dataInputs.length > 0 ? (
         <label htmlFor="button-cancel">
           <button
             onClick={() => deleteRow()}
