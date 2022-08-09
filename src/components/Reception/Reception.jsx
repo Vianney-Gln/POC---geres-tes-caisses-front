@@ -11,8 +11,9 @@ const Reception = () => {
   const contextArticles = useContext(ContextArticles);
   const { setActivate } = contextArticles;
 
-  const [dataInputs, setDataInputs] = useState([{}]);
+  const [dataInputs, setDataInputs] = useState([{}]); // state input data - array with objects
 
+  // Function adding a new object in the state array dataInputs
   const addNewLine = () => {
     const newDataInputs = [...dataInputs];
     newDataInputs.push({});
@@ -33,6 +34,7 @@ const Reception = () => {
             ? dataInputs.map((elt, index) => (
                 <NewLineForm
                   dataInputs={dataInputs}
+                  setDataInputs={setDataInputs}
                   line={elt}
                   key={index}
                   index={index}

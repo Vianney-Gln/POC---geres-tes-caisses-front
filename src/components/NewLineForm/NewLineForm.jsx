@@ -1,8 +1,18 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 // import PropTypes
 import PropTypes from 'prop-types';
 
-const NewLineForm = ({ addNewLine, index, dataInputs }) => {
+const NewLineForm = ({ addNewLine, index, dataInputs, setDataInputs }) => {
+  const deleteRow = () => {
+    const newDataInputs = [...dataInputs];
+    newDataInputs.splice(index, 1);
+    setDataInputs(newDataInputs);
+  };
+
+  useEffect(() => {
+    console.log(dataInputs.length);
+  }, [dataInputs]);
+
   return (
     <div className="newLine">
       <label htmlFor="idBoxe">
@@ -25,10 +35,10 @@ const NewLineForm = ({ addNewLine, index, dataInputs }) => {
         ''
       )}
 
-      {index >= 0 ? (
+      {dataInputs.length > 1 ? (
         <label htmlFor="button-cancel">
           <button
-            onClick={() => console.log(index)}
+            onClick={() => deleteRow()}
             className="red-button"
             name="button-cancel"
             type="button">
@@ -45,7 +55,9 @@ const NewLineForm = ({ addNewLine, index, dataInputs }) => {
 NewLineForm.propTypes = {
   addNewLine: PropTypes.func,
   index: PropTypes.number,
-  dataInputs: PropTypes.array
+  dataInputs: PropTypes.array,
+  line: PropTypes.object,
+  setDataInputs: PropTypes.func
 };
 
 export default NewLineForm;
