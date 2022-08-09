@@ -1,0 +1,28 @@
+div.newLine {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+label {
+  margin-top: 20px;
+  margin-left: 15px;
+  margin-right: 15px;
+
+  input,
+  select {
+    margin-left: 5px;
+    padding: 5px;
+  }
+  select:hover {
+    cursor: pointer;
+  }
+}
+
+div.container-button-submit {
+  margin-top: 40px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

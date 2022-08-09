@@ -1,4 +1,6 @@
-import React, { useEffect } from 'react';
+import React from 'react';
+// import style css
+import './newLineForm.scss';
 // import PropTypes
 import PropTypes from 'prop-types';
 
@@ -8,10 +10,6 @@ const NewLineForm = ({ addNewLine, index, dataInputs, setDataInputs }) => {
     newDataInputs.splice(index, 1);
     setDataInputs(newDataInputs);
   };
-
-  useEffect(() => {
-    console.log(dataInputs.length);
-  }, [dataInputs]);
 
   return (
     <div className="newLine">
@@ -35,7 +33,7 @@ const NewLineForm = ({ addNewLine, index, dataInputs, setDataInputs }) => {
         ''
       )}
 
-      {dataInputs.length > 1 ? (
+      {index === dataInputs.length - 1 ? (
         <label htmlFor="button-cancel">
           <button
             onClick={() => deleteRow()}

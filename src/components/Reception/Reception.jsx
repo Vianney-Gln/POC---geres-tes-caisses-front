@@ -18,7 +18,6 @@ const Reception = () => {
     const newDataInputs = [...dataInputs];
     newDataInputs.push({});
     setDataInputs(newDataInputs);
-    console.log(newDataInputs);
   };
 
   // function desactivate the Menu-Left on component mounting
