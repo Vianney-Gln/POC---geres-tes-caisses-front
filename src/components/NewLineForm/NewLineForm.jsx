@@ -23,7 +23,6 @@ const NewLineForm = ({ addNewLine, index, dataInputs, setDataInputs, line }) => 
     const newDataInputs = [...dataInputs];
     newDataInputs.splice(index, 1);
     setDataInputs(newDataInputs);
-    console.log(line);
   };
 
   /**

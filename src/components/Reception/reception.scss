@@ -23,6 +23,13 @@ div.container-reception {
       flex-direction: column;
       align-items: center;
     }
+    div.container-button-submit {
+      margin-top: 40px;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
   }
 }
 
@@ -32,5 +39,16 @@ div.container-reception {
     padding: none;
     width: 100vw;
     height: auto;
+
+    form {
+      width: 100%;
+      box-shadow: none;
+      border-radius: none;
+
+      div.container-form {
+        width: 100%;
+        padding: 5px;
+      }
+    }
   }
 }

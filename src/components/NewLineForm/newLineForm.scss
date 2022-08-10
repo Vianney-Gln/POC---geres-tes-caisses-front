@@ -29,10 +29,70 @@ div.newLine {
   }
 }
 
-div.container-button-submit {
-  margin-top: 40px;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+@media screen and (max-width: 1200px) {
+  div.newLine {
+    align-items: flex-end;
+    margin: 5px 0;
+
+    label {
+      flex-direction: column;
+      margin: 0px 5px;
+      span {
+        padding: 4px;
+      }
+
+      input,
+      select {
+        margin: 0;
+      }
+    }
+    div.duo-buttons-container {
+      label {
+        margin: 0px 2px;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 730px) {
+  div.newLine {
+    align-items: flex-end;
+    margin: 5px 0;
+
+    label {
+      flex-direction: column;
+      margin: 0px 5px;
+      span {
+        padding: 4px;
+      }
+
+      input,
+      select {
+        margin: 0;
+      }
+    }
+    div.duo-buttons-container {
+      label {
+        margin: 0px 2px;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 340px) {
+  div.newLine {
+    label {
+      width: 50%;
+      margin: 0;
+      span {
+        font-size: 0.8rem;
+      }
+      input {
+        width: 100%;
+      }
+      select {
+        width: 70%;
+      }
+    }
+  }
 }
