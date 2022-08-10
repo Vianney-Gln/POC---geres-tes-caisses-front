@@ -5,6 +5,9 @@ import './newLineForm.scss';
 import PropTypes from 'prop-types';
 // import service
 import getArticles from '../../services/articles';
+// import FontAwesome
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 const NewLineForm = ({ addNewLine, index, dataInputs, setDataInputs, line }) => {
   const [articles, setArticles] = useState([]); // state articles
@@ -59,8 +62,12 @@ const NewLineForm = ({ addNewLine, index, dataInputs, setDataInputs, line }) => 
       </label>
       {index === dataInputs.length - 1 ? (
         <label htmlFor="button-next-article">
-          <button onClick={() => addNewLine()} name="button-next-article" type="button">
-            Ajouter ligne
+          <button
+            onClick={() => addNewLine()}
+            name="button-next-article"
+            type="button"
+            title="Ajouter ligne">
+            <FontAwesomeIcon icon={faPlus} />
           </button>
         </label>
       ) : (
@@ -73,8 +80,9 @@ const NewLineForm = ({ addNewLine, index, dataInputs, setDataInputs, line }) => 
             onClick={() => deleteRow()}
             className="red-button"
             name="button-cancel"
-            type="button">
-            Annuler ligne
+            type="button"
+            title="Supprimer ligne">
+            <FontAwesomeIcon icon={faTrash} />
           </button>
         </label>
       ) : (
