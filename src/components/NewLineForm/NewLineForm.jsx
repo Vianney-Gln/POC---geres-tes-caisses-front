@@ -60,34 +60,36 @@ const NewLineForm = ({ addNewLine, index, dataInputs, setDataInputs, line }) => 
             : null}
         </select>
       </label>
-      {index === dataInputs.length - 1 ? (
-        <label htmlFor="button-next-article">
-          <button
-            onClick={() => addNewLine()}
-            name="button-next-article"
-            type="button"
-            title="Ajouter ligne">
-            <FontAwesomeIcon icon={faPlus} />
-          </button>
-        </label>
-      ) : (
-        ''
-      )}
+      <div className="duo-buttons-container">
+        {index === dataInputs.length - 1 ? (
+          <label htmlFor="button-next-article">
+            <button
+              onClick={() => addNewLine()}
+              name="button-next-article"
+              type="button"
+              title="Ajouter ligne">
+              <FontAwesomeIcon icon={faPlus} />
+            </button>
+          </label>
+        ) : (
+          ''
+        )}
 
-      {dataInputs.length > 0 ? (
-        <label htmlFor="button-cancel">
-          <button
-            onClick={() => deleteRow()}
-            className="red-button"
-            name="button-cancel"
-            type="button"
-            title="Supprimer ligne">
-            <FontAwesomeIcon icon={faTrash} />
-          </button>
-        </label>
-      ) : (
-        ''
-      )}
+        {dataInputs.length > 1 ? (
+          <label htmlFor="button-cancel">
+            <button
+              onClick={() => deleteRow()}
+              className="red-button"
+              name="button-cancel"
+              type="button"
+              title="Supprimer ligne">
+              <FontAwesomeIcon icon={faTrash} />
+            </button>
+          </label>
+        ) : (
+          ''
+        )}
+      </div>
     </div>
   );
 };
