@@ -13,12 +13,12 @@ const Reception = () => {
   const contextArticles = useContext(ContextArticles);
   const { setActivate } = contextArticles;
 
-  const [dataInputs, setDataInputs] = useState([{}]); // state input data - array with objects
+  const [dataInputs, setDataInputs] = useState([{ uuid: '', id_article: '' }]); // state input data - array with objects
 
   // Function adding a new object in the state array dataInputs
   const addNewLine = () => {
     const newDataInputs = [...dataInputs];
-    newDataInputs.push({});
+    newDataInputs.push({ uuid: '', id_article: '' });
     setDataInputs(newDataInputs);
   };
 
