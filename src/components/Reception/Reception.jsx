@@ -1,4 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
+//import useNavigate
+import { useNavigate } from 'react-router-dom';
 // import context
 import ContextArticles from '../../context/ContextArticles';
 // import style css
@@ -17,6 +19,9 @@ const Reception = () => {
   const [dataInputs, setDataInputs] = useState([{ uuid: '', id_article: '' }]); // state input data - array with objects
   const [open, setOpen] = useState(false); // state managing the modal
   const [message, setMessage] = useState(''); // state managing success or fail message
+  const [error, setError] = useState(false); // this state bool manage the color of modal icons(error or success)
+  // UseNavigate
+  const navigate = useNavigate();
 
   // function closing the modal
   const openModal = () => {
@@ -42,15 +47,26 @@ const Reception = () => {
   const runValidateReception = () => {
     validateReception(dataInputs)
       .then(() => {
-        setMessage('Réception créée avec succès!');
+        setError(false);
+        setMessage(`Réception créée avec succès! Redirection en cours...`);
+        setTimeout(() => {
+          navigate('/');
+        }, 3000);
       })
       .catch(() => {
-        setMessage("L'application à rencontré une erreur, la réception n'a pas été créée");
+        setError(true);
+        setMessage("L'application à rencontré une erreur, la réception n'a pas été créée.");
       });
   };
   return (
     <>
-      <ModalComponent message={message} open={open} openModal={openModal} closeModal={closeModal} />
+      <ModalComponent
+        error={error}
+        message={message}
+        open={open}
+        openModal={openModal}
+        closeModal={closeModal}
+      />
       <div className="container-reception">
         <h2>Reception</h2>
         <form
