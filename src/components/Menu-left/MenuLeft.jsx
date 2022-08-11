@@ -1,5 +1,5 @@
 // import react hooks
-import React, { useContext } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 // import style css
 import './menuLeft.scss';
@@ -15,6 +15,9 @@ const MenuLeft = () => {
   const contextStock = useContext(ContextStock); // context stock
   const { articles, activate, idArticles, setIdArticles } = contextArticles;
   const { typeStock, setTypeStock, numberBoxes, setIdArticleCount } = contextStock;
+
+  //states
+  const [resolution, setResolution] = useState('');
 
   /**
    * Function generating the type of boxes as a string, depending of idArticles statement
@@ -32,10 +35,32 @@ const MenuLeft = () => {
         return ' toutes caisses';
     }
   };
+  /* --------------------------------------------------- CHECK RESOLUTION TO DISPLAY OR MASQUED THIS COMPONENT -------------------------------*/
+
+  // On component mounting check the resolution small or desktop and store it into a state
+  useEffect(() => {
+    if (window.matchMedia('(max-width:730px)').matches) {
+      setResolution('small');
+    } else {
+      setResolution('desktop');
+    }
+  }, []);
+
+  // Function checking what device is (desktop or smartphone) and store thos into a state
+  window.onresize = function () {
+    if (window.matchMedia('(max-width:730px)').matches) {
+      setResolution('small');
+    } else {
+      setResolution('desktop');
+    }
+  };
+
+  /* -------------------------------------------------------------------------------------------------------------------------------------------*/
 
   return (
-    <div className="menu-left">
+    <div className={!activate && resolution === 'small' ? 'menu-left-masqued' : 'menu-left'}>
       <select
+        disabled={!activate}
         onChange={(e) => {
           setTypeStock(e.target.value);
           navigate('/');
@@ -47,8 +72,10 @@ const MenuLeft = () => {
       <ul className="list-article">
         <li
           onClick={() => {
-            setIdArticles(null);
-            setIdArticleCount(null);
+            if (activate) {
+              setIdArticles(null);
+              setIdArticleCount(null);
+            }
           }}
           className={
             activate && !idArticles
@@ -66,8 +93,10 @@ const MenuLeft = () => {
               return (
                 <li
                   onClick={() => {
-                    setIdArticles(article.id);
-                    setIdArticleCount(article.id);
+                    if (activate) {
+                      setIdArticles(article.id);
+                      setIdArticleCount(article.id);
+                    }
                   }}
                   className={
                     activate && idArticles === article.id
@@ -86,7 +115,7 @@ const MenuLeft = () => {
           : ''}
       </ul>
       <div className="quantity">
-        <p>
+        <p className={!activate ? 'number-boxes-disable' : 'number-boxes-unable'}>
           {typeStock === 'caisses-vrac'
             ? 'Nombre vrac' + generateStringCount() + ':'
             : typeStock === 'caisses-total'
@@ -95,7 +124,7 @@ const MenuLeft = () => {
             ? 'Nombre fagots' + generateStringCount() + ':'
             : ''}{' '}
         </p>
-        <span>{numberBoxes}</span>
+        {activate ? <span>{numberBoxes}</span> : ''}
       </div>
     </div>
   );
