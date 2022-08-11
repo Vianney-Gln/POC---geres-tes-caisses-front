@@ -12,6 +12,8 @@ import ModalComponent from '../Modal/ModalComponent';
 import validateReception from '../../services/reception';
 
 const Reception = () => {
+  // docTitle
+  document.title = 'Gestion des caisses - réception';
   // Context
   const contextArticles = useContext(ContextArticles);
   const { setActivate } = contextArticles;

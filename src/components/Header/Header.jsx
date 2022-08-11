@@ -9,13 +9,14 @@ import logoIdea from '../../images/logo-idea.png';
 const Header = () => {
   // useNavigate
   const navigate = useNavigate();
+
   return (
     <header className="container-header">
       <div className="logo">
         <img src={logoIdea} alt="logo-idea" onClick={() => navigate('/')} />
       </div>
       <div className="title">
-        <h1>Gères tes caisses</h1>
+        <h1>Gestion des caisses</h1>
       </div>
     </header>
   );
