@@ -5,6 +5,7 @@ import ContextArticles from '../../context/ContextArticles';
 import './reception.scss';
 // import Components
 import NewLineForm from '../NewLineForm/NewLineForm';
+import ModalComponent from '../Modal/ModalComponent';
 // import service
 import validateReception from '../../services/reception';
 
@@ -12,8 +13,19 @@ const Reception = () => {
   // Context
   const contextArticles = useContext(ContextArticles);
   const { setActivate } = contextArticles;
-
+  // States
   const [dataInputs, setDataInputs] = useState([{ uuid: '', id_article: '' }]); // state input data - array with objects
+  const [open, setOpen] = useState(false); // state managing the modal
+  const [message, setMessage] = useState(''); // state managing success or fail message
+
+  // function closing the modal
+  const openModal = () => {
+    setOpen(true);
+  };
+  //function opening the modal
+  const closeModal = () => {
+    setOpen(false);
+  };
 
   // Function adding a new object in the state array dataInputs
   const addNewLine = () => {
@@ -26,36 +38,49 @@ const Reception = () => {
   useEffect(() => {
     setActivate(false);
   }, []);
+
+  const runValidateReception = () => {
+    validateReception(dataInputs)
+      .then(() => {
+        setMessage('Réception créée avec succès!');
+      })
+      .catch(() => {
+        setMessage("L'application à rencontré une erreur, la réception n'a pas été créée");
+      });
+  };
   return (
-    <div className="container-reception">
-      <h2>Reception</h2>
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          validateReception(dataInputs);
-        }}
-        className="form-reception">
-        <div className="container-form">
-          {dataInputs.length
-            ? dataInputs.map((elt, index) => (
-                <NewLineForm
-                  dataInputs={dataInputs}
-                  setDataInputs={setDataInputs}
-                  line={elt}
-                  key={index}
-                  index={index}
-                  addNewLine={addNewLine}
-                />
-              ))
-            : ''}
-        </div>
-        <div className="container-button-submit">
-          <button className="button-submit" type="submit">
-            Valider la réception
-          </button>
-        </div>
-      </form>
-    </div>
+    <>
+      <ModalComponent message={message} open={open} openModal={openModal} closeModal={closeModal} />
+      <div className="container-reception">
+        <h2>Reception</h2>
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            runValidateReception();
+          }}
+          className="form-reception">
+          <div className="container-form">
+            {dataInputs.length
+              ? dataInputs.map((elt, index) => (
+                  <NewLineForm
+                    dataInputs={dataInputs}
+                    setDataInputs={setDataInputs}
+                    line={elt}
+                    key={index}
+                    index={index}
+                    addNewLine={addNewLine}
+                  />
+                ))
+              : ''}
+          </div>
+          <div className="container-button-submit">
+            <button onClick={openModal} className="button-submit" type="submit">
+              Valider la réception
+            </button>
+          </div>
+        </form>
+      </div>
+    </>
   );
 };
 
