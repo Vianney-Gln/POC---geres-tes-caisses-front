@@ -78,8 +78,8 @@ const TableStock = ({ typeStock, stock, captionName }) => {
                 return el;
               }
             })
-            .map((element) => {
-              return <RowTable typeStock={typeStock} key={element.uuid} element={element} />;
+            .map((element, index) => {
+              return <RowTable typeStock={typeStock} key={index} element={element} />;
             })}
       </tbody>
     </table>
