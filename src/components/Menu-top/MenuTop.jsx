@@ -28,7 +28,12 @@ const MenuTop = ({ location }) => {
           <Link to="/reception">
             <li className={location === '/reception' ? 'current' : ''}>Réceptions</li>
           </Link>
-          <li>Gestion des stocks</li>
+          <Link to="/out-of-stock">
+            <li>Sortie de stock</li>
+          </Link>
+          <Link to="/bundling">
+            <li>Fagotage</li>
+          </Link>
         </ul>
       </nav>
     </div>
