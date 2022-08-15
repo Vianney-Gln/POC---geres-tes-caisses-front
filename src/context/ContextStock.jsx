@@ -35,7 +35,13 @@ export const ContextStockProvider = ({ children }) => {
   }, [typeStock, idArticleCount]);
 
   return (
-    <ContextStock.Provider value={{ typeStock, setTypeStock, numberBoxes, setIdArticleCount }}>
+    <ContextStock.Provider
+      value={{
+        typeStock,
+        setTypeStock,
+        numberBoxes,
+        setIdArticleCount
+      }}>
       {children}
     </ContextStock.Provider>
   );

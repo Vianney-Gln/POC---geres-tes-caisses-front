@@ -72,6 +72,7 @@ const MenuLeft = ({ location }) => {
     <div className={!activate && resolution === 'small' ? 'menu-left-masqued' : 'menu-left'}>
       <select
         disabled={!activate}
+        value={typeStock}
         onChange={(e) => {
           setTypeStock(e.target.value);
           navigate(`${generateLink()}`);
