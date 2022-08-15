@@ -9,6 +9,21 @@ table.table-stock {
     padding: 15px;
     font-size: 1.4rem;
     margin-bottom: 20px;
+    position: relative;
+
+    label {
+      display: flex;
+      justify-content: center;
+      margin-top: 5px;
+      input {
+        border: none;
+        border-bottom: 1px solid black;
+        margin-left: 5px;
+      }
+      i {
+        color: grey;
+      }
+    }
   }
 
   td,

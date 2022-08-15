@@ -1,11 +1,17 @@
 // import rect hooks
-import React from 'react';
+import React, { useState } from 'react';
 // import style css
 import './tableStock.scss';
 // import proptypes
 import PropTypes from 'prop-types';
+// import FontAwesome
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 
 const TableStock = ({ typeStock, stock, captionName }) => {
+  // States
+  const [search, setSearch] = useState('');
+
   // function managin caption title
   const manageCaptionTitle = () => {
     if (captionName) return captionName;
@@ -14,9 +20,35 @@ const TableStock = ({ typeStock, stock, captionName }) => {
   return (
     <table className="table-stock">
       {typeStock === 'caisses-vrac' ? (
-        <caption>{`Stock vrac ${manageCaptionTitle()}`}</caption>
+        <caption>
+          {`Stock vrac ${manageCaptionTitle()}`}
+          <label htmlFor="search">
+            <i>
+              <FontAwesomeIcon icon={faMagnifyingGlass} />
+            </i>
+            <input
+              name="search"
+              placeholder="recherche par identifiant"
+              className="input-search"
+              onChange={(e) => setSearch(e.target.value)}
+              type="search"></input>
+          </label>
+        </caption>
       ) : typeStock === 'caisses-total' ? (
-        <caption>{`Stock total ${manageCaptionTitle()}`}</caption>
+        <caption>
+          {`Stock total ${manageCaptionTitle()}`}
+          <label htmlFor="search">
+            <i>
+              <FontAwesomeIcon icon={faMagnifyingGlass} />
+            </i>
+            <input
+              name="search"
+              placeholder="recherche par identifiant"
+              className="input-search"
+              onChange={(e) => setSearch(e.target.value)}
+              type="search"></input>
+          </label>
+        </caption>
       ) : (
         ''
       )}
@@ -36,21 +68,30 @@ const TableStock = ({ typeStock, stock, captionName }) => {
           </tr>
         )}
         {stock &&
-          stock.map((element, index) => {
-            return (
-              <tr key={index}>
-                <td align="center">{element.uuid}</td>
-                <td align="center">{element.name}</td>
-                {typeStock === 'caisses-total' ? (
-                  <td align="center">
-                    {element.idFagot ? 'fag-' + element.idFagot : 'non fagotée'}
-                  </td>
-                ) : (
-                  ''
-                )}
-              </tr>
-            );
-          })}
+          stock
+            .filter((el) => {
+              if (search) {
+                console.log(el.uuid.includes(search));
+                return el.uuid.includes(search);
+              } else {
+                return el;
+              }
+            })
+            .map((element, index) => {
+              return (
+                <tr key={index}>
+                  <td align="center">{element.uuid}</td>
+                  <td align="center">{element.name}</td>
+                  {typeStock === 'caisses-total' ? (
+                    <td align="center">
+                      {element.idFagot ? 'fag-' + element.idFagot : 'non fagotée'}
+                    </td>
+                  ) : (
+                    ''
+                  )}
+                </tr>
+              );
+            })}
       </tbody>
     </table>
   );
