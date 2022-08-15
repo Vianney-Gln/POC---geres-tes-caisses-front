@@ -21,6 +21,10 @@ const MenuLeft = ({ location }) => {
   //states
   const [resolution, setResolution] = useState('');
 
+  /**
+   * Function that generates the first part of the link, depending of location statement
+   * @returns {string}
+   */
   const generateLink = () => {
     if (location.includes('/out-of-stock')) return '/out-of-stock';
     if (location.includes('/stock')) return '/stock';
@@ -70,7 +74,7 @@ const MenuLeft = ({ location }) => {
         disabled={!activate}
         onChange={(e) => {
           setTypeStock(e.target.value);
-          navigate('/stock');
+          navigate(`${generateLink()}`);
         }}>
         <option value="caisses-vrac">Caisses vracs</option>
         <option value="caisses-total">Caisses total</option>
