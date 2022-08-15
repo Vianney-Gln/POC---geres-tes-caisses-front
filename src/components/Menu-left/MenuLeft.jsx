@@ -79,7 +79,9 @@ const MenuLeft = ({ location }) => {
         }}>
         <option value="caisses-vrac">Caisses vracs</option>
         <option value="caisses-total">Caisses total</option>
-        <option value="fagots">Fagots</option>
+        <option disabled={location.includes('/out-of-stock') ? true : false} value="fagots">
+          Fagots
+        </option>
       </select>
       <ul className="list-article">
         <li
