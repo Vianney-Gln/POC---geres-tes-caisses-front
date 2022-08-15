@@ -1,30 +1,25 @@
-import React, { useContext } from 'react';
+import React from 'react';
 // import react router dom
 import { Link } from 'react-router-dom';
 // import PropTypes
 import PropTypes from 'prop-types';
-// import context
-import ContextArticles from '../../context/ContextArticles';
 // style css
 import './menuTop.scss';
 
 // Check if there is filters (by calling articleName), and then check the path to determine the current tabs (stock, reception etc...)
 const MenuTop = ({ location }) => {
-  const contextArticles = useContext(ContextArticles);
-  const { articleName } = contextArticles;
-
   return (
     <div className="menu-top">
       <nav className="navbar">
         <ul className="list-navbar">
           <Link to="/">
-            <li className={location === '/stock' || articleName ? 'current' : ''}>Stock</li>
+            <li className={location.includes('/stock') ? 'current' : ''}>Stock</li>
           </Link>
           <Link to="/reception">
-            <li className={location === '/reception' ? 'current' : ''}>Réceptions</li>
+            <li className={location.includes('/reception') ? 'current' : ''}>Réceptions</li>
           </Link>
           <Link to="/out-of-stock">
-            <li className={location === '/out-of-stock' ? 'current' : ''}>Sortie de stock</li>
+            <li className={location.includes('/out-of-stock') ? 'current' : ''}>Sortie de stock</li>
           </Link>
           <Link to="/bundling">
             <li>Fagotage</li>
