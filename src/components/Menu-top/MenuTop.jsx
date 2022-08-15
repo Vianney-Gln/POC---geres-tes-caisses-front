@@ -18,18 +18,13 @@ const MenuTop = ({ location }) => {
       <nav className="navbar">
         <ul className="list-navbar">
           <Link to="/">
-            <li
-              className={
-                location === '/reception' ? '' : location === '/' || articleName ? 'current' : ''
-              }>
-              Stock
-            </li>
+            <li className={location === '/stock' || articleName ? 'current' : ''}>Stock</li>
           </Link>
           <Link to="/reception">
             <li className={location === '/reception' ? 'current' : ''}>Réceptions</li>
           </Link>
           <Link to="/out-of-stock">
-            <li>Sortie de stock</li>
+            <li className={location === '/out-of-stock' ? 'current' : ''}>Sortie de stock</li>
           </Link>
           <Link to="/bundling">
             <li>Fagotage</li>
