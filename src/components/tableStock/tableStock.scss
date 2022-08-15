@@ -25,24 +25,4 @@ table.table-stock {
       }
     }
   }
-
-  td,
-  th {
-    border: 1px solid black;
-    padding: 10px;
-  }
-  tr:nth-child(2n) {
-    background-color: white;
-  }
-  th {
-    background-color: rgb(151, 150, 255);
-  }
-}
-
-@media screen and (max-width: 730px) {
-  table.table-stock {
-    caption {
-      font-size: 1rem;
-    }
-  }
 }

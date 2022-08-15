@@ -4,6 +4,8 @@ import React, { useState } from 'react';
 import './tableStock.scss';
 // import proptypes
 import PropTypes from 'prop-types';
+// import Components
+import RowTable from '../RowTable/RowTable';
 // import FontAwesome
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
@@ -71,26 +73,13 @@ const TableStock = ({ typeStock, stock, captionName }) => {
           stock
             .filter((el) => {
               if (search) {
-                console.log(el.uuid.includes(search));
                 return el.uuid.includes(search);
               } else {
                 return el;
               }
             })
-            .map((element, index) => {
-              return (
-                <tr key={index}>
-                  <td align="center">{element.uuid}</td>
-                  <td align="center">{element.name}</td>
-                  {typeStock === 'caisses-total' ? (
-                    <td align="center">
-                      {element.idFagot ? 'fag-' + element.idFagot : 'non fagotée'}
-                    </td>
-                  ) : (
-                    ''
-                  )}
-                </tr>
-              );
+            .map((element) => {
+              return <RowTable typeStock={typeStock} key={element.uuid} element={element} />;
             })}
       </tbody>
     </table>
