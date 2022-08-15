@@ -28,6 +28,7 @@ const App = () => {
           <Route exact path="/fagot-content/:id" element={<ContentFagot />} />
           <Route exact path="/reception" element={<Reception />} />
           <Route exact path="/out-of-stock" element={<Stock />} />
+          <Route exact path="/out-of-stock/:articleName" element={<Stock />} />
         </Routes>
       </div>
     </div>
