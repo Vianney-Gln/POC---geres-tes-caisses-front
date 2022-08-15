@@ -7,6 +7,7 @@ import MenuLeft from '../Menu-left/MenuLeft';
 import MenuTop from '../Menu-top/MenuTop';
 import Stock from '../stock/Stock';
 import Reception from '../Reception/Reception';
+import Redirect from '../../Redirect/Redirect';
 
 // style css
 import './app.scss';
@@ -21,8 +22,9 @@ const App = () => {
         {/*Menu top desktop*/}
         <MenuTop location={location.pathname} />
         <Routes>
-          <Route exact path="/" element={<Stock />} />
-          <Route exact path="/:articleName" element={<Stock />} />
+          <Route exact path="/" element={<Redirect />} />
+          <Route exact path="/stock" element={<Stock />} />
+          <Route exact path="/stock/:articleName" element={<Stock />} />
           <Route exact path="/fagot-content/:id" element={<ContentFagot />} />
           <Route exact path="/reception" element={<Reception />} />
           <Route exact path="/out-of-stock" element={<Stock />} />

@@ -63,7 +63,7 @@ const MenuLeft = () => {
         disabled={!activate}
         onChange={(e) => {
           setTypeStock(e.target.value);
-          navigate('/');
+          navigate('/stock');
         }}>
         <option value="caisses-vrac">Caisses vracs</option>
         <option value="caisses-total">Caisses total</option>
@@ -86,7 +86,7 @@ const MenuLeft = () => {
               ? 'disable'
               : ''
           }>
-          <Link to="/toutes caisses">Toutes caisses</Link>
+          <Link to="/stock/toutes caisses">Toutes caisses</Link>
         </li>
         {articles.length
           ? articles.map((article) => {
@@ -108,7 +108,7 @@ const MenuLeft = () => {
                       : ''
                   }
                   key={article.id}>
-                  <Link to={`/${article.name}`}>{article.name}</Link>
+                  <Link to={`/stock/${article.name}`}>{article.name}</Link>
                 </li>
               );
             })
