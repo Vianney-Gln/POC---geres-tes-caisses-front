@@ -1,21 +1,30 @@
-import React, { useState } from 'react';
+import React from 'react';
 // import proptypes
 import PropTypes from 'prop-types';
 // import style css
 import './rowTable.scss';
 
-const RowTable = ({ element, typeStock }) => {
-  // States
-  const [selected, setSelected] = useState(false);
-
+const RowTable = ({ element, typeStock, setSelected, selected }) => {
+  /**
+   * Function getting or deleting data to the cliqued row
+   */
   const handleSelect = () => {
-    setSelected(!selected);
+    let copy = [...selected];
+    if (copy.find((el) => el.id === element.id)) {
+      copy = copy.filter((el) => el.id !== element.id);
+    } else {
+      copy.push(element);
+    }
+    setSelected(copy);
   };
+
   return (
     <tr
-      onClick={handleSelect}
+      onClick={() => {
+        handleSelect();
+      }}
       className={
-        location.pathname.includes('/out-of-stock') && selected
+        location.pathname.includes('/out-of-stock') && selected.find((el) => el.id === element.id)
           ? 'to-select selected'
           : location.pathname.includes('/out-of-stock')
           ? 'to-select'
@@ -34,7 +43,9 @@ const RowTable = ({ element, typeStock }) => {
 
 RowTable.propTypes = {
   typeStock: PropTypes.string,
-  element: PropTypes.object
+  element: PropTypes.object,
+  setSelected: PropTypes.func,
+  selected: PropTypes.array
 };
 
 export default RowTable;

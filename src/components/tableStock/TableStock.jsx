@@ -13,6 +13,7 @@ import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 const TableStock = ({ typeStock, stock, captionName }) => {
   // States
   const [search, setSearch] = useState('');
+  const [selected, setSelected] = useState([]);
 
   // function managin caption title
   const manageCaptionTitle = () => {
@@ -79,7 +80,15 @@ const TableStock = ({ typeStock, stock, captionName }) => {
               }
             })
             .map((element, index) => {
-              return <RowTable typeStock={typeStock} key={index} element={element} />;
+              return (
+                <RowTable
+                  setSelected={setSelected}
+                  selected={selected}
+                  typeStock={typeStock}
+                  key={index}
+                  element={element}
+                />
+              );
             })}
       </tbody>
     </table>
