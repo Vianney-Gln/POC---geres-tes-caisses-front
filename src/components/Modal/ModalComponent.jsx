@@ -15,7 +15,9 @@ const ModalComponent = ({
   message,
   contentLabel,
   runOutOfStock,
-  selected
+  selected,
+  confirmDelete,
+  errorDelete
 }) => {
   // style modal
   const styleModal = {
@@ -70,23 +72,36 @@ const ModalComponent = ({
           onRequestClose={closeModal}
           style={styleModal}
           contentLabel={contentLabel}>
-          <p>
-            {selected.length
-              ? 'Voulez vous vraiment supprimer ces articles?'
-              : 'Veuillez sélectionner au moins un article.'}
-          </p>
-          <div className="duo-btn">
-            {selected.length ? (
-              <>
-                <button onClick={runOutOfStock}>Oui</button>
-                <button onClick={closeModal}>Non</button>
-              </>
-            ) : (
-              <button onClick={closeModal} type="button">
+          {confirmDelete && errorDelete ? (
+            <>
+              <p>{confirmDelete}</p>
+              <button onClick={() => closeModal()} type="button">
                 Ok
               </button>
-            )}
-          </div>
+            </>
+          ) : confirmDelete ? (
+            <p>{confirmDelete}</p>
+          ) : (
+            <>
+              <p>
+                {selected.length
+                  ? 'Voulez vous vraiment supprimer ces articles?'
+                  : 'Veuillez sélectionner au moins un article.'}
+              </p>
+              <div className="duo-btn">
+                {selected.length ? (
+                  <>
+                    <button onClick={runOutOfStock}>Oui</button>
+                    <button onClick={closeModal}>Non</button>
+                  </>
+                ) : (
+                  <button onClick={closeModal} type="button">
+                    Ok
+                  </button>
+                )}
+              </div>
+            </>
+          )}
         </Modal>
       );
     }
@@ -102,7 +117,9 @@ ModalComponent.propTypes = {
   error: PropTypes.bool,
   contentLabel: PropTypes.string,
   runOutOfStock: PropTypes.func,
-  selected: PropTypes.array
+  selected: PropTypes.array,
+  confirmDelete: PropTypes.string,
+  errorDelete: PropTypes.bool
 };
 
 export default ModalComponent;

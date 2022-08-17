@@ -1,5 +1,7 @@
 // import rect hooks
 import React, { useState } from 'react';
+// import react-router-dom
+import { useNavigate } from 'react-router-dom';
 // import style css
 import './tableStock.scss';
 // import service
@@ -15,15 +17,20 @@ import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 
 const TableStock = ({ typeStock, stock, captionName }) => {
   // States
-  const [search, setSearch] = useState('');
-  const [selected, setSelected] = useState([]);
+  const [search, setSearch] = useState(''); // string get from the search input
+  const [selected, setSelected] = useState([]); // state getting data by clicking on a row
   const [open, setOpen] = useState(false); // state managing the modal
+  const [confirmDelete, setConfirmDelete] = useState(''); // Message confirm success or error delete rows
+  const [errorDelete, setErrorDelete] = useState(false); // Bool managin content modal in case of error
 
-  // function closing the modal
+  // UseNavigate
+  const navigate = useNavigate();
+
+  // Function closing the modal
   const openModal = () => {
     setOpen(true);
   };
-  //function opening the modal
+  // Function opening the modal
   const closeModal = () => {
     setOpen(false);
   };
@@ -38,7 +45,6 @@ const TableStock = ({ typeStock, stock, captionName }) => {
     setSelected([]);
   };
   // Function managin the display buttons "sortir du stock" et "annuler selection"
-
   const manageButtons = () => {
     if (location.pathname.includes('/stock')) {
       return '';
@@ -56,9 +62,26 @@ const TableStock = ({ typeStock, stock, captionName }) => {
     }
   };
 
+  // Function running the service function outOfStock, manage error or success messages and redirect stock page
   const runOutOfStock = () => {
     const ids = selected.map((el) => el.id);
-    outOfStock(ids);
+    outOfStock(ids)
+      .then(() => {
+        setErrorDelete(false);
+        setConfirmDelete('Les éléments sont correctements sortis du stock.');
+        setTimeout(() => {
+          setConfirmDelete('redirection page stock en cours...');
+        }, 2000);
+      })
+      .then(() => {
+        setTimeout(() => {
+          navigate('/');
+        }, 4000);
+      })
+      .catch(() => {
+        setErrorDelete(true);
+        setConfirmDelete('Il y eu une erreur durant la suppression');
+      });
   };
 
   return (
@@ -70,6 +93,8 @@ const TableStock = ({ typeStock, stock, captionName }) => {
         contentLabel="Modal-outOfStock"
         runOutOfStock={runOutOfStock}
         selected={selected}
+        confirmDelete={confirmDelete}
+        errorDelete={errorDelete}
       />
       <table className="table-stock">
         {typeStock === 'caisses-vrac' ? (
