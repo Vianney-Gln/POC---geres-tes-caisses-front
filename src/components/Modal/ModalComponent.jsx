@@ -8,7 +8,7 @@ import { faTriangleExclamation, faSquareCheck } from '@fortawesome/free-solid-sv
 import './modalComponent.scss';
 // import PropTypes
 import PropTypes from 'prop-types';
-const ModalComponent = ({ error, open, closeModal, message, contentLabel }) => {
+const ModalComponent = ({ error, open, closeModal, message, contentLabel, outOfStock }) => {
   // style modal
   const styleModal = {
     content: {
@@ -62,8 +62,11 @@ const ModalComponent = ({ error, open, closeModal, message, contentLabel }) => {
           onRequestClose={closeModal}
           style={styleModal}
           contentLabel={contentLabel}>
-          <p>Voulez vous vraiment sortir du stock ces articles? </p>
-          <button onClick={closeModal}>Oui</button>
+          <p>Voulez vous vraiment supprimer ces articles? </p>
+          <div className="duo-btn">
+            <button onClick={outOfStock}>Oui</button>
+            <button onClick={closeModal}>Non</button>
+          </div>
         </Modal>
       );
     }
@@ -77,7 +80,8 @@ ModalComponent.propTypes = {
   closeModal: PropTypes.func,
   message: PropTypes.string,
   error: PropTypes.bool,
-  contentLabel: PropTypes.string
+  contentLabel: PropTypes.string,
+  outOfStock: PropTypes.func
 };
 
 export default ModalComponent;

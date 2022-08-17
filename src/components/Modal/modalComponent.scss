@@ -4,6 +4,7 @@ body > div.ReactModalPortal > div > div {
   align-items: center;
   justify-content: space-around;
   width: 100%;
+  position: relative;
   i.symbol {
     font-size: 5rem;
   }
@@ -16,5 +17,11 @@ body > div.ReactModalPortal > div > div {
   p {
     padding: 0px 40px;
     text-align: center;
+  }
+  div.duo-btn {
+    margin-bottom: 100px;
+    button {
+      margin: 0px 5px;
+    }
   }
 }
