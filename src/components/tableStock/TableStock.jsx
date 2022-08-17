@@ -15,11 +15,20 @@ const TableStock = ({ typeStock, stock, captionName }) => {
   const [search, setSearch] = useState('');
   const [selected, setSelected] = useState([]);
 
-  // function managin caption title
+  // Function managin caption title
   const manageCaptionTitle = () => {
     if (captionName) return captionName;
     return 'toutes caisses';
   };
+  // Function that cancel all selection reseting selected statement
+  const cancelSelection = () => {
+    setSelected([]);
+  };
+
+  const outOfStock = () => {
+    console.log('sortie des stocks:', selected);
+  };
+
   return (
     <table className="table-stock">
       {typeStock === 'caisses-vrac' ? (
@@ -36,6 +45,12 @@ const TableStock = ({ typeStock, stock, captionName }) => {
               onChange={(e) => setSearch(e.target.value)}
               type="search"></input>
           </label>
+          <button onClick={() => cancelSelection()} type="button">
+            Annuler selection
+          </button>
+          <button onClick={() => outOfStock()} type="button">
+            Sortir du stock
+          </button>
         </caption>
       ) : typeStock === 'caisses-total' ? (
         <caption>
