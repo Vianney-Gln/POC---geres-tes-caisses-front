@@ -69,6 +69,7 @@ const TableStock = ({ typeStock, stock, captionName }) => {
         closeModal={closeModal}
         contentLabel="Modal-outOfStock"
         runOutOfStock={runOutOfStock}
+        selected={selected}
       />
       <table className="table-stock">
         {typeStock === 'caisses-vrac' ? (
