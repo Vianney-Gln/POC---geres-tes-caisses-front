@@ -100,7 +100,11 @@ export const getCountFagot = (idArticleCount) => {
  * @param {array} ids
  */
 export const outOfStock = (ids) => {
-  console.log(ids);
+  return axios({
+    method: 'delete',
+    url: `${baseUrl}/api/gereTesCaisses/outOfStock`,
+    data: ids
+  });
 };
 
 export default getStockVrac;
