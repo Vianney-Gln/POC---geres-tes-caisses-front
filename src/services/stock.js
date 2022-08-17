@@ -95,4 +95,12 @@ export const getCountFagot = (idArticleCount) => {
   }
 };
 
+/**
+ * Function deleting all selected rows from the stock
+ * @param {array} ids
+ */
+export const outOfStock = (ids) => {
+  console.log(ids);
+};
+
 export default getStockVrac;

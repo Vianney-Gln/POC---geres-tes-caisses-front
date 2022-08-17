@@ -2,6 +2,8 @@
 import React, { useState } from 'react';
 // import style css
 import './tableStock.scss';
+// import service
+import { outOfStock } from '../../services/stock';
 // import proptypes
 import PropTypes from 'prop-types';
 // import Components
@@ -36,8 +38,9 @@ const TableStock = ({ typeStock, stock, captionName }) => {
     setSelected([]);
   };
 
-  const outOfStock = () => {
-    console.log('sortie des stocks:', selected);
+  const runOutOfStock = () => {
+    const ids = selected.map((el) => el.id);
+    outOfStock(ids);
   };
 
   return (
@@ -47,7 +50,7 @@ const TableStock = ({ typeStock, stock, captionName }) => {
         openModal={openModal}
         closeModal={closeModal}
         contentLabel="Modal-outOfStock"
-        outOfStock={outOfStock}
+        runOutOfStock={runOutOfStock}
       />
       <table className="table-stock">
         {typeStock === 'caisses-vrac' ? (
