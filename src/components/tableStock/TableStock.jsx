@@ -37,6 +37,24 @@ const TableStock = ({ typeStock, stock, captionName }) => {
   const cancelSelection = () => {
     setSelected([]);
   };
+  // Function managin the display buttons "sortir du stock" et "annuler selection"
+
+  const manageButtons = () => {
+    if (location.pathname.includes('/stock')) {
+      return '';
+    } else if (location.pathname.includes('/out-of-stock')) {
+      return (
+        <>
+          <button onClick={() => cancelSelection()} type="button">
+            Annuler selection
+          </button>
+          <button onClick={() => openModal()} type="button">
+            Sortir du stock
+          </button>
+        </>
+      );
+    }
+  };
 
   const runOutOfStock = () => {
     const ids = selected.map((el) => el.id);
@@ -67,12 +85,7 @@ const TableStock = ({ typeStock, stock, captionName }) => {
                 onChange={(e) => setSearch(e.target.value)}
                 type="search"></input>
             </label>
-            <button onClick={() => cancelSelection()} type="button">
-              Annuler selection
-            </button>
-            <button onClick={() => openModal()} type="button">
-              Sortir du stock
-            </button>
+            {manageButtons()}
           </caption>
         ) : typeStock === 'caisses-total' ? (
           <caption>
@@ -88,6 +101,7 @@ const TableStock = ({ typeStock, stock, captionName }) => {
                 onChange={(e) => setSearch(e.target.value)}
                 type="search"></input>
             </label>
+            {manageButtons()}
           </caption>
         ) : (
           ''
