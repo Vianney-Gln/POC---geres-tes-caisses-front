@@ -8,7 +8,7 @@ import { faTriangleExclamation, faSquareCheck } from '@fortawesome/free-solid-sv
 import './modalComponent.scss';
 // import PropTypes
 import PropTypes from 'prop-types';
-const ModalComponent = ({ error, open, closeModal, message }) => {
+const ModalComponent = ({ error, open, closeModal, message, contentLabel }) => {
   // style modal
   const styleModal = {
     content: {
@@ -23,7 +23,9 @@ const ModalComponent = ({ error, open, closeModal, message }) => {
     }
   };
 
-  // function managing icon, depending of error state
+  Modal.setAppElement('#root');
+
+  // Function managing icon, depending of error state
   const manageIcon = () => {
     if (error)
       return (
@@ -38,22 +40,44 @@ const ModalComponent = ({ error, open, closeModal, message }) => {
     );
   };
 
-  return (
-    <div className="component-modal">
-      <Modal isOpen={open} onRequestClose={closeModal} style={styleModal} contentLabel="Info Modal">
-        {manageIcon()}
-        <p>{message}</p>
-        <button onClick={closeModal}>Fermer</button>
-      </Modal>
-    </div>
-  );
+  // Function managing the content of the modal
+
+  const manageModalContent = () => {
+    if (contentLabel === 'Modal-reception') {
+      return (
+        <Modal
+          isOpen={open}
+          onRequestClose={closeModal}
+          style={styleModal}
+          contentLabel={contentLabel}>
+          {manageIcon()}
+          <p>{message}</p>
+          <button onClick={closeModal}>Fermer</button>
+        </Modal>
+      );
+    } else if (contentLabel === 'Modal-outOfStock') {
+      return (
+        <Modal
+          isOpen={open}
+          onRequestClose={closeModal}
+          style={styleModal}
+          contentLabel={contentLabel}>
+          <p>Voulez vous vraiment sortir du stock ces articles? </p>
+          <button onClick={closeModal}>Oui</button>
+        </Modal>
+      );
+    }
+  };
+
+  return <div className="component-modal">{manageModalContent()}</div>;
 };
 
 ModalComponent.propTypes = {
   open: PropTypes.bool,
   closeModal: PropTypes.func,
   message: PropTypes.string,
-  error: PropTypes.bool
+  error: PropTypes.bool,
+  contentLabel: PropTypes.string
 };
 
 export default ModalComponent;
