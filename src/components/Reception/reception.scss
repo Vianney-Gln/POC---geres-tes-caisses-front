@@ -16,7 +16,7 @@ div.container-reception {
     border-radius: 5px;
     width: 80%;
     height: 100%;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 0px 8px;
+
     div.container-form {
       width: 80%;
       display: flex;
@@ -29,6 +29,9 @@ div.container-reception {
       display: flex;
       justify-content: center;
       align-items: center;
+      button {
+        margin-bottom: 20px;
+      }
     }
   }
 }
