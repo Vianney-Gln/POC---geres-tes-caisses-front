@@ -8,9 +8,10 @@ import MenuTop from '../Menu-top/MenuTop';
 import Stock from '../stock/Stock';
 import Reception from '../Reception/Reception';
 import Redirect from '../../Redirect/Redirect';
-
+import Bundling from '../Bundling/Bundling';
 // style css
 import './app.scss';
+
 const App = () => {
   const location = useLocation();
   return (
@@ -29,6 +30,7 @@ const App = () => {
           <Route exact path="/reception" element={<Reception />} />
           <Route exact path="/out-of-stock" element={<Stock />} />
           <Route exact path="/out-of-stock/:articleName" element={<Stock />} />
+          <Route exact path="/bundling" element={<Bundling />} />
         </Routes>
       </div>
     </div>

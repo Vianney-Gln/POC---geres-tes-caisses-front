@@ -35,7 +35,7 @@ const MenuTop = ({ location }) => {
             </li>
           </Link>
           <Link to="/bundling">
-            <li>Fagotage</li>
+            <li className={location.includes('/bundling') ? 'current' : ''}>Fagotage</li>
           </Link>
         </ul>
       </nav>
