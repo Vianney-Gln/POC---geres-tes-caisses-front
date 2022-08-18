@@ -3,32 +3,40 @@ import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 // import PropTypes
 import PropTypes from 'prop-types';
-// import context
-import ContextArticles from '../../context/ContextArticles';
 // style css
 import './menuTop.scss';
+// import components context
+import ContextStock from '../../context/ContextStock';
 
 // Check if there is filters (by calling articleName), and then check the path to determine the current tabs (stock, reception etc...)
 const MenuTop = ({ location }) => {
-  const contextArticles = useContext(ContextArticles);
-  const { articleName } = contextArticles;
-
+  // Context
+  const contextStock = useContext(ContextStock);
+  const { setTypeStock } = contextStock;
   return (
     <div className="menu-top">
       <nav className="navbar">
         <ul className="list-navbar">
           <Link to="/">
             <li
-              className={
-                location === '/reception' ? '' : location === '/' || articleName ? 'current' : ''
-              }>
+              onClick={() => setTypeStock('caisses-vrac')}
+              className={location.includes('/stock') ? 'current' : ''}>
               Stock
             </li>
           </Link>
           <Link to="/reception">
-            <li className={location === '/reception' ? 'current' : ''}>Réceptions</li>
+            <li className={location.includes('/reception') ? 'current' : ''}>Réceptions</li>
           </Link>
-          <li>Gestion des stocks</li>
+          <Link to="/out-of-stock">
+            <li
+              onClick={() => setTypeStock('caisses-vrac')}
+              className={location.includes('/out-of-stock') ? 'current' : ''}>
+              Sortie de stock
+            </li>
+          </Link>
+          <Link to="/bundling">
+            <li>Fagotage</li>
+          </Link>
         </ul>
       </nav>
     </div>

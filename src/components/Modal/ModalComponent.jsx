@@ -8,7 +8,17 @@ import { faTriangleExclamation, faSquareCheck } from '@fortawesome/free-solid-sv
 import './modalComponent.scss';
 // import PropTypes
 import PropTypes from 'prop-types';
-const ModalComponent = ({ error, open, closeModal, message }) => {
+const ModalComponent = ({
+  error,
+  open,
+  closeModal,
+  message,
+  contentLabel,
+  runOutOfStock,
+  selected,
+  confirmDelete,
+  errorDelete
+}) => {
   // style modal
   const styleModal = {
     content: {
@@ -23,7 +33,9 @@ const ModalComponent = ({ error, open, closeModal, message }) => {
     }
   };
 
-  // function managing icon, depending of error state
+  Modal.setAppElement('#root');
+
+  // Function managing icon, depending of error state
   const manageIcon = () => {
     if (error)
       return (
@@ -38,22 +50,76 @@ const ModalComponent = ({ error, open, closeModal, message }) => {
     );
   };
 
-  return (
-    <div className="component-modal">
-      <Modal isOpen={open} onRequestClose={closeModal} style={styleModal} contentLabel="Info Modal">
-        {manageIcon()}
-        <p>{message}</p>
-        <button onClick={closeModal}>Fermer</button>
-      </Modal>
-    </div>
-  );
+  // Function managing the content of the modal
+
+  const manageModalContent = () => {
+    if (contentLabel === 'Modal-reception') {
+      return (
+        <Modal
+          isOpen={open}
+          onRequestClose={closeModal}
+          style={styleModal}
+          contentLabel={contentLabel}>
+          {manageIcon()}
+          <p>{message}</p>
+          <button onClick={closeModal}>Fermer</button>
+        </Modal>
+      );
+    } else if (contentLabel === 'Modal-outOfStock') {
+      return (
+        <Modal
+          isOpen={open}
+          onRequestClose={closeModal}
+          style={styleModal}
+          contentLabel={contentLabel}>
+          {confirmDelete && errorDelete ? (
+            <>
+              <p>{confirmDelete}</p>
+              <button onClick={() => closeModal()} type="button">
+                Ok
+              </button>
+            </>
+          ) : confirmDelete ? (
+            <p>{confirmDelete}</p>
+          ) : (
+            <>
+              <p>
+                {selected.length
+                  ? 'Voulez vous vraiment supprimer ces articles?'
+                  : 'Veuillez sélectionner au moins un article.'}
+              </p>
+              <div className="duo-btn">
+                {selected.length ? (
+                  <>
+                    <button onClick={runOutOfStock}>Oui</button>
+                    <button onClick={closeModal}>Non</button>
+                  </>
+                ) : (
+                  <button onClick={closeModal} type="button">
+                    Ok
+                  </button>
+                )}
+              </div>
+            </>
+          )}
+        </Modal>
+      );
+    }
+  };
+
+  return <div className="component-modal">{manageModalContent()}</div>;
 };
 
 ModalComponent.propTypes = {
   open: PropTypes.bool,
   closeModal: PropTypes.func,
   message: PropTypes.string,
-  error: PropTypes.bool
+  error: PropTypes.bool,
+  contentLabel: PropTypes.string,
+  runOutOfStock: PropTypes.func,
+  selected: PropTypes.array,
+  confirmDelete: PropTypes.string,
+  errorDelete: PropTypes.bool
 };
 
 export default ModalComponent;

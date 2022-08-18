@@ -68,6 +68,7 @@ const Reception = () => {
         open={open}
         openModal={openModal}
         closeModal={closeModal}
+        contentLabel="Modal-reception"
       />
       <div className="container-reception">
         <h2>Reception</h2>

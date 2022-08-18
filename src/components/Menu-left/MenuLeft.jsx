@@ -6,8 +6,10 @@ import './menuLeft.scss';
 // import components context
 import ContextArticles from '../../context/ContextArticles';
 import ContextStock from '../../context/ContextStock';
+// import PropTypes
+import PropTypes from 'prop-types';
 
-const MenuLeft = () => {
+const MenuLeft = ({ location }) => {
   //useNavigate
   const navigate = useNavigate();
   // use context
@@ -18,6 +20,15 @@ const MenuLeft = () => {
 
   //states
   const [resolution, setResolution] = useState('');
+
+  /**
+   * Function that generates the first part of the link, depending of location statement
+   * @returns {string}
+   */
+  const generateLink = () => {
+    if (location.includes('/out-of-stock')) return '/out-of-stock';
+    if (location.includes('/stock')) return '/stock';
+  };
 
   /**
    * Function generating the type of boxes as a string, depending of idArticles statement
@@ -61,13 +72,16 @@ const MenuLeft = () => {
     <div className={!activate && resolution === 'small' ? 'menu-left-masqued' : 'menu-left'}>
       <select
         disabled={!activate}
+        value={typeStock}
         onChange={(e) => {
           setTypeStock(e.target.value);
-          navigate('/');
+          navigate(`${generateLink()}`);
         }}>
         <option value="caisses-vrac">Caisses vracs</option>
         <option value="caisses-total">Caisses total</option>
-        <option value="fagots">Fagots</option>
+        <option disabled={location.includes('/out-of-stock') ? true : false} value="fagots">
+          Fagots
+        </option>
       </select>
       <ul className="list-article">
         <li
@@ -86,7 +100,7 @@ const MenuLeft = () => {
               ? 'disable'
               : ''
           }>
-          <Link to="/toutes caisses">Toutes caisses</Link>
+          <Link to={`${generateLink()}/toutes caisses`}>Toutes caisses</Link>
         </li>
         {articles.length
           ? articles.map((article) => {
@@ -108,7 +122,7 @@ const MenuLeft = () => {
                       : ''
                   }
                   key={article.id}>
-                  <Link to={`/${article.name}`}>{article.name}</Link>
+                  <Link to={`${generateLink()}/${article.name}`}>{article.name}</Link>
                 </li>
               );
             })
@@ -128,6 +142,10 @@ const MenuLeft = () => {
       </div>
     </div>
   );
+};
+
+MenuLeft.propTypes = {
+  location: PropTypes.string
 };
 
 export default MenuLeft;
