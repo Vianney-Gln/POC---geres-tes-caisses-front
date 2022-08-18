@@ -18,6 +18,7 @@ const Stock = () => {
   document.title = 'Gestion des caisses - stock';
   // States
   const [stock, setStock] = useState([]); // state getting stock
+  const [fagots, setFagots] = useState([]);
   //useParams
   const param = useParams();
 
@@ -52,7 +53,7 @@ const Stock = () => {
       setActivate(true);
       getFagots(idArticles)
         .then((result) => {
-          setStock(result.data);
+          setFagots(result.data);
         })
         .catch((err) => {
           console.log(err);
@@ -69,8 +70,10 @@ const Stock = () => {
         <>
           <ul className="list-cards">
             <h2>{`Fagots ${param.articleName ? param.articleName : 'toutes caisses'}`}</h2>
-            {stock.length ? (
-              stock.map((elt, index) => <CardsStockFagot key={index} stock={elt} />)
+            {fagots.length ? (
+              fagots.map((elt, index) => (
+                <CardsStockFagot key={index} stock={elt} fagotId={elt.fagotId} />
+              ))
             ) : (
               <p className="no-fagot-found">Aucun fagot trouvé</p>
             )}
