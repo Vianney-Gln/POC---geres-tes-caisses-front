@@ -57,13 +57,18 @@ div.menu-left {
     width: 100%;
     flex: 1;
     display: flex;
-    justify-content: flex-start;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
 
-    p {
+    p.number-boxes-unable {
       margin: 0;
-      margin-left: 15px;
       font-weight: bold;
+      text-align: center;
+    }
+    p.number-boxes-disable {
+      font-weight: normal;
+      color: grey;
     }
   }
 }
@@ -103,5 +108,8 @@ div.menu-left {
         margin: 0;
       }
     }
+  }
+  div.menu-left-masqued {
+    display: none;
   }
 }

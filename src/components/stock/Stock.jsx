@@ -14,9 +14,10 @@ import TableStock from '../tableStock/TableStock';
 import CardsStockFagot from '../cardsStockFagots/CardsStockFagot';
 
 const Stock = () => {
+  // docTitle
+  document.title = 'Gestion des caisses - stock';
   // States
   const [stock, setStock] = useState([]); // state getting stock
-
   //useParams
   const param = useParams();
 

@@ -9,25 +9,23 @@ table.table-stock {
     padding: 15px;
     font-size: 1.4rem;
     margin-bottom: 20px;
-  }
+    position: relative;
 
-  td,
-  th {
-    border: 1px solid black;
-    padding: 10px;
-  }
-  tr:nth-child(2n) {
-    background-color: white;
-  }
-  th {
-    background-color: rgb(151, 150, 255);
-  }
-}
-
-@media screen and (max-width: 730px) {
-  table.table-stock {
-    caption {
-      font-size: 1rem;
+    label {
+      display: flex;
+      justify-content: center;
+      margin-top: 5px;
+      input {
+        border: none;
+        border-bottom: 1px solid black;
+        margin-left: 5px;
+      }
+      i {
+        color: grey;
+      }
+    }
+    button {
+      margin: 20px 10px;
     }
   }
 }
