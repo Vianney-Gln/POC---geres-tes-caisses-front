@@ -1,70 +1,40 @@
-# Getting Started with Create React App
+# Application de gestion de caisses de transport 
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+En référence à mon ancien métier, je développe actuellement une application qui répondra à une problématique que j'ai pu rencontré.
+Les caisses de transport sont déjà gérées par un logiciel très connu en logistique (REFLEX).
 
-## Available Scripts
+Ici il ne s'agit pas de le remplacer mais d'apporter un outil de gestion supplémentaire exclusif à la gestion des caisses qui aura pour but de faciliter leur gestion   par les opérateurs sur le terrain et d'améliorer la communiquation entre l'entreprise utilisatrice et le client.
 
-In the project directory, you can run:
+# Les différences de fonctionnalités
 
-### `npm start`
+Les fonctionnalités qui seront similaires à la gestion REFLEX:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- Créer une réception de caisses.
+- Consulter le stock globale des caisses.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Les fonctionnalités non gérées avec REFLEX:
+- Créer des fagots de 10 caisses d'une même longueur.
+- Visualiser quelle(s) caisse(s) sont dans quels fagots.
+- Visualiser les caisses qui ne sont pas encore en fagot.
+- L'application tourne sur navigateur et est responsive, elle sera accessible aux opérateurs terrains qui disposent d'un smartphone.
 
-### `npm test`
+# Une problématique de communiquation résolue
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Une autre problématique importante est la communiquation entre les deux équipes chargées de la gestion des caisses ( départ --> arrivée).
+Le client demande à l'équipe A (basée chez le client sans accés à REFLEX) de lui fournir un état des stocks toutes les semaines.
+L'équipe A doit alors attendre que l'équipe B (qui est à l'entrepôt avec un accés à REFLEX) envoie les infos.
+Avec cette application, l'équipe A a directement accés aux informations, à condition que l'équipe B travaille avec cette application.
 
-### `npm run build`
+# Note
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+L'application codée ici n'est encore qu'au début de son dévelopement.
+Pour l'instant l'utilisateur peut consulter les stocks, mais ne peut pas encore créer de fagots ou faire une réception.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+# Technologies utilisées
 
-### `npm run eject`
+- React
+- Express js
+- MySql
+- Scss
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
