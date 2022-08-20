@@ -13,6 +13,7 @@ const MenuTop = ({ location }) => {
   // Context
   const contextStock = useContext(ContextStock);
   const { setTypeStock } = contextStock;
+
   return (
     <div className="menu-top">
       <nav className="navbar">
@@ -35,7 +36,16 @@ const MenuTop = ({ location }) => {
             </li>
           </Link>
           <Link to="/bundling">
-            <li className={location.includes('/bundling') ? 'current' : ''}>Fagotage</li>
+            <li
+              className={
+                location.includes('/bundling') ? 'current content-slide-down' : 'content-slide-down'
+              }>
+              Fagotage
+              <ul className="slide-down">
+                <li>Création de fagot vide</li>
+                <li>Mise en fagot</li>
+              </ul>
+            </li>
           </Link>
         </ul>
       </nav>

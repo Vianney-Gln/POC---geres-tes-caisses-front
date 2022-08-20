@@ -4,3 +4,12 @@ div.container-bundling {
   min-height: 75vh;
   width: 100%;
 }
+
+@media screen and (max-width: 730px) {
+  div.container-bundling {
+    width: 100vw;
+    max-height: none;
+    min-height: none;
+    padding: none;
+  }
+}
