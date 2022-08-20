@@ -1,0 +1,25 @@
+form.form-createBundle {
+  width: 90%;
+  height: 90%;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  label {
+    margin-top: 20px;
+    input,
+    select {
+      margin-left: 5px;
+      padding: 5px;
+      width: 176px;
+    }
+    select {
+      cursor: pointer;
+    }
+  }
+  button {
+    margin-top: 40px;
+  }
+}
