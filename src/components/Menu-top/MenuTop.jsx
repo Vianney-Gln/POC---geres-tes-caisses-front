@@ -35,18 +35,21 @@ const MenuTop = ({ location }) => {
               Sortie de stock
             </li>
           </Link>
-          <Link to="/bundling">
-            <li
-              className={
-                location.includes('/bundling') ? 'current content-slide-down' : 'content-slide-down'
-              }>
-              Fagotage
-              <ul className="slide-down">
+
+          <li
+            className={
+              location.includes('/bundling') ? 'current content-slide-down' : 'content-slide-down'
+            }>
+            Fagotage
+            <ul className="slide-down">
+              <Link to="/bundling/create-bundle">
                 <li>Création de fagot vide</li>
+              </Link>
+              <Link to="/bundling/bundle">
                 <li>Mise en fagot</li>
-              </ul>
-            </li>
-          </Link>
+              </Link>
+            </ul>
+          </li>
         </ul>
       </nav>
     </div>

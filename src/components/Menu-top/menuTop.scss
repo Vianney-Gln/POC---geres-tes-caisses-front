@@ -39,7 +39,7 @@ div.menu-top {
           height: 0;
           list-style: none;
           position: absolute;
-          top: 40px;
+          top: 47px;
           left: -50%;
           background-color: #9796ff;
           z-index: 10;
@@ -98,7 +98,11 @@ div.menu-top {
         }
         li.content-slide-down:hover {
           ul.slide-down {
-            height: 100px;
+            height: 0;
+
+            li {
+              display: none;
+            }
           }
         }
       }
