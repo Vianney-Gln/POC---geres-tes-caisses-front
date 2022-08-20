@@ -1,13 +1,13 @@
 import React from 'react';
 // import style css
 import './menuSlideMobile.scss';
+import { Link } from 'react-router-dom';
 // import PropTypes
 import PropTypes from 'prop-types';
 
 const MenuSlideMobile = ({ openSlide, setOpenSlide }) => {
   // Function closing the slide if device is resizing
   window.addEventListener('resize', () => {
-    console.log(openSlide);
     setOpenSlide(false);
   });
 
@@ -17,8 +17,12 @@ const MenuSlideMobile = ({ openSlide, setOpenSlide }) => {
         X
       </i>
       <ul className="list-nav">
-        <li>choix 1</li>
-        <li>choix 2</li>
+        <Link to="/bundling/create-bundle">
+          <li onClick={() => setOpenSlide(false)}>Création de fagot vide</li>
+        </Link>
+        <Link to="/bundling/bundle">
+          <li onClick={() => setOpenSlide(false)}>Mise en fagot</li>
+        </Link>
       </ul>
     </div>
   );

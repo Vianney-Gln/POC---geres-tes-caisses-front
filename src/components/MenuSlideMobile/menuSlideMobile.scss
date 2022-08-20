@@ -17,7 +17,6 @@ div.MenuSlideMobile {
   ul.list-nav {
     padding: 0;
     margin: 0;
-    color: white;
     list-style: none;
     font-size: 1.2rem;
     width: 100%;
@@ -29,6 +28,7 @@ div.MenuSlideMobile {
 
     li {
       transform: scale(0);
+      color: white;
     }
   }
 }
