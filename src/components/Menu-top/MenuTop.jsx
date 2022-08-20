@@ -7,9 +7,8 @@ import PropTypes from 'prop-types';
 import './menuTop.scss';
 // import components context
 import ContextStock from '../../context/ContextStock';
-
 // Check if there is filters (by calling articleName), and then check the path to determine the current tabs (stock, reception etc...)
-const MenuTop = ({ location }) => {
+const MenuTop = ({ location, setOpenSlide }) => {
   // Context
   const contextStock = useContext(ContextStock);
   const { setTypeStock } = contextStock;
@@ -38,7 +37,9 @@ const MenuTop = ({ location }) => {
 
           <li
             className={
-              location.includes('/bundling') ? 'current content-slide-down' : 'content-slide-down'
+              location.includes('/bundling')
+                ? 'desktop current content-slide-down'
+                : 'desktop content-slide-down'
             }>
             Fagotage
             <ul className="slide-down">
@@ -50,6 +51,15 @@ const MenuTop = ({ location }) => {
               </Link>
             </ul>
           </li>
+          <li
+            onClick={() => setOpenSlide(true)}
+            className={
+              location.includes('/bundling')
+                ? 'mobile current content-slide-down'
+                : 'mobile content-slide-down'
+            }>
+            Fagotage
+          </li>
         </ul>
       </nav>
     </div>
@@ -57,7 +67,8 @@ const MenuTop = ({ location }) => {
 };
 
 MenuTop.propTypes = {
-  location: PropTypes.string
+  location: PropTypes.string,
+  setOpenSlide: PropTypes.func
 };
 
 export default MenuTop;

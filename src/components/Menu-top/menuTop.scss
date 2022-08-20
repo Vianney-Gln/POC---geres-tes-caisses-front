@@ -30,6 +30,12 @@ div.menu-top {
         background-color: rgb(151, 150, 255);
         border-radius: 5px;
       }
+      li.mobile {
+        display: none;
+      }
+      li.desktop {
+        display: block;
+      }
       li.content-slide-down {
         position: relative;
 
@@ -104,6 +110,12 @@ div.menu-top {
               display: none;
             }
           }
+        }
+        li.desktop {
+          display: none;
+        }
+        li.mobile {
+          display: block;
         }
       }
     }
