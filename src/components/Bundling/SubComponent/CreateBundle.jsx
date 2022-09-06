@@ -34,6 +34,9 @@ const CreateBundle = () => {
         .then(() => {
           setError(false);
           setMessage('Fagot créé avec succés.');
+          setTimeout(() => {
+            setDataInput({ uuid: '', id_article: '' });
+          }, 1000);
         })
         .catch((err) => {
           console.log(err);
