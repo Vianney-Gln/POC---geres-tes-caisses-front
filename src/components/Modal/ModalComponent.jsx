@@ -3,7 +3,11 @@ import React from 'react';
 import Modal from 'react-modal';
 // import FontAwesome
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTriangleExclamation, faSquareCheck } from '@fortawesome/free-solid-svg-icons';
+import {
+  faTriangleExclamation,
+  faSquareCheck,
+  faInfoCircle
+} from '@fortawesome/free-solid-svg-icons';
 // import style css
 import './modalComponent.scss';
 // import PropTypes
@@ -102,6 +106,24 @@ const ModalComponent = ({
               </div>
             </>
           )}
+        </Modal>
+      );
+    } else if (contentLabel === 'Modal-manage-bundle') {
+      return (
+        <Modal
+          isOpen={open}
+          onRequestClose={closeModal}
+          style={styleModal}
+          contentLabel={contentLabel}>
+          <i className="symbol blue">
+            <FontAwesomeIcon icon={faInfoCircle} />
+          </i>
+          <p>Défagoter n&apos;entrainera pas la suppression des caisses qui lui sont associées</p>
+          <p>Voulez défagoter?</p>
+          <div className="container-duo-btn">
+            <button onClick={closeModal}>Annuler</button>
+            <button>Défagoter</button>
+          </div>
         </Modal>
       );
     }
