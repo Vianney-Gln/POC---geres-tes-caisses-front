@@ -18,7 +18,8 @@ const Stock = () => {
   document.title = 'Gestion des caisses - stock';
   // States
   const [stock, setStock] = useState([]); // state getting stock
-  const [fagots, setFagots] = useState([]);
+  const [fagots, setFagots] = useState([]); // state getting fagot contents
+
   //useParams
   const param = useParams();
 

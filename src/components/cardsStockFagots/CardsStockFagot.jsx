@@ -11,7 +11,7 @@ import { getCountBoxesByFagot } from '../../services/stock';
 // import comonents
 import ModalComponent from '../Modal/ModalComponent';
 
-const CardsStockFagot = ({ stock, fagotId }) => {
+const CardsStockFagot = ({ stock, fagotId, handleEffect }) => {
   // States
   const [nbBoxe, setNbBoxe] = useState(null); // nb boxes
   const [open, setOpen] = useState(false); // state managing the modal
@@ -42,6 +42,8 @@ const CardsStockFagot = ({ stock, fagotId }) => {
         contentLabel="Modal-manage-bundle"
         messageForBundle={messageForBundle}
         setMessageForBundle={setMessageForBundle}
+        fagotId={fagotId}
+        handleEffect={handleEffect}
       />
       {operation === 'manage-bundle' ? (
         <div className="card">
@@ -69,7 +71,8 @@ const CardsStockFagot = ({ stock, fagotId }) => {
 
 CardsStockFagot.propTypes = {
   stock: PropTypes.object,
-  fagotId: PropTypes.number
+  fagotId: PropTypes.number,
+  handleEffect: PropTypes.func
 };
 
 export default CardsStockFagot;

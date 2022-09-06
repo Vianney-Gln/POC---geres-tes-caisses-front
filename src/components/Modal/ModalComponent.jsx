@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 // import modal
 import Modal from 'react-modal';
+// import service
+import { deleteFagotById } from '../../services/fagot';
 // import FontAwesome
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -24,7 +26,9 @@ const ModalComponent = ({
   confirmDelete,
   errorDelete,
   messageForBundle,
-  setMessageForBundle
+  setMessageForBundle,
+  fagotId,
+  handleEffect
 }) => {
   // States
   const [load, setLoad] = useState(false); // states loading while current operation: "défagotage en cours"
@@ -45,12 +49,25 @@ const ModalComponent = ({
 
   Modal.setAppElement('#root');
 
-  const loadOperation = () => {
-    setLoad(true);
-    setTimeout(() => {
-      setLoad(false);
-      setMessageForBundle('Défagotage effectué');
-    }, 4000);
+  const runDeleteFagotById = () => {
+    deleteFagotById(fagotId)
+      .then(() => {
+        setLoad(true);
+        setTimeout(() => {
+          setLoad(false);
+          setMessageForBundle('Défagotage effectué');
+        }, 4000);
+      })
+      .then(() => {
+        setTimeout(() => {
+          handleEffect();
+        }, 2000);
+      })
+
+      .catch((err) => {
+        console.log(err);
+        setMessageForBundle('Il y eu une erreur, défagotage non effectué.');
+      });
   };
 
   // Function managing icon, depending of error state
@@ -140,7 +157,7 @@ const ModalComponent = ({
               <p>Voulez défagoter?</p>
               <div className="container-duo-btn">
                 <button onClick={closeModal}>Annuler</button>
-                <button onClick={() => loadOperation()}>Défagoter</button>
+                <button onClick={() => runDeleteFagotById()}>Défagoter</button>
               </div>
             </>
           ) : load && !messageForBundle ? (
@@ -182,7 +199,9 @@ ModalComponent.propTypes = {
   confirmDelete: PropTypes.string,
   errorDelete: PropTypes.bool,
   messageForBundle: PropTypes.string,
-  setMessageForBundle: PropTypes.func
+  setMessageForBundle: PropTypes.func,
+  fagotId: PropTypes.number,
+  handleEffect: PropTypes.func
 };
 
 export default ModalComponent;
