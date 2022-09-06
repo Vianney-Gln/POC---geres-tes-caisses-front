@@ -1,6 +1,5 @@
 import axios from 'axios';
-
-const baseUrl = 'http://localhost:3001';
+import baseUrl from './'; // base url
 
 const getArticles = () => {
   return axios.get(`${baseUrl}/api/gereTesCaisses/articles`);
