@@ -22,4 +22,13 @@ form.form-createBundle {
   button {
     margin-top: 40px;
   }
+  p {
+    margin-top: 40px;
+  }
+  p.success {
+    color: green;
+  }
+  p.error {
+    color: red;
+  }
 }

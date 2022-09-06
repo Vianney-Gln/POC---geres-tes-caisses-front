@@ -3,10 +3,13 @@ import React, { useEffect, useState } from 'react';
 import './createBundle.scss';
 // import service
 import getArticles from '../../../services/articles';
+import createFagot from '../../../services/createFagot';
 
 const CreateBundle = () => {
   const [listArticles, setListArticles] = useState([]); // state list articles
-  const [dataInput, setDataInput] = useState({ uuid: '', id_article: '' });
+  const [dataInput, setDataInput] = useState({ uuid: '', id_article: '' }); // input to send to api
+  const [error, setError] = useState(false); // boolean managing error
+  const [message, setMessage] = useState(''); // success or error string message
 
   // On Mounting component, get articles
   useEffect(() => {
@@ -27,9 +30,19 @@ const CreateBundle = () => {
     e.preventDefault();
     const regex = /^Fag-/;
     if (dataInput.uuid.match(regex)) {
-      console.log(dataInput.uuid);
+      createFagot(dataInput)
+        .then(() => {
+          setError(false);
+          setMessage('Fagot créé avec succés.');
+        })
+        .catch((err) => {
+          console.log(err);
+          setError(true);
+          setMessage("Il y a eu une erreur, le fagot n'a pas été créé.");
+        });
     } else {
-      console.log('ça match pas');
+      setError(true);
+      setMessage("L'identifiant doit commencé par Fag-");
     }
   };
   return (
@@ -61,6 +74,7 @@ const CreateBundle = () => {
         </select>
       </label>
       <button type="submit">Créer fagot</button>
+      <p className={error ? 'error' : 'success'}>{message && message}</p>
     </form>
   );
 };

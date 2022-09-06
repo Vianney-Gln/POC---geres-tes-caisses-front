@@ -1,6 +1,11 @@
 import axios from 'axios';
 import baseUrl from './'; // base url
 
+/**
+ * Function creating an empty fagot
+ * @param {object} data
+ * @returns
+ */
 const createFagot = (data) => {
   return axios({
     method: 'post',
