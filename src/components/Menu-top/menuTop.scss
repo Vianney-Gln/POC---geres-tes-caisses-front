@@ -45,7 +45,7 @@ div.menu-top {
           height: 0;
           list-style: none;
           position: absolute;
-          top: 47px;
+          top: 52px;
           left: -50%;
           background-color: #9796ff;
           z-index: 10;
@@ -70,7 +70,7 @@ div.menu-top {
       }
       li.content-slide-down:hover {
         ul.slide-down {
-          height: 200%;
+          height: 250%;
 
           a {
             transform: scaleY(1);
