@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 // import modal
 import Modal from 'react-modal';
 // import FontAwesome
@@ -12,6 +12,7 @@ import {
 import './modalComponent.scss';
 // import PropTypes
 import PropTypes from 'prop-types';
+
 const ModalComponent = ({
   error,
   open,
@@ -21,8 +22,13 @@ const ModalComponent = ({
   runOutOfStock,
   selected,
   confirmDelete,
-  errorDelete
+  errorDelete,
+  messageForBundle,
+  setMessageForBundle
 }) => {
+  // States
+  const [load, setLoad] = useState(false); // states loading while current operation: "défagotage en cours"
+
   // style modal
   const styleModal = {
     content: {
@@ -38,6 +44,14 @@ const ModalComponent = ({
   };
 
   Modal.setAppElement('#root');
+
+  const loadOperation = () => {
+    setLoad(true);
+    setTimeout(() => {
+      setLoad(false);
+      setMessageForBundle('Défagotage effectué');
+    }, 4000);
+  };
 
   // Function managing icon, depending of error state
   const manageIcon = () => {
@@ -115,15 +129,40 @@ const ModalComponent = ({
           onRequestClose={closeModal}
           style={styleModal}
           contentLabel={contentLabel}>
-          <i className="symbol blue">
-            <FontAwesomeIcon icon={faInfoCircle} />
-          </i>
-          <p>Défagoter n&apos;entrainera pas la suppression des caisses qui lui sont associées</p>
-          <p>Voulez défagoter?</p>
-          <div className="container-duo-btn">
-            <button onClick={closeModal}>Annuler</button>
-            <button>Défagoter</button>
-          </div>
+          {!load && !messageForBundle ? (
+            <>
+              <i className="symbol blue">
+                <FontAwesomeIcon icon={faInfoCircle} />
+              </i>
+              <p>
+                Défagoter n&apos;entrainera pas la suppression des caisses qui lui sont associées
+              </p>
+              <p>Voulez défagoter?</p>
+              <div className="container-duo-btn">
+                <button onClick={closeModal}>Annuler</button>
+                <button onClick={() => loadOperation()}>Défagoter</button>
+              </div>
+            </>
+          ) : load && !messageForBundle ? (
+            <p>Défagotage en cours...</p>
+          ) : !load && messageForBundle ? (
+            <>
+              <i className="symbol green">
+                <FontAwesomeIcon icon={faSquareCheck} />
+              </i>
+              <p>{messageForBundle}</p>
+              <button
+                onClick={() => {
+                  closeModal();
+                  setMessageForBundle('');
+                }}
+                type="button">
+                Continuer
+              </button>
+            </>
+          ) : (
+            ''
+          )}
         </Modal>
       );
     }
@@ -141,7 +180,9 @@ ModalComponent.propTypes = {
   runOutOfStock: PropTypes.func,
   selected: PropTypes.array,
   confirmDelete: PropTypes.string,
-  errorDelete: PropTypes.bool
+  errorDelete: PropTypes.bool,
+  messageForBundle: PropTypes.string,
+  setMessageForBundle: PropTypes.func
 };
 
 export default ModalComponent;

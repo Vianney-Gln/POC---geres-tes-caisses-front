@@ -15,6 +15,7 @@ const CardsStockFagot = ({ stock, fagotId }) => {
   // States
   const [nbBoxe, setNbBoxe] = useState(null); // nb boxes
   const [open, setOpen] = useState(false); // state managing the modal
+  const [messageForBundle, setMessageForBundle] = useState(''); // message only for "défagotage" operation
   const param = useParams();
   // UseParam
   const { operation } = param;
@@ -26,6 +27,7 @@ const CardsStockFagot = ({ stock, fagotId }) => {
   //function opening the modal
   const closeModal = () => {
     setOpen(false);
+    setMessageForBundle('');
   };
 
   useEffect(() => {
@@ -38,6 +40,8 @@ const CardsStockFagot = ({ stock, fagotId }) => {
         openModal={openModal}
         closeModal={closeModal}
         contentLabel="Modal-manage-bundle"
+        messageForBundle={messageForBundle}
+        setMessageForBundle={setMessageForBundle}
       />
       {operation === 'manage-bundle' ? (
         <div className="card">
