@@ -20,10 +20,20 @@ const CreateBundle = () => {
     const copy = { ...dataInput };
     copy[key] = value;
     setDataInput(copy);
-    console.log(copy);
+  };
+
+  // Function submitting form and verify if uuid is starting by Fag-
+  const handleForm = (e) => {
+    e.preventDefault();
+    const regex = /^Fag-/;
+    if (dataInput.uuid.match(regex)) {
+      console.log(dataInput.uuid);
+    } else {
+      console.log('ça match pas');
+    }
   };
   return (
-    <form className="form-createBundle">
+    <form onSubmit={(e) => handleForm(e)} className="form-createBundle">
       <h1>Création de fagot</h1>
       <label htmlFor="idFagot">
         <span>Nom du fagot:</span>

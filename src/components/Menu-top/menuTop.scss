@@ -54,19 +54,27 @@ div.menu-top {
           justify-content: center;
           align-items: center;
           transition: all 0.3s;
-
-          li {
-            font-weight: normal;
-            font-size: 1rem;
-            color: transparent;
+          a {
             transform: scaleY(0);
             transition: all 0.5s;
+
+            li {
+              font-weight: normal;
+              font-size: 1rem;
+              color: transparent;
+              transform: scaleY(0);
+              transition: all 0.5s;
+            }
           }
         }
       }
       li.content-slide-down:hover {
         ul.slide-down {
           height: 200%;
+
+          a {
+            transform: scaleY(1);
+          }
 
           li {
             transform: scaleY(1);
