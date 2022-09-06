@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import './createBundle.scss';
 // import service
 import getArticles from '../../../services/articles';
-import createFagot from '../../../services/createFagot';
+import createFagot from '../../../services/fagot';
 
 const CreateBundle = () => {
   const [listArticles, setListArticles] = useState([]); // state list articles

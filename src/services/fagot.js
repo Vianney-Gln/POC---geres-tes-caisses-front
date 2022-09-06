@@ -1,5 +1,5 @@
 import axios from 'axios';
-import baseUrl from './'; // base url
+import baseUrl from '.'; // base url
 
 /**
  * Function creating an empty fagot
@@ -11,6 +11,18 @@ const createFagot = (data) => {
     method: 'post',
     url: `${baseUrl}/api/gereTesCaisses/fagots`,
     data: data
+  });
+};
+
+/**
+ * Function deleting one fagot by his id
+ * @param {number} id
+ * @returns
+ */
+export const deleteFagotById = (id) => {
+  return axios({
+    method: 'delete',
+    url: `${baseUrl}/api/gereTesCaisses/fagots/${id}`
   });
 };
 
