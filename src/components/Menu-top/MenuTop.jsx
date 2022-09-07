@@ -18,30 +18,36 @@ const MenuTop = ({ location, setOpenSlide }) => {
       <nav className="navbar">
         <ul className="list-navbar">
           <Link to="/">
-            <li
-              onClick={() => setTypeStock('caisses-vrac')}
-              className={location.includes('/stock') ? 'current' : ''}>
-              Stock
+            <li onClick={() => setTypeStock('caisses-vrac')}>
+              <span className={location.includes('/stock') ? 'current' : ''}>Stock</span>
             </li>
           </Link>
           <Link to="/reception">
-            <li className={location.includes('/reception') ? 'current' : ''}>Réceptions</li>
-          </Link>
-          <Link to="/out-of-stock">
-            <li
-              onClick={() => setTypeStock('caisses-vrac')}
-              className={location.includes('/out-of-stock') ? 'current' : ''}>
-              Sortie de stock
+            <li>
+              <span className={location.includes('/reception') ? 'current' : ''}>Réceptions</span>
             </li>
           </Link>
-
+          <Link to="/out-of-stock">
+            <li onClick={() => setTypeStock('caisses-vrac')}>
+              <span className={location.includes('/out-of-stock') ? 'current' : ''}>
+                Sortie de stock
+              </span>
+            </li>
+          </Link>
           <li
             className={
               location.includes('/bundling')
-                ? 'desktop current content-slide-down'
+                ? 'desktop content-slide-down'
                 : 'desktop content-slide-down'
             }>
-            Fagotage
+            <span
+              className={
+                location.includes('bundling')
+                  ? 'desktop current content-slide-down'
+                  : 'desktop content-slide-down'
+              }>
+              Fagotage
+            </span>
             <ul className="slide-down">
               <Link to="/bundling/create-bundle">
                 <li>Création de fagot vide</li>

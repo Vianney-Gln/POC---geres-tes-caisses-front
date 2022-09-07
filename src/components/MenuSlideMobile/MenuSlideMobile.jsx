@@ -23,6 +23,9 @@ const MenuSlideMobile = ({ openSlide, setOpenSlide }) => {
         <Link to="/bundling/bundle">
           <li onClick={() => setOpenSlide(false)}>Mise en fagot</li>
         </Link>
+        <Link to="/bundling/manage-bundle">
+          <li onClick={() => setOpenSlide(false)}>Gestion des fagots</li>
+        </Link>
       </ul>
     </div>
   );

@@ -25,10 +25,11 @@ div.menu-top {
         padding: 5px;
         cursor: pointer;
       }
-      li.current {
+      span.current {
         color: white;
         background-color: rgb(151, 150, 255);
         border-radius: 5px;
+        padding: 5px;
       }
       li.mobile {
         display: none;
@@ -51,7 +52,7 @@ div.menu-top {
           z-index: 10;
           display: flex;
           flex-direction: column;
-          justify-content: center;
+          justify-content: flex-start;
           align-items: center;
           transition: all 0.3s;
           a {
@@ -64,6 +65,7 @@ div.menu-top {
               color: transparent;
               transform: scaleY(0);
               transition: all 0.5s;
+              padding: 5px;
             }
           }
         }
