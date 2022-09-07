@@ -2,6 +2,7 @@ a,
 div.card {
   text-decoration: none;
   color: black;
+
   li.card-fagot {
     width: 200px;
     height: 150px;
@@ -13,7 +14,8 @@ div.card {
     justify-content: space-around;
     align-items: center;
     cursor: pointer;
-    margin: 0 10px;
+    margin: 10px 25px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 
     span {
       font-size: 1.4rem;
@@ -22,6 +24,29 @@ div.card {
     span.nbr-boxes {
       font-size: 1rem;
       font-weight: normal;
+    }
+    div.duo-btn {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      a.button-like {
+        display: block;
+        background-color: blue;
+        color: white;
+        padding: 3px;
+        border-radius: 5px;
+        font-size: 0.9rem;
+        transition: all 0.5s ease;
+        cursor: pointer;
+      }
+      a.button-like,
+      button {
+        margin: 0px 10px;
+      }
+      a.button-like:hover {
+        transform: scale(1.1);
+        background-color: #9796ff;
+      }
     }
   }
 

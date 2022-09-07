@@ -52,9 +52,6 @@ const MenuTop = ({ location, setOpenSlide }) => {
               <Link to="/bundling/create-bundle">
                 <li>Création de fagot vide</li>
               </Link>
-              <Link to="/bundling/bundle">
-                <li>Mise en fagot</li>
-              </Link>
               <Link to="/bundling/manage-bundle">
                 <li>Gestion des fagots</li>
               </Link>

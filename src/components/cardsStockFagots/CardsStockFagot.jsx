@@ -51,9 +51,14 @@ const CardsStockFagot = ({ stock, fagotId, handleEffect }) => {
             <span>{stock.uuid}</span>
             <span>{stock.fagotType}</span>
             <span className="nbr-boxes">Nombre de caisses: {nbBoxe}/10</span>
-            <button onClick={() => openModal()} type="button">
-              Défagoter
-            </button>
+            <div className="duo-btn">
+              <button onClick={() => openModal()} type="button">
+                Défagoter
+              </button>
+              <Link className="button-like" to="/bundling/bundle">
+                Modifier
+              </Link>
+            </div>
           </li>
         </div>
       ) : (
