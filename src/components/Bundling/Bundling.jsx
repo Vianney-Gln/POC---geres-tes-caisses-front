@@ -8,6 +8,7 @@ import ContextArticles from '../../context/ContextArticles';
 // import Components
 import CreateBundle from './SubComponent/CreateBundle';
 import ManageBundle from '../Bundling/SubComponent/ManageBundle';
+import Bundle from './SubComponent/Bundle';
 const Bundling = () => {
   // Context
   const contextArticle = useContext(ContextArticles);
@@ -26,6 +27,7 @@ const Bundling = () => {
     <div className="container-bundling">
       {operation === 'create-bundle' ? <CreateBundle /> : ''}
       {operation === 'manage-bundle' ? <ManageBundle /> : ''}
+      {operation === 'bundle' ? <Bundle /> : ''}
     </div>
   );
 };
