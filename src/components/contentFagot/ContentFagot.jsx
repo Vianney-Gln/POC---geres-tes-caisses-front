@@ -8,8 +8,10 @@ import ContextArticles from '../../context/ContextArticles';
 import './contentFagot.scss';
 // import service
 import { getBoxeByFagot } from '../../services/stock';
+// import PropTypes
+import PropTypes from 'prop-types';
 
-const ContentFagot = () => {
+const ContentFagot = ({ operation }) => {
   // context
   const contextArticles = useContext(ContextArticles);
   const { setActivate } = contextArticles; // able - disable filters
@@ -17,12 +19,17 @@ const ContentFagot = () => {
   const param = useParams();
   // Sates
   const [fagotBoxes, setFagotBoxes] = useState([]); // state getting boxes from one fagot
+  const [numberLines, setNumberLines] = useState([]); // max lines table
+
   // Function getting boxes from one fagot, setting the boxes statement and disable filters
   useEffect(() => {
     setActivate(false);
     getBoxeByFagot(param.id)
       .then((result) => {
         setFagotBoxes(result.data);
+        const diff = 10 - result.data.length;
+        const lines = new Array(diff).fill('undefined');
+        setNumberLines(lines);
       })
       .catch((err) => {
         console.log(err);
@@ -41,13 +48,6 @@ const ContentFagot = () => {
           </tr>
         </thead>
         <tbody>
-          {fagotBoxes.length < 1 && (
-            <tr align="center">
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-          )}
           {fagotBoxes &&
             fagotBoxes.map((element, index) => {
               return (
@@ -58,10 +58,25 @@ const ContentFagot = () => {
                 </tr>
               );
             })}
+          {operation === 'bundle' &&
+            numberLines.length &&
+            numberLines.map((_, index) => {
+              return (
+                <tr key={index}>
+                  <td align="center">Néant</td>
+                  <td align="center">-----</td>
+                  <td align="center">-----</td>
+                </tr>
+              );
+            })}
         </tbody>
       </table>
     </div>
   );
+};
+
+ContentFagot.propTypes = {
+  operation: PropTypes.string
 };
 
 export default ContentFagot;

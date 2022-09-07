@@ -3,16 +3,22 @@ import React from 'react';
 import './bundle.scss';
 // Import components
 import ContentFagot from '../../contentFagot/ContentFagot';
+// import PropTypes
+import PropTypes from 'prop-types';
 
-const Bundle = () => {
+const Bundle = ({ operation }) => {
   return (
     <div className="container-bundle">
       <div className="table-this-bundle">
-        <ContentFagot />
+        <ContentFagot operation={operation} />
       </div>
       <div className="table-stock"></div>
     </div>
   );
+};
+
+Bundle.propTypes = {
+  operation: PropTypes.string
 };
 
 export default Bundle;

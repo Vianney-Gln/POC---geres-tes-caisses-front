@@ -27,7 +27,7 @@ const Bundling = () => {
     <div className="container-bundling">
       {operation === 'create-bundle' ? <CreateBundle /> : ''}
       {operation === 'manage-bundle' ? <ManageBundle /> : ''}
-      {operation === 'bundle' ? <Bundle /> : ''}
+      {operation === 'bundle' ? <Bundle operation={operation} /> : ''}
     </div>
   );
 };
