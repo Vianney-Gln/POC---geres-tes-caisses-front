@@ -55,7 +55,7 @@ const CardsStockFagot = ({ stock, fagotId, handleEffect }) => {
               <button onClick={() => openModal()} type="button">
                 Défagoter
               </button>
-              <Link className="button-like" to="/bundling/bundle">
+              <Link className="button-like" to={`/bundling/bundle/${fagotId}`}>
                 Modifier
               </Link>
             </div>

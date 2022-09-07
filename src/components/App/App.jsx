@@ -36,7 +36,8 @@ const App = () => {
           <Route exact path="/reception" element={<Reception />} />
           <Route exact path="/out-of-stock" element={<Stock />} />
           <Route exact path="/out-of-stock/:articleName" element={<Stock />} />
-          <Route exact path="/bundling/:operation" element={<Bundling />} />
+          <Route exact path="/bundling/:operation/" element={<Bundling />} />
+          <Route exact path="/bundling/:operation/:id" element={<Bundling />} />
         </Routes>
       </div>
     </div>
