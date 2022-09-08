@@ -43,7 +43,7 @@ const ContentFagot = ({ operation }) => {
   return (
     <div className="container-contentFagot">
       <table className="table-boxes-fagots">
-        <caption>Constitution du fagot</caption>
+        <caption className="caption">Constitution du fagot</caption>
         <thead>
           <tr align="center">
             <th>identifiant</th>
