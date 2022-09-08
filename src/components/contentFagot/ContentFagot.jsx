@@ -23,7 +23,11 @@ const ContentFagot = ({ operation }) => {
 
   // Function getting boxes from one fagot, setting the boxes statement and disable filters
   useEffect(() => {
-    setActivate(false);
+    if (location.pathname.includes('/bundling/bundle')) {
+      setActivate(true);
+    } else {
+      setActivate(false);
+    }
     getBoxeByFagot(param.id)
       .then((result) => {
         setFagotBoxes(result.data);

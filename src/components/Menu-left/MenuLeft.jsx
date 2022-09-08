@@ -77,7 +77,9 @@ const MenuLeft = ({ location }) => {
   return (
     <div className={!activate && resolution === 'small' ? 'menu-left-masqued' : 'menu-left'}>
       <select
-        disabled={!activate}
+        disabled={
+          location.includes('/bundling/bundle') && currentIdBundle ? true : activate ? false : true
+        }
         value={typeStock}
         onChange={(e) => {
           setTypeStock(e.target.value);

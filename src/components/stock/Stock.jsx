@@ -25,7 +25,7 @@ const Stock = () => {
 
   // get Context
   const contextStock = useContext(ContextStock);
-  const { typeStock } = contextStock;
+  const { setTypeStock, typeStock } = contextStock;
   const contextArticle = useContext(ContextArticles);
   const { setActivate, setArticleName, idArticles } = contextArticle;
 
@@ -34,6 +34,9 @@ const Stock = () => {
   useEffect(() => {
     setArticleName(param.articleName);
 
+    if (location.pathname.includes('bundling/bundle')) {
+      setTypeStock('caisses-vrac');
+    }
     if (typeStock === 'caisses-vrac') {
       setActivate(true);
       getStockVrac(idArticles)
