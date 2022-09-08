@@ -38,6 +38,7 @@ const App = () => {
           <Route exact path="/out-of-stock/:articleName" element={<Stock />} />
           <Route exact path="/bundling/:operation/" element={<Bundling />} />
           <Route exact path="/bundling/:operation/:id" element={<Bundling />} />
+          <Route exact path="/bundling/:operation/:id/:articleName" element={<Bundling />} />
         </Routes>
       </div>
     </div>
