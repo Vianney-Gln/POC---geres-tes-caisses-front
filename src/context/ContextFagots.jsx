@@ -8,9 +8,11 @@ import PropTypes from 'prop-types';
 export const ContextFagotsProvider = ({ children }) => {
   // States
   const [currentIdBundle, setCurrentIdBundle] = useState(null);
+  const [boxesToAdd, setBoxesToAdd] = useState([]);
 
   return (
-    <ContextFagots.Provider value={{ currentIdBundle, setCurrentIdBundle }}>
+    <ContextFagots.Provider
+      value={{ currentIdBundle, setCurrentIdBundle, boxesToAdd, setBoxesToAdd }}>
       {children}
     </ContextFagots.Provider>
   );

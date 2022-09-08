@@ -1,10 +1,16 @@
-import React from 'react';
+import React, { useContext } from 'react';
 // import proptypes
 import PropTypes from 'prop-types';
 // import style css
 import './rowTable.scss';
+// Import component context
+import ContextFagots from '../../context/ContextFagots';
 
 const RowTable = ({ element, typeStock, setSelected, selected }) => {
+  // Context
+  const contextFagots = useContext(ContextFagots);
+  const { boxesToAdd, setBoxesToAdd } = contextFagots;
+
   /**
    * Function getting or deleting data to the cliqued row --- out-of-stock use only
    */
@@ -18,8 +24,16 @@ const RowTable = ({ element, typeStock, setSelected, selected }) => {
     setSelected(copy);
   };
 
+  /**
+   * Function getting or deleting data to the cliqued row --- bundling/bundle use only
+   */
   const addToBundle = () => {
-    console.log('coucou');
+    let copy = [...boxesToAdd];
+    if (!copy.find((elt) => elt.id == element.id)) {
+      copy.push(element);
+      setBoxesToAdd(copy);
+      console.log(copy);
+    }
   };
 
   return (
