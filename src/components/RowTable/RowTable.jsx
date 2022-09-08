@@ -6,7 +6,7 @@ import './rowTable.scss';
 
 const RowTable = ({ element, typeStock, setSelected, selected }) => {
   /**
-   * Function getting or deleting data to the cliqued row
+   * Function getting or deleting data to the cliqued row --- out-of-stock use only
    */
   const handleSelect = () => {
     let copy = [...selected];
@@ -18,15 +18,25 @@ const RowTable = ({ element, typeStock, setSelected, selected }) => {
     setSelected(copy);
   };
 
+  const addToBundle = () => {
+    console.log('coucou');
+  };
+
   return (
     <tr
       onClick={() => {
-        handleSelect();
+        location.pathname.includes('/out-of-stock')
+          ? handleSelect()
+          : location.pathname.includes('/bundling/bundle')
+          ? addToBundle()
+          : '';
       }}
       className={
         location.pathname.includes('/out-of-stock') && selected.find((el) => el.id === element.id)
           ? 'to-select selected'
           : location.pathname.includes('/out-of-stock')
+          ? 'to-select'
+          : location.pathname.includes('/bundling/bundle')
           ? 'to-select'
           : ''
       }>
