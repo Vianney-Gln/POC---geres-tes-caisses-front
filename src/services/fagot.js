@@ -26,4 +26,14 @@ export const deleteFagotById = (id) => {
   });
 };
 
+/**
+ * Function getting info from a fagot by his id
+ * @param {number} id
+ * @returns
+ */
+
+export const getInfoFagotById = (id) => {
+  return axios.get(`${baseUrl}/api/gereTesCaisses/fagots/info/${id}`);
+};
+
 export default createFagot;

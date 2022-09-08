@@ -9,6 +9,7 @@ import ContextFagots from '../../context/ContextFagots';
 import './contentFagot.scss';
 // import service
 import { getBoxeByFagot } from '../../services/stock';
+import { getInfoFagotById } from '../../services/fagot';
 // import PropTypes
 import PropTypes from 'prop-types';
 
@@ -18,6 +19,7 @@ const ContentFagot = ({ operation }) => {
   const contextFagots = useContext(ContextFagots);
   const { setActivate } = contextArticles; // able - disable filters
   const { boxesToAdd, setBoxesToAdd } = contextFagots;
+  const [currId, setCurrId] = useState(null); // state current uuid fagot
   // params
   const param = useParams();
   // Sates
@@ -39,6 +41,18 @@ const ContentFagot = ({ operation }) => {
       });
   }, [boxesToAdd]);
 
+  // On component mounting get the uuid of the current fagot (displayed in the caption)
+  useEffect(() => {
+    getInfoFagotById(param.id)
+      .then((result) => {
+        setCurrId(result.data.uuid);
+        console.log(result);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
   /**
    * Function removing a boxe from one bundle during update
    * @param {object} element
@@ -49,13 +63,12 @@ const ContentFagot = ({ operation }) => {
       copy = copy.filter((el) => el.id !== element.id);
     }
     setBoxesToAdd(copy);
-    console.log(copy);
   };
 
   return (
     <div className="container-contentFagot">
       <table className="table-boxes-fagots">
-        <caption className="caption">Constitution du {}</caption>
+        <caption className="caption">Constitution du {currId ? currId : 'fagot'}</caption>
         <thead>
           <tr align="center">
             <th>identifiant</th>
