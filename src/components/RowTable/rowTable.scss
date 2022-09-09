@@ -17,6 +17,10 @@ tr.selected {
   color: white;
 }
 
+tr.added {
+  background-color: rgb(186, 255, 186) !important;
+}
+
 td.bundle:hover {
   cursor: pointer;
   text-decoration: underline;

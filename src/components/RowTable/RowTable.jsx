@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 // import proptypes
 import PropTypes from 'prop-types';
 // import style css
@@ -10,6 +10,16 @@ const RowTable = ({ element, typeStock, setSelected, selected, operation }) => {
   // Context
   const contextFagots = useContext(ContextFagots);
   const { boxesToAdd, setBoxesToAdd, fagotBoxes } = contextFagots;
+
+  // States
+  const [added, setAdded] = useState(false);
+
+  // On component compare the current element with array boxesToAdd, if not match, this element 's classname "added" is removed
+  useEffect(() => {
+    if (!boxesToAdd.find((elt) => elt.uuid === element.uuid)) {
+      setAdded(false);
+    }
+  }, [boxesToAdd]);
 
   /**
    * Function getting or deleting data to the cliqued row --- out-of-stock use only
@@ -33,6 +43,7 @@ const RowTable = ({ element, typeStock, setSelected, selected, operation }) => {
     if (!copy.find((elt) => elt.id === element.id) && sum < 10) {
       copy.push(element);
       setBoxesToAdd(copy);
+      setAdded(true);
     }
   };
 
@@ -46,14 +57,19 @@ const RowTable = ({ element, typeStock, setSelected, selected, operation }) => {
           ? 'to-select selected'
           : location.pathname.includes('/out-of-stock')
           ? 'to-select'
-          : location.pathname.includes('/bundling/bundle')
-          ? 'to-select'
-          : ''
+          : location.pathname.includes('/bundling/bundle') && added
+          ? 'to-select added'
+          : 'to-select'
       }>
       <td align="center">{element.uuid}</td>
       <td align="center">{element.name}</td>
       {operation === 'bundle' && (
-        <td onClick={() => addToBundle()} className="bundle" align="center">
+        <td
+          onClick={() => {
+            addToBundle();
+          }}
+          className="bundle"
+          align="center">
           Fagoter
         </td>
       )}
