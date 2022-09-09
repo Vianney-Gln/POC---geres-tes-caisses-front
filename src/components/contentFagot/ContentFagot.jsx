@@ -18,13 +18,13 @@ const ContentFagot = ({ operation }) => {
   const contextArticles = useContext(ContextArticles);
   const contextFagots = useContext(ContextFagots);
   const { setActivate } = contextArticles; // able - disable filters
-  const { boxesToAdd, setBoxesToAdd } = contextFagots;
+  const { boxesToAdd, setBoxesToAdd, fagotBoxes, setFagotBoxes } = contextFagots;
+
+  // States
   const [currFagot, setCurrFagot] = useState({}); // state current fagot
 
   // params
   const param = useParams();
-  // Sates
-  const [fagotBoxes, setFagotBoxes] = useState([]); // state getting boxes from one fagot
 
   // Function getting boxes from one fagot, setting the boxes statement and disable filters
   useEffect(() => {
@@ -42,21 +42,26 @@ const ContentFagot = ({ operation }) => {
       });
   }, [boxesToAdd]);
 
+  /**
+   * Function generating empty rows
+   * @returns
+   */
   const generateEmptyRows = () => {
     const maxRows = 10;
     const sum = fagotBoxes.length + boxesToAdd.length;
     const diff = maxRows - sum;
-    const tempArray = new Array(diff).fill(undefined);
-
-    return tempArray.map((_, index) => {
-      return (
-        <tr key={index}>
-          <td align="center">----</td>
-          <td align="center">----</td>
-          <td align="center">----</td>
-        </tr>
-      );
-    });
+    if (diff > 0) {
+      const tempArray = new Array(diff).fill(undefined);
+      return tempArray.map((_, index) => {
+        return (
+          <tr key={index}>
+            <td align="center">----</td>
+            <td align="center">----</td>
+            <td align="center">----</td>
+          </tr>
+        );
+      });
+    }
   };
 
   // On component mounting get the uuid of the current fagot (displayed in the caption)
@@ -88,7 +93,8 @@ const ContentFagot = ({ operation }) => {
         <caption className="caption">
           Constitution du {currFagot.uuid ? currFagot.uuid : 'fagot'}
           <br></br>
-          {currFagot.name}
+          <span className="info-fagot">{currFagot.name}</span>
+          <span className="info-fagot"> {fagotBoxes.length + boxesToAdd.length} /10</span>
         </caption>
         <thead>
           <tr align="center">

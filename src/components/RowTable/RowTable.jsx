@@ -9,7 +9,7 @@ import ContextFagots from '../../context/ContextFagots';
 const RowTable = ({ element, typeStock, setSelected, selected }) => {
   // Context
   const contextFagots = useContext(ContextFagots);
-  const { boxesToAdd, setBoxesToAdd } = contextFagots;
+  const { boxesToAdd, setBoxesToAdd, fagotBoxes } = contextFagots;
 
   /**
    * Function getting or deleting data to the cliqued row --- out-of-stock use only
@@ -29,10 +29,10 @@ const RowTable = ({ element, typeStock, setSelected, selected }) => {
    */
   const addToBundle = () => {
     let copy = [...boxesToAdd];
-    if (!copy.find((elt) => elt.id == element.id)) {
+    const sum = fagotBoxes.length + copy.length;
+    if (!copy.find((elt) => elt.id === element.id) && sum < 10) {
       copy.push(element);
       setBoxesToAdd(copy);
-      console.log(copy);
     }
   };
 
