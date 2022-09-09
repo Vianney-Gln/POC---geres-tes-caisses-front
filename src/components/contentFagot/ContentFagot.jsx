@@ -121,7 +121,7 @@ const ContentFagot = ({ operation }) => {
           {operation === 'bundle' && boxesToAdd.length
             ? boxesToAdd.map((elt, index) => {
                 return (
-                  <tr key={index}>
+                  <tr className="justAdded" key={index}>
                     <td align="center">{elt.uuid}</td>
                     <td align="center">{elt.name}</td>
                     <td align="center">{currFagot.uuid}</td>
