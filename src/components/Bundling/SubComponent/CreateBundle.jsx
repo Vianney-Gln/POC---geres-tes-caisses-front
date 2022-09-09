@@ -1,18 +1,26 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 // import style css
 import './createBundle.scss';
 // import service
 import getArticles from '../../../services/articles';
 import createFagot from '../../../services/fagot';
+// import component context
+import ContextArticles from '../../../context/ContextArticles';
 
 const CreateBundle = () => {
+  // States
   const [listArticles, setListArticles] = useState([]); // state list articles
   const [dataInput, setDataInput] = useState({ uuid: '', id_article: '' }); // input to send to api
   const [error, setError] = useState(false); // boolean managing error
   const [message, setMessage] = useState(''); // success or error string message
 
-  // On Mounting component, get articles
+  // Context
+  const contextArticles = useContext(ContextArticles);
+  const { setActivate } = contextArticles;
+
+  // On Mounting component, get articles and disable the Menu Left
   useEffect(() => {
+    setActivate(false);
     getArticles().then((result) => {
       setListArticles(result.data);
     });

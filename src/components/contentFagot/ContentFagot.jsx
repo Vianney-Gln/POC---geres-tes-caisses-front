@@ -19,7 +19,7 @@ const ContentFagot = ({ operation }) => {
   const contextFagots = useContext(ContextFagots);
   const { setActivate } = contextArticles; // able - disable filters
   const { boxesToAdd, setBoxesToAdd } = contextFagots;
-  const [currId, setCurrId] = useState(null); // state current uuid fagot
+  const [currFagot, setCurrFagot] = useState({}); // state current fagot
   // params
   const param = useParams();
   // Sates
@@ -45,8 +45,7 @@ const ContentFagot = ({ operation }) => {
   useEffect(() => {
     getInfoFagotById(param.id)
       .then((result) => {
-        setCurrId(result.data.uuid);
-        console.log(result);
+        setCurrFagot(result.data);
       })
       .catch((err) => {
         console.log(err);
@@ -68,7 +67,11 @@ const ContentFagot = ({ operation }) => {
   return (
     <div className="container-contentFagot">
       <table className="table-boxes-fagots">
-        <caption className="caption">Constitution du {currId ? currId : 'fagot'}</caption>
+        <caption className="caption">
+          Constitution du {currFagot.uuid ? currFagot.uuid : 'fagot'}
+          <br></br>
+          {currFagot.name}
+        </caption>
         <thead>
           <tr align="center">
             <th>identifiant</th>
@@ -93,7 +96,7 @@ const ContentFagot = ({ operation }) => {
                   <tr onClick={() => removeToBundle(elt)} key={index}>
                     <td align="center">{elt.uuid}</td>
                     <td align="center">{elt.name}</td>
-                    <td align="center">{fagotBoxes[0].idFagot}</td>
+                    <td align="center">{currFagot.uuid}</td>
                   </tr>
                 );
               })
