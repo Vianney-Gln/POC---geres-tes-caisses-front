@@ -38,6 +38,11 @@ div.container-contentFagot {
       padding: 10px;
     }
 
+    td.delete:hover {
+      text-decoration: underline;
+      cursor: pointer;
+    }
+
     tr:nth-child(2n) {
       background-color: white;
     }

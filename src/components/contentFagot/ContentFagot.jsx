@@ -58,6 +58,7 @@ const ContentFagot = ({ operation }) => {
             <td align="center">----</td>
             <td align="center">----</td>
             <td align="center">----</td>
+            <td align="center">----</td>
           </tr>
         );
       });
@@ -95,12 +96,14 @@ const ContentFagot = ({ operation }) => {
           <br></br>
           <span className="info-fagot">{currFagot.name}</span>
           <span className="info-fagot"> {fagotBoxes.length + boxesToAdd.length} /10</span>
+          {operation === 'bundle' && <button type="button">Mise à jour</button>}
         </caption>
         <thead>
           <tr align="center">
             <th>identifiant</th>
             <th>désignation</th>
             <th>numéro fagot</th>
+            {operation === 'bundle' && <th>Action</th>}
           </tr>
         </thead>
         <tbody>
@@ -111,16 +114,20 @@ const ContentFagot = ({ operation }) => {
                   <td align="center">{element.idCaisse}</td>
                   <td align="center">{element.name}</td>
                   <td align="center">{element.idFagot}</td>
+                  {operation === 'bundle' && <td align="center">-----</td>}
                 </tr>
               );
             })}
           {operation === 'bundle' && boxesToAdd.length
             ? boxesToAdd.map((elt, index) => {
                 return (
-                  <tr onClick={() => removeToBundle(elt)} key={index}>
+                  <tr key={index}>
                     <td align="center">{elt.uuid}</td>
                     <td align="center">{elt.name}</td>
                     <td align="center">{currFagot.uuid}</td>
+                    <td className="delete" onClick={() => removeToBundle(elt)} align="center">
+                      Supprimer
+                    </td>
                   </tr>
                 );
               })
