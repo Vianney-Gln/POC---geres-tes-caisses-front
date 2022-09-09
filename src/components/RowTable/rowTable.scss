@@ -17,6 +17,11 @@ tr.selected {
   color: white;
 }
 
+td.bundle:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
 @media screen and (max-width: 730px) {
   table.table-stock {
     caption {

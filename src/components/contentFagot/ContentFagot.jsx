@@ -126,7 +126,7 @@ const ContentFagot = ({ operation }) => {
                     <td align="center">{elt.name}</td>
                     <td align="center">{currFagot.uuid}</td>
                     <td className="delete" onClick={() => removeToBundle(elt)} align="center">
-                      Supprimer
+                      Annuler
                     </td>
                   </tr>
                 );

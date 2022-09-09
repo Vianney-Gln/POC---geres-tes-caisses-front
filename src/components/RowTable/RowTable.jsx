@@ -6,7 +6,7 @@ import './rowTable.scss';
 // Import component context
 import ContextFagots from '../../context/ContextFagots';
 
-const RowTable = ({ element, typeStock, setSelected, selected }) => {
+const RowTable = ({ element, typeStock, setSelected, selected, operation }) => {
   // Context
   const contextFagots = useContext(ContextFagots);
   const { boxesToAdd, setBoxesToAdd, fagotBoxes } = contextFagots;
@@ -39,11 +39,7 @@ const RowTable = ({ element, typeStock, setSelected, selected }) => {
   return (
     <tr
       onClick={() => {
-        location.pathname.includes('/out-of-stock')
-          ? handleSelect()
-          : location.pathname.includes('/bundling/bundle')
-          ? addToBundle()
-          : '';
+        location.pathname.includes('/out-of-stock') ? handleSelect() : '';
       }}
       className={
         location.pathname.includes('/out-of-stock') && selected.find((el) => el.id === element.id)
@@ -56,6 +52,11 @@ const RowTable = ({ element, typeStock, setSelected, selected }) => {
       }>
       <td align="center">{element.uuid}</td>
       <td align="center">{element.name}</td>
+      {operation === 'bundle' && (
+        <td onClick={() => addToBundle()} className="bundle" align="center">
+          Fagoter
+        </td>
+      )}
       {typeStock === 'caisses-total' ? (
         <td align="center">{element.idFagot ? 'fag-' + element.idFagot : 'non fagotée'}</td>
       ) : (
@@ -69,7 +70,8 @@ RowTable.propTypes = {
   typeStock: PropTypes.string,
   element: PropTypes.object,
   setSelected: PropTypes.func,
-  selected: PropTypes.array
+  selected: PropTypes.array,
+  operation: PropTypes.string
 };
 
 export default RowTable;
