@@ -7,13 +7,22 @@ div.container-bundle {
   overflow-y: auto;
   display: flex;
 
-  div.table-this-bundle {
-    width: 50%;
-    background-color: green;
-  }
+  div.table-this-bundle,
   div.table-stock {
     width: 50%;
-    background-color: purple;
+
+    table {
+      font-size: 0.75rem;
+
+      caption {
+        padding: 0;
+        margin: 0;
+        margin-bottom: 10px;
+      }
+      caption.caption {
+        height: auto;
+      }
+    }
   }
 
   div.table-stock,
