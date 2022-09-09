@@ -20,6 +20,7 @@ const ContentFagot = ({ operation }) => {
   const { setActivate } = contextArticles; // able - disable filters
   const { boxesToAdd, setBoxesToAdd } = contextFagots;
   const [currFagot, setCurrFagot] = useState({}); // state current fagot
+
   // params
   const param = useParams();
   // Sates
@@ -40,6 +41,23 @@ const ContentFagot = ({ operation }) => {
         console.log(err);
       });
   }, [boxesToAdd]);
+
+  const generateEmptyRows = () => {
+    const maxRows = 10;
+    const sum = fagotBoxes.length + boxesToAdd.length;
+    const diff = maxRows - sum;
+    const tempArray = new Array(diff).fill(undefined);
+
+    return tempArray.map((_, index) => {
+      return (
+        <tr key={index}>
+          <td align="center">----</td>
+          <td align="center">----</td>
+          <td align="center">----</td>
+        </tr>
+      );
+    });
+  };
 
   // On component mounting get the uuid of the current fagot (displayed in the caption)
   useEffect(() => {
@@ -101,6 +119,7 @@ const ContentFagot = ({ operation }) => {
                 );
               })
             : ''}
+          {generateEmptyRows()}
         </tbody>
       </table>
     </div>
