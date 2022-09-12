@@ -26,13 +26,22 @@ const ContentFagot = ({ operation }) => {
   // params
   const param = useParams();
 
-  // Function getting boxes from one fagot, setting the boxes statement and disable filters
+  // Function setting the boxes statement and disable filters
   useEffect(() => {
     if (location.pathname.includes('/bundling/bundle')) {
       setActivate(true);
     } else {
       setActivate(false);
     }
+  }, [boxesToAdd]);
+
+  // Function removing all selected boxes if this componant unmount
+  useEffect(() => {
+    return () => setBoxesToAdd([]);
+  }, []);
+
+  // Function getting boxes from one fagot
+  useEffect(() => {
     getBoxeByFagot(param.id)
       .then((result) => {
         setFagotBoxes(result.data);
@@ -40,7 +49,7 @@ const ContentFagot = ({ operation }) => {
       .catch((err) => {
         console.log(err);
       });
-  }, [boxesToAdd]);
+  }, []);
 
   /**
    * Function generating empty rows
