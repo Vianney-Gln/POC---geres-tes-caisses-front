@@ -67,7 +67,7 @@ const ContentFagot = ({ operation }) => {
             <td align="center">----</td>
             <td align="center">----</td>
             <td align="center">----</td>
-            <td align="center">----</td>
+            {operation === 'bundle' && <td align="center">----</td>}
           </tr>
         );
       });
@@ -101,7 +101,8 @@ const ContentFagot = ({ operation }) => {
     <div className="container-contentFagot">
       <table className="table-boxes-fagots">
         <caption className="caption">
-          Constitution du {currFagot.uuid ? currFagot.uuid : 'fagot'}
+          {operation === 'bundle' ? 'Mise à jour' : 'Constitution'} du{' '}
+          {currFagot.uuid ? currFagot.uuid : 'fagot'}
           <br></br>
           <span className="info-fagot">{currFagot.name}</span>
           <span className="info-fagot"> {fagotBoxes.length + boxesToAdd.length} /10</span>
