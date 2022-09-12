@@ -1,5 +1,8 @@
 import React, { useContext, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+// import FontAwesome
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 // Import style css
 import './bundle.scss';
 // Import components
@@ -25,6 +28,10 @@ const Bundle = ({ operation }) => {
     <div className="container-bundle">
       <div className="table-this-bundle">
         <ContentFagot operation={operation} />
+      </div>
+      <div className="arrows">
+        <FontAwesomeIcon icon={faArrowLeft} />
+        <FontAwesomeIcon icon={faArrowRight} />
       </div>
       <div className="table-stock">
         <Stock />
