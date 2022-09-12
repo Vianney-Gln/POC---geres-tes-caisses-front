@@ -36,4 +36,13 @@ export const getInfoFagotById = (id) => {
   return axios.get(`${baseUrl}/api/gereTesCaisses/fagots/info/${id}`);
 };
 
+/**
+ * Function service updating id_fagot about boxes
+ * @param {array} boxesToAdd
+ * @param {number} id
+ */
+export const updateBundleById = (boxesToAdd, id) => {
+  console.log(boxesToAdd, id);
+};
+
 export default createFagot;

@@ -10,6 +10,7 @@ import './contentFagot.scss';
 // import service
 import { getBoxeByFagot } from '../../services/stock';
 import { getInfoFagotById } from '../../services/fagot';
+import { updateBundleById } from '../../services/fagot';
 // import PropTypes
 import PropTypes from 'prop-types';
 
@@ -104,7 +105,11 @@ const ContentFagot = ({ operation }) => {
           <br></br>
           <span className="info-fagot">{currFagot.name}</span>
           <span className="info-fagot"> {fagotBoxes.length + boxesToAdd.length} /10</span>
-          {operation === 'bundle' && <button type="button">Valider</button>}
+          {operation === 'bundle' && (
+            <button onClick={() => updateBundleById(boxesToAdd, currFagot.id)} type="button">
+              Valider
+            </button>
+          )}
         </caption>
         <thead>
           <tr align="center">
