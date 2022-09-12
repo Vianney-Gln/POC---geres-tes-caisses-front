@@ -104,7 +104,7 @@ const ContentFagot = ({ operation }) => {
           <br></br>
           <span className="info-fagot">{currFagot.name}</span>
           <span className="info-fagot"> {fagotBoxes.length + boxesToAdd.length} /10</span>
-          {operation === 'bundle' && <button type="button">Mise à jour</button>}
+          {operation === 'bundle' && <button type="button">Valider</button>}
         </caption>
         <thead>
           <tr align="center">

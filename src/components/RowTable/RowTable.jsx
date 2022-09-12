@@ -3,6 +3,9 @@ import React, { useContext, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 // import style css
 import './rowTable.scss';
+// import FontAwesome
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBoxesStacked } from '@fortawesome/free-solid-svg-icons';
 // Import component context
 import ContextFagots from '../../context/ContextFagots';
 
@@ -71,9 +74,10 @@ const RowTable = ({ element, typeStock, setSelected, selected, operation }) => {
           onClick={() => {
             addToBundle();
           }}
-          className="bundle"
-          align="center">
-          Fagoter
+          className="bundle icon"
+          align="center"
+          title="fagoter">
+          <FontAwesomeIcon icon={faBoxesStacked} />
         </td>
       )}
       {typeStock === 'caisses-total' ? (
