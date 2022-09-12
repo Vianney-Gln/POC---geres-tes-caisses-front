@@ -9,12 +9,12 @@ import ContextFagots from '../../context/ContextFagots';
 const RowTable = ({ element, typeStock, setSelected, selected, operation }) => {
   // Context
   const contextFagots = useContext(ContextFagots);
-  const { boxesToAdd, setBoxesToAdd, fagotBoxes } = contextFagots;
+  const { boxesToAdd, setBoxesToAdd, fagotBoxes, currFagot } = contextFagots;
 
   // States
   const [added, setAdded] = useState(false);
 
-  // On component compare the current element with array boxesToAdd, if not match, this element 's classname "added" is removed
+  // On component mounting compare the current element with array boxesToAdd, if not match, this element 's classname "added" is removed
   useEffect(() => {
     if (!boxesToAdd.find((elt) => elt.uuid === element.uuid)) {
       setAdded(false);
@@ -40,11 +40,14 @@ const RowTable = ({ element, typeStock, setSelected, selected, operation }) => {
   const addToBundle = () => {
     let copy = [...boxesToAdd];
     const sum = fagotBoxes.length + copy.length;
-    if (!copy.find((elt) => elt.id === element.id) && sum < 10) {
+
+    if (!copy.find((elt) => elt.id === element.id) && sum < 10 && element.name === currFagot.name) {
       copy.push(element);
       setBoxesToAdd(copy);
       setAdded(true);
     }
+    if (element.name !== currFagot.name)
+      alert('Attention la taille de la caisse ne correspond pas à la taille du fagot');
   };
 
   return (

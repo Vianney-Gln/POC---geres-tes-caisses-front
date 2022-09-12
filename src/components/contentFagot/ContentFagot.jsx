@@ -1,5 +1,5 @@
 // import react hooks
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useContext } from 'react';
 // react router dom
 import { useParams } from 'react-router-dom';
 // import Components context
@@ -18,10 +18,8 @@ const ContentFagot = ({ operation }) => {
   const contextArticles = useContext(ContextArticles);
   const contextFagots = useContext(ContextFagots);
   const { setActivate } = contextArticles; // able - disable filters
-  const { boxesToAdd, setBoxesToAdd, fagotBoxes, setFagotBoxes } = contextFagots;
-
-  // States
-  const [currFagot, setCurrFagot] = useState({}); // state current fagot
+  const { boxesToAdd, setBoxesToAdd, fagotBoxes, setFagotBoxes, currFagot, setCurrFagot } =
+    contextFagots;
 
   // params
   const param = useParams();

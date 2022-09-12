@@ -10,6 +10,7 @@ export const ContextFagotsProvider = ({ children }) => {
   const [currentIdBundle, setCurrentIdBundle] = useState(null);
   const [boxesToAdd, setBoxesToAdd] = useState([]); // state boxes to send into api for update
   const [fagotBoxes, setFagotBoxes] = useState([]); // state getting boxes from one fagot http request
+  const [currFagot, setCurrFagot] = useState({}); // state current fagot
 
   return (
     <ContextFagots.Provider
@@ -19,7 +20,9 @@ export const ContextFagotsProvider = ({ children }) => {
         boxesToAdd,
         setBoxesToAdd,
         fagotBoxes,
-        setFagotBoxes
+        setFagotBoxes,
+        currFagot,
+        setCurrFagot
       }}>
       {children}
     </ContextFagots.Provider>
