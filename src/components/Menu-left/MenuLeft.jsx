@@ -19,7 +19,7 @@ const MenuLeft = ({ location }) => {
   const contextFagots = useContext(ContextFagots); // context fagots
   const { articles, activate, idArticles, setIdArticles } = contextArticles;
   const { typeStock, setTypeStock, numberBoxes, setIdArticleCount } = contextStock;
-  const { currentIdBundle, setBoxesToAdd } = contextFagots;
+  const { currentIdBundle } = contextFagots;
 
   //states
   const [resolution, setResolution] = useState('');
@@ -97,7 +97,6 @@ const MenuLeft = ({ location }) => {
             if (activate) {
               setIdArticles(null);
               setIdArticleCount(null);
-              setBoxesToAdd([]);
             }
           }}
           className={
@@ -119,7 +118,6 @@ const MenuLeft = ({ location }) => {
                     if (activate) {
                       setIdArticles(article.id);
                       setIdArticleCount(article.id);
-                      setBoxesToAdd([]);
                     }
                   }}
                   className={

@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext } from 'react';
 // import proptypes
 import PropTypes from 'prop-types';
 // import style css
@@ -13,16 +13,6 @@ const RowTable = ({ element, typeStock, setSelected, selected, operation }) => {
   // Context
   const contextFagots = useContext(ContextFagots);
   const { boxesToAdd, setBoxesToAdd, fagotBoxes, currFagot } = contextFagots;
-
-  // States
-  const [added, setAdded] = useState(false);
-
-  // On component mounting compare the current element with array boxesToAdd, if not match, this element 's classname "added" is removed
-  useEffect(() => {
-    if (!boxesToAdd.find((elt) => elt.uuid === element.uuid)) {
-      setAdded(false);
-    }
-  }, [boxesToAdd]);
 
   /**
    * Function getting or deleting data to the cliqued row --- out-of-stock use only
@@ -47,7 +37,6 @@ const RowTable = ({ element, typeStock, setSelected, selected, operation }) => {
     if (!copy.find((elt) => elt.id === element.id) && sum < 10 && element.name === currFagot.name) {
       copy.push(element);
       setBoxesToAdd(copy);
-      setAdded(true);
     }
     if (element.name !== currFagot.name)
       alert('Attention la taille de la caisse ne correspond pas à la taille du fagot');
@@ -63,7 +52,8 @@ const RowTable = ({ element, typeStock, setSelected, selected, operation }) => {
           ? 'to-select selected'
           : location.pathname.includes('/out-of-stock')
           ? 'to-select'
-          : location.pathname.includes('/bundling/bundle') && added
+          : location.pathname.includes('/bundling/bundle') &&
+            boxesToAdd.find((el) => el.id === element.id)
           ? 'to-select added'
           : 'to-select'
       }>
