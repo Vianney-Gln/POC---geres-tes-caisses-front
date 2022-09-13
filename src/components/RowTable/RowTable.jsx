@@ -71,7 +71,7 @@ const RowTable = ({ element, typeStock, setSelected, selected, operation }) => {
         </td>
       )}
       {typeStock === 'caisses-total' ? (
-        <td align="center">{element.idFagot ? 'fag-' + element.idFagot : 'non fagotée'}</td>
+        <td align="center">{element.nameFagot ? element.nameFagot : 'non fagotée'}</td>
       ) : (
         ''
       )}
