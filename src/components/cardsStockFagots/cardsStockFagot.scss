@@ -4,18 +4,19 @@ div.card {
   color: black;
 
   li.card-fagot {
-    width: 200px;
-    height: 150px;
+    width: 700px;
+    height: 75px;
     background-color: #f0eeee;
     border: 1px solid black;
     border-radius: 5px;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: space-around;
     align-items: center;
     cursor: pointer;
     margin: 10px 25px;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    transition: all 0.5s ease;
 
     span {
       font-size: 1.4rem;
@@ -51,6 +52,6 @@ div.card {
   }
 
   li.card-fagot:hover {
-    background-color: #c4c4c4;
+    transform: scale(0.95);
   }
 }
