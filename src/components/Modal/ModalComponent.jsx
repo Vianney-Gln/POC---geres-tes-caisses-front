@@ -28,7 +28,8 @@ const ModalComponent = ({
   messageForBundle,
   setMessageForBundle,
   fagotId,
-  handleEffect
+  handleEffect,
+  runUpdateBundleByid
 }) => {
   // States
   const [load, setLoad] = useState(false); // states loading while current operation: "défagotage en cours"
@@ -182,6 +183,36 @@ const ModalComponent = ({
           )}
         </Modal>
       );
+    } else if (contentLabel === 'Modal-bundling') {
+      return (
+        <Modal
+          isOpen={open}
+          onRequestClose={closeModal}
+          style={styleModal}
+          contentLabel={contentLabel}>
+          {!message ? (
+            <>
+              <p>Voulez vous vraiment modifier ce fagot?</p>
+              <div className="duo-btn">
+                <button
+                  onClick={() => {
+                    runUpdateBundleByid();
+                  }}
+                  type="button">
+                  Oui
+                </button>
+                <button onClick={() => closeModal()} type="button">
+                  Non
+                </button>
+              </div>
+            </>
+          ) : (
+            ''
+          )}
+
+          {message ? <p>{message}</p> : ''}
+        </Modal>
+      );
     }
   };
 
@@ -201,7 +232,8 @@ ModalComponent.propTypes = {
   messageForBundle: PropTypes.string,
   setMessageForBundle: PropTypes.func,
   fagotId: PropTypes.number,
-  handleEffect: PropTypes.func
+  handleEffect: PropTypes.func,
+  runUpdateBundleByid: PropTypes.func
 };
 
 export default ModalComponent;

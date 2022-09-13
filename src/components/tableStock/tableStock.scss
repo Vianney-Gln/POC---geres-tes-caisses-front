@@ -9,7 +9,6 @@ table.table-stock {
   caption {
     padding: 15px;
     font-size: 1.4rem;
-    margin-bottom: 20px;
     position: relative;
 
     div.search-buttons {
@@ -20,7 +19,7 @@ table.table-stock {
     label {
       display: flex;
       justify-content: center;
-      margin-top: 5px;
+      margin-top: 4px;
       input {
         border: none;
         border-bottom: 1px solid black;
@@ -30,7 +29,6 @@ table.table-stock {
       }
       i {
         color: grey;
-        margin-bottom: 7px;
       }
     }
     button {

@@ -1,5 +1,5 @@
 // import react hooks
-import React, { useEffect, useContext } from 'react';
+import React, { useEffect, useContext, useState } from 'react';
 // react router dom
 import { useParams } from 'react-router-dom';
 // import Components context
@@ -13,6 +13,8 @@ import { getInfoFagotById } from '../../services/fagot';
 import { updateBundleById } from '../../services/fagot';
 // import PropTypes
 import PropTypes from 'prop-types';
+// Import component
+import ModalComponent from '../Modal/ModalComponent';
 
 const ContentFagot = ({ operation }) => {
   // context
@@ -21,6 +23,20 @@ const ContentFagot = ({ operation }) => {
   const { setActivate } = contextArticles; // able - disable filters
   const { boxesToAdd, setBoxesToAdd, fagotBoxes, setFagotBoxes, currFagot, setCurrFagot } =
     contextFagots;
+  // States
+  const [open, setOpen] = useState(false); // state managing the modal
+  const [message, setMessage] = useState(''); // state managing success or fail message
+  const [error, setError] = useState(false); // this state bool manage the color of modal icons(error or success)
+  // Modal
+
+  // function closing the modal
+  const openModal = () => {
+    setOpen(true);
+  };
+  // function opening the modal
+  const closeModal = () => {
+    setOpen(false);
+  };
 
   // params
   const param = useParams();
@@ -96,8 +112,32 @@ const ContentFagot = ({ operation }) => {
     setBoxesToAdd(copy);
   };
 
+  /**
+   * Function running the service function updateBundleById
+   */
+  const runUpdateBundleByid = () => {
+    updateBundleById(boxesToAdd, currFagot.id)
+      .then(() => {
+        setError(false);
+        setMessage('Fagot mis à jour avec succés');
+      })
+      .catch(() => {
+        setError(true);
+        setMessage('Une erreur est survenue pendant la mise à jour');
+      });
+  };
+
   return (
     <div className="container-contentFagot">
+      <ModalComponent
+        error={error}
+        message={message}
+        open={open}
+        openModal={openModal}
+        closeModal={closeModal}
+        contentLabel="Modal-bundling"
+        runUpdateBundleByid={runUpdateBundleByid}
+      />
       <table className="table-boxes-fagots">
         <caption className="caption">
           {operation === 'bundle' ? 'Mise à jour' : 'Constitution'} du{' '}
@@ -106,7 +146,7 @@ const ContentFagot = ({ operation }) => {
           <span className="info-fagot">{currFagot.name}</span>
           <span className="info-fagot"> {fagotBoxes.length + boxesToAdd.length} /10</span>
           {operation === 'bundle' && (
-            <button onClick={() => updateBundleById(boxesToAdd, currFagot.id)} type="button">
+            <button onClick={() => openModal()} type="button">
               Valider
             </button>
           )}
