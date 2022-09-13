@@ -42,7 +42,11 @@ export const getInfoFagotById = (id) => {
  * @param {number} id
  */
 export const updateBundleById = (boxesToAdd, id) => {
-  console.log(boxesToAdd, id);
+  return axios({
+    method: 'put',
+    data: boxesToAdd,
+    url: `${baseUrl}/api/gereTesCaisses/fagots/boxes-to-bundle/${id}`
+  });
 };
 
 export default createFagot;
