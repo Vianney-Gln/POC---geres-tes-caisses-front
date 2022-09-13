@@ -104,18 +104,20 @@ const TableStock = ({ typeStock, stock, captionName }) => {
         {typeStock === 'caisses-vrac' ? (
           <caption>
             {`Stock vrac ${manageCaptionTitle()}`}
-            <label htmlFor="search">
-              <i>
-                <FontAwesomeIcon icon={faMagnifyingGlass} />
-              </i>
-              <input
-                name="search"
-                placeholder="recherche par identifiant"
-                className="input-search"
-                onChange={(e) => setSearch(e.target.value)}
-                type="search"></input>
-            </label>
-            {manageButtons()}
+            <div className="search-buttons">
+              <label htmlFor="search">
+                <i>
+                  <FontAwesomeIcon icon={faMagnifyingGlass} />
+                </i>
+                <input
+                  name="search"
+                  placeholder="recherche par identifiant"
+                  className="input-search"
+                  onChange={(e) => setSearch(e.target.value)}
+                  type="search"></input>
+              </label>
+              {manageButtons()}
+            </div>
           </caption>
         ) : typeStock === 'caisses-total' ? (
           <caption>
