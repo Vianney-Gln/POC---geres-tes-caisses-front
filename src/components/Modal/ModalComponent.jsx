@@ -29,7 +29,8 @@ const ModalComponent = ({
   setMessageForBundle,
   fagotId,
   handleEffect,
-  runUpdateBundleByid
+  runUpdateBundleByid,
+  updateOperationOk
 }) => {
   // States
   const [load, setLoad] = useState(false); // states loading while current operation: "défagotage en cours"
@@ -209,7 +210,7 @@ const ModalComponent = ({
           ) : (
             ''
           )}
-
+          {updateOperationOk ? manageIcon() : ''}
           {message ? <p>{message}</p> : ''}
         </Modal>
       );
@@ -233,7 +234,8 @@ ModalComponent.propTypes = {
   setMessageForBundle: PropTypes.func,
   fagotId: PropTypes.number,
   handleEffect: PropTypes.func,
-  runUpdateBundleByid: PropTypes.func
+  runUpdateBundleByid: PropTypes.func,
+  updateOperationOk: PropTypes.bool
 };
 
 export default ModalComponent;

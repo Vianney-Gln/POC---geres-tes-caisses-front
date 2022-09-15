@@ -1,7 +1,7 @@
 // import react hooks
 import React, { useEffect, useContext, useState } from 'react';
 // react router dom
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 // import Components context
 import ContextArticles from '../../context/ContextArticles';
 import ContextFagots from '../../context/ContextFagots';
@@ -27,6 +27,10 @@ const ContentFagot = ({ operation }) => {
   const [open, setOpen] = useState(false); // state managing the modal
   const [message, setMessage] = useState(''); // state managing success or fail message
   const [error, setError] = useState(false); // this state bool manage the color of modal icons(error or success)
+  const [updateOperationOk, setUpdateOperationOk] = useState(false); // state determine the display of icon
+
+  // Navigate from react router dom
+  const navigate = useNavigate();
 
   // Modal
 
@@ -114,7 +118,7 @@ const ContentFagot = ({ operation }) => {
   };
 
   /**
-   * Function running the service function updateBundleById
+   * Function running the service function updateBundleById, manage messages success or errors and then redirect to stock component
    */
   const runUpdateBundleByid = () => {
     updateBundleById(boxesToAdd, currFagot.id)
@@ -122,16 +126,23 @@ const ContentFagot = ({ operation }) => {
         setMessage('Mise à jour du fagot en cours...');
         setError(false);
         setTimeout(() => {
+          setUpdateOperationOk(true);
           setMessage('Fagot mis à jour avec succés.');
-        }, 4000);
+        }, 3000);
         setTimeout(() => {
+          setUpdateOperationOk(false);
           setMessage('');
-          closeModal();
-        }, 8000);
+          navigate('/');
+        }, 6000);
       })
       .catch(() => {
         setError(true);
+        setUpdateOperationOk(true);
         setMessage('Une erreur est survenue pendant la mise à jour');
+
+        setTimeout(() => {
+          navigate('/');
+        }, 3000);
       });
   };
 
@@ -145,6 +156,7 @@ const ContentFagot = ({ operation }) => {
         closeModal={closeModal}
         contentLabel="Modal-bundling"
         runUpdateBundleByid={runUpdateBundleByid}
+        updateOperationOk={updateOperationOk}
       />
       <table className="table-boxes-fagots">
         <caption className="caption">
