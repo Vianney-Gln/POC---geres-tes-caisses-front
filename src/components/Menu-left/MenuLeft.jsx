@@ -83,6 +83,7 @@ const MenuLeft = ({ location }) => {
         value={typeStock}
         onChange={(e) => {
           setTypeStock(e.target.value);
+          setIdArticles(null);
           navigate(`${generateLink()}`);
         }}>
         <option value="caisses-vrac">Caisses vracs</option>

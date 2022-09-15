@@ -3,7 +3,7 @@ import React, { useState, useEffect, useContext } from 'react';
 // import style css;
 import './stock.scss';
 // import useParams
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 // service
 import getStockVrac, { getStockTotal, getFagots } from '../../services/stock';
 // import components context
@@ -16,12 +16,20 @@ import CardsStockFagot from '../cardsStockFagots/CardsStockFagot';
 const Stock = () => {
   // docTitle
   document.title = 'Gestion des caisses - stock';
+
+  // Navigate from react router dom
+  const navigate = useNavigate();
   // States
   const [stock, setStock] = useState([]); // state getting stock
   const [fagots, setFagots] = useState([]); // state getting fagot contents
 
   //useParams
   const param = useParams();
+
+  // If the user reload this page, remove the url parameter
+  window.addEventListener('load', () => {
+    if (param.articleName) navigate('/');
+  });
 
   // get Context
   const contextStock = useContext(ContextStock);
