@@ -26,10 +26,11 @@ const Stock = () => {
   //useParams
   const param = useParams();
 
-  // If the user reload this page, remove the url parameter
-  window.addEventListener('load', () => {
+  // If the user reload this page, remove the url parameter and redirect to stock page
+
+  useEffect(() => {
     if (param.articleName) navigate('/');
-  });
+  }, []);
 
   // get Context
   const contextStock = useContext(ContextStock);
