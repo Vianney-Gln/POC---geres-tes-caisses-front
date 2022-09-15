@@ -27,6 +27,7 @@ const ContentFagot = ({ operation }) => {
   const [open, setOpen] = useState(false); // state managing the modal
   const [message, setMessage] = useState(''); // state managing success or fail message
   const [error, setError] = useState(false); // this state bool manage the color of modal icons(error or success)
+
   // Modal
 
   // function closing the modal
@@ -118,8 +119,15 @@ const ContentFagot = ({ operation }) => {
   const runUpdateBundleByid = () => {
     updateBundleById(boxesToAdd, currFagot.id)
       .then(() => {
+        setMessage('Mise à jour du fagot en cours...');
         setError(false);
-        setMessage('Fagot mis à jour avec succés');
+        setTimeout(() => {
+          setMessage('Fagot mis à jour avec succés.');
+        }, 4000);
+        setTimeout(() => {
+          setMessage('');
+          closeModal();
+        }, 8000);
       })
       .catch(() => {
         setError(true);
