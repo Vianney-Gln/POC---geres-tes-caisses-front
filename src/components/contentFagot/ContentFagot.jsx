@@ -1,7 +1,7 @@
 // import react hooks
 import React, { useEffect, useContext, useState } from 'react';
 // react router dom
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 // import Components context
 import ContextArticles from '../../context/ContextArticles';
 import ContextFagots from '../../context/ContextFagots';
@@ -21,16 +21,21 @@ const ContentFagot = ({ operation }) => {
   const contextArticles = useContext(ContextArticles);
   const contextFagots = useContext(ContextFagots);
   const { setActivate } = contextArticles; // able - disable filters
-  const { boxesToAdd, setBoxesToAdd, fagotBoxes, setFagotBoxes, currFagot, setCurrFagot } =
-    contextFagots;
+  const {
+    boxesToAdd,
+    setBoxesToAdd,
+    fagotBoxes,
+    setFagotBoxes,
+    currFagot,
+    setCurrFagot,
+    handleRestartEffect,
+    restartEffect
+  } = contextFagots;
   // States
   const [open, setOpen] = useState(false); // state managing the modal
   const [message, setMessage] = useState(''); // state managing success or fail message
   const [error, setError] = useState(false); // this state bool manage the color of modal icons(error or success)
   const [updateOperationOk, setUpdateOperationOk] = useState(false); // state determine the display of icon
-
-  // Navigate from react router dom
-  const navigate = useNavigate();
 
   // Modal
 
@@ -69,7 +74,7 @@ const ContentFagot = ({ operation }) => {
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [restartEffect]);
 
   /**
    * Function generating empty rows
@@ -132,16 +137,17 @@ const ContentFagot = ({ operation }) => {
         setTimeout(() => {
           setUpdateOperationOk(false);
           setMessage('');
-          navigate('/');
+          handleRestartEffect();
+          setBoxesToAdd([]);
+          closeModal();
         }, 6000);
       })
       .catch(() => {
         setError(true);
         setUpdateOperationOk(true);
         setMessage('Une erreur est survenue pendant la mise à jour');
-
         setTimeout(() => {
-          navigate('/');
+          closeModal();
         }, 3000);
       });
   };

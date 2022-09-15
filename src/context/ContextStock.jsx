@@ -1,9 +1,11 @@
 // imports hooks
-import React, { createContext, useState, useEffect } from 'react';
+import React, { createContext, useState, useEffect, useContext } from 'react';
 // import proptypes
 import PropTypes from 'prop-types';
 // import services
 import { getCountTotal, getCountFagot, getCountVrac } from '../services/stock.js';
+// Import component context
+import ContextFagots from './ContextFagots.jsx';
 // create context
 const ContextStock = createContext(null);
 
@@ -12,6 +14,9 @@ export const ContextStockProvider = ({ children }) => {
   const [typeStock, setTypeStock] = useState('caisses-vrac'); // state getting the type of stock (vrac, total, fagots) --- default caisses-vrac
   const [numberBoxes, setNumberBoxes] = useState(null); // state getting the bumber of boxes
   const [idArticleCount, setIdArticleCount] = useState(null); //state id article argument getCount() functions
+
+  // Get other Context -- Use restart Effect from ContextFagots to restart API calls
+  const { restartEffect } = useContext(ContextFagots);
 
   // function getting the number of boxes depending of stock type and articles
   useEffect(() => {
@@ -32,7 +37,7 @@ export const ContextStockProvider = ({ children }) => {
           .catch((err) => console.log(err));
         break;
     }
-  }, [typeStock, idArticleCount]);
+  }, [typeStock, idArticleCount, restartEffect]);
 
   return (
     <ContextStock.Provider

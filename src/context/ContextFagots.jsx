@@ -11,6 +11,12 @@ export const ContextFagotsProvider = ({ children }) => {
   const [boxesToAdd, setBoxesToAdd] = useState([]); // state boxes to send into api for update
   const [fagotBoxes, setFagotBoxes] = useState([]); // state getting boxes from one fagot http request
   const [currFagot, setCurrFagot] = useState({}); // state current fagot
+  const [restartEffect, setRestartEffect] = useState(false); // state used to restart the useEffect in Stock component
+
+  // Function restarting the useEffect in Stock component
+  const handleRestartEffect = () => {
+    setRestartEffect(!restartEffect);
+  };
 
   return (
     <ContextFagots.Provider
@@ -22,7 +28,9 @@ export const ContextFagotsProvider = ({ children }) => {
         fagotBoxes,
         setFagotBoxes,
         currFagot,
-        setCurrFagot
+        setCurrFagot,
+        handleRestartEffect,
+        restartEffect
       }}>
       {children}
     </ContextFagots.Provider>

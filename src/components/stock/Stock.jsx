@@ -9,6 +9,7 @@ import getStockVrac, { getStockTotal, getFagots } from '../../services/stock';
 // import components context
 import ContextStock from '../../context/ContextStock';
 import ContextArticles from '../../context/ContextArticles';
+import ContextFagots from '../../context/ContextFagots';
 // import components
 import TableStock from '../tableStock/TableStock';
 import CardsStockFagot from '../cardsStockFagots/CardsStockFagot';
@@ -37,6 +38,8 @@ const Stock = () => {
   const { setTypeStock, typeStock } = contextStock;
   const contextArticle = useContext(ContextArticles);
   const { setActivate, setArticleName, idArticles } = contextArticle;
+  const contextFagot = useContext(ContextFagots);
+  const { restartEffect } = contextFagot;
 
   // function getting stock calling api
 
@@ -74,7 +77,7 @@ const Stock = () => {
     } else {
       setStock([]);
     }
-  }, [typeStock, param.articleName]);
+  }, [typeStock, param.articleName, restartEffect]);
   return (
     <div className="container-stock">
       {typeStock === 'caisses-vrac' || typeStock === 'caisses-total' ? (
