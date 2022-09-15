@@ -1,5 +1,5 @@
 // import react hooks
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 // import Routing Link
 import { Link, useParams } from 'react-router-dom';
 // import PropTypes
@@ -10,6 +10,8 @@ import './cardsStockFagot.scss';
 import { getCountBoxesByFagot } from '../../services/stock';
 // import comonents
 import ModalComponent from '../Modal/ModalComponent';
+// Import component context
+import ContextArticles from '../../context/ContextArticles';
 
 const CardsStockFagot = ({ stock, fagotId, handleEffect }) => {
   // States
@@ -19,6 +21,10 @@ const CardsStockFagot = ({ stock, fagotId, handleEffect }) => {
   const param = useParams();
   // UseParam
   const { operation } = param;
+
+  // Context
+  const contextArticles = useContext(ContextArticles);
+  const { setIdArticles } = contextArticles;
 
   // function closing the modal
   const openModal = () => {
@@ -55,7 +61,10 @@ const CardsStockFagot = ({ stock, fagotId, handleEffect }) => {
               <button onClick={() => openModal()} type="button">
                 Défagoter
               </button>
-              <Link className="button-like" to={`/bundling/bundle/${fagotId}`}>
+              <Link
+                onClick={() => setIdArticles(null)}
+                className="button-like"
+                to={`/bundling/bundle/${fagotId}`}>
                 Modifier
               </Link>
             </div>
