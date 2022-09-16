@@ -7,6 +7,9 @@ import ContextArticles from '../../context/ContextArticles';
 import ContextFagots from '../../context/ContextFagots';
 // import style css
 import './contentFagot.scss';
+// import FontAwesome
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowTurnRight } from '@fortawesome/free-solid-svg-icons';
 // import service
 import { getBoxeByFagot } from '../../services/stock';
 import { getInfoFagotById } from '../../services/fagot';
@@ -193,7 +196,13 @@ const ContentFagot = ({ operation }) => {
                   <td align="center">{element.idCaisse}</td>
                   <td align="center">{element.name}</td>
                   <td align="center">{element.idFagot}</td>
-                  {operation === 'bundle' && <td align="center">-----</td>}
+                  {operation === 'bundle' && (
+                    <td className="red" title="supprimer du fagot" align="center">
+                      <i>
+                        <FontAwesomeIcon icon={faArrowTurnRight} />
+                      </i>
+                    </td>
+                  )}
                 </tr>
               );
             })}
