@@ -37,10 +37,11 @@ const ContentFagot = ({ operation }) => {
   // States
   const [open, setOpen] = useState(false); // state managing the modal
   const [message, setMessage] = useState(''); // state managing success or fail message
+  const [contentLabel, setContentLabel] = useState(''); // state managin the content label modal
   const [error, setError] = useState(false); // this state bool manage the color of modal icons(error or success)
   const [updateOperationOk, setUpdateOperationOk] = useState(false); // state determine the display of icon
 
-  // Modal
+  // Modals
 
   // function closing the modal
   const openModal = () => {
@@ -163,7 +164,7 @@ const ContentFagot = ({ operation }) => {
         open={open}
         openModal={openModal}
         closeModal={closeModal}
-        contentLabel="Modal-bundling"
+        contentLabel={contentLabel} //"Modal-bundling"
         runUpdateBundleByid={runUpdateBundleByid}
         updateOperationOk={updateOperationOk}
       />
@@ -175,7 +176,12 @@ const ContentFagot = ({ operation }) => {
           <span className="info-fagot">{currFagot.name}</span>
           <span className="info-fagot"> {fagotBoxes.length + boxesToAdd.length} /10</span>
           {operation === 'bundle' && (
-            <button onClick={() => openModal()} type="button">
+            <button
+              onClick={() => {
+                setContentLabel('Modal-bundling');
+                openModal();
+              }}
+              type="button">
               Valider
             </button>
           )}
@@ -198,7 +204,11 @@ const ContentFagot = ({ operation }) => {
                   <td align="center">{element.idFagot}</td>
                   {operation === 'bundle' && (
                     <td className="red" title="supprimer du fagot" align="center">
-                      <i>
+                      <i
+                        onClick={() => {
+                          setContentLabel('Modal-remove-from-bundle');
+                          openModal();
+                        }}>
                         <FontAwesomeIcon icon={faArrowTurnRight} />
                       </i>
                     </td>

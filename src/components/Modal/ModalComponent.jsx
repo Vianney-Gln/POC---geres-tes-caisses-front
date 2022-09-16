@@ -214,6 +214,36 @@ const ModalComponent = ({
           {message ? <p>{message}</p> : ''}
         </Modal>
       );
+    } else if (contentLabel === 'Modal-remove-from-bundle') {
+      return (
+        <Modal
+          isOpen={open}
+          onRequestClose={closeModal}
+          style={styleModal}
+          contentLabel={contentLabel}>
+          {!message ? (
+            <div className="confirmation-modal">
+              <p>Voulez vous vraiment retirer cette caisse de ce fagot?</p>
+              <div className="duo-btn">
+                <button
+                  onClick={() => {
+                    console.log('toto');
+                  }}
+                  type="button">
+                  Oui
+                </button>
+                <button onClick={() => closeModal()} type="button">
+                  Non
+                </button>
+              </div>
+            </div>
+          ) : (
+            ''
+          )}
+          {updateOperationOk ? manageIcon() : ''}
+          {message ? <p>{message}</p> : ''}
+        </Modal>
+      );
     }
   };
 
