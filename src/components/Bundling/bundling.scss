@@ -1,0 +1,18 @@
+div.container-bundling {
+  background-color: white;
+  max-height: 75vh;
+  min-height: 75vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media screen and (max-width: 730px) {
+  div.container-bundling {
+    width: 100vw;
+    max-height: none;
+    min-height: none;
+    padding: none;
+  }
+}

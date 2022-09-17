@@ -1,26 +1,57 @@
-a {
+a,
+div.card {
   text-decoration: none;
   color: black;
+
   li.card-fagot {
-    width: 200px;
-    height: 150px;
+    width: 700px;
+    height: 75px;
     background-color: #f0eeee;
     border: 1px solid black;
     border-radius: 5px;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: space-around;
     align-items: center;
     cursor: pointer;
-    margin: 0 10px;
+    margin: 10px 25px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    transition: all 0.5s ease;
 
     span {
       font-size: 1.4rem;
       font-weight: bold;
     }
+    span.nbr-boxes {
+      font-size: 1rem;
+      font-weight: normal;
+    }
+    div.duo-btn {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      a.button-like {
+        display: block;
+        background-color: blue;
+        color: white;
+        padding: 3px;
+        border-radius: 5px;
+        font-size: 0.9rem;
+        transition: all 0.5s ease;
+        cursor: pointer;
+      }
+      a.button-like,
+      button {
+        margin: 0px 10px;
+      }
+      a.button-like:hover {
+        transform: scale(1.1);
+        background-color: #9796ff;
+      }
+    }
   }
 
   li.card-fagot:hover {
-    background-color: #c4c4c4;
+    transform: scale(0.95);
   }
 }

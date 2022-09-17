@@ -1,6 +1,5 @@
 import axios from 'axios';
-
-const baseUrl = 'http://localhost:3001';
+import baseUrl from './'; // base url
 
 /**
  * Function getting stock vrac
@@ -105,6 +104,17 @@ export const outOfStock = (ids) => {
     url: `${baseUrl}/api/gereTesCaisses/outOfStock`,
     data: ids
   });
+};
+
+/**
+ * Function getting the number of boxes in a fagot
+ * @param {number} idFagot
+ * @returns {promise}
+ */
+export const getCountBoxesByFagot = (idFagot) => {
+  return axios
+    .get(`${baseUrl}/api/gereTesCaisses/fagots/number-box-in-fagots/${idFagot}`)
+    .then((result) => result.data);
 };
 
 export default getStockVrac;

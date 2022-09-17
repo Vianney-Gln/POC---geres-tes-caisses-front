@@ -4,21 +4,28 @@ table.table-stock {
   border-collapse: collapse;
   background-color: whitesmoke;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 0px 8px;
+  font-size: 0.8rem;
 
   caption {
     padding: 15px;
     font-size: 1.4rem;
-    margin-bottom: 20px;
     position: relative;
 
+    div.search-buttons {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
     label {
       display: flex;
       justify-content: center;
-      margin-top: 5px;
+      margin-top: 4px;
       input {
         border: none;
         border-bottom: 1px solid black;
         margin-left: 5px;
+        margin-bottom: 7px;
+        margin-right: 10px;
       }
       i {
         color: grey;

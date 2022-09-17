@@ -25,10 +25,67 @@ div.menu-top {
         padding: 5px;
         cursor: pointer;
       }
-      li.current {
+      span.current {
         color: white;
         background-color: rgb(151, 150, 255);
         border-radius: 5px;
+        padding: 5px;
+      }
+      li.mobile {
+        display: none;
+      }
+      li.desktop {
+        display: block;
+      }
+      li.content-slide-down {
+        position: relative;
+
+        ul.slide-down {
+          padding: 0;
+          width: 200%;
+          height: 0;
+          list-style: none;
+          position: absolute;
+          top: 52px;
+          left: -50%;
+          background-color: #9796ff;
+          z-index: 10;
+          display: flex;
+          flex-direction: column;
+          justify-content: flex-start;
+          align-items: center;
+          transition: all 0.3s;
+          a {
+            transform: scaleY(0);
+            transition: all 0.5s;
+
+            li {
+              font-weight: normal;
+              font-size: 1rem;
+              color: transparent;
+              transform: scaleY(0);
+              transition: all 0.5s;
+              padding: 5px;
+            }
+          }
+        }
+      }
+      li.content-slide-down:hover {
+        ul.slide-down {
+          height: 190%;
+
+          a {
+            transform: scaleY(1);
+          }
+
+          li {
+            transform: scaleY(1);
+            color: white;
+          }
+          li:hover {
+            text-decoration: underline;
+          }
+        }
       }
     }
   }
@@ -42,6 +99,33 @@ div.menu-top {
       ul.list-navbar {
         li {
           font-size: 0.8rem;
+        }
+        li.content-slide-down {
+          ul.slide-down {
+            left: -100%;
+            width: 250%;
+            justify-content: space-evenly;
+            align-items: flex-start;
+
+            li {
+              font-size: 0.8rem;
+            }
+          }
+        }
+        li.content-slide-down:hover {
+          ul.slide-down {
+            height: 0;
+
+            li {
+              display: none;
+            }
+          }
+        }
+        li.desktop {
+          display: none;
+        }
+        li.mobile {
+          display: block;
         }
       }
     }

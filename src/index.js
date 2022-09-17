@@ -9,16 +9,19 @@ import App from './components/App/App';
 // import context
 import { ContextArticlesProvider } from './context/ContextArticles';
 import { ContextStockProvider } from './context/ContextStock';
+import { ContextFagotsProvider } from './context/ContextFagots';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <ContextStockProvider>
-      <ContextArticlesProvider>
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
-      </ContextArticlesProvider>
-    </ContextStockProvider>
+    <ContextFagotsProvider>
+      <ContextStockProvider>
+        <ContextArticlesProvider>
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
+        </ContextArticlesProvider>
+      </ContextStockProvider>
+    </ContextFagotsProvider>
   </React.StrictMode>
 );

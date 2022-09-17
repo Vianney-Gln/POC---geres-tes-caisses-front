@@ -3,6 +3,10 @@ th {
   border: 1px solid black;
   padding: 10px;
 }
+
+td.icon {
+  color: blue;
+}
 tr:nth-child(2n) {
   background-color: white;
 }
@@ -15,6 +19,15 @@ tr.to-select {
 tr.selected {
   background-color: rgb(46, 47, 48);
   color: white;
+}
+
+tr.added {
+  background-color: rgb(186, 255, 186) !important;
+}
+
+td.bundle:hover {
+  cursor: pointer;
+  text-decoration: underline;
 }
 
 @media screen and (max-width: 730px) {
