@@ -36,15 +36,24 @@ const Reception = () => {
   };
 
   /**
-   * // Function adding a new object in the state array dataInputs IF this current line got 10 caracteres
+   * // Function adding a new object in the state array dataInputs IF this current line got 10 caracteres, IF NOT, generate an error message
    * @param {number} index
    */
   const addNewLine = (index, line) => {
+    const year = new Date().getFullYear().toString();
+    const regex = new RegExp(`^${year}`, 'g');
     if (line.uuid.length === 10) {
-      setMessageCaracteres('');
-      const newDataInputs = [...dataInputs];
-      newDataInputs.push({ uuid: (Number(dataInputs[index].uuid) + 1).toString(), id_article: '' });
-      setDataInputs(newDataInputs);
+      if (regex.test(line.uuid)) {
+        setMessageCaracteres('');
+        const newDataInputs = [...dataInputs];
+        newDataInputs.push({
+          uuid: (Number(dataInputs[index].uuid) + 1).toString(),
+          id_article: ''
+        });
+        setDataInputs(newDataInputs);
+      } else {
+        setMessageCaracteres("L'identifiant doit commencer par l'année actuelle.");
+      }
     } else {
       setMessageCaracteres("L'identifiant doit être composé de 10 caratères.");
     }

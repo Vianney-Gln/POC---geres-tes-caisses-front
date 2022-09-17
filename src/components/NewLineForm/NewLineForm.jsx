@@ -45,7 +45,8 @@ const NewLineForm = ({ addNewLine, index, dataInputs, setDataInputs, line }) => 
           value={line.uuid}
           maxLength="10"
           type="text"
-          name="idBoxe"></input>
+          name="idBoxe"
+          placeholder={`${new Date().getFullYear()}....`}></input>
       </label>
       <label htmlFor="articleBoxe">
         <span>type de caisse:</span>
