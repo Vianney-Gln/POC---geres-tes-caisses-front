@@ -207,15 +207,17 @@ const ContentFagot = ({ operation }) => {
           <br></br>
           <span className="info-fagot">{currFagot.name}</span>
           <span className="info-fagot"> {fagotBoxes.length + boxesToAdd.length} /10</span>
-          {operation === 'bundle' && (
+          {operation === 'bundle' && boxesToAdd.length ? (
             <button
               onClick={() => {
                 setContentLabel('Modal-bundling');
                 openModal();
               }}
               type="button">
-              Valider
+              Mise à jour fagot
             </button>
+          ) : (
+            ''
           )}
         </caption>
         <thead>
