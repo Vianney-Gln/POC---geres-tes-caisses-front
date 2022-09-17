@@ -1,9 +1,10 @@
 import axios from 'axios';
+import baseUrl from './'; // base url
 
 const validateReception = (reception) => {
   return axios({
     method: 'post',
-    url: 'http://localhost:3001/api/gereTesCaisses/receptions',
+    url: `${baseUrl}/api/gereTesCaisses/receptions`,
     data: reception
   });
 };

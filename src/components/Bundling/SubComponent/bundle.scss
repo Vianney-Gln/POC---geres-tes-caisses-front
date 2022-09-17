@@ -1,0 +1,46 @@
+div.container-bundle {
+  width: 100%;
+  height: 100%;
+  max-height: 75vh;
+  min-height: 75vh;
+  overflow-y: auto;
+  display: flex;
+  position: relative;
+
+  div.arrows {
+    color: blue;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 35px;
+    width: 75px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 2rem;
+  }
+
+  div.table-this-bundle,
+  div.table-stock {
+    width: 50%;
+
+    table {
+      font-size: 0.75rem;
+
+      caption {
+        padding: 0;
+        margin: 0;
+        margin-bottom: 10px;
+      }
+      caption.caption {
+        height: auto;
+      }
+    }
+  }
+
+  div.table-stock,
+  div.table-this-bundle {
+    h2 {
+      text-align: center;
+    }
+  }
+}

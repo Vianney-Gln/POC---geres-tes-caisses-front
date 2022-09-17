@@ -1,7 +1,7 @@
 // import rect hooks
 import React, { useState } from 'react';
 // import react-router-dom
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 // import style css
 import './tableStock.scss';
 // import service
@@ -22,6 +22,10 @@ const TableStock = ({ typeStock, stock, captionName }) => {
   const [open, setOpen] = useState(false); // state managing the modal
   const [confirmDelete, setConfirmDelete] = useState(''); // Message confirm success or error delete rows
   const [errorDelete, setErrorDelete] = useState(false); // Bool managin content modal in case of error
+
+  // UseParams
+  const param = useParams();
+  const { operation } = param;
 
   // UseNavigate
   const navigate = useNavigate();
@@ -100,18 +104,20 @@ const TableStock = ({ typeStock, stock, captionName }) => {
         {typeStock === 'caisses-vrac' ? (
           <caption>
             {`Stock vrac ${manageCaptionTitle()}`}
-            <label htmlFor="search">
-              <i>
-                <FontAwesomeIcon icon={faMagnifyingGlass} />
-              </i>
-              <input
-                name="search"
-                placeholder="recherche par identifiant"
-                className="input-search"
-                onChange={(e) => setSearch(e.target.value)}
-                type="search"></input>
-            </label>
-            {manageButtons()}
+            <div className="search-buttons">
+              <label htmlFor="search">
+                <i>
+                  <FontAwesomeIcon icon={faMagnifyingGlass} />
+                </i>
+                <input
+                  name="search"
+                  placeholder="recherche par identifiant"
+                  className="input-search"
+                  onChange={(e) => setSearch(e.target.value)}
+                  type="search"></input>
+              </label>
+              {manageButtons()}
+            </div>
           </caption>
         ) : typeStock === 'caisses-total' ? (
           <caption>
@@ -136,6 +142,7 @@ const TableStock = ({ typeStock, stock, captionName }) => {
           <tr align="center">
             <th>identifiant</th>
             <th>désignation</th>
+            {operation === 'bundle' && <th>Action</th>}
             {typeStock === 'caisses-total' ? <th>fagot</th> : ''}
           </tr>
         </thead>
@@ -144,6 +151,7 @@ const TableStock = ({ typeStock, stock, captionName }) => {
             <tr align="center">
               <td></td>
               <td></td>
+              {operation === 'bundle' && <td></td>}
               {typeStock === 'caisses-total' ? <td></td> : ''}
             </tr>
           )}
@@ -164,6 +172,7 @@ const TableStock = ({ typeStock, stock, captionName }) => {
                     typeStock={typeStock}
                     key={index}
                     element={element}
+                    operation={operation}
                   />
                 );
               })}

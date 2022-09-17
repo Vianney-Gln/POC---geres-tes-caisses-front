@@ -29,7 +29,7 @@ const Reception = () => {
   const openModal = () => {
     setOpen(true);
   };
-  //function opening the modal
+  // function opening the modal
   const closeModal = () => {
     setOpen(false);
   };

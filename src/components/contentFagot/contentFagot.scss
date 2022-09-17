@@ -15,17 +15,36 @@ div.container-contentFagot {
     border-collapse: collapse;
     background-color: whitesmoke;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 0px 8px;
+    font-size: 0.8rem;
 
     caption {
       padding: 15px;
       font-size: 1.4rem;
       margin-bottom: 20px;
+
+      span.info-fagot {
+        font-size: 1rem;
+        font-weight: normal;
+        margin: 0px 10px;
+      }
     }
 
+    caption.caption {
+      height: 94.2px;
+    }
+
+    tr.justAdded {
+      background-color: rgb(186, 255, 186) !important;
+    }
     td,
     th {
       border: 1px solid black;
       padding: 10px;
+    }
+
+    td.delete:hover {
+      text-decoration: underline;
+      cursor: pointer;
     }
 
     tr:nth-child(2n) {
