@@ -23,6 +23,7 @@ const Reception = () => {
   const [message, setMessage] = useState(''); // state managing success or fail message
   const [error, setError] = useState(false); // this state bool manage the color of modal icons(error or success)
   const [messageCarateres, setMessageCaracteres] = useState(''); // state managing the message if input uuid != 10 length
+
   // UseNavigate
   const navigate = useNavigate();
 
@@ -64,20 +65,46 @@ const Reception = () => {
     setActivate(false);
   }, []);
 
-  // Function running validateReception and then manage messages, then redirect to stock page
+  const findDuplicate = () => {
+    let duplicate = [];
+    for (let i = 0; i < dataInputs.length; i++) {
+      let count = 0;
+      for (let j = 0; j < dataInputs.length; j++) {
+        if (dataInputs[i].uuid === dataInputs[j].uuid) {
+          count++;
+        }
+      }
+      if (count > 1) {
+        duplicate.push({ duplicate: dataInputs[i].uuid });
+      }
+    }
+    if (duplicate.length) {
+      return true;
+    }
+
+    return false;
+  };
+
+  // Function running validateReception and then manage messages, then redirect to stock page IF no duplicates elements in dataInputs
   const runValidateReception = () => {
-    validateReception(dataInputs)
-      .then(() => {
-        setError(false);
-        setMessage(`Réception créée avec succès! Redirection en cours...`);
-        setTimeout(() => {
-          navigate('/');
-        }, 3000);
-      })
-      .catch(() => {
-        setError(true);
-        setMessage("L'application à rencontré une erreur, la réception n'a pas été créée.");
-      });
+    const error = findDuplicate();
+    if (error) {
+      setError(true);
+      setMessage('Vous ne pouvez pas entrer plusieurs fois le même identifiant.');
+    } else {
+      validateReception(dataInputs)
+        .then(() => {
+          setError(false);
+          setMessage(`Réception créée avec succès! Redirection en cours...`);
+          setTimeout(() => {
+            navigate('/');
+          }, 3000);
+        })
+        .catch(() => {
+          setError(true);
+          setMessage("L'application à rencontré une erreur, la réception n'a pas été créée.");
+        });
+    }
   };
   return (
     <>
