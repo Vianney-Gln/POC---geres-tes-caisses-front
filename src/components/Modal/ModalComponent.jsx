@@ -30,7 +30,8 @@ const ModalComponent = ({
   fagotId,
   handleEffect,
   runUpdateBundleByid,
-  updateOperationOk
+  updateOperationOk,
+  runRemoveBoxeFromBundle
 }) => {
   // States
   const [load, setLoad] = useState(false); // states loading while current operation: "défagotage en cours"
@@ -39,7 +40,7 @@ const ModalComponent = ({
   const styleModal = {
     content: {
       width: '450px',
-      height: '300px',
+      height: '225px',
       top: '50%',
       left: '50%',
       right: 'auto',
@@ -227,7 +228,7 @@ const ModalComponent = ({
               <div className="duo-btn">
                 <button
                   onClick={() => {
-                    console.log('toto');
+                    runRemoveBoxeFromBundle();
                   }}
                   type="button">
                   Oui
@@ -265,7 +266,8 @@ ModalComponent.propTypes = {
   fagotId: PropTypes.number,
   handleEffect: PropTypes.func,
   runUpdateBundleByid: PropTypes.func,
-  updateOperationOk: PropTypes.bool
+  updateOperationOk: PropTypes.bool,
+  runRemoveBoxeFromBundle: PropTypes.func
 };
 
 export default ModalComponent;

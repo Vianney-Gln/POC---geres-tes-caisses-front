@@ -49,4 +49,16 @@ export const updateBundleById = (boxesToAdd, id) => {
   });
 };
 
+/**
+ * Function removing one boxe from a fagot
+ * @param {number} id
+ * @returns
+ */
+export const removeBoxeFromBundle = (id) => {
+  return axios({
+    method: 'put',
+    url: `${baseUrl}/api/gereTesCaisses/fagots/remove-to-bundle/${id}`
+  });
+};
+
 export default createFagot;

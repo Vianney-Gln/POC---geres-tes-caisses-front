@@ -12,7 +12,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowTurnRight } from '@fortawesome/free-solid-svg-icons';
 // import service
 import { getBoxeByFagot } from '../../services/stock';
-import { getInfoFagotById } from '../../services/fagot';
+import { getInfoFagotById, removeBoxeFromBundle } from '../../services/fagot';
 import { updateBundleById } from '../../services/fagot';
 // import PropTypes
 import PropTypes from 'prop-types';
@@ -40,6 +40,7 @@ const ContentFagot = ({ operation }) => {
   const [contentLabel, setContentLabel] = useState(''); // state managin the content label modal
   const [error, setError] = useState(false); // this state bool manage the color of modal icons(error or success)
   const [updateOperationOk, setUpdateOperationOk] = useState(false); // state determine the display of icon
+  const [currentBoxeId, setCurrentBoxeId] = useState(null); // state managing the current selected boxe id
 
   // Modals
 
@@ -156,6 +157,36 @@ const ContentFagot = ({ operation }) => {
       });
   };
 
+  /**
+   * Function running the service function removeBoxeFromBundle then, manage messages and restart the useeffect
+   */
+  const runRemoveBoxeFromBundle = () => {
+    removeBoxeFromBundle(currentBoxeId)
+      .then(() => {
+        setMessage('Mise à jour du fagot en cours...');
+        setError(false);
+        setTimeout(() => {
+          setUpdateOperationOk(true);
+          setMessage('La caisse a été retirée avec succés.');
+        }, 3000);
+        setTimeout(() => {
+          setUpdateOperationOk(false);
+          setMessage('');
+          handleRestartEffect();
+          setBoxesToAdd([]);
+          closeModal();
+        }, 6000);
+      })
+      .catch(() => {
+        setError(true);
+        setUpdateOperationOk(true);
+        setMessage('Une erreur est survenue pendant la mise à jour');
+        setTimeout(() => {
+          closeModal();
+        }, 3000);
+      });
+  };
+
   return (
     <div className="container-contentFagot">
       <ModalComponent
@@ -167,6 +198,7 @@ const ContentFagot = ({ operation }) => {
         contentLabel={contentLabel} //"Modal-bundling"
         runUpdateBundleByid={runUpdateBundleByid}
         updateOperationOk={updateOperationOk}
+        runRemoveBoxeFromBundle={runRemoveBoxeFromBundle}
       />
       <table className="table-boxes-fagots">
         <caption className="caption">
@@ -207,6 +239,7 @@ const ContentFagot = ({ operation }) => {
                       <i
                         onClick={() => {
                           setContentLabel('Modal-remove-from-bundle');
+                          setCurrentBoxeId(element.uid);
                           openModal();
                         }}>
                         <FontAwesomeIcon icon={faArrowTurnRight} />
