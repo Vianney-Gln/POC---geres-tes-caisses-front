@@ -63,7 +63,7 @@ const NewLineForm = ({ addNewLine, index, dataInputs, setDataInputs, line }) => 
         {index === dataInputs.length - 1 ? (
           <label htmlFor="button-next-article">
             <button
-              onClick={() => addNewLine()}
+              onClick={() => addNewLine(index)}
               name="button-next-article"
               type="button"
               title="Ajouter ligne">

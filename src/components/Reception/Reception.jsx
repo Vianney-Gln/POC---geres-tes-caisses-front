@@ -35,9 +35,9 @@ const Reception = () => {
   };
 
   // Function adding a new object in the state array dataInputs
-  const addNewLine = () => {
+  const addNewLine = (index) => {
     const newDataInputs = [...dataInputs];
-    newDataInputs.push({ uuid: '', id_article: '' });
+    newDataInputs.push({ uuid: (Number(dataInputs[index].uuid) + 1).toString(), id_article: '' });
     setDataInputs(newDataInputs);
   };
 
@@ -46,6 +46,7 @@ const Reception = () => {
     setActivate(false);
   }, []);
 
+  // Function running validateReception and then manage messages, then redirect to stock page
   const runValidateReception = () => {
     validateReception(dataInputs)
       .then(() => {
