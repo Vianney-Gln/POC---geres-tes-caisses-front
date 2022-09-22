@@ -43,8 +43,10 @@ const NewLineForm = ({ addNewLine, index, dataInputs, setDataInputs, line }) => 
         <input
           onChange={(e) => getInputData(e.target.value, 'uuid')}
           value={line.uuid}
+          maxLength="10"
           type="text"
-          name="idBoxe"></input>
+          name="idBoxe"
+          placeholder={`${new Date().getFullYear()}....`}></input>
       </label>
       <label htmlFor="articleBoxe">
         <span>type de caisse:</span>
@@ -63,7 +65,7 @@ const NewLineForm = ({ addNewLine, index, dataInputs, setDataInputs, line }) => 
         {index === dataInputs.length - 1 ? (
           <label htmlFor="button-next-article">
             <button
-              onClick={() => addNewLine()}
+              onClick={() => addNewLine(index, line)}
               name="button-next-article"
               type="button"
               title="Ajouter ligne">
