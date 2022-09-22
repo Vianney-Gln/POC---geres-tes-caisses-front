@@ -22,6 +22,8 @@ const Reception = () => {
   const [open, setOpen] = useState(false); // state managing the modal
   const [message, setMessage] = useState(''); // state managing success or fail message
   const [error, setError] = useState(false); // this state bool manage the color of modal icons(error or success)
+  const [messageCarateres, setMessageCaracteres] = useState(''); // state managing the message if input uuid != 10 length
+
   // UseNavigate
   const navigate = useNavigate();
 
@@ -34,11 +36,28 @@ const Reception = () => {
     setOpen(false);
   };
 
-  // Function adding a new object in the state array dataInputs
-  const addNewLine = () => {
-    const newDataInputs = [...dataInputs];
-    newDataInputs.push({ uuid: '', id_article: '' });
-    setDataInputs(newDataInputs);
+  /**
+   * // Function adding a new object in the state array dataInputs IF this current line got 10 caracteres, IF NOT, generate an error message
+   * @param {number} index
+   */
+  const addNewLine = (index, line) => {
+    const year = new Date().getFullYear().toString();
+    const regex = new RegExp(`^${year}`, 'g');
+    if (line.uuid.length === 10) {
+      if (regex.test(line.uuid)) {
+        setMessageCaracteres('');
+        const newDataInputs = [...dataInputs];
+        newDataInputs.push({
+          uuid: (Number(dataInputs[index].uuid) + 1).toString(),
+          id_article: ''
+        });
+        setDataInputs(newDataInputs);
+      } else {
+        setMessageCaracteres("L'identifiant doit commencer par l'année actuelle.");
+      }
+    } else {
+      setMessageCaracteres("L'identifiant doit être composé de 10 caratères.");
+    }
   };
 
   // function desactivate the Menu-Left on component mounting
@@ -46,19 +65,46 @@ const Reception = () => {
     setActivate(false);
   }, []);
 
+  const findDuplicate = () => {
+    let duplicate = [];
+    for (let i = 0; i < dataInputs.length; i++) {
+      let count = 0;
+      for (let j = 0; j < dataInputs.length; j++) {
+        if (dataInputs[i].uuid === dataInputs[j].uuid) {
+          count++;
+        }
+      }
+      if (count > 1) {
+        duplicate.push({ duplicate: dataInputs[i].uuid });
+      }
+    }
+    if (duplicate.length) {
+      return true;
+    }
+
+    return false;
+  };
+
+  // Function running validateReception and then manage messages, then redirect to stock page IF no duplicates elements in dataInputs
   const runValidateReception = () => {
-    validateReception(dataInputs)
-      .then(() => {
-        setError(false);
-        setMessage(`Réception créée avec succès! Redirection en cours...`);
-        setTimeout(() => {
-          navigate('/');
-        }, 3000);
-      })
-      .catch(() => {
-        setError(true);
-        setMessage("L'application à rencontré une erreur, la réception n'a pas été créée.");
-      });
+    const error = findDuplicate();
+    if (error) {
+      setError(true);
+      setMessage('Vous ne pouvez pas entrer plusieurs fois le même identifiant.');
+    } else {
+      validateReception(dataInputs)
+        .then(() => {
+          setError(false);
+          setMessage(`Réception créée avec succès! Redirection en cours...`);
+          setTimeout(() => {
+            navigate('/');
+          }, 3000);
+        })
+        .catch(() => {
+          setError(true);
+          setMessage("L'application à rencontré une erreur, la réception n'a pas été créée.");
+        });
+    }
   };
   return (
     <>
@@ -97,6 +143,7 @@ const Reception = () => {
               Valider la réception
             </button>
           </div>
+          {messageCarateres && <p className="red">{messageCarateres}</p>}
         </form>
       </div>
     </>
