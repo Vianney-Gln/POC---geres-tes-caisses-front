@@ -1,8 +1,15 @@
 header.container-header {
   height: 15vh;
+  font-family: 'Chakra Petch', sans-serif;
+  text-shadow: 1px 2px 3px rgba(0, 0, 0, 0.5);
   width: 100%;
   display: flex;
   border: 1px solid black;
+  background-image: url('../../images/banner-blue-pixabay.jpg');
+  background-size: cover;
+  color: white;
+  background-position: center;
+  font-size: 1.8rem;
 
   div.logo {
     height: 100%;
