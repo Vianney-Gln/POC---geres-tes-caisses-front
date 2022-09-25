@@ -11,9 +11,7 @@ import PropTypes from 'prop-types';
 // import Components
 import RowTable from '../RowTable/RowTable';
 import ModalComponent from '../Modal/ModalComponent';
-// import FontAwesome
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+import SearchBarre from '../SearchBarre/SearchBarre';
 
 const TableStock = ({ typeStock, stock, captionName }) => {
   // States
@@ -59,7 +57,7 @@ const TableStock = ({ typeStock, stock, captionName }) => {
             Annuler selection
           </button>
           <button onClick={() => openModal()} type="button">
-            Sortir du stock
+            Valider sorties
           </button>
         </>
       );
@@ -105,34 +103,14 @@ const TableStock = ({ typeStock, stock, captionName }) => {
           <caption>
             {`Stock vrac ${manageCaptionTitle()}`}
             <div className="search-buttons">
-              <label htmlFor="search">
-                <i>
-                  <FontAwesomeIcon icon={faMagnifyingGlass} />
-                </i>
-                <input
-                  name="search"
-                  placeholder="recherche par identifiant"
-                  className="input-search"
-                  onChange={(e) => setSearch(e.target.value)}
-                  type="search"></input>
-              </label>
+              <SearchBarre setSearch={setSearch} />
               {manageButtons()}
             </div>
           </caption>
         ) : typeStock === 'caisses-total' ? (
           <caption>
             {`Stock total ${manageCaptionTitle()}`}
-            <label htmlFor="search">
-              <i>
-                <FontAwesomeIcon icon={faMagnifyingGlass} />
-              </i>
-              <input
-                name="search"
-                placeholder="recherche par identifiant"
-                className="input-search"
-                onChange={(e) => setSearch(e.target.value)}
-                type="search"></input>
-            </label>
+            <SearchBarre setSearch={setSearch} />
             {manageButtons()}
           </caption>
         ) : (

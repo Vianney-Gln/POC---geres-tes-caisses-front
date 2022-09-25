@@ -16,21 +16,7 @@ table.table-stock {
       justify-content: center;
       align-items: center;
     }
-    label {
-      display: flex;
-      justify-content: center;
-      margin-top: 4px;
-      input {
-        border: none;
-        border-bottom: 1px solid black;
-        margin-left: 5px;
-        margin-bottom: 7px;
-        margin-right: 10px;
-      }
-      i {
-        color: grey;
-      }
-    }
+
     button {
       margin: 20px 10px;
     }
