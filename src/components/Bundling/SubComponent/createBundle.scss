@@ -7,6 +7,11 @@ form.form-createBundle {
   flex-direction: column;
   align-items: center;
 
+  h2 {
+    font-family: 'Chakra Petch', sans-serif;
+    font-weight: normal;
+  }
+
   label {
     margin-top: 20px;
     input,

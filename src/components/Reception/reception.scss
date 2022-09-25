@@ -9,6 +9,11 @@ div.container-reception {
   min-height: 75vh;
   overflow-y: auto;
 
+  h2 {
+    font-family: 'Chakra Petch', sans-serif;
+    font-weight: normal;
+  }
+
   form {
     display: flex;
     flex-direction: column;
