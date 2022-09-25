@@ -32,16 +32,28 @@ div.menu-left {
     border-right: none;
     border-top: none;
 
+    li {
+      text-align: center;
+      width: 100%;
+      padding: 10px;
+      position: relative;
+
+      i.icon {
+        position: absolute;
+        left: 40px;
+        font-size: 1rem;
+      }
+    }
+
     li.unable {
       font-weight: bold;
       cursor: pointer;
-      margin-left: 15px;
     }
 
     li.disable {
       font-weight: normal;
       color: grey;
-      margin-left: 15px;
+
       a {
         text-decoration: none;
         color: grey;
@@ -50,7 +62,8 @@ div.menu-left {
       }
     }
     li.current {
-      text-decoration: underline;
+      background-color: white;
+      border: 1px solid white;
     }
   }
   div.quantity {
