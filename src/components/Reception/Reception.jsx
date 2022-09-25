@@ -117,7 +117,7 @@ const Reception = () => {
         contentLabel="Modal-reception"
       />
       <div className="container-reception">
-        <h2>Reception</h2>
+        <h2>Receptions</h2>
         <form
           onSubmit={(e) => {
             e.preventDefault();
