@@ -9,9 +9,11 @@ table.table-stock {
   caption {
     padding: 15px;
     font-size: 1.4rem;
+    font-family: 'Chakra Petch', sans-serif;
     position: relative;
 
-    div.search-buttons {
+    div.search-buttons,
+    div.div-total-boxes {
       display: flex;
       justify-content: center;
       align-items: center;
