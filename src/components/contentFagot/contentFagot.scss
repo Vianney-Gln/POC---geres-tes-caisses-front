@@ -1,7 +1,6 @@
 div.container-contentFagot {
   width: 100%;
   background-color: white;
-  padding-bottom: 40px;
   display: flex;
   justify-content: center;
   align-items: flex-start;
@@ -29,10 +28,6 @@ div.container-contentFagot {
       }
     }
 
-    caption.caption {
-      height: 94.2px;
-    }
-
     tr.justAdded {
       background-color: rgb(186, 255, 186) !important;
     }
@@ -51,7 +46,7 @@ div.container-contentFagot {
       background-color: white;
     }
     th {
-      background-color: rgb(151, 150, 255);
+      background-color: rgb(49, 48, 135);
     }
   }
 }
