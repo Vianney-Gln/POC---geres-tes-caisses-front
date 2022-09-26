@@ -6,6 +6,9 @@ div.menu-left {
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-image: url('../../images/banner-blue-pixabay.jpg');
+  background-size: cover;
+  background-position: center;
 
   select {
     width: 90%;
@@ -32,16 +35,28 @@ div.menu-left {
     border-right: none;
     border-top: none;
 
+    li {
+      text-align: center;
+      width: 100%;
+      padding: 10px;
+      position: relative;
+
+      i.icon {
+        position: absolute;
+        left: 10%;
+        font-size: 1rem;
+      }
+    }
+
     li.unable {
       font-weight: bold;
       cursor: pointer;
-      margin-left: 15px;
     }
 
     li.disable {
       font-weight: normal;
       color: grey;
-      margin-left: 15px;
+
       a {
         text-decoration: none;
         color: grey;
@@ -50,7 +65,8 @@ div.menu-left {
       }
     }
     li.current {
-      text-decoration: underline;
+      background-color: white;
+      border: 1px solid white;
     }
   }
   div.quantity {

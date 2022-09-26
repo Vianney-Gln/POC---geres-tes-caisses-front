@@ -58,7 +58,7 @@ const CreateBundle = () => {
   };
   return (
     <form onSubmit={(e) => handleForm(e)} className="form-createBundle">
-      <h1>Création de fagot</h1>
+      <h2>Création de fagot</h2>
       <label htmlFor="idFagot">
         <span>Nom du fagot:</span>
         <input

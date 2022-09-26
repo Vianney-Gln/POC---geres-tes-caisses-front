@@ -1,0 +1,23 @@
+label.search-barre {
+  width: 20%;
+  height: 29.6px;
+  min-width: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid black;
+
+  input.input-search {
+    border: none;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    outline: none;
+  }
+}
+i.icon-search {
+  color: grey;
+  background-color: rgb(49, 48, 135);
+  width: 40px;
+  color: white;
+}

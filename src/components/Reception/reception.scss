@@ -1,5 +1,5 @@
 div.container-reception {
-  background-color: white;
+  background-color: whitesmoke;
   padding-bottom: 40px;
   width: 100%;
   display: flex;
@@ -8,6 +8,11 @@ div.container-reception {
   max-height: 75vh;
   min-height: 75vh;
   overflow-y: auto;
+
+  h2 {
+    font-family: 'Chakra Petch', sans-serif;
+    font-weight: normal;
+  }
 
   form {
     display: flex;

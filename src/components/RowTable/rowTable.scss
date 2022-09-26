@@ -11,7 +11,11 @@ tr:nth-child(2n) {
   background-color: white;
 }
 th {
-  background-color: rgb(151, 150, 255);
+  background-color: rgb(49, 48, 135);
+  color: white;
+  font-size: 1.2rem;
+  font-family: 'Chakra Petch', sans-serif;
+  width: 25%;
 }
 tr.to-select {
   cursor: pointer;
