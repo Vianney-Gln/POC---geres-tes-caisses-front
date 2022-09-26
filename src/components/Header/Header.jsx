@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 // import style css
 import './header.scss';
 // import image
-import logoIdea from '../../images/logo-idea.png';
+import logo from '../../images/logo-free.jpg';
 // Import component context
 import ContextArticles from '../../context/ContextArticles';
 const Header = () => {
@@ -19,7 +19,7 @@ const Header = () => {
     <header className="container-header">
       <div className="logo">
         <img
-          src={logoIdea}
+          src={logo}
           alt="logo-idea"
           onClick={() => {
             navigate('/');
