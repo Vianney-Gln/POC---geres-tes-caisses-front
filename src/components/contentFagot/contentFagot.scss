@@ -1,7 +1,6 @@
 div.container-contentFagot {
   width: 100%;
   background-color: white;
-  padding-bottom: 40px;
   display: flex;
   justify-content: center;
   align-items: flex-start;
@@ -21,16 +20,12 @@ div.container-contentFagot {
       padding: 15px;
       font-size: 1.4rem;
       margin-bottom: 20px;
-
+      font-family: 'Chakra Petch', sans-serif;
       span.info-fagot {
         font-size: 1rem;
         font-weight: normal;
         margin: 0px 10px;
       }
-    }
-
-    caption.caption {
-      height: 94.2px;
     }
 
     tr.justAdded {
@@ -51,7 +46,7 @@ div.container-contentFagot {
       background-color: white;
     }
     th {
-      background-color: rgb(151, 150, 255);
+      background-color: rgb(49, 48, 135);
     }
   }
 }

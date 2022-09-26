@@ -3,6 +3,9 @@ import React, { useContext, useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 // import style css
 import './menuLeft.scss';
+// import FontAwesome
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCaretRight } from '@fortawesome/free-solid-svg-icons';
 // import components context
 import ContextArticles from '../../context/ContextArticles';
 import ContextStock from '../../context/ContextStock';
@@ -109,6 +112,11 @@ const MenuLeft = ({ location }) => {
               ? 'disable'
               : ''
           }>
+          {!idArticles && (
+            <i className="icon">
+              <FontAwesomeIcon icon={faCaretRight} />
+            </i>
+          )}
           <Link to={`${generateLink()}/toutes caisses`}>Toutes caisses</Link>
         </li>
         {articles.length
@@ -131,6 +139,12 @@ const MenuLeft = ({ location }) => {
                       : ''
                   }
                   key={article.id}>
+                  {idArticles === article.id && (
+                    <i className="icon">
+                      <FontAwesomeIcon icon={faCaretRight} />
+                    </i>
+                  )}
+
                   <Link to={`${generateLink()}/${article.name}`}>{article.name}</Link>
                 </li>
               );

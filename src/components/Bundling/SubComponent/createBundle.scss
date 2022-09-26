@@ -1,11 +1,14 @@
 form.form-createBundle {
   width: 90%;
   height: 90%;
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-  border-radius: 5px;
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  h2 {
+    font-family: 'Chakra Petch', sans-serif;
+    font-weight: normal;
+  }
 
   label {
     margin-top: 20px;
