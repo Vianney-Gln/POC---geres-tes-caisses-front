@@ -108,14 +108,30 @@ div.menu-left {
       border: none;
       height: auto;
 
+      li {
+        i.icon {
+          display: none;
+        }
+        position: static;
+        width: 50px;
+      }
+
       li.unable,
       li.disable {
         margin: 0;
         background-color: white;
-        border-radius: 5px;
         text-align: center;
         padding: 4px;
         font-size: 0.8rem;
+        border-radius: 5px;
+      }
+
+      li.current {
+        background-color: blue;
+        border: none;
+        a {
+          color: white;
+        }
       }
     }
     div.quantity {
