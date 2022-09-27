@@ -16,8 +16,13 @@ label.search-barre {
   }
 }
 i.icon-search {
-  color: grey;
   background-color: rgb(49, 48, 135);
   width: 40px;
   color: white;
+}
+
+@media screen and (max-width: 730px) {
+  i.icon-search {
+    font-size: 1.4rem;
+  }
 }
