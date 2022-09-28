@@ -83,6 +83,7 @@ const Reception = () => {
     setActivate(false);
   }, []);
 
+  // Function checking if there is duplicates into a reception
   const findDuplicate = () => {
     let duplicate = [];
     for (let i = 0; i < dataInputs.length; i++) {
@@ -105,20 +106,25 @@ const Reception = () => {
 
   // Function running validateReception and then manage messages, then redirect to stock page IF no duplicates elements in dataInputs
   const runValidateReception = () => {
-    const error = findDuplicate();
-    if (error) {
+    const errorDup = findDuplicate();
+    const errorRegexs = dataInputs.map((elt) => {
+      return validateInput(elt);
+    });
+    if (errorDup) {
       setError(true);
       setMessage('Vous ne pouvez pas entrer plusieurs fois le même identifiant.');
-    } else {
+    } else if (!errorRegexs.includes(true)) {
       validateReception(dataInputs)
         .then(() => {
           setError(false);
+          openModal();
           setMessage(`Réception créée avec succès! Redirection en cours...`);
           setTimeout(() => {
             navigate('/');
           }, 3000);
         })
         .catch(() => {
+          openModal();
           setError(true);
           setMessage("L'application à rencontré une erreur, la réception n'a pas été créée.");
         });
@@ -157,7 +163,7 @@ const Reception = () => {
               : ''}
           </div>
           <div className="container-button-submit">
-            <button onClick={openModal} className="button-submit" type="submit">
+            <button className="button-submit" type="submit">
               Valider la réception
             </button>
           </div>
