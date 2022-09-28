@@ -37,26 +37,44 @@ const Reception = () => {
   };
 
   /**
+   * Validate input verifying the length (10), the begin (current year),and contains only numeric char
+   * @param {object} line
+   * @returns
+   */
+  const validateInput = (line) => {
+    const year = new Date().getFullYear().toString();
+    const regexYear = new RegExp(`^${year}`, 'g');
+    const regexNumOnly = new RegExp('^[0-9]+$');
+    if (line.uuid.length === 10) {
+      if (regexYear.test(line.uuid)) {
+        if (regexNumOnly.test(line.uuid)) {
+          return false;
+        }
+        setMessageCaracteres("L'identifiant ne doit contenir que des caractères numériques");
+        return true;
+      }
+      setMessageCaracteres("L'identifiant doit commencer par l'année actuelle");
+      return true;
+    }
+    setMessageCaracteres("L'identifiant doit être composé de 10 caractères.");
+    return true;
+  };
+
+  /**
    * // Function adding a new object in the state array dataInputs IF this current line got 10 caracteres, IF NOT, generate an error message
    * @param {number} index
+   *  @param {object} line
    */
   const addNewLine = (index, line) => {
-    const year = new Date().getFullYear().toString();
-    const regex = new RegExp(`^${year}`, 'g');
-    if (line.uuid.length === 10) {
-      if (regex.test(line.uuid)) {
-        setMessageCaracteres('');
-        const newDataInputs = [...dataInputs];
-        newDataInputs.push({
-          uuid: (Number(dataInputs[index].uuid) + 1).toString(),
-          id_article: ''
-        });
-        setDataInputs(newDataInputs);
-      } else {
-        setMessageCaracteres("L'identifiant doit commencer par l'année actuelle.");
-      }
-    } else {
-      setMessageCaracteres("L'identifiant doit être composé de 10 caratères.");
+    const error = validateInput(line);
+    if (!error) {
+      setMessageCaracteres('');
+      const newDataInputs = [...dataInputs];
+      newDataInputs.push({
+        uuid: (Number(dataInputs[index].uuid) + 1).toString(),
+        id_article: ''
+      });
+      setDataInputs(newDataInputs);
     }
   };
 
