@@ -22,7 +22,8 @@ const Reception = () => {
   const [open, setOpen] = useState(false); // state managing the modal
   const [message, setMessage] = useState(''); // state managing success or fail message
   const [error, setError] = useState(false); // this state bool manage the color of modal icons(error or success)
-  const [messageCarateres, setMessageCaracteres] = useState(''); // state managing the message if input uuid != 10 length
+  const [messageCarateres, setMessageCaracteres] = useState(''); // state managing the message ex: if input uuid != 10 length
+  const [isTypeBoxSelected, setIsTypeBoxSelected] = useState(''); // Message error displayed if user dont fill the type box select
 
   // UseNavigate
   const navigate = useNavigate();
@@ -48,6 +49,7 @@ const Reception = () => {
     if (line.uuid.length === 10) {
       if (regexYear.test(line.uuid)) {
         if (regexNumOnly.test(line.uuid)) {
+          setMessageCaracteres('');
           return false;
         }
         setMessageCaracteres("L'identifiant ne doit contenir que des caractères numériques");
@@ -104,15 +106,19 @@ const Reception = () => {
     return false;
   };
 
-  // Function running validateReception and then manage messages, then redirect to stock page IF no duplicates elements in dataInputs
+  // Function running validateReception and then manage messages,verify the good conformity from user's input, then redirect to stock page IF no duplicates elements in dataInputs
   const runValidateReception = () => {
     const errorDup = findDuplicate();
+    const errorSelectEmpty = dataInputs.find((elt) => elt.id_article === '');
     const errorRegexs = dataInputs.map((elt) => {
       return validateInput(elt);
     });
     if (errorDup) {
       setError(true);
       setMessage('Vous ne pouvez pas entrer plusieurs fois le même identifiant.');
+    } else if (errorSelectEmpty) {
+      setError(true);
+      setIsTypeBoxSelected('Veuillez remplir le type de caisses svp');
     } else if (!errorRegexs.includes(true)) {
       validateReception(dataInputs)
         .then(() => {
@@ -168,6 +174,7 @@ const Reception = () => {
             </button>
           </div>
           {messageCarateres && <p className="red">{messageCarateres}</p>}
+          {isTypeBoxSelected && <p className="red">{isTypeBoxSelected}</p>}
         </form>
       </div>
     </>
