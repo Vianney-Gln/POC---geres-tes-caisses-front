@@ -34,3 +34,20 @@ div.container-manageBundle {
     }
   }
 }
+
+@media screen and (max-width: 730px) {
+  div.container-manageBundle {
+    ul.list-cards {
+      width: 100%;
+
+      div.card {
+        width: 100%;
+        li.card-fagot {
+          height: 200px;
+          flex-direction: column;
+          justify-content: space-around;
+        }
+      }
+    }
+  }
+}

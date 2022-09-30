@@ -1,7 +1,7 @@
 div.MenuSlideMobile {
   height: 100vh;
   width: 0;
-  background-color: rgb(151, 150, 255);
+  background-color: rgb(49, 48, 135);
   position: fixed;
   z-index: 50;
   transition: all 0.5s ease;
@@ -26,7 +26,7 @@ div.MenuSlideMobile {
     justify-content: space-around;
     align-items: center;
 
-    li {
+    a {
       transform: scale(0);
       color: white;
     }
@@ -34,10 +34,11 @@ div.MenuSlideMobile {
 }
 
 div > .open {
+  display: block;
   width: 100vw;
 
   ul.list-nav {
-    li {
+    a {
       transform: scale(1);
     }
   }

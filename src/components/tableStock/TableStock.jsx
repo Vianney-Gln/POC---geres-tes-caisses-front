@@ -101,7 +101,7 @@ const TableStock = ({ typeStock, stock, captionName }) => {
       <table className="table-stock">
         {typeStock === 'caisses-vrac' ? (
           <caption>
-            {`Stock vrac ${manageCaptionTitle()}`}
+            <span className="title-caption">{`Stock vrac ${manageCaptionTitle()}`}</span>
             <div className="search-buttons">
               <SearchBarre setSearch={setSearch} />
               {manageButtons()}

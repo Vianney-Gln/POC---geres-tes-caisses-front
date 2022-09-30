@@ -24,3 +24,17 @@ table.table-stock {
     }
   }
 }
+
+@media screen and (max-width: 730px) {
+  table.table-stock {
+    caption {
+      span.title-caption {
+        font-size: 1.2rem;
+      }
+      div.search-buttons {
+        flex-wrap: wrap;
+        margin-top: 20px;
+      }
+    }
+  }
+}
