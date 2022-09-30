@@ -1,23 +1,15 @@
 import React, { useContext, useEffect, useState } from 'react';
-//import useNavigate
 import { useNavigate } from 'react-router-dom';
-// import context
 import ContextArticles from '../../context/ContextArticles';
-// import style css
 import './reception.scss';
-// import Components
 import NewLineForm from '../NewLineForm/NewLineForm';
 import ModalComponent from '../Modal/ModalComponent';
-// import service
 import validateReception from '../../services/reception';
 
 const Reception = () => {
-  // docTitle
   document.title = 'Gestion des caisses - réception';
-  // Context
   const contextArticles = useContext(ContextArticles);
   const { setActivate } = contextArticles;
-  // States
   const [dataInputs, setDataInputs] = useState([{ uuid: '', id_article: '' }]); // state input data - array with objects
   const [open, setOpen] = useState(false); // state managing the modal
   const [message, setMessage] = useState(''); // state managing success or fail message
@@ -25,14 +17,12 @@ const Reception = () => {
   const [messageCarateres, setMessageCaracteres] = useState(''); // state managing the message ex: if input uuid != 10 length
   const [isTypeBoxSelected, setIsTypeBoxSelected] = useState(''); // Message error displayed if user dont fill the type box select
 
-  // UseNavigate
   const navigate = useNavigate();
 
-  // function closing the modal
   const openModal = () => {
     setOpen(true);
   };
-  // function opening the modal
+
   const closeModal = () => {
     setOpen(false);
   };
@@ -123,6 +113,7 @@ const Reception = () => {
       validateReception(dataInputs)
         .then(() => {
           setError(false);
+          setIsTypeBoxSelected('');
           openModal();
           setMessage(`Réception créée avec succès! Redirection en cours...`);
           setTimeout(() => {
@@ -130,6 +121,7 @@ const Reception = () => {
           }, 3000);
         })
         .catch(() => {
+          setIsTypeBoxSelected('');
           openModal();
           setError(true);
           setMessage("L'application à rencontré une erreur, la réception n'a pas été créée.");
