@@ -8,22 +8,26 @@ import './header.scss';
 import logo from '../../images/logo-free.jpg';
 // Import component context
 import ContextArticles from '../../context/ContextArticles';
+import ContextStock from '../../context/ContextStock';
+
 const Header = () => {
   // useNavigate
   const navigate = useNavigate();
   // Context
   const contextArticles = useContext(ContextArticles);
   const { setIdArticles } = contextArticles;
+  const { setIdArticleCount } = useContext(ContextStock);
 
   return (
     <header className="container-header">
       <div className="logo">
         <img
           src={logo}
-          alt="logo-idea"
+          alt="logo-free"
           onClick={() => {
-            navigate('/');
             setIdArticles(null);
+            setIdArticleCount(null);
+            navigate('/');
           }}
         />
       </div>
