@@ -11,6 +11,7 @@ div.container-contentFagot {
   table.table-boxes-fagots {
     width: 80%;
     margin-top: 20px;
+    margin-bottom: 20px;
     border-collapse: collapse;
     background-color: whitesmoke;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 0px 8px;
@@ -53,12 +54,16 @@ div.container-contentFagot {
 
 @media screen and (max-width: 730px) {
   div.container-contentFagot {
-    width: 100%;
+    width: 100vw;
     max-height: none;
     min-height: none;
     padding: none;
     table.table-boxes-fagots {
+      width: 90%;
       caption {
+        font-size: 1rem;
+      }
+      th {
         font-size: 1rem;
       }
     }
