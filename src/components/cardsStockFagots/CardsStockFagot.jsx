@@ -12,6 +12,7 @@ import { getCountBoxesByFagot } from '../../services/stock';
 import ModalComponent from '../Modal/ModalComponent';
 // Import component context
 import ContextArticles from '../../context/ContextArticles';
+import ContextStock from '../../context/ContextStock';
 
 const CardsStockFagot = ({ stock, fagotId, handleEffect }) => {
   // States
@@ -25,6 +26,7 @@ const CardsStockFagot = ({ stock, fagotId, handleEffect }) => {
   // Context
   const contextArticles = useContext(ContextArticles);
   const { setIdArticles } = contextArticles;
+  const { setIdArticleCount } = useContext(ContextStock);
 
   // function closing the modal
   const openModal = () => {
@@ -62,7 +64,10 @@ const CardsStockFagot = ({ stock, fagotId, handleEffect }) => {
                 Défagoter
               </button>
               <Link
-                onClick={() => setIdArticles(null)}
+                onClick={() => {
+                  setIdArticles(null);
+                  setIdArticleCount(null);
+                }}
                 className="button-like"
                 to={`/bundling/bundle/${fagotId}`}>
                 Modifier
