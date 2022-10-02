@@ -37,15 +37,13 @@ const Stock = () => {
   const contextStock = useContext(ContextStock);
   const { setTypeStock, typeStock } = contextStock;
   const contextArticle = useContext(ContextArticles);
-  const { setActivate, setArticleName, idArticles } = contextArticle;
+  const { setActivate, idArticles } = contextArticle;
   const contextFagot = useContext(ContextFagots);
   const { restartEffect } = contextFagot;
 
   // function getting stock calling api
 
   useEffect(() => {
-    setArticleName(param.articleName);
-
     if (location.pathname.includes('bundling/bundle')) {
       setTypeStock('caisses-vrac');
     }
