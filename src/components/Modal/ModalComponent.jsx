@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 // import modal
 import Modal from 'react-modal';
 // import service
@@ -35,11 +35,12 @@ const ModalComponent = ({
 }) => {
   // States
   const [load, setLoad] = useState(false); // states loading while current operation: "défagotage en cours"
+  const [widthModal, setWidthModal] = useState('450px');
 
   // style modal
   const styleModal = {
     content: {
-      width: '450px',
+      width: widthModal,
       height: '225px',
       top: '50%',
       left: '50%',
@@ -49,6 +50,23 @@ const ModalComponent = ({
       transform: 'translate(-50%, -50%)'
     }
   };
+
+  // Function managing size of modal depending the size of the device
+  useEffect(() => {
+    if (window.matchMedia('(max-width:730px)').matches) {
+      setWidthModal('80%');
+    } else {
+      setWidthModal('450px');
+    }
+  }, []);
+
+  window.addEventListener('resize', () => {
+    if (window.matchMedia('(max-width:730px)').matches) {
+      setWidthModal('80%');
+    } else {
+      setWidthModal('450px');
+    }
+  });
 
   Modal.setAppElement('#root');
 
