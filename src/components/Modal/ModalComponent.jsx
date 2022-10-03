@@ -41,12 +41,13 @@ const ModalComponent = ({
   const styleModal = {
     content: {
       width: widthModal,
-      height: '225px',
+      height: 'auto',
       top: '50%',
       left: '50%',
       right: 'auto',
       bottom: 'auto',
       marginRight: '-50%',
+      padding: '30px',
       transform: 'translate(-50%, -50%)'
     }
   };
@@ -118,7 +119,9 @@ const ModalComponent = ({
           contentLabel={contentLabel}>
           {manageIcon()}
           <p>{message}</p>
-          <button onClick={closeModal}>Fermer</button>
+          <button className="button-close" onClick={closeModal}>
+            Fermer
+          </button>
         </Modal>
       );
     } else if (contentLabel === 'Modal-outOfStock') {
