@@ -14,7 +14,7 @@ const ManageBundle = () => {
 
   // Context
   const contextArticles = useContext(ContextArticles);
-  const { setActivate } = contextArticles;
+  const { setAreActivateFilters } = contextArticles;
 
   // Function calling service to get fagots on component mount
   useEffect(() => {
@@ -23,7 +23,7 @@ const ManageBundle = () => {
 
   // Function settting activate context statement to false to disable the MenuLeft component on component mount
   useEffect(() => {
-    setActivate(false);
+    setAreActivateFilters(false);
   }, []);
 
   // Function reloading the useEffect by update the reloadEffect state for each request in CardStockComponent > ModalComponent

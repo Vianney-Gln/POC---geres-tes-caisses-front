@@ -37,7 +37,7 @@ const Stock = () => {
   const contextStock = useContext(ContextStock);
   const { setTypeStock, typeStock } = contextStock;
   const contextArticle = useContext(ContextArticles);
-  const { setActivate, idArticles } = contextArticle;
+  const { setAreActivateFilters, idArticles } = contextArticle;
   const contextBundles = useContext(ContextBundles);
   const { restartEffect } = contextBundles;
 
@@ -48,14 +48,14 @@ const Stock = () => {
       setTypeStock('caisses-vrac');
     }
     if (typeStock === 'caisses-vrac') {
-      setActivate(true);
+      setAreActivateFilters(true);
       getStockVrac(idArticles)
         .then((result) => {
           setStock(result.data);
         })
         .catch((err) => console.log(err));
     } else if (typeStock === 'caisses-total') {
-      setActivate(true);
+      setAreActivateFilters(true);
       getStockTotal(idArticles)
         .then((result) => {
           setStock(result.data);
@@ -64,7 +64,7 @@ const Stock = () => {
           console.log(err);
         });
     } else if (typeStock === 'fagots') {
-      setActivate(true);
+      setAreActivateFilters(true);
       getBundles(idArticles)
         .then((result) => {
           setFagots(result.data);

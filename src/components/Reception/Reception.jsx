@@ -9,7 +9,7 @@ import validateReception from '../../services/reception';
 const Reception = () => {
   document.title = 'Gestion des caisses - réception';
   const contextArticles = useContext(ContextArticles);
-  const { setActivate } = contextArticles;
+  const { setAreActivateFilters } = contextArticles;
   const [dataInputs, setDataInputs] = useState([{ uuid: '', id_article: '' }]); // state input data - array with objects
   const [open, setOpen] = useState(false); // state managing the modal
   const [message, setMessage] = useState(''); // state managing success or fail message
@@ -72,7 +72,7 @@ const Reception = () => {
 
   // function desactivate the Menu-Left on component mounting
   useEffect(() => {
-    setActivate(false);
+    setAreActivateFilters(false);
   }, []);
 
   // Function checking if there is duplicates into a reception

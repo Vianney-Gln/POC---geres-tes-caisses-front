@@ -20,7 +20,7 @@ const MenuLeft = ({ location }) => {
   const contextArticles = useContext(ContextArticles); // context articles;
   const contextStock = useContext(ContextStock); // context stock
   const contextBundles = useContext(ContextBundles); // context fagots
-  const { articles, activate, idArticles, setIdArticles } = contextArticles;
+  const { articles, areActivateFilters, idArticles, setIdArticles } = contextArticles;
   const { typeStock, setTypeStock, numberBoxes, setIdArticleCountForCountFunctions } = contextStock;
   const { currentIdBundle } = contextBundles;
 
@@ -78,10 +78,15 @@ const MenuLeft = ({ location }) => {
   /* -------------------------------------------------------------------------------------------------------------------------------------------*/
 
   return (
-    <div className={!activate && resolution === 'small' ? 'menu-left-masqued' : 'menu-left'}>
+    <div
+      className={!areActivateFilters && resolution === 'small' ? 'menu-left-masqued' : 'menu-left'}>
       <select
         disabled={
-          location.includes('/bundling/bundle') && currentIdBundle ? true : activate ? false : true
+          location.includes('/bundling/bundle') && currentIdBundle
+            ? true
+            : areActivateFilters
+            ? false
+            : true
         }
         value={typeStock}
         onChange={(e) => {
@@ -98,17 +103,17 @@ const MenuLeft = ({ location }) => {
       <ul className="list-article">
         <li
           onClick={() => {
-            if (activate) {
+            if (areActivateFilters) {
               setIdArticles(null);
               setIdArticleCountForCountFunctions(null);
             }
           }}
           className={
-            activate && !idArticles
+            areActivateFilters && !idArticles
               ? 'unable current'
-              : activate && idArticles
+              : areActivateFilters && idArticles
               ? 'unable'
-              : !activate
+              : !areActivateFilters
               ? 'disable'
               : ''
           }>
@@ -124,17 +129,17 @@ const MenuLeft = ({ location }) => {
               return (
                 <li
                   onClick={() => {
-                    if (activate) {
+                    if (areActivateFilters) {
                       setIdArticles(article.id);
                       setIdArticleCountForCountFunctions(article.id);
                     }
                   }}
                   className={
-                    activate && idArticles === article.id
+                    areActivateFilters && idArticles === article.id
                       ? 'unable current'
-                      : activate && idArticles !== article.id
+                      : areActivateFilters && idArticles !== article.id
                       ? 'unable'
-                      : !activate
+                      : !areActivateFilters
                       ? 'disable'
                       : ''
                   }
@@ -152,7 +157,7 @@ const MenuLeft = ({ location }) => {
           : ''}
       </ul>
       <div className="quantity">
-        <p className={!activate ? 'number-boxes-disable' : 'number-boxes-unable'}>
+        <p className={!areActivateFilters ? 'number-boxes-disable' : 'number-boxes-unable'}>
           {typeStock === 'caisses-vrac'
             ? 'Nombre vrac' + generateStringCount() + ':'
             : typeStock === 'caisses-total'
@@ -161,7 +166,7 @@ const MenuLeft = ({ location }) => {
             ? 'Nombre fagots' + generateStringCount() + ':'
             : ''}{' '}
         </p>
-        {activate ? <span>{numberBoxes}</span> : ''}
+        {areActivateFilters ? <span>{numberBoxes}</span> : ''}
       </div>
     </div>
   );

@@ -14,7 +14,7 @@ import ModalComponent from '../Modal/ModalComponent';
 const ContentBundle = ({ operation }) => {
   const contextArticles = useContext(ContextArticles);
   const contextBundles = useContext(ContextBundles);
-  const { setActivate } = contextArticles; // able - disable filters
+  const { setAreActivateFilters } = contextArticles; // able - disable filters
   const {
     boxesToAdd,
     setBoxesToAdd,
@@ -47,9 +47,9 @@ const ContentBundle = ({ operation }) => {
   // Function setting the boxes statement and disable filters on mounting component
   useEffect(() => {
     if (location.pathname.includes('/bundling/bundle')) {
-      setActivate(true);
+      setAreActivateFilters(true);
     } else {
-      setActivate(false);
+      setAreActivateFilters(false);
     }
   }, [boxesToAdd]);
 

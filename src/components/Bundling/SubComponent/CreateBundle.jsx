@@ -16,11 +16,11 @@ const CreateBundle = () => {
 
   // Context
   const contextArticles = useContext(ContextArticles);
-  const { setActivate } = contextArticles;
+  const { setAreActivateFilters } = contextArticles;
 
   // On Mounting component, get articles and disable the Menu Left
   useEffect(() => {
-    setActivate(false);
+    setAreActivateFilters(false);
     getArticles().then((result) => {
       setListArticles(result.data);
     });
