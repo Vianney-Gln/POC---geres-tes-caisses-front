@@ -1,12 +1,10 @@
 import React from 'react';
-// import style css
 import './menuSlideMobile.scss';
 import { Link } from 'react-router-dom';
-// import PropTypes
 import PropTypes from 'prop-types';
 
 const MenuSlideMobile = ({ openSlide, setOpenSlide }) => {
-  // Function closing the slide if device is resizing
+  // Function closing the slide if device is resized
   window.addEventListener('resize', () => {
     setOpenSlide(false);
   });

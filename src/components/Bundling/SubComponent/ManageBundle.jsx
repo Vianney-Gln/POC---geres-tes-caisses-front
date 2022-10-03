@@ -1,29 +1,23 @@
 import React, { useEffect, useState, useContext } from 'react';
-// Import style css
 import './manageBundle.scss';
-// Import services
-import { getFagots } from '../../../services/stock';
-// Import components
-import CardsStockFagot from '../../cardsStockFagots/CardsStockFagot';
-// Import component context
+import { getBundles } from '../../../services/stock';
+import CardsStockBundle from '../../cardsStockBundles/CardsStockBundle';
 import ContextArticles from '../../../context/ContextArticles';
 const ManageBundle = () => {
-  // States
   const [fagots, setFagots] = useState([]);
   const [reloadEffect, setReloadeffect] = useState(false);
 
-  // Context
   const contextArticles = useContext(ContextArticles);
-  const { setActivate } = contextArticles;
+  const { setAreActivateFilters } = contextArticles;
 
   // Function calling service to get fagots on component mount
   useEffect(() => {
-    getFagots().then((result) => setFagots(result.data));
+    getBundles().then((result) => setFagots(result.data));
   }, [reloadEffect]);
 
   // Function settting activate context statement to false to disable the MenuLeft component on component mount
   useEffect(() => {
-    setActivate(false);
+    setAreActivateFilters(false);
   }, []);
 
   // Function reloading the useEffect by update the reloadEffect state for each request in CardStockComponent > ModalComponent
@@ -37,7 +31,7 @@ const ManageBundle = () => {
       <ul className="list-cards">
         {fagots.length ? (
           fagots.map((elt, index) => (
-            <CardsStockFagot
+            <CardsStockBundle
               key={index}
               handleEffect={handleEffect}
               stock={elt}

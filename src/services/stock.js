@@ -1,5 +1,5 @@
 import axios from 'axios';
-import baseUrl from './'; // base url
+import baseUrl from './';
 
 /**
  * Function getting stock vrac
@@ -15,7 +15,7 @@ const getStockVrac = (idArticle) => {
 };
 
 /**
- * Function getting stock total - can be sorted by length
+ * Function getting stock total - can be sorted by length (article)
  * @returns {promise}
  */
 export const getStockTotal = (idArticle) => {
@@ -28,10 +28,10 @@ export const getStockTotal = (idArticle) => {
 };
 
 /**
- * Function getting fagots
+ * Function getting bundles
  * @returns {promise}
  */
-export const getFagots = (idArticle) => {
+export const getBundles = (idArticle) => {
   if (idArticle) {
     return axios
       .get(`${baseUrl}/api/gereTesCaisses/fagots/?article=${idArticle}`)
@@ -45,19 +45,19 @@ export const getFagots = (idArticle) => {
  * @param {number} id
  * @returns {promise}
  */
-export const getBoxeByFagot = (id) => {
+export const getBoxesByBundle = (id) => {
   return axios.get(`${baseUrl}/api/gereTesCaisses/fagots/${id}`).then((result) => result);
 };
 
 /**
  * Function counting boxes in vrac stock
- * @param {number} idArticleCount
+ * @param {number} idArticleForCountFunction
  * @returns {promise}
  */
-export const getCountVrac = (idArticleCount) => {
-  if (idArticleCount) {
+export const getCountVrac = (idArticleForCountFunction) => {
+  if (idArticleForCountFunction) {
     return axios
-      .get(`${baseUrl}/api/gereTesCaisses/vrac/count/?article=${idArticleCount}`)
+      .get(`${baseUrl}/api/gereTesCaisses/vrac/count/?article=${idArticleForCountFunction}`)
       .then((result) => result.data);
   } else {
     return axios.get(`${baseUrl}/api/gereTesCaisses/vrac/count`).then((result) => result.data);
@@ -66,13 +66,13 @@ export const getCountVrac = (idArticleCount) => {
 
 /**
  * Function counting boxes in total stock
- * @param {number} idArticleCount
+ * @param {number} idArticleForCountFunction
  * @returns {promise}
  */
-export const getCountTotal = (idArticleCount) => {
-  if (idArticleCount) {
+export const getCountTotal = (idArticleForCountFunction) => {
+  if (idArticleForCountFunction) {
     return axios
-      .get(`${baseUrl}/api/gereTesCaisses/total/count/?article=${idArticleCount}`)
+      .get(`${baseUrl}/api/gereTesCaisses/total/count/?article=${idArticleForCountFunction}`)
       .then((result) => result.data);
   } else {
     return axios.get(`${baseUrl}/api/gereTesCaisses/total/count`).then((result) => result.data);
@@ -80,14 +80,14 @@ export const getCountTotal = (idArticleCount) => {
 };
 
 /**
- * Function counting fagots
- *  @param {number} idArticleCount
+ * Function counting bundle
+ *  @param {number} idArticleForCountFunction
  * @returns {promise}
  */
-export const getCountFagot = (idArticleCount) => {
-  if (idArticleCount) {
+export const getCountBundle = (idArticleForCountFunction) => {
+  if (idArticleForCountFunction) {
     return axios
-      .get(`${baseUrl}/api/gereTesCaisses/fagots/count/?article=${idArticleCount}`)
+      .get(`${baseUrl}/api/gereTesCaisses/fagots/count/?article=${idArticleForCountFunction}`)
       .then((result) => result.data);
   } else {
     return axios.get(`${baseUrl}/api/gereTesCaisses/fagots/count`).then((result) => result.data);
@@ -111,7 +111,7 @@ export const outOfStock = (ids) => {
  * @param {number} idFagot
  * @returns {promise}
  */
-export const getCountBoxesByFagot = (idFagot) => {
+export const getCountBoxesByBundle = (idFagot) => {
   return axios
     .get(`${baseUrl}/api/gereTesCaisses/fagots/number-box-in-fagots/${idFagot}`)
     .then((result) => result.data);

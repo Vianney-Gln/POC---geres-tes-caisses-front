@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 // import modal
 import Modal from 'react-modal';
 // import service
-import { deleteFagotById } from '../../services/fagot';
+import { deleteBundleById } from '../../services/bundle';
 // import FontAwesome
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -30,7 +30,7 @@ const ModalComponent = ({
   fagotId,
   handleEffect,
   runUpdateBundleByid,
-  updateOperationOk,
+  isOperationOk,
   runRemoveBoxeFromBundle
 }) => {
   // States
@@ -71,8 +71,8 @@ const ModalComponent = ({
 
   Modal.setAppElement('#root');
 
-  const runDeleteFagotById = () => {
-    deleteFagotById(fagotId)
+  const runDeleteBundleById = () => {
+    deleteBundleById(fagotId)
       .then(() => {
         setLoad(true);
         setTimeout(() => {
@@ -181,7 +181,7 @@ const ModalComponent = ({
               <p>Voulez défagoter?</p>
               <div className="container-duo-btn">
                 <button onClick={closeModal}>Annuler</button>
-                <button onClick={() => runDeleteFagotById()}>Défagoter</button>
+                <button onClick={() => runDeleteBundleById()}>Défagoter</button>
               </div>
             </>
           ) : load && !messageForBundle ? (
@@ -232,7 +232,7 @@ const ModalComponent = ({
           ) : (
             ''
           )}
-          {updateOperationOk ? manageIcon() : ''}
+          {isOperationOk ? manageIcon() : ''}
           {message ? <p>{message}</p> : ''}
         </Modal>
       );
@@ -262,7 +262,7 @@ const ModalComponent = ({
           ) : (
             ''
           )}
-          {updateOperationOk ? manageIcon() : ''}
+          {isOperationOk ? manageIcon() : ''}
           {message ? <p>{message}</p> : ''}
         </Modal>
       );
@@ -287,7 +287,7 @@ ModalComponent.propTypes = {
   fagotId: PropTypes.number,
   handleEffect: PropTypes.func,
   runUpdateBundleByid: PropTypes.func,
-  updateOperationOk: PropTypes.bool,
+  isOperationOk: PropTypes.bool,
   runRemoveBoxeFromBundle: PropTypes.func
 };
 

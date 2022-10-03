@@ -1,40 +1,31 @@
-// import rect hooks
 import React, { useState } from 'react';
-// import react-router-dom
 import { useNavigate, useParams } from 'react-router-dom';
-// import style css
 import './tableStock.scss';
-// import service
 import { outOfStock } from '../../services/stock';
-// import proptypes
 import PropTypes from 'prop-types';
-// import Components
 import RowTable from '../RowTable/RowTable';
 import ModalComponent from '../Modal/ModalComponent';
 import SearchBarre from '../SearchBarre/SearchBarre';
 
 const TableStock = ({ typeStock, stock, captionName }) => {
-  // States
-  const [search, setSearch] = useState(''); // string get from the search input
+  const [searchValue, setSearchValue] = useState('');
   const [selected, setSelected] = useState([]); // state getting data by clicking on a row
-  const [open, setOpen] = useState(false); // state managing the modal
-  const [confirmDelete, setConfirmDelete] = useState(''); // Message confirm success or error delete rows
-  const [errorDelete, setErrorDelete] = useState(false); // Bool managin content modal in case of error
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [confirmDelete, setConfirmDelete] = useState('');
+  const [errorDelete, setErrorDelete] = useState(false);
 
-  // UseParams
   const param = useParams();
   const { operation } = param;
 
-  // UseNavigate
   const navigate = useNavigate();
 
   // Function closing the modal
   const openModal = () => {
-    setOpen(true);
+    setModalIsOpen(true);
   };
   // Function opening the modal
   const closeModal = () => {
-    setOpen(false);
+    setModalIsOpen(false);
   };
 
   // Function managin caption title
@@ -89,7 +80,7 @@ const TableStock = ({ typeStock, stock, captionName }) => {
   return (
     <>
       <ModalComponent
-        open={open}
+        open={modalIsOpen}
         openModal={openModal}
         closeModal={closeModal}
         contentLabel="Modal-outOfStock"
@@ -103,7 +94,7 @@ const TableStock = ({ typeStock, stock, captionName }) => {
           <caption>
             <span className="title-caption">{`Stock vrac ${manageCaptionTitle()}`}</span>
             <div className="search-buttons">
-              <SearchBarre setSearch={setSearch} />
+              <SearchBarre setSearch={setSearchValue} />
               {manageButtons()}
             </div>
           </caption>
@@ -111,7 +102,7 @@ const TableStock = ({ typeStock, stock, captionName }) => {
           <caption>
             {`Stock total ${manageCaptionTitle()}`}
             <div className="div-total-boxes">
-              <SearchBarre setSearch={setSearch} />
+              <SearchBarre setSearch={setSearchValue} />
               {manageButtons()}
             </div>
           </caption>
@@ -138,8 +129,8 @@ const TableStock = ({ typeStock, stock, captionName }) => {
           {stock &&
             stock
               .filter((el) => {
-                if (search) {
-                  return el.uuid.includes(search);
+                if (searchValue) {
+                  return el.uuid.includes(searchValue);
                 } else {
                   return el;
                 }

@@ -1,16 +1,12 @@
 import React, { useEffect, useState } from 'react';
-// import style css
 import './newLineForm.scss';
-// import PropTypes
 import PropTypes from 'prop-types';
-// import service
 import getArticles from '../../services/articles';
-// import FontAwesome
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 const NewLineForm = ({ addNewLine, index, dataInputs, setDataInputs, line }) => {
-  const [articles, setArticles] = useState([]); // state articles
+  const [articles, setArticles] = useState([]);
 
   useEffect(() => {
     getArticles()

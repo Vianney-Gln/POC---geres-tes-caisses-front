@@ -1,12 +1,12 @@
 import axios from 'axios';
-import baseUrl from '.'; // base url
+import baseUrl from '.';
 
 /**
- * Function creating an empty fagot
+ * Function creating an empty bundle
  * @param {object} data
  * @returns
  */
-const createFagot = (data) => {
+const createBundle = (data) => {
   return axios({
     method: 'post',
     url: `${baseUrl}/api/gereTesCaisses/fagots`,
@@ -19,7 +19,7 @@ const createFagot = (data) => {
  * @param {number} id
  * @returns
  */
-export const deleteFagotById = (id) => {
+export const deleteBundleById = (id) => {
   return axios({
     method: 'delete',
     url: `${baseUrl}/api/gereTesCaisses/fagots/${id}`
@@ -32,7 +32,7 @@ export const deleteFagotById = (id) => {
  * @returns
  */
 
-export const getInfoFagotById = (id) => {
+export const getInfoBundleById = (id) => {
   return axios.get(`${baseUrl}/api/gereTesCaisses/fagots/info/${id}`);
 };
 
@@ -61,4 +61,4 @@ export const removeBoxeFromBundle = (id) => {
   });
 };
 
-export default createFagot;
+export default createBundle;

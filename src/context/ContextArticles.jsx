@@ -1,16 +1,12 @@
-// imports hooks
 import React, { createContext, useState, useEffect } from 'react';
-// import proptypes
 import PropTypes from 'prop-types';
-// import services
 import getArticles from '../services/articles';
-// create context
+
 const ContextArticles = createContext(null);
 export const ContextArticlesProvider = ({ children }) => {
-  // States
-  const [articles, setArticles] = useState([]); // state getting differents articles
-  const [activate, setActivate] = useState(true); // state active or inactive filter
-  const [idArticles, setIdArticles] = useState(null); // state filters stock by articles
+  const [articles, setArticles] = useState([]);
+  const [areActivateFilters, setAreActivateFilters] = useState(true);
+  const [idArticles, setIdArticles] = useState(null);
   const [articleName, setArticleName] = useState('');
 
   // Function getting all articles and update articles state
@@ -31,8 +27,8 @@ export const ContextArticlesProvider = ({ children }) => {
         articleName,
         setArticleName,
         setIdArticles,
-        activate,
-        setActivate
+        areActivateFilters,
+        setAreActivateFilters
       }}>
       {children}
     </ContextArticles.Provider>
