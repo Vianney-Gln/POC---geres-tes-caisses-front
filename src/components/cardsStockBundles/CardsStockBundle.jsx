@@ -1,50 +1,42 @@
-// import react hooks
 import React, { useEffect, useState, useContext } from 'react';
-// import Routing Link
 import { Link, useParams } from 'react-router-dom';
-// import PropTypes
 import PropTypes from 'prop-types';
-// import style css
 import './cardsStockBundle.scss';
-// import service
 import { getCountBoxesByBundle } from '../../services/stock';
-// import comonents
 import ModalComponent from '../Modal/ModalComponent';
-// Import component context
 import ContextArticles from '../../context/ContextArticles';
 import ContextStock from '../../context/ContextStock';
 
 const CardsStockBundle = ({ stock, fagotId, handleEffect }) => {
-  // States
-  const [nbBoxe, setNbBoxe] = useState(null); // nb boxes
-  const [open, setOpen] = useState(false); // state managing the modal
-  const [messageForBundle, setMessageForBundle] = useState(''); // message only for "défagotage" operation
+  const [nbBoxe, setNbBoxe] = useState(null);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [messageForBundle, setMessageForBundle] = useState('');
+
   const param = useParams();
-  // UseParam
   const { operation } = param;
 
-  // Context
   const contextArticles = useContext(ContextArticles);
   const { setIdArticles } = contextArticles;
   const { setIdArticleCount } = useContext(ContextStock);
 
   // function closing the modal
   const openModal = () => {
-    setOpen(true);
+    setModalIsOpen(true);
   };
-  //function opening the modal
+  // function opening the modal
   const closeModal = () => {
-    setOpen(false);
+    setModalIsOpen(false);
     setMessageForBundle('');
   };
 
+  // Function getting the number of boxes in a fagot on mounting component
   useEffect(() => {
     getCountBoxesByBundle(fagotId).then((result) => setNbBoxe(result.nbBoxes));
   }, []);
   return (
     <>
       <ModalComponent
-        open={open}
+        open={modalIsOpen}
         openModal={openModal}
         closeModal={closeModal}
         contentLabel="Modal-manage-bundle"
