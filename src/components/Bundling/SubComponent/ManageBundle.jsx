@@ -1,18 +1,12 @@
 import React, { useEffect, useState, useContext } from 'react';
-// Import style css
 import './manageBundle.scss';
-// Import services
 import { getBundles } from '../../../services/stock';
-// Import components
 import CardsStockBundle from '../../cardsStockBundles/CardsStockBundle';
-// Import component context
 import ContextArticles from '../../../context/ContextArticles';
 const ManageBundle = () => {
-  // States
   const [fagots, setFagots] = useState([]);
   const [reloadEffect, setReloadeffect] = useState(false);
 
-  // Context
   const contextArticles = useContext(ContextArticles);
   const { setAreActivateFilters } = contextArticles;
 
