@@ -1,16 +1,11 @@
 import React, { useContext } from 'react';
-// import proptypes
 import PropTypes from 'prop-types';
-// import style css
 import './rowTable.scss';
-// import FontAwesome
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBoxesStacked } from '@fortawesome/free-solid-svg-icons';
-// Import component context
 import ContextBundles from '../../context/ContextBundles';
 
 const RowTable = ({ element, typeStock, setSelected, selected, operation }) => {
-  // Context
   const contextBundles = useContext(ContextBundles);
   const { boxesToAdd, setBoxesToAdd, getBundleBoxes, currBundle } = contextBundles;
 
