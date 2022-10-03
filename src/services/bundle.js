@@ -32,7 +32,7 @@ export const deleteFagotById = (id) => {
  * @returns
  */
 
-export const getInfoFagotById = (id) => {
+export const getInfoBundleById = (id) => {
   return axios.get(`${baseUrl}/api/gereTesCaisses/fagots/info/${id}`);
 };
 

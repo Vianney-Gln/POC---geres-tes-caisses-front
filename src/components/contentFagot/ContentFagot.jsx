@@ -12,7 +12,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowTurnRight } from '@fortawesome/free-solid-svg-icons';
 // import service
 import { getBoxeByFagot } from '../../services/stock';
-import { getInfoFagotById, removeBoxeFromBundle } from '../../services/bundle';
+import { getInfoBundleById, removeBoxeFromBundle } from '../../services/bundle';
 import { updateBundleById } from '../../services/bundle';
 // import PropTypes
 import PropTypes from 'prop-types';
@@ -106,7 +106,7 @@ const ContentFagot = ({ operation }) => {
 
   // On component mounting get the uuid of the current fagot (displayed in the caption)
   useEffect(() => {
-    getInfoFagotById(param.id)
+    getInfoBundleById(param.id)
       .then((result) => {
         setCurrFagot(result.data);
       })
