@@ -6,7 +6,7 @@ import { useParams } from 'react-router-dom';
 import ContextArticles from '../../context/ContextArticles';
 import ContextFagots from '../../context/ContextFagots';
 // import style css
-import './contentFagot.scss';
+import './contentBundle.scss';
 // import FontAwesome
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowTurnRight } from '@fortawesome/free-solid-svg-icons';
@@ -19,7 +19,7 @@ import PropTypes from 'prop-types';
 // Import component
 import ModalComponent from '../Modal/ModalComponent';
 
-const ContentFagot = ({ operation }) => {
+const ContentBundle = ({ operation }) => {
   // context
   const contextArticles = useContext(ContextArticles);
   const contextFagots = useContext(ContextFagots);
@@ -272,8 +272,8 @@ const ContentFagot = ({ operation }) => {
   );
 };
 
-ContentFagot.propTypes = {
+ContentBundle.propTypes = {
   operation: PropTypes.string
 };
 
-export default ContentFagot;
+export default ContentBundle;
