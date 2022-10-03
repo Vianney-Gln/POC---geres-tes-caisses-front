@@ -80,11 +80,11 @@ export const getCountTotal = (idArticleCount) => {
 };
 
 /**
- * Function counting fagots
+ * Function counting bundle
  *  @param {number} idArticleCount
  * @returns {promise}
  */
-export const getCountFagot = (idArticleCount) => {
+export const getCountBundle = (idArticleCount) => {
   if (idArticleCount) {
     return axios
       .get(`${baseUrl}/api/gereTesCaisses/fagots/count/?article=${idArticleCount}`)

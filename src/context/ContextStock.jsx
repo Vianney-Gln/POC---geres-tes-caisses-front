@@ -3,7 +3,7 @@ import React, { createContext, useState, useEffect, useContext } from 'react';
 // import proptypes
 import PropTypes from 'prop-types';
 // import services
-import { getCountTotal, getCountFagot, getCountVrac } from '../services/stock.js';
+import { getCountTotal, getCountBundle, getCountVrac } from '../services/stock.js';
 // Import component context
 import ContextFagots from './ContextFagots.jsx';
 // create context
@@ -32,7 +32,7 @@ export const ContextStockProvider = ({ children }) => {
           .catch((err) => console.log(err));
         break;
       case 'fagots':
-        getCountFagot(idArticleCount)
+        getCountBundle(idArticleCount)
           .then((result) => setNumberBoxes(result.nbFagots))
           .catch((err) => console.log(err));
         break;
