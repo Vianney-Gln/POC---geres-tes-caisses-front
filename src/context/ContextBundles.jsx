@@ -1,17 +1,14 @@
-// imports hooks
 import React, { createContext, useState } from 'react';
-// create context
-const ContextBundles = createContext(null);
-// import proptypes
 import PropTypes from 'prop-types';
 
+const ContextBundles = createContext(null);
+
 export const ContextBundleProvider = ({ children }) => {
-  // States
   const [currentIdBundle, setCurrentIdBundle] = useState(null);
-  const [boxesToAdd, setBoxesToAdd] = useState([]); // state boxes to send into api for update
-  const [getBundleBoxes, setGetBundleBoxes] = useState([]); // state getting boxes from one fagot http request
-  const [currBundle, setCurrBundle] = useState({}); // state current fagot
-  const [restartEffect, setRestartEffect] = useState(false); // state used to restart the useEffect in Stock component
+  const [boxesToAdd, setBoxesToAdd] = useState([]);
+  const [getBundleBoxes, setGetBundleBoxes] = useState([]);
+  const [currBundle, setCurrBundle] = useState({});
+  const [restartEffect, setRestartEffect] = useState(false);
 
   // Function restarting the useEffect in Stock component
   const handleRestartEffect = () => {
