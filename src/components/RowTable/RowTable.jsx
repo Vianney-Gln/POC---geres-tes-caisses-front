@@ -12,7 +12,7 @@ import ContextBundles from '../../context/ContextBundles';
 const RowTable = ({ element, typeStock, setSelected, selected, operation }) => {
   // Context
   const contextBundles = useContext(ContextBundles);
-  const { boxesToAdd, setBoxesToAdd, fagotBoxes, currFagot } = contextBundles;
+  const { boxesToAdd, setBoxesToAdd, fagotBoxes, currBundle } = contextBundles;
 
   /**
    * Function getting or deleting data to the cliqued row --- out-of-stock use only
@@ -34,11 +34,15 @@ const RowTable = ({ element, typeStock, setSelected, selected, operation }) => {
     let copy = [...boxesToAdd];
     const sum = fagotBoxes.length + copy.length;
 
-    if (!copy.find((elt) => elt.id === element.id) && sum < 10 && element.name === currFagot.name) {
+    if (
+      !copy.find((elt) => elt.id === element.id) &&
+      sum < 10 &&
+      element.name === currBundle.name
+    ) {
       copy.push(element);
       setBoxesToAdd(copy);
     }
-    if (element.name !== currFagot.name)
+    if (element.name !== currBundle.name)
       alert('Attention la taille de la caisse ne correspond pas à la taille du fagot');
   };
 

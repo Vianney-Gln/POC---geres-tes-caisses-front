@@ -29,8 +29,8 @@ const ContentBundle = ({ operation }) => {
     setBoxesToAdd,
     fagotBoxes,
     setFagotBoxes,
-    currFagot,
-    setCurrFagot,
+    currBundle,
+    setCurrBundle,
     handleRestartEffect,
     restartEffect
   } = contextBundles;
@@ -108,7 +108,7 @@ const ContentBundle = ({ operation }) => {
   useEffect(() => {
     getInfoBundleById(param.id)
       .then((result) => {
-        setCurrFagot(result.data);
+        setCurrBundle(result.data);
       })
       .catch((err) => {
         console.log(err);
@@ -131,7 +131,7 @@ const ContentBundle = ({ operation }) => {
    * Function running the service function updateBundleById, manage messages success or errors and then redirect to stock component
    */
   const runUpdateBundleByid = () => {
-    updateBundleById(boxesToAdd, currFagot.id)
+    updateBundleById(boxesToAdd, currBundle.id)
       .then(() => {
         setMessage('Mise à jour du fagot en cours...');
         setError(false);
@@ -203,9 +203,9 @@ const ContentBundle = ({ operation }) => {
       <table className="table-boxes-fagots">
         <caption className="caption">
           {operation === 'bundle' ? 'Mise à jour' : 'Constitution'} du{' '}
-          {currFagot.uuid ? currFagot.uuid : 'fagot'}
+          {currBundle.uuid ? currBundle.uuid : 'fagot'}
           <br></br>
-          <span className="info-fagot">{currFagot.name}</span>
+          <span className="info-fagot">{currBundle.name}</span>
           <span className="info-fagot"> {fagotBoxes.length + boxesToAdd.length} /10</span>
           {operation === 'bundle' && boxesToAdd.length ? (
             <button
@@ -257,7 +257,7 @@ const ContentBundle = ({ operation }) => {
                   <tr className="justAdded" key={index}>
                     <td align="center">{elt.uuid}</td>
                     <td align="center">{elt.name}</td>
-                    <td align="center">{currFagot.uuid}</td>
+                    <td align="center">{currBundle.uuid}</td>
                     <td className="delete" onClick={() => removeToBundle(elt)} align="center">
                       Annuler
                     </td>
