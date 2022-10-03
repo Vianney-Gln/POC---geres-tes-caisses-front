@@ -1,8 +1,6 @@
 import { useState } from 'react';
-//import react router dom
 import { Routes, Route, useLocation } from 'react-router-dom';
 import ContentBundle from '../contentBundle/ContentBundle';
-// Components imports
 import Header from '../Header/Header';
 import MenuLeft from '../Menu-left/MenuLeft';
 import MenuTop from '../Menu-top/MenuTop';
@@ -11,13 +9,11 @@ import Reception from '../Reception/Reception';
 import Redirect from '../../Redirect/Redirect';
 import Bundling from '../Bundling/Bundling';
 import MenuSlideMobile from '../MenuSlideMobile/MenuSlideMobile';
-// style css
 import './app.scss';
 
 const App = () => {
   const location = useLocation();
-  // States
-  const [openSlide, setOpenSlide] = useState(false); // state opening or closing the slide
+  const [openSlide, setOpenSlide] = useState(false);
 
   return (
     <div className="App">
