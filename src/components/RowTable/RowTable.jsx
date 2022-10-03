@@ -12,7 +12,7 @@ import ContextBundles from '../../context/ContextBundles';
 const RowTable = ({ element, typeStock, setSelected, selected, operation }) => {
   // Context
   const contextBundles = useContext(ContextBundles);
-  const { boxesToAdd, setBoxesToAdd, fagotBoxes, currBundle } = contextBundles;
+  const { boxesToAdd, setBoxesToAdd, getBundleBoxes, currBundle } = contextBundles;
 
   /**
    * Function getting or deleting data to the cliqued row --- out-of-stock use only
@@ -32,7 +32,7 @@ const RowTable = ({ element, typeStock, setSelected, selected, operation }) => {
    */
   const addToBundle = () => {
     let copy = [...boxesToAdd];
-    const sum = fagotBoxes.length + copy.length;
+    const sum = getBundleBoxes.length + copy.length;
 
     if (
       !copy.find((elt) => elt.id === element.id) &&

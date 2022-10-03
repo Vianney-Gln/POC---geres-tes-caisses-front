@@ -9,7 +9,7 @@ export const ContextBundleProvider = ({ children }) => {
   // States
   const [currentIdBundle, setCurrentIdBundle] = useState(null);
   const [boxesToAdd, setBoxesToAdd] = useState([]); // state boxes to send into api for update
-  const [fagotBoxes, setFagotBoxes] = useState([]); // state getting boxes from one fagot http request
+  const [getBundleBoxes, setGetBundleBoxes] = useState([]); // state getting boxes from one fagot http request
   const [currBundle, setCurrBundle] = useState({}); // state current fagot
   const [restartEffect, setRestartEffect] = useState(false); // state used to restart the useEffect in Stock component
 
@@ -25,8 +25,8 @@ export const ContextBundleProvider = ({ children }) => {
         setCurrentIdBundle,
         boxesToAdd,
         setBoxesToAdd,
-        fagotBoxes,
-        setFagotBoxes,
+        getBundleBoxes,
+        setGetBundleBoxes,
         currBundle,
         setCurrBundle,
         handleRestartEffect,

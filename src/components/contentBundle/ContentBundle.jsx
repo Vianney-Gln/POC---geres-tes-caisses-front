@@ -27,8 +27,8 @@ const ContentBundle = ({ operation }) => {
   const {
     boxesToAdd,
     setBoxesToAdd,
-    fagotBoxes,
-    setFagotBoxes,
+    getBundleBoxes,
+    setGetBundleBoxes,
     currBundle,
     setCurrBundle,
     handleRestartEffect,
@@ -74,7 +74,7 @@ const ContentBundle = ({ operation }) => {
   useEffect(() => {
     getBoxesByBundle(param.id)
       .then((result) => {
-        setFagotBoxes(result.data);
+        setGetBundleBoxes(result.data);
       })
       .catch((err) => {
         console.log(err);
@@ -87,7 +87,7 @@ const ContentBundle = ({ operation }) => {
    */
   const generateEmptyRows = () => {
     const maxRows = 10;
-    const sum = fagotBoxes.length + boxesToAdd.length;
+    const sum = getBundleBoxes.length + boxesToAdd.length;
     const diff = maxRows - sum;
     if (diff > 0) {
       const tempArray = new Array(diff).fill(undefined);
@@ -206,7 +206,7 @@ const ContentBundle = ({ operation }) => {
           {currBundle.uuid ? currBundle.uuid : 'fagot'}
           <br></br>
           <span className="info-fagot">{currBundle.name}</span>
-          <span className="info-fagot"> {fagotBoxes.length + boxesToAdd.length} /10</span>
+          <span className="info-fagot"> {getBundleBoxes.length + boxesToAdd.length} /10</span>
           {operation === 'bundle' && boxesToAdd.length ? (
             <button
               onClick={() => {
@@ -229,8 +229,8 @@ const ContentBundle = ({ operation }) => {
           </tr>
         </thead>
         <tbody>
-          {fagotBoxes &&
-            fagotBoxes.map((element, index) => {
+          {getBundleBoxes &&
+            getBundleBoxes.map((element, index) => {
               return (
                 <tr key={index}>
                   <td align="center">{element.idCaisse}</td>
