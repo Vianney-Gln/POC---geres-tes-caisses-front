@@ -1,5 +1,4 @@
-import React, { useEffect } from 'react';
-// useNavigate
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const Redirect = () => {
@@ -8,7 +7,6 @@ const Redirect = () => {
   useEffect(() => {
     navigate('/stock');
   }, []);
-  return <div>Redirect</div>;
 };
 
 export default Redirect;
