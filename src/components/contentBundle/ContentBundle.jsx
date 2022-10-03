@@ -1,26 +1,17 @@
-// import react hooks
 import React, { useEffect, useContext, useState } from 'react';
-// react router dom
 import { useParams } from 'react-router-dom';
-// import Components context
 import ContextArticles from '../../context/ContextArticles';
 import ContextBundles from '../../context/ContextBundles';
-// import style css
 import './contentBundle.scss';
-// import FontAwesome
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowTurnRight } from '@fortawesome/free-solid-svg-icons';
-// import service
 import { getBoxesByBundle } from '../../services/stock';
 import { getInfoBundleById, removeBoxeFromBundle } from '../../services/bundle';
 import { updateBundleById } from '../../services/bundle';
-// import PropTypes
 import PropTypes from 'prop-types';
-// Import component
 import ModalComponent from '../Modal/ModalComponent';
 
 const ContentBundle = ({ operation }) => {
-  // context
   const contextArticles = useContext(ContextArticles);
   const contextBundles = useContext(ContextBundles);
   const { setActivate } = contextArticles; // able - disable filters
@@ -34,29 +25,26 @@ const ContentBundle = ({ operation }) => {
     handleRestartEffect,
     restartEffect
   } = contextBundles;
-  // States
-  const [open, setOpen] = useState(false); // state managing the modal
-  const [message, setMessage] = useState(''); // state managing success or fail message
-  const [contentLabel, setContentLabel] = useState(''); // state managin the content label modal
-  const [error, setError] = useState(false); // this state bool manage the color of modal icons(error or success)
-  const [updateOperationOk, setUpdateOperationOk] = useState(false); // state determine the display of icon
-  const [currentBoxeId, setCurrentBoxeId] = useState(null); // state managing the current selected boxe id
 
-  // Modals
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [message, setMessage] = useState('');
+  const [contentLabel, setContentLabel] = useState('');
+  const [error, setError] = useState(false);
+  const [isOperationOk, setIsOperationOk] = useState(false);
+  const [currentBoxeId, setCurrentBoxeId] = useState(null);
 
   // function closing the modal
   const openModal = () => {
-    setOpen(true);
+    setModalIsOpen(true);
   };
   // function opening the modal
   const closeModal = () => {
-    setOpen(false);
+    setModalIsOpen(false);
   };
 
-  // params
   const param = useParams();
 
-  // Function setting the boxes statement and disable filters
+  // Function setting the boxes statement and disable filters on mounting component
   useEffect(() => {
     if (location.pathname.includes('/bundling/bundle')) {
       setActivate(true);
@@ -136,11 +124,11 @@ const ContentBundle = ({ operation }) => {
         setMessage('Mise à jour du fagot en cours...');
         setError(false);
         setTimeout(() => {
-          setUpdateOperationOk(true);
+          setIsOperationOk(true);
           setMessage('Fagot mis à jour avec succés.');
         }, 3000);
         setTimeout(() => {
-          setUpdateOperationOk(false);
+          setIsOperationOk(false);
           setMessage('');
           handleRestartEffect();
           setBoxesToAdd([]);
@@ -149,7 +137,7 @@ const ContentBundle = ({ operation }) => {
       })
       .catch(() => {
         setError(true);
-        setUpdateOperationOk(true);
+        setIsOperationOk(true);
         setMessage('Une erreur est survenue pendant la mise à jour');
         setTimeout(() => {
           closeModal();
@@ -166,11 +154,11 @@ const ContentBundle = ({ operation }) => {
         setMessage('Mise à jour du fagot en cours...');
         setError(false);
         setTimeout(() => {
-          setUpdateOperationOk(true);
+          setIsOperationOk(true);
           setMessage('La caisse a été retirée avec succés.');
         }, 3000);
         setTimeout(() => {
-          setUpdateOperationOk(false);
+          setIsOperationOk(false);
           setMessage('');
           handleRestartEffect();
           setBoxesToAdd([]);
@@ -179,7 +167,7 @@ const ContentBundle = ({ operation }) => {
       })
       .catch(() => {
         setError(true);
-        setUpdateOperationOk(true);
+        setIsOperationOk(true);
         setMessage('Une erreur est survenue pendant la mise à jour');
         setTimeout(() => {
           closeModal();
@@ -192,12 +180,12 @@ const ContentBundle = ({ operation }) => {
       <ModalComponent
         error={error}
         message={message}
-        open={open}
+        open={modalIsOpen}
         openModal={openModal}
         closeModal={closeModal}
         contentLabel={contentLabel} //"Modal-bundling"
         runUpdateBundleByid={runUpdateBundleByid}
-        updateOperationOk={updateOperationOk}
+        isOperationOk={isOperationOk}
         runRemoveBoxeFromBundle={runRemoveBoxeFromBundle}
       />
       <table className="table-boxes-fagots">

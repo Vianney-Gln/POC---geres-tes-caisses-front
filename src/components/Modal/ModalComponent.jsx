@@ -30,7 +30,7 @@ const ModalComponent = ({
   fagotId,
   handleEffect,
   runUpdateBundleByid,
-  updateOperationOk,
+  isOperationOk,
   runRemoveBoxeFromBundle
 }) => {
   // States
@@ -232,7 +232,7 @@ const ModalComponent = ({
           ) : (
             ''
           )}
-          {updateOperationOk ? manageIcon() : ''}
+          {isOperationOk ? manageIcon() : ''}
           {message ? <p>{message}</p> : ''}
         </Modal>
       );
@@ -262,7 +262,7 @@ const ModalComponent = ({
           ) : (
             ''
           )}
-          {updateOperationOk ? manageIcon() : ''}
+          {isOperationOk ? manageIcon() : ''}
           {message ? <p>{message}</p> : ''}
         </Modal>
       );
@@ -287,7 +287,7 @@ ModalComponent.propTypes = {
   fagotId: PropTypes.number,
   handleEffect: PropTypes.func,
   runUpdateBundleByid: PropTypes.func,
-  updateOperationOk: PropTypes.bool,
+  isOperationOk: PropTypes.bool,
   runRemoveBoxeFromBundle: PropTypes.func
 };
 
