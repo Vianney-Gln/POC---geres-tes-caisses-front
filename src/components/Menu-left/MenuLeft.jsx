@@ -1,37 +1,30 @@
-// import react hooks
 import React, { useContext, useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-// import style css
 import './menuLeft.scss';
-// import FontAwesome
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCaretRight } from '@fortawesome/free-solid-svg-icons';
-// import components context
 import ContextArticles from '../../context/ContextArticles';
 import ContextStock from '../../context/ContextStock';
 import ContextBundles from '../../context/ContextBundles';
-// import PropTypes
 import PropTypes from 'prop-types';
 
 const MenuLeft = ({ location }) => {
-  //useNavigate
   const navigate = useNavigate();
-  // use context
-  const contextArticles = useContext(ContextArticles); // context articles;
-  const contextStock = useContext(ContextStock); // context stock
-  const contextBundles = useContext(ContextBundles); // context fagots
+
+  const contextArticles = useContext(ContextArticles);
+  const contextStock = useContext(ContextStock);
+  const contextBundles = useContext(ContextBundles);
   const { articles, areActivateFilters, idArticles, setIdArticles } = contextArticles;
   const { typeStock, setTypeStock, numberBoxes, setIdArticleCountForCountFunctions } = contextStock;
   const { currentIdBundle } = contextBundles;
 
-  //states
-  const [resolution, setResolution] = useState('');
+  const [deviceResolution, setDeviceResolution] = useState('');
 
   /**
    * Function that generates the first part of the link, depending of location statement
    * @returns {string}
    */
-  const generateLink = () => {
+  const generateUrl = () => {
     if (location.includes('/out-of-stock')) return '/out-of-stock';
     if (location.includes('/stock')) return '/stock';
     if (location.includes('/bundling/bundle') && currentIdBundle) {
@@ -43,7 +36,7 @@ const MenuLeft = ({ location }) => {
    * Function generating the type of boxes as a string, depending of idArticles statement
    * @returns {string}
    */
-  const generateStringCount = () => {
+  const generateNameSizeBoxes = () => {
     switch (idArticles) {
       case 1:
         return ' 4m';
@@ -60,18 +53,18 @@ const MenuLeft = ({ location }) => {
   // On component mounting check the resolution small or desktop and store it into a state
   useEffect(() => {
     if (window.matchMedia('(max-width:730px)').matches) {
-      setResolution('small');
+      setDeviceResolution('small');
     } else {
-      setResolution('desktop');
+      setDeviceResolution('desktop');
     }
   }, []);
 
   // Function checking what device is (desktop or smartphone) and store thos into a state
   window.onresize = function () {
     if (window.matchMedia('(max-width:730px)').matches) {
-      setResolution('small');
+      setDeviceResolution('small');
     } else {
-      setResolution('desktop');
+      setDeviceResolution('desktop');
     }
   };
 
@@ -79,7 +72,9 @@ const MenuLeft = ({ location }) => {
 
   return (
     <div
-      className={!areActivateFilters && resolution === 'small' ? 'menu-left-masqued' : 'menu-left'}>
+      className={
+        !areActivateFilters && deviceResolution === 'small' ? 'menu-left-masqued' : 'menu-left'
+      }>
       <select
         disabled={
           location.includes('/bundling/bundle') && currentIdBundle
@@ -92,7 +87,7 @@ const MenuLeft = ({ location }) => {
         onChange={(e) => {
           setTypeStock(e.target.value);
           setIdArticles(null);
-          navigate(`${generateLink()}`);
+          navigate(`${generateUrl()}`);
         }}>
         <option value="caisses-vrac">Caisses vracs</option>
         <option value="caisses-total">Caisses total</option>
@@ -122,7 +117,7 @@ const MenuLeft = ({ location }) => {
               <FontAwesomeIcon icon={faCaretRight} />
             </i>
           )}
-          <Link to={`${generateLink()}/toutes caisses`}>Toutes caisses</Link>
+          <Link to={`${generateUrl()}/toutes caisses`}>Toutes caisses</Link>
         </li>
         {articles.length
           ? articles.map((article) => {
@@ -150,7 +145,7 @@ const MenuLeft = ({ location }) => {
                     </i>
                   )}
 
-                  <Link to={`${generateLink()}/${article.name}`}>{article.name}</Link>
+                  <Link to={`${generateUrl()}/${article.name}`}>{article.name}</Link>
                 </li>
               );
             })
@@ -159,11 +154,11 @@ const MenuLeft = ({ location }) => {
       <div className="quantity">
         <p className={!areActivateFilters ? 'number-boxes-disable' : 'number-boxes-unable'}>
           {typeStock === 'caisses-vrac'
-            ? 'Nombre vrac' + generateStringCount() + ':'
+            ? 'Nombre vrac' + generateNameSizeBoxes() + ':'
             : typeStock === 'caisses-total'
-            ? 'Nombre total' + generateStringCount() + ':'
+            ? 'Nombre total' + generateNameSizeBoxes() + ':'
             : typeStock === 'fagots'
-            ? 'Nombre fagots' + generateStringCount() + ':'
+            ? 'Nombre fagots' + generateNameSizeBoxes() + ':'
             : ''}{' '}
         </p>
         {areActivateFilters ? <span>{numberBoxes}</span> : ''}
