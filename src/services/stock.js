@@ -51,13 +51,13 @@ export const getBoxesByBundle = (id) => {
 
 /**
  * Function counting boxes in vrac stock
- * @param {number} idArticleCount
+ * @param {number} idArticleForCountFunction
  * @returns {promise}
  */
-export const getCountVrac = (idArticleCount) => {
-  if (idArticleCount) {
+export const getCountVrac = (idArticleForCountFunction) => {
+  if (idArticleForCountFunction) {
     return axios
-      .get(`${baseUrl}/api/gereTesCaisses/vrac/count/?article=${idArticleCount}`)
+      .get(`${baseUrl}/api/gereTesCaisses/vrac/count/?article=${idArticleForCountFunction}`)
       .then((result) => result.data);
   } else {
     return axios.get(`${baseUrl}/api/gereTesCaisses/vrac/count`).then((result) => result.data);
@@ -66,13 +66,13 @@ export const getCountVrac = (idArticleCount) => {
 
 /**
  * Function counting boxes in total stock
- * @param {number} idArticleCount
+ * @param {number} idArticleForCountFunction
  * @returns {promise}
  */
-export const getCountTotal = (idArticleCount) => {
-  if (idArticleCount) {
+export const getCountTotal = (idArticleForCountFunction) => {
+  if (idArticleForCountFunction) {
     return axios
-      .get(`${baseUrl}/api/gereTesCaisses/total/count/?article=${idArticleCount}`)
+      .get(`${baseUrl}/api/gereTesCaisses/total/count/?article=${idArticleForCountFunction}`)
       .then((result) => result.data);
   } else {
     return axios.get(`${baseUrl}/api/gereTesCaisses/total/count`).then((result) => result.data);
@@ -81,13 +81,13 @@ export const getCountTotal = (idArticleCount) => {
 
 /**
  * Function counting bundle
- *  @param {number} idArticleCount
+ *  @param {number} idArticleForCountFunction
  * @returns {promise}
  */
-export const getCountBundle = (idArticleCount) => {
-  if (idArticleCount) {
+export const getCountBundle = (idArticleForCountFunction) => {
+  if (idArticleForCountFunction) {
     return axios
-      .get(`${baseUrl}/api/gereTesCaisses/fagots/count/?article=${idArticleCount}`)
+      .get(`${baseUrl}/api/gereTesCaisses/fagots/count/?article=${idArticleForCountFunction}`)
       .then((result) => result.data);
   } else {
     return axios.get(`${baseUrl}/api/gereTesCaisses/fagots/count`).then((result) => result.data);

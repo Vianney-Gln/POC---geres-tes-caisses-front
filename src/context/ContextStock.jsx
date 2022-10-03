@@ -13,7 +13,7 @@ export const ContextStockProvider = ({ children }) => {
   // States
   const [typeStock, setTypeStock] = useState('caisses-vrac'); // state getting the type of stock (vrac, total, fagots) --- default caisses-vrac
   const [numberBoxes, setNumberBoxes] = useState(null); // state getting the bumber of boxes
-  const [idArticleCount, setIdArticleCount] = useState(null); //state id article argument getCount() functions
+  const [idArticleForCountFunctions, setIdArticleCountForCountFunctions] = useState(null); //state id article argument getCount() functions
 
   // Get other Context -- Use restart Effect from ContextBundles to restart API calls
   const { restartEffect } = useContext(ContextBundles);
@@ -22,22 +22,22 @@ export const ContextStockProvider = ({ children }) => {
   useEffect(() => {
     switch (typeStock) {
       case 'caisses-vrac':
-        getCountVrac(idArticleCount)
+        getCountVrac(idArticleForCountFunctions)
           .then((result) => setNumberBoxes(result.nbVrac))
           .catch((err) => console.log(err));
         break;
       case 'caisses-total':
-        getCountTotal(idArticleCount)
+        getCountTotal(idArticleForCountFunctions)
           .then((result) => setNumberBoxes(result.numberTotal))
           .catch((err) => console.log(err));
         break;
       case 'fagots':
-        getCountBundle(idArticleCount)
+        getCountBundle(idArticleForCountFunctions)
           .then((result) => setNumberBoxes(result.nbFagots))
           .catch((err) => console.log(err));
         break;
     }
-  }, [typeStock, idArticleCount, restartEffect]);
+  }, [typeStock, idArticleForCountFunctions, restartEffect]);
 
   return (
     <ContextStock.Provider
@@ -45,7 +45,7 @@ export const ContextStockProvider = ({ children }) => {
         typeStock,
         setTypeStock,
         numberBoxes,
-        setIdArticleCount
+        setIdArticleCountForCountFunctions
       }}>
       {children}
     </ContextStock.Provider>

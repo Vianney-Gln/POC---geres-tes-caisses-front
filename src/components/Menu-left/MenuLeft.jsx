@@ -21,7 +21,7 @@ const MenuLeft = ({ location }) => {
   const contextStock = useContext(ContextStock); // context stock
   const contextBundles = useContext(ContextBundles); // context fagots
   const { articles, activate, idArticles, setIdArticles } = contextArticles;
-  const { typeStock, setTypeStock, numberBoxes, setIdArticleCount } = contextStock;
+  const { typeStock, setTypeStock, numberBoxes, setIdArticleCountForCountFunctions } = contextStock;
   const { currentIdBundle } = contextBundles;
 
   //states
@@ -100,7 +100,7 @@ const MenuLeft = ({ location }) => {
           onClick={() => {
             if (activate) {
               setIdArticles(null);
-              setIdArticleCount(null);
+              setIdArticleCountForCountFunctions(null);
             }
           }}
           className={
@@ -126,7 +126,7 @@ const MenuLeft = ({ location }) => {
                   onClick={() => {
                     if (activate) {
                       setIdArticles(article.id);
-                      setIdArticleCount(article.id);
+                      setIdArticleCountForCountFunctions(article.id);
                     }
                   }}
                   className={

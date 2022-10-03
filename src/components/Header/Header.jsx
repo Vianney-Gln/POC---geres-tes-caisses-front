@@ -1,22 +1,16 @@
-//import react hooks
 import React, { useContext } from 'react';
-// import routing with react router dom
 import { useNavigate } from 'react-router-dom';
-// import style css
 import './header.scss';
-// import image
 import logo from '../../images/logo-free.jpg';
-// Import component context
 import ContextArticles from '../../context/ContextArticles';
 import ContextStock from '../../context/ContextStock';
 
 const Header = () => {
-  // useNavigate
   const navigate = useNavigate();
-  // Context
+
   const contextArticles = useContext(ContextArticles);
   const { setIdArticles } = contextArticles;
-  const { setIdArticleCount } = useContext(ContextStock);
+  const { setIdArticleCountForCountFunctions } = useContext(ContextStock);
 
   return (
     <header className="container-header">
@@ -26,7 +20,7 @@ const Header = () => {
           alt="logo-free"
           onClick={() => {
             setIdArticles(null);
-            setIdArticleCount(null);
+            setIdArticleCountForCountFunctions(null);
             navigate('/');
           }}
         />

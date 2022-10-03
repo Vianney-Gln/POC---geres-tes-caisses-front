@@ -17,7 +17,7 @@ const CardsStockBundle = ({ stock, fagotId, handleEffect }) => {
 
   const contextArticles = useContext(ContextArticles);
   const { setIdArticles } = contextArticles;
-  const { setIdArticleCount } = useContext(ContextStock);
+  const { setIdArticleCountForCountFunctions } = useContext(ContextStock);
 
   // function closing the modal
   const openModal = () => {
@@ -58,7 +58,7 @@ const CardsStockBundle = ({ stock, fagotId, handleEffect }) => {
               <Link
                 onClick={() => {
                   setIdArticles(null);
-                  setIdArticleCount(null);
+                  setIdArticleCountForCountFunctions(null);
                 }}
                 className="button-like"
                 to={`/bundling/bundle/${fagotId}`}>
