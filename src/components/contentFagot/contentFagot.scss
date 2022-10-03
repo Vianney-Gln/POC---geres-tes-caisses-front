@@ -6,12 +6,12 @@ div.container-contentFagot {
   align-items: flex-start;
   max-height: 75vh;
   min-height: 75vh;
-  overflow-y: auto;
+  overflow-y: hidden;
+  margin-bottom: 20px;
 
   table.table-boxes-fagots {
     width: 80%;
     margin-top: 20px;
-    margin-bottom: 20px;
     border-collapse: collapse;
     background-color: whitesmoke;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 0px 8px;
