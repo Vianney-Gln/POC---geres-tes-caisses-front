@@ -9,22 +9,22 @@ import validateReception from '../../services/reception';
 const Reception = () => {
   document.title = 'Gestion des caisses - réception';
   const contextArticles = useContext(ContextArticles);
-  const { setActivate } = contextArticles;
-  const [dataInputs, setDataInputs] = useState([{ uuid: '', id_article: '' }]); // state input data - array with objects
-  const [open, setOpen] = useState(false); // state managing the modal
-  const [message, setMessage] = useState(''); // state managing success or fail message
-  const [error, setError] = useState(false); // this state bool manage the color of modal icons(error or success)
-  const [messageCarateres, setMessageCaracteres] = useState(''); // state managing the message ex: if input uuid != 10 length
-  const [isTypeBoxSelected, setIsTypeBoxSelected] = useState(''); // Message error displayed if user dont fill the type box select
+  const { setAreActivateFilters } = contextArticles;
+  const [dataInputs, setDataInputs] = useState([{ uuid: '', id_article: '' }]);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [message, setMessage] = useState('');
+  const [error, setError] = useState(false);
+  const [messageCarateres, setMessageCaracteres] = useState('');
+  const [isTypeBoxSelected, setIsTypeBoxSelected] = useState('');
 
   const navigate = useNavigate();
 
   const openModal = () => {
-    setOpen(true);
+    setModalIsOpen(true);
   };
 
   const closeModal = () => {
-    setOpen(false);
+    setModalIsOpen(false);
   };
 
   /**
@@ -72,7 +72,7 @@ const Reception = () => {
 
   // function desactivate the Menu-Left on component mounting
   useEffect(() => {
-    setActivate(false);
+    setAreActivateFilters(false);
   }, []);
 
   // Function checking if there is duplicates into a reception
@@ -133,7 +133,7 @@ const Reception = () => {
       <ModalComponent
         error={error}
         message={message}
-        open={open}
+        open={modalIsOpen}
         openModal={openModal}
         closeModal={closeModal}
         contentLabel="Modal-reception"

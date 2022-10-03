@@ -1,61 +1,49 @@
-// import react hook;
 import React, { useState, useEffect, useContext } from 'react';
-// import style css;
 import './stock.scss';
-// import useParams
 import { useParams, useNavigate } from 'react-router-dom';
-// service
-import getStockVrac, { getStockTotal, getFagots } from '../../services/stock';
-// import components context
+import getStockVrac, { getStockTotal, getBundles } from '../../services/stock';
 import ContextStock from '../../context/ContextStock';
 import ContextArticles from '../../context/ContextArticles';
-import ContextFagots from '../../context/ContextFagots';
-// import components
+import ContextBundles from '../../context/ContextBundles';
 import TableStock from '../tableStock/TableStock';
-import CardsStockFagot from '../cardsStockFagots/CardsStockFagot';
+import CardsStockBundle from '../cardsStockBundles/CardsStockBundle';
 
 const Stock = () => {
-  // docTitle
   document.title = 'Gestion des caisses - stock';
 
-  // Navigate from react router dom
   const navigate = useNavigate();
-  // States
+
   const [stock, setStock] = useState([]); // state getting stock
   const [fagots, setFagots] = useState([]); // state getting fagot contents
 
-  //useParams
   const param = useParams();
 
-  // If the user reload this page, remove the url parameter and redirect to stock page
-
+  // On Mounting component, if the user reload this page, remove the url parameter and redirect to stock page
   useEffect(() => {
     if (param.articleName) navigate('/');
   }, []);
 
-  // get Context
   const contextStock = useContext(ContextStock);
   const { setTypeStock, typeStock } = contextStock;
   const contextArticle = useContext(ContextArticles);
-  const { setActivate, idArticles } = contextArticle;
-  const contextFagot = useContext(ContextFagots);
-  const { restartEffect } = contextFagot;
+  const { setAreActivateFilters, idArticles } = contextArticle;
+  const contextBundles = useContext(ContextBundles);
+  const { restartEffect } = contextBundles;
 
-  // function getting stock calling api
-
+  // On component mounting, call api and get stock, depending of typeStock and idArticles filters
   useEffect(() => {
     if (location.pathname.includes('bundling/bundle')) {
       setTypeStock('caisses-vrac');
     }
     if (typeStock === 'caisses-vrac') {
-      setActivate(true);
+      setAreActivateFilters(true);
       getStockVrac(idArticles)
         .then((result) => {
           setStock(result.data);
         })
         .catch((err) => console.log(err));
     } else if (typeStock === 'caisses-total') {
-      setActivate(true);
+      setAreActivateFilters(true);
       getStockTotal(idArticles)
         .then((result) => {
           setStock(result.data);
@@ -64,8 +52,8 @@ const Stock = () => {
           console.log(err);
         });
     } else if (typeStock === 'fagots') {
-      setActivate(true);
-      getFagots(idArticles)
+      setAreActivateFilters(true);
+      getBundles(idArticles)
         .then((result) => {
           setFagots(result.data);
         })
@@ -86,7 +74,7 @@ const Stock = () => {
             <h2>{`Fagots ${param.articleName ? param.articleName : 'toutes caisses'}`}</h2>
             {fagots.length ? (
               fagots.map((elt, index) => (
-                <CardsStockFagot key={index} stock={elt} fagotId={elt.fagotId} />
+                <CardsStockBundle key={index} stock={elt} fagotId={elt.fagotId} />
               ))
             ) : (
               <p className="no-fagot-found">Aucun fagot trouvé</p>

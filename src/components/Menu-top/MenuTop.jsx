@@ -1,15 +1,10 @@
 import React, { useContext } from 'react';
-// import react router dom
 import { Link } from 'react-router-dom';
-// import PropTypes
 import PropTypes from 'prop-types';
-// style css
 import './menuTop.scss';
-// import components context
 import ContextStock from '../../context/ContextStock';
-// Check if there is filters (by calling articleName), and then check the path to determine the current tabs (stock, reception etc...)
+
 const MenuTop = ({ location, setOpenSlide }) => {
-  // Context
   const contextStock = useContext(ContextStock);
   const { setTypeStock } = contextStock;
 

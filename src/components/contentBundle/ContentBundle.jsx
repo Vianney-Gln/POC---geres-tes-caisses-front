@@ -1,67 +1,55 @@
-// import react hooks
 import React, { useEffect, useContext, useState } from 'react';
-// react router dom
 import { useParams } from 'react-router-dom';
-// import Components context
 import ContextArticles from '../../context/ContextArticles';
-import ContextFagots from '../../context/ContextFagots';
-// import style css
-import './contentFagot.scss';
-// import FontAwesome
+import ContextBundles from '../../context/ContextBundles';
+import './contentBundle.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowTurnRight } from '@fortawesome/free-solid-svg-icons';
-// import service
-import { getBoxeByFagot } from '../../services/stock';
-import { getInfoFagotById, removeBoxeFromBundle } from '../../services/fagot';
-import { updateBundleById } from '../../services/fagot';
-// import PropTypes
+import { getBoxesByBundle } from '../../services/stock';
+import { getInfoBundleById, removeBoxeFromBundle } from '../../services/bundle';
+import { updateBundleById } from '../../services/bundle';
 import PropTypes from 'prop-types';
-// Import component
 import ModalComponent from '../Modal/ModalComponent';
 
-const ContentFagot = ({ operation }) => {
-  // context
+const ContentBundle = ({ operation }) => {
   const contextArticles = useContext(ContextArticles);
-  const contextFagots = useContext(ContextFagots);
-  const { setActivate } = contextArticles; // able - disable filters
+  const contextBundles = useContext(ContextBundles);
+  const { setAreActivateFilters } = contextArticles; // able - disable filters
   const {
     boxesToAdd,
     setBoxesToAdd,
-    fagotBoxes,
-    setFagotBoxes,
-    currFagot,
-    setCurrFagot,
+    getBundleBoxes,
+    setGetBundleBoxes,
+    currBundle,
+    setCurrBundle,
     handleRestartEffect,
     restartEffect
-  } = contextFagots;
-  // States
-  const [open, setOpen] = useState(false); // state managing the modal
-  const [message, setMessage] = useState(''); // state managing success or fail message
-  const [contentLabel, setContentLabel] = useState(''); // state managin the content label modal
-  const [error, setError] = useState(false); // this state bool manage the color of modal icons(error or success)
-  const [updateOperationOk, setUpdateOperationOk] = useState(false); // state determine the display of icon
-  const [currentBoxeId, setCurrentBoxeId] = useState(null); // state managing the current selected boxe id
+  } = contextBundles;
 
-  // Modals
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [message, setMessage] = useState('');
+  const [contentLabel, setContentLabel] = useState('');
+  const [error, setError] = useState(false);
+  const [isOperationOk, setIsOperationOk] = useState(false);
+  const [currentBoxeId, setCurrentBoxeId] = useState(null);
 
   // function closing the modal
   const openModal = () => {
-    setOpen(true);
+    setModalIsOpen(true);
   };
   // function opening the modal
   const closeModal = () => {
-    setOpen(false);
+    setModalIsOpen(false);
   };
 
-  // params
   const param = useParams();
 
-  // Function setting the boxes statement and disable filters
+  // Function setting the boxes statement and disable filters on mounting component
   useEffect(() => {
     if (location.pathname.includes('/bundling/bundle')) {
-      setActivate(true);
+      setAreActivateFilters(true);
     } else {
-      setActivate(false);
+      setAreActivateFilters(false);
     }
   }, [boxesToAdd]);
 
@@ -72,9 +60,9 @@ const ContentFagot = ({ operation }) => {
 
   // Function getting boxes from one fagot
   useEffect(() => {
-    getBoxeByFagot(param.id)
+    getBoxesByBundle(param.id)
       .then((result) => {
-        setFagotBoxes(result.data);
+        setGetBundleBoxes(result.data);
       })
       .catch((err) => {
         console.log(err);
@@ -87,7 +75,7 @@ const ContentFagot = ({ operation }) => {
    */
   const generateEmptyRows = () => {
     const maxRows = 10;
-    const sum = fagotBoxes.length + boxesToAdd.length;
+    const sum = getBundleBoxes.length + boxesToAdd.length;
     const diff = maxRows - sum;
     if (diff > 0) {
       const tempArray = new Array(diff).fill(undefined);
@@ -106,9 +94,9 @@ const ContentFagot = ({ operation }) => {
 
   // On component mounting get the uuid of the current fagot (displayed in the caption)
   useEffect(() => {
-    getInfoFagotById(param.id)
+    getInfoBundleById(param.id)
       .then((result) => {
-        setCurrFagot(result.data);
+        setCurrBundle(result.data);
       })
       .catch((err) => {
         console.log(err);
@@ -131,16 +119,16 @@ const ContentFagot = ({ operation }) => {
    * Function running the service function updateBundleById, manage messages success or errors and then redirect to stock component
    */
   const runUpdateBundleByid = () => {
-    updateBundleById(boxesToAdd, currFagot.id)
+    updateBundleById(boxesToAdd, currBundle.id)
       .then(() => {
         setMessage('Mise à jour du fagot en cours...');
         setError(false);
         setTimeout(() => {
-          setUpdateOperationOk(true);
+          setIsOperationOk(true);
           setMessage('Fagot mis à jour avec succés.');
         }, 3000);
         setTimeout(() => {
-          setUpdateOperationOk(false);
+          setIsOperationOk(false);
           setMessage('');
           handleRestartEffect();
           setBoxesToAdd([]);
@@ -149,7 +137,7 @@ const ContentFagot = ({ operation }) => {
       })
       .catch(() => {
         setError(true);
-        setUpdateOperationOk(true);
+        setIsOperationOk(true);
         setMessage('Une erreur est survenue pendant la mise à jour');
         setTimeout(() => {
           closeModal();
@@ -166,11 +154,11 @@ const ContentFagot = ({ operation }) => {
         setMessage('Mise à jour du fagot en cours...');
         setError(false);
         setTimeout(() => {
-          setUpdateOperationOk(true);
+          setIsOperationOk(true);
           setMessage('La caisse a été retirée avec succés.');
         }, 3000);
         setTimeout(() => {
-          setUpdateOperationOk(false);
+          setIsOperationOk(false);
           setMessage('');
           handleRestartEffect();
           setBoxesToAdd([]);
@@ -179,7 +167,7 @@ const ContentFagot = ({ operation }) => {
       })
       .catch(() => {
         setError(true);
-        setUpdateOperationOk(true);
+        setIsOperationOk(true);
         setMessage('Une erreur est survenue pendant la mise à jour');
         setTimeout(() => {
           closeModal();
@@ -192,21 +180,21 @@ const ContentFagot = ({ operation }) => {
       <ModalComponent
         error={error}
         message={message}
-        open={open}
+        open={modalIsOpen}
         openModal={openModal}
         closeModal={closeModal}
         contentLabel={contentLabel} //"Modal-bundling"
         runUpdateBundleByid={runUpdateBundleByid}
-        updateOperationOk={updateOperationOk}
+        isOperationOk={isOperationOk}
         runRemoveBoxeFromBundle={runRemoveBoxeFromBundle}
       />
       <table className="table-boxes-fagots">
         <caption className="caption">
           {operation === 'bundle' ? 'Mise à jour' : 'Constitution'} du{' '}
-          {currFagot.uuid ? currFagot.uuid : 'fagot'}
+          {currBundle.uuid ? currBundle.uuid : 'fagot'}
           <br></br>
-          <span className="info-fagot">{currFagot.name}</span>
-          <span className="info-fagot"> {fagotBoxes.length + boxesToAdd.length} /10</span>
+          <span className="info-fagot">{currBundle.name}</span>
+          <span className="info-fagot"> {getBundleBoxes.length + boxesToAdd.length} /10</span>
           {operation === 'bundle' && boxesToAdd.length ? (
             <button
               onClick={() => {
@@ -229,8 +217,8 @@ const ContentFagot = ({ operation }) => {
           </tr>
         </thead>
         <tbody>
-          {fagotBoxes &&
-            fagotBoxes.map((element, index) => {
+          {getBundleBoxes &&
+            getBundleBoxes.map((element, index) => {
               return (
                 <tr key={index}>
                   <td align="center">{element.idCaisse}</td>
@@ -257,7 +245,7 @@ const ContentFagot = ({ operation }) => {
                   <tr className="justAdded" key={index}>
                     <td align="center">{elt.uuid}</td>
                     <td align="center">{elt.name}</td>
-                    <td align="center">{currFagot.uuid}</td>
+                    <td align="center">{currBundle.uuid}</td>
                     <td className="delete" onClick={() => removeToBundle(elt)} align="center">
                       Annuler
                     </td>
@@ -272,8 +260,8 @@ const ContentFagot = ({ operation }) => {
   );
 };
 
-ContentFagot.propTypes = {
+ContentBundle.propTypes = {
   operation: PropTypes.string
 };
 
-export default ContentFagot;
+export default ContentBundle;

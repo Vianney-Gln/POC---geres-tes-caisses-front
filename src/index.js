@@ -9,12 +9,12 @@ import App from './components/App/App';
 // import context
 import { ContextArticlesProvider } from './context/ContextArticles';
 import { ContextStockProvider } from './context/ContextStock';
-import { ContextFagotsProvider } from './context/ContextFagots';
+import { ContextBundleProvider } from './context/ContextBundles';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <ContextFagotsProvider>
+    <ContextBundleProvider>
       <ContextStockProvider>
         <ContextArticlesProvider>
           <BrowserRouter>
@@ -22,6 +22,6 @@ root.render(
           </BrowserRouter>
         </ContextArticlesProvider>
       </ContextStockProvider>
-    </ContextFagotsProvider>
+    </ContextBundleProvider>
   </React.StrictMode>
 );

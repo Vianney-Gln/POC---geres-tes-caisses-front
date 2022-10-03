@@ -1,18 +1,13 @@
 import React, { useContext } from 'react';
-// import proptypes
 import PropTypes from 'prop-types';
-// import style css
 import './rowTable.scss';
-// import FontAwesome
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBoxesStacked } from '@fortawesome/free-solid-svg-icons';
-// Import component context
-import ContextFagots from '../../context/ContextFagots';
+import ContextBundles from '../../context/ContextBundles';
 
 const RowTable = ({ element, typeStock, setSelected, selected, operation }) => {
-  // Context
-  const contextFagots = useContext(ContextFagots);
-  const { boxesToAdd, setBoxesToAdd, fagotBoxes, currFagot } = contextFagots;
+  const contextBundles = useContext(ContextBundles);
+  const { boxesToAdd, setBoxesToAdd, getBundleBoxes, currBundle } = contextBundles;
 
   /**
    * Function getting or deleting data to the cliqued row --- out-of-stock use only
@@ -32,13 +27,17 @@ const RowTable = ({ element, typeStock, setSelected, selected, operation }) => {
    */
   const addToBundle = () => {
     let copy = [...boxesToAdd];
-    const sum = fagotBoxes.length + copy.length;
+    const sum = getBundleBoxes.length + copy.length;
 
-    if (!copy.find((elt) => elt.id === element.id) && sum < 10 && element.name === currFagot.name) {
+    if (
+      !copy.find((elt) => elt.id === element.id) &&
+      sum < 10 &&
+      element.name === currBundle.name
+    ) {
       copy.push(element);
       setBoxesToAdd(copy);
     }
-    if (element.name !== currFagot.name)
+    if (element.name !== currBundle.name)
       alert('Attention la taille de la caisse ne correspond pas à la taille du fagot');
   };
 
