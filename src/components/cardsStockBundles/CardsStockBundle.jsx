@@ -5,7 +5,7 @@ import { Link, useParams } from 'react-router-dom';
 // import PropTypes
 import PropTypes from 'prop-types';
 // import style css
-import './cardsStockFagot.scss';
+import './cardsStockBundle.scss';
 // import service
 import { getCountBoxesByBundle } from '../../services/stock';
 // import comonents
@@ -14,7 +14,7 @@ import ModalComponent from '../Modal/ModalComponent';
 import ContextArticles from '../../context/ContextArticles';
 import ContextStock from '../../context/ContextStock';
 
-const CardsStockFagot = ({ stock, fagotId, handleEffect }) => {
+const CardsStockBundle = ({ stock, fagotId, handleEffect }) => {
   // States
   const [nbBoxe, setNbBoxe] = useState(null); // nb boxes
   const [open, setOpen] = useState(false); // state managing the modal
@@ -88,10 +88,10 @@ const CardsStockFagot = ({ stock, fagotId, handleEffect }) => {
   );
 };
 
-CardsStockFagot.propTypes = {
+CardsStockBundle.propTypes = {
   stock: PropTypes.object,
   fagotId: PropTypes.number,
   handleEffect: PropTypes.func
 };
 
-export default CardsStockFagot;
+export default CardsStockBundle;

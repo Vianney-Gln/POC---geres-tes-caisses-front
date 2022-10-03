@@ -12,7 +12,7 @@ import ContextArticles from '../../context/ContextArticles';
 import ContextBundles from '../../context/ContextBundles';
 // import components
 import TableStock from '../tableStock/TableStock';
-import CardsStockFagot from '../cardsStockFagots/CardsStockFagot';
+import CardsStockBundle from '../cardsStockBundles/CardsStockBundle';
 
 const Stock = () => {
   // docTitle
@@ -86,7 +86,7 @@ const Stock = () => {
             <h2>{`Fagots ${param.articleName ? param.articleName : 'toutes caisses'}`}</h2>
             {fagots.length ? (
               fagots.map((elt, index) => (
-                <CardsStockFagot key={index} stock={elt} fagotId={elt.fagotId} />
+                <CardsStockBundle key={index} stock={elt} fagotId={elt.fagotId} />
               ))
             ) : (
               <p className="no-fagot-found">Aucun fagot trouvé</p>

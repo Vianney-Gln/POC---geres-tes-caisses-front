@@ -4,7 +4,7 @@ import './manageBundle.scss';
 // Import services
 import { getBundles } from '../../../services/stock';
 // Import components
-import CardsStockFagot from '../../cardsStockFagots/CardsStockFagot';
+import CardsStockBundle from '../../cardsStockBundles/CardsStockBundle';
 // Import component context
 import ContextArticles from '../../../context/ContextArticles';
 const ManageBundle = () => {
@@ -37,7 +37,7 @@ const ManageBundle = () => {
       <ul className="list-cards">
         {fagots.length ? (
           fagots.map((elt, index) => (
-            <CardsStockFagot
+            <CardsStockBundle
               key={index}
               handleEffect={handleEffect}
               stock={elt}
