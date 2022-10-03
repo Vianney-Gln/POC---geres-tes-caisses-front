@@ -12,8 +12,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowTurnRight } from '@fortawesome/free-solid-svg-icons';
 // import service
 import { getBoxeByFagot } from '../../services/stock';
-import { getInfoFagotById, removeBoxeFromBundle } from '../../services/fagot';
-import { updateBundleById } from '../../services/fagot';
+import { getInfoFagotById, removeBoxeFromBundle } from '../../services/bundle';
+import { updateBundleById } from '../../services/bundle';
 // import PropTypes
 import PropTypes from 'prop-types';
 // Import component

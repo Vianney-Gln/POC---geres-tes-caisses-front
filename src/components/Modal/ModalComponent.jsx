@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 // import modal
 import Modal from 'react-modal';
 // import service
-import { deleteFagotById } from '../../services/fagot';
+import { deleteFagotById } from '../../services/bundle';
 // import FontAwesome
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {

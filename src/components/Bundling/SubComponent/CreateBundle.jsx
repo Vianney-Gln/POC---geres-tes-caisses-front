@@ -3,7 +3,7 @@ import React, { useEffect, useState, useContext } from 'react';
 import './createBundle.scss';
 // import service
 import getArticles from '../../../services/articles';
-import createBundle from '../../../services/fagot';
+import createBundle from '../../../services/bundle';
 // import component context
 import ContextArticles from '../../../context/ContextArticles';
 
