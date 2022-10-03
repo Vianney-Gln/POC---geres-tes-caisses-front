@@ -9,7 +9,7 @@ import getStockVrac, { getStockTotal, getBundles } from '../../services/stock';
 // import components context
 import ContextStock from '../../context/ContextStock';
 import ContextArticles from '../../context/ContextArticles';
-import ContextFagots from '../../context/ContextFagots';
+import ContextBundles from '../../context/ContextBundles';
 // import components
 import TableStock from '../tableStock/TableStock';
 import CardsStockFagot from '../cardsStockFagots/CardsStockFagot';
@@ -38,8 +38,8 @@ const Stock = () => {
   const { setTypeStock, typeStock } = contextStock;
   const contextArticle = useContext(ContextArticles);
   const { setActivate, idArticles } = contextArticle;
-  const contextFagot = useContext(ContextFagots);
-  const { restartEffect } = contextFagot;
+  const contextBundles = useContext(ContextBundles);
+  const { restartEffect } = contextBundles;
 
   // function getting stock calling api
 

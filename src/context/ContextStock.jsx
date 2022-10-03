@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 // import services
 import { getCountTotal, getCountBundle, getCountVrac } from '../services/stock.js';
 // Import component context
-import ContextFagots from './ContextFagots.jsx';
+import ContextBundles from './ContextBundles.jsx';
 // create context
 const ContextStock = createContext(null);
 
@@ -15,8 +15,8 @@ export const ContextStockProvider = ({ children }) => {
   const [numberBoxes, setNumberBoxes] = useState(null); // state getting the bumber of boxes
   const [idArticleCount, setIdArticleCount] = useState(null); //state id article argument getCount() functions
 
-  // Get other Context -- Use restart Effect from ContextFagots to restart API calls
-  const { restartEffect } = useContext(ContextFagots);
+  // Get other Context -- Use restart Effect from ContextBundles to restart API calls
+  const { restartEffect } = useContext(ContextBundles);
 
   // function getting the number of boxes depending of stock type and articles
   useEffect(() => {

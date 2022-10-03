@@ -9,7 +9,7 @@ import { faCaretRight } from '@fortawesome/free-solid-svg-icons';
 // import components context
 import ContextArticles from '../../context/ContextArticles';
 import ContextStock from '../../context/ContextStock';
-import ContextFagots from '../../context/ContextFagots';
+import ContextBundles from '../../context/ContextBundles';
 // import PropTypes
 import PropTypes from 'prop-types';
 
@@ -19,10 +19,10 @@ const MenuLeft = ({ location }) => {
   // use context
   const contextArticles = useContext(ContextArticles); // context articles;
   const contextStock = useContext(ContextStock); // context stock
-  const contextFagots = useContext(ContextFagots); // context fagots
+  const contextBundles = useContext(ContextBundles); // context fagots
   const { articles, activate, idArticles, setIdArticles } = contextArticles;
   const { typeStock, setTypeStock, numberBoxes, setIdArticleCount } = contextStock;
-  const { currentIdBundle } = contextFagots;
+  const { currentIdBundle } = contextBundles;
 
   //states
   const [resolution, setResolution] = useState('');

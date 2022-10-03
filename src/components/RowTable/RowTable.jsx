@@ -7,12 +7,12 @@ import './rowTable.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBoxesStacked } from '@fortawesome/free-solid-svg-icons';
 // Import component context
-import ContextFagots from '../../context/ContextFagots';
+import ContextBundles from '../../context/ContextBundles';
 
 const RowTable = ({ element, typeStock, setSelected, selected, operation }) => {
   // Context
-  const contextFagots = useContext(ContextFagots);
-  const { boxesToAdd, setBoxesToAdd, fagotBoxes, currFagot } = contextFagots;
+  const contextBundles = useContext(ContextBundles);
+  const { boxesToAdd, setBoxesToAdd, fagotBoxes, currFagot } = contextBundles;
 
   /**
    * Function getting or deleting data to the cliqued row --- out-of-stock use only

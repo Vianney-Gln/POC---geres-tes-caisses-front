@@ -4,7 +4,7 @@ import React, { useEffect, useContext, useState } from 'react';
 import { useParams } from 'react-router-dom';
 // import Components context
 import ContextArticles from '../../context/ContextArticles';
-import ContextFagots from '../../context/ContextFagots';
+import ContextBundles from '../../context/ContextBundles';
 // import style css
 import './contentBundle.scss';
 // import FontAwesome
@@ -22,7 +22,7 @@ import ModalComponent from '../Modal/ModalComponent';
 const ContentBundle = ({ operation }) => {
   // context
   const contextArticles = useContext(ContextArticles);
-  const contextFagots = useContext(ContextFagots);
+  const contextBundles = useContext(ContextBundles);
   const { setActivate } = contextArticles; // able - disable filters
   const {
     boxesToAdd,
@@ -33,7 +33,7 @@ const ContentBundle = ({ operation }) => {
     setCurrFagot,
     handleRestartEffect,
     restartEffect
-  } = contextFagots;
+  } = contextBundles;
   // States
   const [open, setOpen] = useState(false); // state managing the modal
   const [message, setMessage] = useState(''); // state managing success or fail message

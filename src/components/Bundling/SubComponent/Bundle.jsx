@@ -11,17 +11,17 @@ import Stock from '../../stock/Stock';
 // import PropTypes
 import PropTypes from 'prop-types';
 // Import component context
-import ContextFagots from '../../../context/ContextFagots';
+import ContextBundles from '../../../context/ContextBundles';
 
 const Bundle = ({ operation }) => {
   // Context
-  const contextFagot = useContext(ContextFagots);
+  const contextBundles = useContext(ContextBundles);
 
   // Params
   const param = useParams();
 
   useEffect(() => {
-    contextFagot.setCurrentIdBundle(param.id);
+    contextBundles.setCurrentIdBundle(param.id);
   }, []);
 
   return (

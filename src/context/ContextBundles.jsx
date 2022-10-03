@@ -1,11 +1,11 @@
 // imports hooks
 import React, { createContext, useState } from 'react';
 // create context
-const ContextFagots = createContext(null);
+const ContextBundles = createContext(null);
 // import proptypes
 import PropTypes from 'prop-types';
 
-export const ContextFagotsProvider = ({ children }) => {
+export const ContextBundleProvider = ({ children }) => {
   // States
   const [currentIdBundle, setCurrentIdBundle] = useState(null);
   const [boxesToAdd, setBoxesToAdd] = useState([]); // state boxes to send into api for update
@@ -19,7 +19,7 @@ export const ContextFagotsProvider = ({ children }) => {
   };
 
   return (
-    <ContextFagots.Provider
+    <ContextBundles.Provider
       value={{
         currentIdBundle,
         setCurrentIdBundle,
@@ -33,12 +33,12 @@ export const ContextFagotsProvider = ({ children }) => {
         restartEffect
       }}>
       {children}
-    </ContextFagots.Provider>
+    </ContextBundles.Provider>
   );
 };
 
-ContextFagotsProvider.propTypes = {
+ContextBundleProvider.propTypes = {
   children: PropTypes.node
 };
 
-export default ContextFagots;
+export default ContextBundles;
