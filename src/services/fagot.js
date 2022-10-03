@@ -1,12 +1,12 @@
 import axios from 'axios';
-import baseUrl from '.'; // base url
+import baseUrl from '.';
 
 /**
- * Function creating an empty fagot
+ * Function creating an empty bundle
  * @param {object} data
  * @returns
  */
-const createFagot = (data) => {
+const createBundle = (data) => {
   return axios({
     method: 'post',
     url: `${baseUrl}/api/gereTesCaisses/fagots`,
@@ -61,4 +61,4 @@ export const removeBoxeFromBundle = (id) => {
   });
 };
 
-export default createFagot;
+export default createBundle;

@@ -3,7 +3,7 @@ import React, { useEffect, useState, useContext } from 'react';
 import './createBundle.scss';
 // import service
 import getArticles from '../../../services/articles';
-import createFagot from '../../../services/fagot';
+import createBundle from '../../../services/fagot';
 // import component context
 import ContextArticles from '../../../context/ContextArticles';
 
@@ -38,7 +38,7 @@ const CreateBundle = () => {
     e.preventDefault();
     const regex = /^Fag-/;
     if (dataInput.uuid.match(regex)) {
-      createFagot(dataInput)
+      createBundle(dataInput)
         .then(() => {
           setError(false);
           setMessage('Fagot créé avec succés.');
