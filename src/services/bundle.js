@@ -19,7 +19,7 @@ const createBundle = (data) => {
  * @param {number} id
  * @returns
  */
-export const deleteFagotById = (id) => {
+export const deleteBundleById = (id) => {
   return axios({
     method: 'delete',
     url: `${baseUrl}/api/gereTesCaisses/fagots/${id}`

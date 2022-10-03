@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 // import modal
 import Modal from 'react-modal';
 // import service
-import { deleteFagotById } from '../../services/bundle';
+import { deleteBundleById } from '../../services/bundle';
 // import FontAwesome
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -71,8 +71,8 @@ const ModalComponent = ({
 
   Modal.setAppElement('#root');
 
-  const runDeleteFagotById = () => {
-    deleteFagotById(fagotId)
+  const runDeleteBundleById = () => {
+    deleteBundleById(fagotId)
       .then(() => {
         setLoad(true);
         setTimeout(() => {
@@ -181,7 +181,7 @@ const ModalComponent = ({
               <p>Voulez défagoter?</p>
               <div className="container-duo-btn">
                 <button onClick={closeModal}>Annuler</button>
-                <button onClick={() => runDeleteFagotById()}>Défagoter</button>
+                <button onClick={() => runDeleteBundleById()}>Défagoter</button>
               </div>
             </>
           ) : load && !messageForBundle ? (
