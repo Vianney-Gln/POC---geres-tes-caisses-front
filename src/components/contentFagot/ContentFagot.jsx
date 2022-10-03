@@ -11,7 +11,7 @@ import './contentFagot.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowTurnRight } from '@fortawesome/free-solid-svg-icons';
 // import service
-import { getBoxeByFagot } from '../../services/stock';
+import { getBoxesByBundle } from '../../services/stock';
 import { getInfoBundleById, removeBoxeFromBundle } from '../../services/bundle';
 import { updateBundleById } from '../../services/bundle';
 // import PropTypes
@@ -72,7 +72,7 @@ const ContentFagot = ({ operation }) => {
 
   // Function getting boxes from one fagot
   useEffect(() => {
-    getBoxeByFagot(param.id)
+    getBoxesByBundle(param.id)
       .then((result) => {
         setFagotBoxes(result.data);
       })

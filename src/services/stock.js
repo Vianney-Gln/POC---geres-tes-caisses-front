@@ -45,7 +45,7 @@ export const getBundles = (idArticle) => {
  * @param {number} id
  * @returns {promise}
  */
-export const getBoxeByFagot = (id) => {
+export const getBoxesByBundle = (id) => {
   return axios.get(`${baseUrl}/api/gereTesCaisses/fagots/${id}`).then((result) => result);
 };
 
