@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 // import style css
 import './cardsStockFagot.scss';
 // import service
-import { getCountBoxesByFagot } from '../../services/stock';
+import { getCountBoxesByBundle } from '../../services/stock';
 // import comonents
 import ModalComponent from '../Modal/ModalComponent';
 // Import component context
@@ -39,7 +39,7 @@ const CardsStockFagot = ({ stock, fagotId, handleEffect }) => {
   };
 
   useEffect(() => {
-    getCountBoxesByFagot(fagotId).then((result) => setNbBoxe(result.nbBoxes));
+    getCountBoxesByBundle(fagotId).then((result) => setNbBoxe(result.nbBoxes));
   }, []);
   return (
     <>

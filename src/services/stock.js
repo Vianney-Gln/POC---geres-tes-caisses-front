@@ -111,7 +111,7 @@ export const outOfStock = (ids) => {
  * @param {number} idFagot
  * @returns {promise}
  */
-export const getCountBoxesByFagot = (idFagot) => {
+export const getCountBoxesByBundle = (idFagot) => {
   return axios
     .get(`${baseUrl}/api/gereTesCaisses/fagots/number-box-in-fagots/${idFagot}`)
     .then((result) => result.data);
