@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from 'react';
 // Import style css
 import './manageBundle.scss';
 // Import services
-import { getFagots } from '../../../services/stock';
+import { getBundles } from '../../../services/stock';
 // Import components
 import CardsStockFagot from '../../cardsStockFagots/CardsStockFagot';
 // Import component context
@@ -18,7 +18,7 @@ const ManageBundle = () => {
 
   // Function calling service to get fagots on component mount
   useEffect(() => {
-    getFagots().then((result) => setFagots(result.data));
+    getBundles().then((result) => setFagots(result.data));
   }, [reloadEffect]);
 
   // Function settting activate context statement to false to disable the MenuLeft component on component mount

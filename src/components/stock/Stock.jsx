@@ -5,7 +5,7 @@ import './stock.scss';
 // import useParams
 import { useParams, useNavigate } from 'react-router-dom';
 // service
-import getStockVrac, { getStockTotal, getFagots } from '../../services/stock';
+import getStockVrac, { getStockTotal, getBundles } from '../../services/stock';
 // import components context
 import ContextStock from '../../context/ContextStock';
 import ContextArticles from '../../context/ContextArticles';
@@ -65,7 +65,7 @@ const Stock = () => {
         });
     } else if (typeStock === 'fagots') {
       setActivate(true);
-      getFagots(idArticles)
+      getBundles(idArticles)
         .then((result) => {
           setFagots(result.data);
         })

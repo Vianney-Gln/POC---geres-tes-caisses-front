@@ -1,5 +1,5 @@
 import axios from 'axios';
-import baseUrl from './'; // base url
+import baseUrl from './';
 
 /**
  * Function getting stock vrac
@@ -15,7 +15,7 @@ const getStockVrac = (idArticle) => {
 };
 
 /**
- * Function getting stock total - can be sorted by length
+ * Function getting stock total - can be sorted by length (article)
  * @returns {promise}
  */
 export const getStockTotal = (idArticle) => {
@@ -28,10 +28,10 @@ export const getStockTotal = (idArticle) => {
 };
 
 /**
- * Function getting fagots
+ * Function getting bundles
  * @returns {promise}
  */
-export const getFagots = (idArticle) => {
+export const getBundles = (idArticle) => {
   if (idArticle) {
     return axios
       .get(`${baseUrl}/api/gereTesCaisses/fagots/?article=${idArticle}`)
