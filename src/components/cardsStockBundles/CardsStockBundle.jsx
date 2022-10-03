@@ -11,13 +11,15 @@ const CardsStockBundle = ({ stock, fagotId, handleEffect }) => {
   const [nbBoxe, setNbBoxe] = useState(null);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [messageForBundle, setMessageForBundle] = useState('');
+  const [error, setError] = useState(false);
+  const [isOperationOk, setIsOperationOk] = useState(false);
 
   const param = useParams();
   const { operation } = param;
 
   const contextArticles = useContext(ContextArticles);
   const { setIdArticles } = contextArticles;
-  const { setIdArticleCountForCountFunctions } = useContext(ContextStock);
+  const { setIdArticleCountForCountFunctions, restartEffect } = useContext(ContextStock);
 
   // function closing the modal
   const openModal = () => {
@@ -32,7 +34,7 @@ const CardsStockBundle = ({ stock, fagotId, handleEffect }) => {
   // Function getting the number of boxes in a fagot on mounting component
   useEffect(() => {
     getCountBoxesByBundle(fagotId).then((result) => setNbBoxe(result.nbBoxes));
-  }, []);
+  }, [restartEffect]);
   return (
     <>
       <ModalComponent
@@ -44,6 +46,10 @@ const CardsStockBundle = ({ stock, fagotId, handleEffect }) => {
         setMessageForBundle={setMessageForBundle}
         fagotId={fagotId}
         handleEffect={handleEffect}
+        error={error}
+        setError={setError}
+        isOperationOk={isOperationOk}
+        setIsOperationOk={setIsOperationOk}
       />
       {operation === 'manage-bundle' ? (
         <div className="card">

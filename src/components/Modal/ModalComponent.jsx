@@ -17,6 +17,7 @@ import PropTypes from 'prop-types';
 
 const ModalComponent = ({
   error,
+  setError,
   open,
   closeModal,
   message,
@@ -31,10 +32,11 @@ const ModalComponent = ({
   handleEffect,
   runUpdateBundleByid,
   isOperationOk,
+  setIsOperationOk,
   runRemoveBoxeFromBundle
 }) => {
   // States
-  const [load, setLoad] = useState(false); // states loading while current operation: "défagotage en cours"
+
   const [widthModal, setWidthModal] = useState('450px');
 
   // style modal
@@ -74,21 +76,32 @@ const ModalComponent = ({
   const runDeleteBundleById = () => {
     deleteBundleById(fagotId)
       .then(() => {
-        setLoad(true);
+        setMessageForBundle('Défagotage en cours...');
+        setError(false);
         setTimeout(() => {
-          setLoad(false);
+          setIsOperationOk(true);
           setMessageForBundle('Défagotage effectué');
-        }, 4000);
-      })
-      .then(() => {
+        }, 3000);
         setTimeout(() => {
           handleEffect();
-        }, 2000);
+          setIsOperationOk(false);
+          setMessageForBundle('');
+          closeModal();
+        }, 6000);
       })
-
-      .catch((err) => {
-        console.log(err);
-        setMessageForBundle('Il y eu une erreur, défagotage non effectué.');
+      .catch(() => {
+        setMessageForBundle('Défagotage en cours...');
+        setError(true);
+        setTimeout(() => {
+          setIsOperationOk(true);
+          setMessageForBundle('Il y a eu une erreur, défagotage non effectué.');
+        }, 3000);
+        setTimeout(() => {
+          setIsOperationOk(false);
+          setMessageForBundle('');
+          closeModal();
+          setError(false);
+        }, 6000);
       });
   };
 
@@ -170,7 +183,7 @@ const ModalComponent = ({
           onRequestClose={closeModal}
           style={styleModal}
           contentLabel={contentLabel}>
-          {!load && !messageForBundle ? (
+          {!messageForBundle ? (
             <>
               <i className="symbol blue">
                 <FontAwesomeIcon icon={faInfoCircle} />
@@ -184,26 +197,11 @@ const ModalComponent = ({
                 <button onClick={() => runDeleteBundleById()}>Défagoter</button>
               </div>
             </>
-          ) : load && !messageForBundle ? (
-            <p>Défagotage en cours...</p>
-          ) : !load && messageForBundle ? (
-            <>
-              <i className="symbol green">
-                <FontAwesomeIcon icon={faSquareCheck} />
-              </i>
-              <p>{messageForBundle}</p>
-              <button
-                onClick={() => {
-                  closeModal();
-                  setMessageForBundle('');
-                }}
-                type="button">
-                Continuer
-              </button>
-            </>
           ) : (
             ''
           )}
+          {isOperationOk ? manageIcon() : ''}
+          {messageForBundle ? <p>{messageForBundle}</p> : ''}
         </Modal>
       );
     } else if (contentLabel === 'Modal-bundling') {
@@ -288,7 +286,9 @@ ModalComponent.propTypes = {
   handleEffect: PropTypes.func,
   runUpdateBundleByid: PropTypes.func,
   isOperationOk: PropTypes.bool,
-  runRemoveBoxeFromBundle: PropTypes.func
+  runRemoveBoxeFromBundle: PropTypes.func,
+  setError: PropTypes.func,
+  setIsOperationOk: PropTypes.func
 };
 
 export default ModalComponent;
