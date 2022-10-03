@@ -1,20 +1,15 @@
 import React, { useEffect, useState, useContext } from 'react';
-// import style css
 import './createBundle.scss';
-// import service
 import getArticles from '../../../services/articles';
 import createBundle from '../../../services/bundle';
-// import component context
 import ContextArticles from '../../../context/ContextArticles';
 
 const CreateBundle = () => {
-  // States
   const [listArticles, setListArticles] = useState([]); // state list articles
   const [dataInput, setDataInput] = useState({ uuid: '', id_article: '' }); // input to send to api
   const [error, setError] = useState(false); // boolean managing error
   const [message, setMessage] = useState(''); // success or error string message
 
-  // Context
   const contextArticles = useContext(ContextArticles);
   const { setAreActivateFilters } = contextArticles;
 
