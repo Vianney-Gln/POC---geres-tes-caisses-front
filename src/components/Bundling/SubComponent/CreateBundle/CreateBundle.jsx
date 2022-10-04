@@ -1,8 +1,8 @@
 import React, { useEffect, useState, useContext } from 'react';
 import './createBundle.scss';
-import getArticles from '../../../services/articles';
-import createBundle from '../../../services/bundle';
-import ContextArticles from '../../../context/ContextArticles';
+import getArticles from '../../../../services/articles';
+import createBundle from '../../../../services/bundle';
+import ContextArticles from '../../../../context/ContextArticles';
 
 const CreateBundle = () => {
   const [listArticles, setListArticles] = useState([]); // state list articles
