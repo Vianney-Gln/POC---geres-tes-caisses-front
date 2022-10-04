@@ -10,6 +10,7 @@ import { getInfoBundleById, removeBoxeFromBundle } from '../../services/bundle';
 import { updateBundleById } from '../../services/bundle';
 import PropTypes from 'prop-types';
 import ModalComponent from '../Modal/ModalComponent';
+import generateEmptyRows from './util';
 
 const ContentBundle = ({ operation }) => {
   const contextArticles = useContext(ContextArticles);
@@ -68,29 +69,6 @@ const ContentBundle = ({ operation }) => {
         console.log(err);
       });
   }, [restartEffect]);
-
-  /**
-   * Function generating empty rows
-   * @returns
-   */
-  const generateEmptyRows = () => {
-    const maxRows = 10;
-    const sum = getBundleBoxes.length + boxesToAdd.length;
-    const diff = maxRows - sum;
-    if (diff > 0) {
-      const tempArray = new Array(diff).fill(undefined);
-      return tempArray.map((_, index) => {
-        return (
-          <tr key={index}>
-            <td align="center">----</td>
-            <td align="center">----</td>
-            <td align="center">----</td>
-            {operation === 'bundle' && <td align="center">----</td>}
-          </tr>
-        );
-      });
-    }
-  };
 
   // On component mounting get the uuid of the current fagot (displayed in the caption)
   useEffect(() => {
@@ -253,7 +231,7 @@ const ContentBundle = ({ operation }) => {
                 );
               })
             : ''}
-          {generateEmptyRows()}
+          {generateEmptyRows(getBundleBoxes, boxesToAdd, operation)}
         </tbody>
       </table>
     </div>
