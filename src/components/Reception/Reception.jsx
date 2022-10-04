@@ -1,16 +1,17 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ContextArticles from '../../context/ContextArticles';
+import ContextBundles from '../../context/ContextBundles';
 import './reception.scss';
 import NewLineForm from '../NewLineForm/NewLineForm';
 import ModalComponent from '../Modal/ModalComponent';
-import validateReception from '../../services/reception';
-import openModal, { closeModal, validateInput, addNewLine, findDuplicate } from './util';
+import openModal, { closeModal, addNewLine, runValidateReception } from './util';
 
 const Reception = () => {
   document.title = 'Gestion des caisses - réception';
   const contextArticles = useContext(ContextArticles);
   const { setAreActivateFilters } = contextArticles;
+  const { handleRestartEffect } = useContext(ContextBundles);
   const [dataInputs, setDataInputs] = useState([{ uuid: '', id_article: '' }]);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [message, setMessage] = useState('');
@@ -25,41 +26,6 @@ const Reception = () => {
     setAreActivateFilters(false);
   }, []);
 
-  // Function running validateReception and then manage messages,verify the good conformity from user's input, then redirect to stock page IF no duplicates elements in dataInputs
-  const runValidateReception = () => {
-    const errorDup = findDuplicate(dataInputs);
-    const errorSelectEmpty = dataInputs.find((elt) => elt.id_article === '');
-    const errorRegexs = dataInputs.map((elt) => {
-      return validateInput(elt, setMessageCaracteres);
-    });
-    if (errorDup) {
-      setError(true);
-      setMessage('Vous ne pouvez pas entrer plusieurs fois le même identifiant.');
-      setTimeout(() => {
-        setMessage('');
-      }, 3000);
-    } else if (errorSelectEmpty) {
-      setError(true);
-      setIsTypeBoxSelected('Veuillez remplir le type de caisses svp');
-    } else if (!errorRegexs.includes(true)) {
-      validateReception(dataInputs)
-        .then(() => {
-          setError(false);
-          setIsTypeBoxSelected('');
-          openModal(setModalIsOpen);
-          setMessage(`Réception créée avec succès! Redirection en cours...`);
-          setTimeout(() => {
-            navigate('/');
-          }, 3000);
-        })
-        .catch(() => {
-          setIsTypeBoxSelected('');
-          openModal(setModalIsOpen);
-          setError(true);
-          setMessage("L'application à rencontré une erreur, la réception n'a pas été créée.");
-        });
-    }
-  };
   return (
     <>
       <ModalComponent
@@ -76,7 +42,16 @@ const Reception = () => {
         <form
           onSubmit={(e) => {
             e.preventDefault();
-            runValidateReception();
+            runValidateReception(
+              dataInputs,
+              setMessageCaracteres,
+              setError,
+              setMessage,
+              setIsTypeBoxSelected,
+              setModalIsOpen,
+              navigate,
+              handleRestartEffect
+            );
           }}
           className="form-reception">
           <div className="container-form">
