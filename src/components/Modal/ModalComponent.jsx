@@ -33,7 +33,8 @@ const ModalComponent = ({
   runUpdateBundleByid,
   isOperationOk,
   setIsOperationOk,
-  runRemoveBoxeFromBundle
+  runRemoveBoxeFromBundle,
+  setModalIsOpen
 }) => {
   // States
 
@@ -132,7 +133,7 @@ const ModalComponent = ({
           contentLabel={contentLabel}>
           {manageIcon()}
           <p>{message}</p>
-          <button className="button-close" onClick={closeModal}>
+          <button className="button-close" onClick={() => closeModal(setModalIsOpen)}>
             Fermer
           </button>
         </Modal>
@@ -288,7 +289,8 @@ ModalComponent.propTypes = {
   isOperationOk: PropTypes.bool,
   runRemoveBoxeFromBundle: PropTypes.func,
   setError: PropTypes.func,
-  setIsOperationOk: PropTypes.func
+  setIsOperationOk: PropTypes.func,
+  setModalIsOpen: PropTypes.func
 };
 
 export default ModalComponent;

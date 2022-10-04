@@ -5,6 +5,7 @@ import './reception.scss';
 import NewLineForm from '../NewLineForm/NewLineForm';
 import ModalComponent from '../Modal/ModalComponent';
 import validateReception from '../../services/reception';
+import openModal, { closeModal } from './util';
 
 const Reception = () => {
   document.title = 'Gestion des caisses - réception';
@@ -18,14 +19,6 @@ const Reception = () => {
   const [isTypeBoxSelected, setIsTypeBoxSelected] = useState('');
 
   const navigate = useNavigate();
-
-  const openModal = () => {
-    setModalIsOpen(true);
-  };
-
-  const closeModal = () => {
-    setModalIsOpen(false);
-  };
 
   /**
    * Validate input verifying the length (10), the begin (current year),and contains only numeric char
@@ -114,7 +107,7 @@ const Reception = () => {
         .then(() => {
           setError(false);
           setIsTypeBoxSelected('');
-          openModal();
+          openModal(setModalIsOpen);
           setMessage(`Réception créée avec succès! Redirection en cours...`);
           setTimeout(() => {
             navigate('/');
@@ -122,7 +115,7 @@ const Reception = () => {
         })
         .catch(() => {
           setIsTypeBoxSelected('');
-          openModal();
+          openModal(setModalIsOpen);
           setError(true);
           setMessage("L'application à rencontré une erreur, la réception n'a pas été créée.");
         });
@@ -136,6 +129,7 @@ const Reception = () => {
         open={modalIsOpen}
         openModal={openModal}
         closeModal={closeModal}
+        setModalIsOpen={setModalIsOpen}
         contentLabel="Modal-reception"
       />
       <div className="container-reception">
