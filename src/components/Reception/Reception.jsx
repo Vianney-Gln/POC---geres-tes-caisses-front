@@ -5,7 +5,7 @@ import './reception.scss';
 import NewLineForm from '../NewLineForm/NewLineForm';
 import ModalComponent from '../Modal/ModalComponent';
 import validateReception from '../../services/reception';
-import openModal, { closeModal } from './util';
+import openModal, { closeModal, validateInput, addNewLine } from './util';
 
 const Reception = () => {
   document.title = 'Gestion des caisses - réception';
@@ -19,49 +19,6 @@ const Reception = () => {
   const [isTypeBoxSelected, setIsTypeBoxSelected] = useState('');
 
   const navigate = useNavigate();
-
-  /**
-   * Validate input verifying the length (10), the begin (current year),and contains only numeric char
-   * @param {object} line
-   * @returns
-   */
-  const validateInput = (line) => {
-    const year = new Date().getFullYear().toString();
-    const regexYear = new RegExp(`^${year}`, 'g');
-    const regexNumOnly = new RegExp('^[0-9]+$');
-    if (line.uuid.length === 10) {
-      if (regexYear.test(line.uuid)) {
-        if (regexNumOnly.test(line.uuid)) {
-          setMessageCaracteres('');
-          return false;
-        }
-        setMessageCaracteres("L'identifiant ne doit contenir que des caractères numériques");
-        return true;
-      }
-      setMessageCaracteres("L'identifiant doit commencer par l'année actuelle");
-      return true;
-    }
-    setMessageCaracteres("L'identifiant doit être composé de 10 caractères.");
-    return true;
-  };
-
-  /**
-   * // Function adding a new object in the state array dataInputs IF this current line got 10 caracteres, IF NOT, generate an error message
-   * @param {number} index
-   *  @param {object} line
-   */
-  const addNewLine = (index, line) => {
-    const error = validateInput(line);
-    if (!error) {
-      setMessageCaracteres('');
-      const newDataInputs = [...dataInputs];
-      newDataInputs.push({
-        uuid: (Number(dataInputs[index].uuid) + 1).toString(),
-        id_article: ''
-      });
-      setDataInputs(newDataInputs);
-    }
-  };
 
   // function desactivate the Menu-Left on component mounting
   useEffect(() => {
@@ -94,7 +51,7 @@ const Reception = () => {
     const errorDup = findDuplicate();
     const errorSelectEmpty = dataInputs.find((elt) => elt.id_article === '');
     const errorRegexs = dataInputs.map((elt) => {
-      return validateInput(elt);
+      return validateInput(elt, setMessageCaracteres);
     });
     if (errorDup) {
       setError(true);
@@ -150,6 +107,7 @@ const Reception = () => {
                     key={index}
                     index={index}
                     addNewLine={addNewLine}
+                    setMessageCaracteres={setMessageCaracteres}
                   />
                 ))
               : ''}

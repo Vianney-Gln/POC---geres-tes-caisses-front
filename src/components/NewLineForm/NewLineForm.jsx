@@ -6,7 +6,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
 import deleteRow, { getInputData } from './util';
 
-const NewLineForm = ({ addNewLine, index, dataInputs, setDataInputs, line }) => {
+const NewLineForm = ({
+  addNewLine,
+  index,
+  dataInputs,
+  setDataInputs,
+  line,
+  setMessageCaracteres
+}) => {
   const [articles, setArticles] = useState([]);
 
   // Function getting articles box on component mount
@@ -48,7 +55,9 @@ const NewLineForm = ({ addNewLine, index, dataInputs, setDataInputs, line }) => 
         {index === dataInputs.length - 1 ? (
           <label htmlFor="button-next-article">
             <button
-              onClick={() => addNewLine(index, line)}
+              onClick={() =>
+                addNewLine(index, line, setMessageCaracteres, dataInputs, setDataInputs)
+              }
               name="button-next-article"
               type="button"
               title="Ajouter ligne">
@@ -83,7 +92,8 @@ NewLineForm.propTypes = {
   index: PropTypes.number,
   dataInputs: PropTypes.array,
   line: PropTypes.object,
-  setDataInputs: PropTypes.func
+  setDataInputs: PropTypes.func,
+  setMessageCaracteres: PropTypes.func
 };
 
 export default NewLineForm;
