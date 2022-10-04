@@ -5,7 +5,7 @@ import './reception.scss';
 import NewLineForm from '../NewLineForm/NewLineForm';
 import ModalComponent from '../Modal/ModalComponent';
 import validateReception from '../../services/reception';
-import openModal, { closeModal, validateInput, addNewLine } from './util';
+import openModal, { closeModal, validateInput, addNewLine, findDuplicate } from './util';
 
 const Reception = () => {
   document.title = 'Gestion des caisses - réception';
@@ -25,30 +25,9 @@ const Reception = () => {
     setAreActivateFilters(false);
   }, []);
 
-  // Function checking if there is duplicates into a reception
-  const findDuplicate = () => {
-    let duplicate = [];
-    for (let i = 0; i < dataInputs.length; i++) {
-      let count = 0;
-      for (let j = 0; j < dataInputs.length; j++) {
-        if (dataInputs[i].uuid === dataInputs[j].uuid) {
-          count++;
-        }
-      }
-      if (count > 1) {
-        duplicate.push({ duplicate: dataInputs[i].uuid });
-      }
-    }
-    if (duplicate.length) {
-      return true;
-    }
-
-    return false;
-  };
-
   // Function running validateReception and then manage messages,verify the good conformity from user's input, then redirect to stock page IF no duplicates elements in dataInputs
   const runValidateReception = () => {
-    const errorDup = findDuplicate();
+    const errorDup = findDuplicate(dataInputs);
     const errorSelectEmpty = dataInputs.find((elt) => elt.id_article === '');
     const errorRegexs = dataInputs.map((elt) => {
       return validateInput(elt, setMessageCaracteres);
@@ -56,6 +35,9 @@ const Reception = () => {
     if (errorDup) {
       setError(true);
       setMessage('Vous ne pouvez pas entrer plusieurs fois le même identifiant.');
+      setTimeout(() => {
+        setMessage('');
+      }, 3000);
     } else if (errorSelectEmpty) {
       setError(true);
       setIsTypeBoxSelected('Veuillez remplir le type de caisses svp');
@@ -119,6 +101,7 @@ const Reception = () => {
           </div>
           {messageCarateres && <p className="red">{messageCarateres}</p>}
           {isTypeBoxSelected && <p className="red">{isTypeBoxSelected}</p>}
+          {message && <p className="red">{message}</p>}
         </form>
       </div>
     </>

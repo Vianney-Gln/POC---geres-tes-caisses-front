@@ -55,4 +55,29 @@ export const addNewLine = (index, line, setMessageCaracteres, dataInputs, setDat
   }
 };
 
+/**
+ * Function checking if there is duplicates into a reception
+ * @param {array} dataInputs
+ * @returns
+ */
+export const findDuplicate = (dataInputs) => {
+  let duplicate = [];
+  for (let i = 0; i < dataInputs.length; i++) {
+    let count = 0;
+    for (let j = 0; j < dataInputs.length; j++) {
+      if (dataInputs[i].uuid === dataInputs[j].uuid) {
+        count++;
+      }
+    }
+    if (count > 1) {
+      duplicate.push({ duplicate: dataInputs[i].uuid });
+    }
+  }
+  if (duplicate.length) {
+    return true;
+  }
+
+  return false;
+};
+
 export default openModal;
