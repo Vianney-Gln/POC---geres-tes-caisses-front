@@ -3,6 +3,7 @@ import './createBundle.scss';
 import getArticles from '../../../../services/articles';
 import createBundle from '../../../../services/bundle';
 import ContextArticles from '../../../../context/ContextArticles';
+import getDataInputs from './util';
 
 const CreateBundle = () => {
   const [listArticles, setListArticles] = useState([]); // state list articles
@@ -20,13 +21,6 @@ const CreateBundle = () => {
       setListArticles(result.data);
     });
   }, []);
-
-  // Function getting data from inputs
-  const getDataInputs = (value, key) => {
-    const copy = { ...dataInput };
-    copy[key] = value;
-    setDataInput(copy);
-  };
 
   // Function submitting form and verify if uuid is starting by Fag-
   const handleForm = (e) => {
@@ -57,7 +51,7 @@ const CreateBundle = () => {
       <label htmlFor="idFagot">
         <span>Nom du fagot:</span>
         <input
-          onChange={(e) => getDataInputs(e.target.value, 'uuid')}
+          onChange={(e) => getDataInputs(e.target.value, 'uuid', dataInput, setDataInput)}
           placeholder="Fag-001"
           value={dataInput.uuid}
           name="idFagot"
@@ -67,7 +61,7 @@ const CreateBundle = () => {
         <span>Type de caisse:</span>
         <select
           value={dataInput.id_article}
-          onChange={(e) => getDataInputs(e.target.value, 'id_article')}
+          onChange={(e) => getDataInputs(e.target.value, 'id_article', dataInput, setDataInput)}
           name="idArticle">
           <option>--Choix--</option>
           {listArticles
