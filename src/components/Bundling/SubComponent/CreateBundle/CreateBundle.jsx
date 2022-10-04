@@ -3,7 +3,7 @@ import './createBundle.scss';
 import getArticles from '../../../../services/articles';
 import createBundle from '../../../../services/bundle';
 import ContextArticles from '../../../../context/ContextArticles';
-import getDataInputs from './util';
+import getDataInputs, { handleForm } from './util';
 
 const CreateBundle = () => {
   const [listArticles, setListArticles] = useState([]); // state list articles
@@ -22,31 +22,10 @@ const CreateBundle = () => {
     });
   }, []);
 
-  // Function submitting form and verify if uuid is starting by Fag-
-  const handleForm = (e) => {
-    e.preventDefault();
-    const regex = /^Fag-/;
-    if (dataInput.uuid.match(regex)) {
-      createBundle(dataInput)
-        .then(() => {
-          setError(false);
-          setMessage('Fagot créé avec succés.');
-          setTimeout(() => {
-            setDataInput({ uuid: '', id_article: '' });
-          }, 1000);
-        })
-        .catch((err) => {
-          console.log(err);
-          setError(true);
-          setMessage("Il y a eu une erreur, le fagot n'a pas été créé.");
-        });
-    } else {
-      setError(true);
-      setMessage("L'identifiant doit commencé par Fag-");
-    }
-  };
   return (
-    <form onSubmit={(e) => handleForm(e)} className="form-createBundle">
+    <form
+      onSubmit={(e) => handleForm(e, dataInput, createBundle, setError, setMessage, setDataInput)}
+      className="form-createBundle">
       <h2>Création de fagot</h2>
       <label htmlFor="idFagot">
         <span>Nom du fagot:</span>
