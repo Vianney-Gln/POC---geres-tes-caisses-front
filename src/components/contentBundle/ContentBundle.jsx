@@ -10,7 +10,7 @@ import { getInfoBundleById, removeBoxeFromBundle } from '../../services/bundle';
 import { updateBundleById } from '../../services/bundle';
 import PropTypes from 'prop-types';
 import ModalComponent from '../Modal/ModalComponent';
-import generateEmptyRows from './util';
+import generateEmptyRows, { removeToBundle } from './util';
 
 const ContentBundle = ({ operation }) => {
   const contextArticles = useContext(ContextArticles);
@@ -80,18 +80,6 @@ const ContentBundle = ({ operation }) => {
         console.log(err);
       });
   }, []);
-
-  /**
-   * Function removing a boxe from one bundle during update
-   * @param {object} element
-   */
-  const removeToBundle = (element) => {
-    let copy = [...boxesToAdd];
-    if (copy.find((el) => el.id === element.id)) {
-      copy = copy.filter((el) => el.id !== element.id);
-    }
-    setBoxesToAdd(copy);
-  };
 
   /**
    * Function running the service function updateBundleById, manage messages success or errors and then redirect to stock component
@@ -224,7 +212,10 @@ const ContentBundle = ({ operation }) => {
                     <td align="center">{elt.uuid}</td>
                     <td align="center">{elt.name}</td>
                     <td align="center">{currBundle.uuid}</td>
-                    <td className="delete" onClick={() => removeToBundle(elt)} align="center">
+                    <td
+                      className="delete"
+                      onClick={() => removeToBundle(elt, boxesToAdd, setBoxesToAdd)}
+                      align="center">
                       Annuler
                     </td>
                   </tr>

@@ -24,4 +24,18 @@ const generateEmptyRows = (getBundleBoxes, boxesToAdd, operation) => {
   }
 };
 
+/**
+ * Function removing a boxe from one bundle during update
+ * @param {object} element
+ * @param {array} boxesToAdd
+ * @param {function} setBoxesToAdd
+ */
+export const removeToBundle = (element, boxesToAdd, setBoxesToAdd) => {
+  let copy = [...boxesToAdd];
+  if (copy.find((el) => el.id === element.id)) {
+    copy = copy.filter((el) => el.id !== element.id);
+  }
+  setBoxesToAdd(copy);
+};
+
 export default generateEmptyRows;
