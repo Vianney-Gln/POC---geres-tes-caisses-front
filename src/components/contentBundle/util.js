@@ -85,4 +85,53 @@ export const runRemoveBoxeFromBundle = (
     });
 };
 
+/**
+ * Function running the service function updateBundleById, manage messages success or errors and then redirect to stock component
+ * @param {function} updateBundleById
+ * @param {array} boxesToAdd
+ * @param {object} currBundle
+ * @param {function} setMessage
+ * @param {function} setError
+ * @param {function} setIsOperationOk
+ * @param {function} handleRestartEffect
+ * @param {function} setBoxesToAdd
+ * @param {function} closeModal
+ */
+export const runUpdateBundleByid = (
+  updateBundleById,
+  boxesToAdd,
+  currBundle,
+  setMessage,
+  setError,
+  setIsOperationOk,
+  handleRestartEffect,
+  setBoxesToAdd,
+  closeModal
+) => {
+  updateBundleById(boxesToAdd, currBundle.id)
+    .then(() => {
+      setMessage('Mise à jour du fagot en cours...');
+      setError(false);
+      setTimeout(() => {
+        setIsOperationOk(true);
+        setMessage('Fagot mis à jour avec succés.');
+      }, 3000);
+      setTimeout(() => {
+        setIsOperationOk(false);
+        setMessage('');
+        handleRestartEffect();
+        setBoxesToAdd([]);
+        closeModal();
+      }, 6000);
+    })
+    .catch(() => {
+      setError(true);
+      setIsOperationOk(true);
+      setMessage('Une erreur est survenue pendant la mise à jour');
+      setTimeout(() => {
+        closeModal();
+      }, 3000);
+    });
+};
+
 export default generateEmptyRows;

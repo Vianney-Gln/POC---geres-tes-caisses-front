@@ -10,7 +10,11 @@ import { getInfoBundleById, removeBoxeFromBundle } from '../../services/bundle';
 import { updateBundleById } from '../../services/bundle';
 import PropTypes from 'prop-types';
 import ModalComponent from '../Modal/ModalComponent';
-import generateEmptyRows, { removeToBundle, runRemoveBoxeFromBundle } from './util';
+import generateEmptyRows, {
+  removeToBundle,
+  runRemoveBoxeFromBundle,
+  runUpdateBundleByid
+} from './util';
 
 const ContentBundle = ({ operation }) => {
   const contextArticles = useContext(ContextArticles);
@@ -81,36 +85,6 @@ const ContentBundle = ({ operation }) => {
       });
   }, []);
 
-  /**
-   * Function running the service function updateBundleById, manage messages success or errors and then redirect to stock component
-   */
-  const runUpdateBundleByid = () => {
-    updateBundleById(boxesToAdd, currBundle.id)
-      .then(() => {
-        setMessage('Mise à jour du fagot en cours...');
-        setError(false);
-        setTimeout(() => {
-          setIsOperationOk(true);
-          setMessage('Fagot mis à jour avec succés.');
-        }, 3000);
-        setTimeout(() => {
-          setIsOperationOk(false);
-          setMessage('');
-          handleRestartEffect();
-          setBoxesToAdd([]);
-          closeModal();
-        }, 6000);
-      })
-      .catch(() => {
-        setError(true);
-        setIsOperationOk(true);
-        setMessage('Une erreur est survenue pendant la mise à jour');
-        setTimeout(() => {
-          closeModal();
-        }, 3000);
-      });
-  };
-
   return (
     <div className="container-contentFagot">
       <ModalComponent
@@ -119,7 +93,7 @@ const ContentBundle = ({ operation }) => {
         open={modalIsOpen}
         openModal={openModal}
         closeModal={closeModal}
-        contentLabel={contentLabel} //"Modal-bundling"
+        contentLabel={contentLabel}
         runUpdateBundleByid={runUpdateBundleByid}
         isOperationOk={isOperationOk}
         runRemoveBoxeFromBundle={runRemoveBoxeFromBundle}
@@ -130,6 +104,9 @@ const ContentBundle = ({ operation }) => {
         setIsOperationOk={setIsOperationOk}
         handleRestartEffect={handleRestartEffect}
         setBoxesToAdd={setBoxesToAdd}
+        updateBundleById={updateBundleById}
+        boxesToAdd={boxesToAdd}
+        currBundle={currBundle}
       />
       <table className="table-boxes-fagots">
         <caption className="caption">

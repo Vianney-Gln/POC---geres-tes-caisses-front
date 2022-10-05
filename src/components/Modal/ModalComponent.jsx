@@ -39,7 +39,10 @@ const ModalComponent = ({
   currentBoxeId,
   setMessage,
   handleRestartEffect,
-  setBoxesToAdd
+  setBoxesToAdd,
+  updateBundleById,
+  boxesToAdd,
+  currBundle
 }) => {
   // States
 
@@ -223,7 +226,17 @@ const ModalComponent = ({
               <div className="duo-btn">
                 <button
                   onClick={() => {
-                    runUpdateBundleByid();
+                    runUpdateBundleByid(
+                      updateBundleById,
+                      boxesToAdd,
+                      currBundle,
+                      setMessage,
+                      setError,
+                      setIsOperationOk,
+                      handleRestartEffect,
+                      setBoxesToAdd,
+                      closeModal
+                    );
                   }}
                   type="button">
                   Oui
@@ -309,7 +322,10 @@ ModalComponent.propTypes = {
   currentBoxeId: PropTypes.number,
   setMessage: PropTypes.func,
   handleRestartEffect: PropTypes.func,
-  setBoxesToAdd: PropTypes.func
+  setBoxesToAdd: PropTypes.func,
+  updateBundleById: PropTypes.func,
+  boxesToAdd: PropTypes.array,
+  currBundle: PropTypes.object
 };
 
 export default ModalComponent;
