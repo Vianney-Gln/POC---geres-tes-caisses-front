@@ -7,6 +7,7 @@ import ContextArticles from '../../context/ContextArticles';
 import ContextStock from '../../context/ContextStock';
 import ContextBundles from '../../context/ContextBundles';
 import PropTypes from 'prop-types';
+import generateUrl, { generateNameSizeBoxes } from './util';
 
 const MenuLeft = ({ location }) => {
   const navigate = useNavigate();
@@ -20,34 +21,6 @@ const MenuLeft = ({ location }) => {
 
   const [deviceResolution, setDeviceResolution] = useState('');
 
-  /**
-   * Function that generates the first part of the link, depending of location statement
-   * @returns {string}
-   */
-  const generateUrl = () => {
-    if (location.includes('/out-of-stock')) return '/out-of-stock';
-    if (location.includes('/stock')) return '/stock';
-    if (location.includes('/bundling/bundle') && currentIdBundle) {
-      return `/bundling/bundle/${currentIdBundle}`;
-    }
-  };
-
-  /**
-   * Function generating the type of boxes as a string, depending of idArticles statement
-   * @returns {string}
-   */
-  const generateNameSizeBoxes = () => {
-    switch (idArticles) {
-      case 1:
-        return ' 4m';
-      case 2:
-        return ' 4m20';
-      case 3:
-        return ' 4m60';
-      default:
-        return ' toutes caisses';
-    }
-  };
   /* --------------------------------------------------- CHECK RESOLUTION TO DISPLAY OR MASQUED THIS COMPONENT -------------------------------*/
 
   // On component mounting check the resolution small or desktop and store it into a state
@@ -87,7 +60,7 @@ const MenuLeft = ({ location }) => {
         onChange={(e) => {
           setTypeStock(e.target.value);
           setIdArticles(null);
-          navigate(`${generateUrl()}`);
+          navigate(`${generateUrl(location, currentIdBundle)}`);
         }}>
         <option value="caisses-vrac">Caisses vracs</option>
         <option value="caisses-total">Caisses total</option>
@@ -117,7 +90,9 @@ const MenuLeft = ({ location }) => {
               <FontAwesomeIcon icon={faCaretRight} />
             </i>
           )}
-          <Link to={`${generateUrl()}/toutes caisses`}>Toutes caisses</Link>
+          <Link to={`${generateUrl(location, currentIdBundle)}/toutes caisses`}>
+            Toutes caisses
+          </Link>
         </li>
         {articles.length
           ? articles.map((article) => {
@@ -145,7 +120,9 @@ const MenuLeft = ({ location }) => {
                     </i>
                   )}
 
-                  <Link to={`${generateUrl()}/${article.name}`}>{article.name}</Link>
+                  <Link to={`${generateUrl(location, currentIdBundle)}/${article.name}`}>
+                    {article.name}
+                  </Link>
                 </li>
               );
             })
@@ -154,11 +131,11 @@ const MenuLeft = ({ location }) => {
       <div className="quantity">
         <p className={!areActivateFilters ? 'number-boxes-disable' : 'number-boxes-unable'}>
           {typeStock === 'caisses-vrac'
-            ? 'Nombre vrac' + generateNameSizeBoxes() + ':'
+            ? 'Nombre vrac' + generateNameSizeBoxes(idArticles) + ':'
             : typeStock === 'caisses-total'
-            ? 'Nombre total' + generateNameSizeBoxes() + ':'
+            ? 'Nombre total' + generateNameSizeBoxes(idArticles) + ':'
             : typeStock === 'fagots'
-            ? 'Nombre fagots' + generateNameSizeBoxes() + ':'
+            ? 'Nombre fagots' + generateNameSizeBoxes(idArticles) + ':'
             : ''}{' '}
         </p>
         {areActivateFilters ? <span>{numberBoxes}</span> : ''}

@@ -4,47 +4,18 @@ import './rowTable.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBoxesStacked } from '@fortawesome/free-solid-svg-icons';
 import ContextBundles from '../../context/ContextBundles';
+import handleSelect, { addToBundle } from './util';
 
 const RowTable = ({ element, typeStock, setSelected, selected, operation }) => {
   const contextBundles = useContext(ContextBundles);
   const { boxesToAdd, setBoxesToAdd, getBundleBoxes, currBundle } = contextBundles;
 
-  /**
-   * Function getting or deleting data to the cliqued row --- out-of-stock use only
-   */
-  const handleSelect = () => {
-    let copy = [...selected];
-    if (copy.find((el) => el.id === element.id)) {
-      copy = copy.filter((el) => el.id !== element.id);
-    } else {
-      copy.push(element);
-    }
-    setSelected(copy);
-  };
-
-  /**
-   * Function getting or deleting data to the cliqued row --- bundling/bundle use only
-   */
-  const addToBundle = () => {
-    let copy = [...boxesToAdd];
-    const sum = getBundleBoxes.length + copy.length;
-
-    if (
-      !copy.find((elt) => elt.id === element.id) &&
-      sum < 10 &&
-      element.name === currBundle.name
-    ) {
-      copy.push(element);
-      setBoxesToAdd(copy);
-    }
-    if (element.name !== currBundle.name)
-      alert('Attention la taille de la caisse ne correspond pas à la taille du fagot');
-  };
-
   return (
     <tr
       onClick={() => {
-        location.pathname.includes('/out-of-stock') ? handleSelect() : '';
+        location.pathname.includes('/out-of-stock')
+          ? handleSelect(selected, element, setSelected)
+          : '';
       }}
       className={
         location.pathname.includes('/out-of-stock') && selected.find((el) => el.id === element.id)
@@ -61,7 +32,7 @@ const RowTable = ({ element, typeStock, setSelected, selected, operation }) => {
       {operation === 'bundle' && (
         <td
           onClick={() => {
-            addToBundle();
+            addToBundle(boxesToAdd, getBundleBoxes, element, setBoxesToAdd, currBundle);
           }}
           className="bundle icon"
           align="center"

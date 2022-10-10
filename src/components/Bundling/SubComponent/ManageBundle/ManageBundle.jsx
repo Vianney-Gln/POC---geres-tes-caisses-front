@@ -1,8 +1,8 @@
 import React, { useEffect, useState, useContext } from 'react';
 import './manageBundle.scss';
-import { getBundles } from '../../../services/stock';
-import CardsStockBundle from '../../cardsStockBundles/CardsStockBundle';
-import ContextArticles from '../../../context/ContextArticles';
+import { getBundles } from '../../../../services/stock';
+import CardsStockBundle from '../../../cardsStockBundles/CardsStockBundle';
+import ContextArticles from '../../../../context/ContextArticles';
 const ManageBundle = () => {
   const [fagots, setFagots] = useState([]);
   const [reloadEffect, setReloadeffect] = useState(false);
