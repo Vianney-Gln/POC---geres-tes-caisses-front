@@ -5,15 +5,12 @@ import Modal from 'react-modal';
 import { deleteBundleById } from '../../services/bundle';
 // import FontAwesome
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faTriangleExclamation,
-  faSquareCheck,
-  faInfoCircle
-} from '@fortawesome/free-solid-svg-icons';
+import { faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 // import style css
 import './modalComponent.scss';
 // import PropTypes
 import PropTypes from 'prop-types';
+import manageIcon from './util';
 
 const ModalComponent = ({
   error,
@@ -114,21 +111,6 @@ const ModalComponent = ({
       });
   };
 
-  // Function managing icon, depending of error state
-  const manageIcon = () => {
-    if (error)
-      return (
-        <i className="symbol red">
-          <FontAwesomeIcon icon={faTriangleExclamation} />
-        </i>
-      );
-    return (
-      <i className="symbol green">
-        <FontAwesomeIcon icon={faSquareCheck} />
-      </i>
-    );
-  };
-
   // Function managing the content of the modal
 
   const manageModalContent = () => {
@@ -139,7 +121,7 @@ const ModalComponent = ({
           onRequestClose={closeModal}
           style={styleModal}
           contentLabel={contentLabel}>
-          {manageIcon()}
+          {manageIcon(error)}
           <p>{message}</p>
           <button className="button-close" onClick={() => closeModal(setModalIsOpen)}>
             Fermer
@@ -209,7 +191,7 @@ const ModalComponent = ({
           ) : (
             ''
           )}
-          {isOperationOk ? manageIcon() : ''}
+          {isOperationOk ? manageIcon(error) : ''}
           {messageForBundle ? <p>{messageForBundle}</p> : ''}
         </Modal>
       );
@@ -249,7 +231,7 @@ const ModalComponent = ({
           ) : (
             ''
           )}
-          {isOperationOk ? manageIcon() : ''}
+          {isOperationOk ? manageIcon(error) : ''}
           {message ? <p>{message}</p> : ''}
         </Modal>
       );
@@ -288,7 +270,7 @@ const ModalComponent = ({
           ) : (
             ''
           )}
-          {isOperationOk ? manageIcon() : ''}
+          {isOperationOk ? manageIcon(error) : ''}
           {message ? <p>{message}</p> : ''}
         </Modal>
       );
