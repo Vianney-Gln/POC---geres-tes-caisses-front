@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import Modal from 'react-modal';
 // import service
 import { deleteBundleById } from '../../services/bundle';
-import { runDeleteBundleById } from './util';
+import { runDeleteBundleById, modalReception, modalOutOfStock } from './util';
 // import FontAwesome
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faInfoCircle } from '@fortawesome/free-solid-svg-icons';
@@ -84,57 +84,26 @@ const ModalComponent = ({
 
   const manageModalContent = () => {
     if (contentLabel === 'Modal-reception') {
-      return (
-        <Modal
-          isOpen={open}
-          onRequestClose={closeModal}
-          style={styleModal}
-          contentLabel={contentLabel}>
-          {manageIcon(error)}
-          <p>{message}</p>
-          <button className="button-close" onClick={() => closeModal(setModalIsOpen)}>
-            Fermer
-          </button>
-        </Modal>
+      return modalReception(
+        open,
+        closeModal,
+        styleModal,
+        contentLabel,
+        manageIcon,
+        error,
+        message,
+        setModalIsOpen
       );
     } else if (contentLabel === 'Modal-outOfStock') {
-      return (
-        <Modal
-          isOpen={open}
-          onRequestClose={closeModal}
-          style={styleModal}
-          contentLabel={contentLabel}>
-          {confirmDelete && errorDelete ? (
-            <>
-              <p>{confirmDelete}</p>
-              <button onClick={() => closeModal()} type="button">
-                Ok
-              </button>
-            </>
-          ) : confirmDelete ? (
-            <p>{confirmDelete}</p>
-          ) : (
-            <>
-              <p>
-                {selected.length
-                  ? 'Voulez vous vraiment supprimer ces articles?'
-                  : 'Veuillez sélectionner au moins un article.'}
-              </p>
-              <div className="duo-btn">
-                {selected.length ? (
-                  <>
-                    <button onClick={runOutOfStock}>Oui</button>
-                    <button onClick={closeModal}>Non</button>
-                  </>
-                ) : (
-                  <button onClick={closeModal} type="button">
-                    Ok
-                  </button>
-                )}
-              </div>
-            </>
-          )}
-        </Modal>
+      return modalOutOfStock(
+        open,
+        closeModal,
+        styleModal,
+        contentLabel,
+        confirmDelete,
+        errorDelete,
+        selected,
+        runOutOfStock
       );
     } else if (contentLabel === 'Modal-manage-bundle') {
       return (
