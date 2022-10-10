@@ -1,19 +1,17 @@
 import React, { useState, useEffect } from 'react';
-// import modal
 import Modal from 'react-modal';
-// import service
 import { deleteBundleById } from '../../services/bundle';
-// import FontAwesome
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
-  faTriangleExclamation,
-  faSquareCheck,
-  faInfoCircle
-} from '@fortawesome/free-solid-svg-icons';
-// import style css
+  runDeleteBundleById,
+  modalReception,
+  modalOutOfStock,
+  modalManagebundle,
+  modalBundling,
+  modalRemoveFromBundle
+} from './util';
 import './modalComponent.scss';
-// import PropTypes
 import PropTypes from 'prop-types';
+import manageIcon from './util';
 
 const ModalComponent = ({
   error,
@@ -33,7 +31,20 @@ const ModalComponent = ({
   runUpdateBundleByid,
   isOperationOk,
   setIsOperationOk,
-  runRemoveBoxeFromBundle
+  removeBoxeFromBundle,
+  runRemoveBoxeFromBundle,
+  setModalIsOpen,
+  currentBoxeId,
+  setMessage,
+  handleRestartEffect,
+  setBoxesToAdd,
+  updateBundleById,
+  boxesToAdd,
+  currBundle,
+  outOfStock,
+  navigate,
+  setConfirmDelete,
+  setErrorDelete
 }) => {
   // States
 
@@ -73,196 +84,89 @@ const ModalComponent = ({
 
   Modal.setAppElement('#root');
 
-  const runDeleteBundleById = () => {
-    deleteBundleById(fagotId)
-      .then(() => {
-        setMessageForBundle('Défagotage en cours...');
-        setError(false);
-        setTimeout(() => {
-          setIsOperationOk(true);
-          setMessageForBundle('Défagotage effectué');
-        }, 3000);
-        setTimeout(() => {
-          handleEffect();
-          setIsOperationOk(false);
-          setMessageForBundle('');
-          closeModal();
-        }, 6000);
-      })
-      .catch(() => {
-        setMessageForBundle('Défagotage en cours...');
-        setError(true);
-        setTimeout(() => {
-          setIsOperationOk(true);
-          setMessageForBundle('Il y a eu une erreur, défagotage non effectué.');
-        }, 3000);
-        setTimeout(() => {
-          setIsOperationOk(false);
-          setMessageForBundle('');
-          closeModal();
-          setError(false);
-        }, 6000);
-      });
-  };
-
-  // Function managing icon, depending of error state
-  const manageIcon = () => {
-    if (error)
-      return (
-        <i className="symbol red">
-          <FontAwesomeIcon icon={faTriangleExclamation} />
-        </i>
-      );
-    return (
-      <i className="symbol green">
-        <FontAwesomeIcon icon={faSquareCheck} />
-      </i>
-    );
-  };
-
   // Function managing the content of the modal
 
   const manageModalContent = () => {
     if (contentLabel === 'Modal-reception') {
-      return (
-        <Modal
-          isOpen={open}
-          onRequestClose={closeModal}
-          style={styleModal}
-          contentLabel={contentLabel}>
-          {manageIcon()}
-          <p>{message}</p>
-          <button className="button-close" onClick={closeModal}>
-            Fermer
-          </button>
-        </Modal>
+      return modalReception(
+        open,
+        closeModal,
+        styleModal,
+        contentLabel,
+        manageIcon,
+        error,
+        message,
+        setModalIsOpen
       );
     } else if (contentLabel === 'Modal-outOfStock') {
-      return (
-        <Modal
-          isOpen={open}
-          onRequestClose={closeModal}
-          style={styleModal}
-          contentLabel={contentLabel}>
-          {confirmDelete && errorDelete ? (
-            <>
-              <p>{confirmDelete}</p>
-              <button onClick={() => closeModal()} type="button">
-                Ok
-              </button>
-            </>
-          ) : confirmDelete ? (
-            <p>{confirmDelete}</p>
-          ) : (
-            <>
-              <p>
-                {selected.length
-                  ? 'Voulez vous vraiment supprimer ces articles?'
-                  : 'Veuillez sélectionner au moins un article.'}
-              </p>
-              <div className="duo-btn">
-                {selected.length ? (
-                  <>
-                    <button onClick={runOutOfStock}>Oui</button>
-                    <button onClick={closeModal}>Non</button>
-                  </>
-                ) : (
-                  <button onClick={closeModal} type="button">
-                    Ok
-                  </button>
-                )}
-              </div>
-            </>
-          )}
-        </Modal>
+      return modalOutOfStock(
+        open,
+        closeModal,
+        styleModal,
+        contentLabel,
+        confirmDelete,
+        errorDelete,
+        selected,
+        runOutOfStock,
+        outOfStock,
+        setErrorDelete,
+        setConfirmDelete,
+        navigate
       );
     } else if (contentLabel === 'Modal-manage-bundle') {
-      return (
-        <Modal
-          isOpen={open}
-          onRequestClose={closeModal}
-          style={styleModal}
-          contentLabel={contentLabel}>
-          {!messageForBundle ? (
-            <>
-              <i className="symbol blue">
-                <FontAwesomeIcon icon={faInfoCircle} />
-              </i>
-              <p>
-                Défagoter n&apos;entrainera pas la suppression des caisses qui lui sont associées
-              </p>
-              <p>Voulez défagoter?</p>
-              <div className="container-duo-btn">
-                <button onClick={closeModal}>Annuler</button>
-                <button onClick={() => runDeleteBundleById()}>Défagoter</button>
-              </div>
-            </>
-          ) : (
-            ''
-          )}
-          {isOperationOk ? manageIcon() : ''}
-          {messageForBundle ? <p>{messageForBundle}</p> : ''}
-        </Modal>
+      return modalManagebundle(
+        open,
+        closeModal,
+        styleModal,
+        contentLabel,
+        messageForBundle,
+        deleteBundleById,
+        fagotId,
+        setMessageForBundle,
+        setError,
+        setIsOperationOk,
+        handleEffect,
+        isOperationOk,
+        error,
+        runDeleteBundleById
       );
     } else if (contentLabel === 'Modal-bundling') {
-      return (
-        <Modal
-          isOpen={open}
-          onRequestClose={closeModal}
-          style={styleModal}
-          contentLabel={contentLabel}>
-          {!message ? (
-            <>
-              <p>Voulez vous vraiment modifier ce fagot?</p>
-              <div className="duo-btn">
-                <button
-                  onClick={() => {
-                    runUpdateBundleByid();
-                  }}
-                  type="button">
-                  Oui
-                </button>
-                <button onClick={() => closeModal()} type="button">
-                  Non
-                </button>
-              </div>
-            </>
-          ) : (
-            ''
-          )}
-          {isOperationOk ? manageIcon() : ''}
-          {message ? <p>{message}</p> : ''}
-        </Modal>
+      return modalBundling(
+        open,
+        closeModal,
+        styleModal,
+        contentLabel,
+        message,
+        runUpdateBundleByid,
+        updateBundleById,
+        boxesToAdd,
+        currBundle,
+        setMessage,
+        setError,
+        setIsOperationOk,
+        handleRestartEffect,
+        setBoxesToAdd,
+        isOperationOk,
+        error
       );
     } else if (contentLabel === 'Modal-remove-from-bundle') {
-      return (
-        <Modal
-          isOpen={open}
-          onRequestClose={closeModal}
-          style={styleModal}
-          contentLabel={contentLabel}>
-          {!message ? (
-            <div className="confirmation-modal">
-              <p>Voulez vous vraiment retirer cette caisse de ce fagot?</p>
-              <div className="duo-btn">
-                <button
-                  onClick={() => {
-                    runRemoveBoxeFromBundle();
-                  }}
-                  type="button">
-                  Oui
-                </button>
-                <button onClick={() => closeModal()} type="button">
-                  Non
-                </button>
-              </div>
-            </div>
-          ) : (
-            ''
-          )}
-          {isOperationOk ? manageIcon() : ''}
-          {message ? <p>{message}</p> : ''}
-        </Modal>
+      return modalRemoveFromBundle(
+        open,
+        closeModal,
+        styleModal,
+        contentLabel,
+        message,
+        runRemoveBoxeFromBundle,
+        removeBoxeFromBundle,
+        currentBoxeId,
+        setMessage,
+        setError,
+        setIsOperationOk,
+        handleRestartEffect,
+        setBoxesToAdd,
+        manageIcon,
+        isOperationOk,
+        error
       );
     }
   };
@@ -288,7 +192,20 @@ ModalComponent.propTypes = {
   isOperationOk: PropTypes.bool,
   runRemoveBoxeFromBundle: PropTypes.func,
   setError: PropTypes.func,
-  setIsOperationOk: PropTypes.func
+  setIsOperationOk: PropTypes.func,
+  setModalIsOpen: PropTypes.func,
+  removeBoxeFromBundle: PropTypes.func,
+  currentBoxeId: PropTypes.number,
+  setMessage: PropTypes.func,
+  handleRestartEffect: PropTypes.func,
+  setBoxesToAdd: PropTypes.func,
+  updateBundleById: PropTypes.func,
+  boxesToAdd: PropTypes.array,
+  currBundle: PropTypes.object,
+  outOfStock: PropTypes.func,
+  navigate: PropTypes.func,
+  setConfirmDelete: PropTypes.func,
+  setErrorDelete: PropTypes.func
 };
 
 export default ModalComponent;
