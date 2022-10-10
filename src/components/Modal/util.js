@@ -235,4 +235,79 @@ export const modalManagebundle = (
   );
 };
 
+/**
+ * Function generate the vew modal manage-bundle
+ * @param {bool} open
+ * @param {function} closeModal
+ * @param {object} styleModal
+ * @param {string} contentLabel
+ * @param {string} message
+ * @param {function} runUpdateBundleByid
+ * @param {function} updateBundleById
+ * @param {array} boxesToAdd
+ * @param {object} currBundle
+ * @param {function} setMessage
+ * @param {function} setError
+ * @param {function} setIsOperationOk
+ * @param {function} handleRestartEffect
+ * @param {function} setBoxesToAdd
+ * @param {bool} isOperationOk
+ * @param {bool} error
+ * @returns
+ */
+export const modalBundling = (
+  open,
+  closeModal,
+  styleModal,
+  contentLabel,
+  message,
+  runUpdateBundleByid,
+  updateBundleById,
+  boxesToAdd,
+  currBundle,
+  setMessage,
+  setError,
+  setIsOperationOk,
+  handleRestartEffect,
+  setBoxesToAdd,
+  isOperationOk,
+  error
+) => {
+  return (
+    <Modal isOpen={open} onRequestClose={closeModal} style={styleModal} contentLabel={contentLabel}>
+      {!message ? (
+        <>
+          <p>Voulez vous vraiment modifier ce fagot?</p>
+          <div className="duo-btn">
+            <button
+              onClick={() => {
+                runUpdateBundleByid(
+                  updateBundleById,
+                  boxesToAdd,
+                  currBundle,
+                  setMessage,
+                  setError,
+                  setIsOperationOk,
+                  handleRestartEffect,
+                  setBoxesToAdd,
+                  closeModal
+                );
+              }}
+              type="button">
+              Oui
+            </button>
+            <button onClick={() => closeModal()} type="button">
+              Non
+            </button>
+          </div>
+        </>
+      ) : (
+        ''
+      )}
+      {isOperationOk ? manageIcon(error) : ''}
+      {message ? <p>{message}</p> : ''}
+    </Modal>
+  );
+};
+
 export default manageIcon;

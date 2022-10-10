@@ -3,7 +3,13 @@ import React, { useState, useEffect } from 'react';
 import Modal from 'react-modal';
 // import service
 import { deleteBundleById } from '../../services/bundle';
-import { runDeleteBundleById, modalReception, modalOutOfStock, modalManagebundle } from './util';
+import {
+  runDeleteBundleById,
+  modalReception,
+  modalOutOfStock,
+  modalManagebundle,
+  modalBundling
+} from './util';
 
 // import style css
 import './modalComponent.scss';
@@ -121,44 +127,23 @@ const ModalComponent = ({
         runDeleteBundleById
       );
     } else if (contentLabel === 'Modal-bundling') {
-      return (
-        <Modal
-          isOpen={open}
-          onRequestClose={closeModal}
-          style={styleModal}
-          contentLabel={contentLabel}>
-          {!message ? (
-            <>
-              <p>Voulez vous vraiment modifier ce fagot?</p>
-              <div className="duo-btn">
-                <button
-                  onClick={() => {
-                    runUpdateBundleByid(
-                      updateBundleById,
-                      boxesToAdd,
-                      currBundle,
-                      setMessage,
-                      setError,
-                      setIsOperationOk,
-                      handleRestartEffect,
-                      setBoxesToAdd,
-                      closeModal
-                    );
-                  }}
-                  type="button">
-                  Oui
-                </button>
-                <button onClick={() => closeModal()} type="button">
-                  Non
-                </button>
-              </div>
-            </>
-          ) : (
-            ''
-          )}
-          {isOperationOk ? manageIcon(error) : ''}
-          {message ? <p>{message}</p> : ''}
-        </Modal>
+      return modalBundling(
+        open,
+        closeModal,
+        styleModal,
+        contentLabel,
+        message,
+        runUpdateBundleByid,
+        updateBundleById,
+        boxesToAdd,
+        currBundle,
+        setMessage,
+        setError,
+        setIsOperationOk,
+        handleRestartEffect,
+        setBoxesToAdd,
+        isOperationOk,
+        error
       );
     } else if (contentLabel === 'Modal-remove-from-bundle') {
       return (
