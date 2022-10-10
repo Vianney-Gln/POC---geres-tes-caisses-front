@@ -310,4 +310,79 @@ export const modalBundling = (
   );
 };
 
+/**
+ * Function generate the vew modal manage-remove-from-bundles
+ * @param {*} open
+ * @param {*} closeModal
+ * @param {*} styleModal
+ * @param {*} contentLabel
+ * @param {*} message
+ * @param {*} runRemoveBoxeFromBundle
+ * @param {*} removeBoxeFromBundle
+ * @param {*} currentBoxeId
+ * @param {*} setMessage
+ * @param {*} setError
+ * @param {*} setIsOperationOk
+ * @param {*} handleRestartEffect
+ * @param {*} setBoxesToAdd
+ * @param {*} manageIcon
+ * @param {*} isOperationOk
+ * @param {*} error
+ * @returns
+ */
+
+export const modalRemoveFromBundle = (
+  open,
+  closeModal,
+  styleModal,
+  contentLabel,
+  message,
+  runRemoveBoxeFromBundle,
+  removeBoxeFromBundle,
+  currentBoxeId,
+  setMessage,
+  setError,
+  setIsOperationOk,
+  handleRestartEffect,
+  setBoxesToAdd,
+  manageIcon,
+  isOperationOk,
+  error
+) => {
+  return (
+    <Modal isOpen={open} onRequestClose={closeModal} style={styleModal} contentLabel={contentLabel}>
+      {!message ? (
+        <div className="confirmation-modal">
+          <p>Voulez vous vraiment retirer cette caisse de ce fagot?</p>
+          <div className="duo-btn">
+            <button
+              onClick={() => {
+                runRemoveBoxeFromBundle(
+                  removeBoxeFromBundle,
+                  currentBoxeId,
+                  setMessage,
+                  setError,
+                  setIsOperationOk,
+                  handleRestartEffect,
+                  setBoxesToAdd,
+                  closeModal
+                );
+              }}
+              type="button">
+              Oui
+            </button>
+            <button onClick={() => closeModal()} type="button">
+              Non
+            </button>
+          </div>
+        </div>
+      ) : (
+        ''
+      )}
+      {isOperationOk ? manageIcon(error) : ''}
+      {message ? <p>{message}</p> : ''}
+    </Modal>
+  );
+};
+
 export default manageIcon;

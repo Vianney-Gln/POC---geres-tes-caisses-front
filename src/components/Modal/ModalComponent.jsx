@@ -8,7 +8,8 @@ import {
   modalReception,
   modalOutOfStock,
   modalManagebundle,
-  modalBundling
+  modalBundling,
+  modalRemoveFromBundle
 } from './util';
 
 // import style css
@@ -146,43 +147,23 @@ const ModalComponent = ({
         error
       );
     } else if (contentLabel === 'Modal-remove-from-bundle') {
-      return (
-        <Modal
-          isOpen={open}
-          onRequestClose={closeModal}
-          style={styleModal}
-          contentLabel={contentLabel}>
-          {!message ? (
-            <div className="confirmation-modal">
-              <p>Voulez vous vraiment retirer cette caisse de ce fagot?</p>
-              <div className="duo-btn">
-                <button
-                  onClick={() => {
-                    runRemoveBoxeFromBundle(
-                      removeBoxeFromBundle,
-                      currentBoxeId,
-                      setMessage,
-                      setError,
-                      setIsOperationOk,
-                      handleRestartEffect,
-                      setBoxesToAdd,
-                      closeModal
-                    );
-                  }}
-                  type="button">
-                  Oui
-                </button>
-                <button onClick={() => closeModal()} type="button">
-                  Non
-                </button>
-              </div>
-            </div>
-          ) : (
-            ''
-          )}
-          {isOperationOk ? manageIcon(error) : ''}
-          {message ? <p>{message}</p> : ''}
-        </Modal>
+      return modalRemoveFromBundle(
+        open,
+        closeModal,
+        styleModal,
+        contentLabel,
+        message,
+        runRemoveBoxeFromBundle,
+        removeBoxeFromBundle,
+        currentBoxeId,
+        setMessage,
+        setError,
+        setIsOperationOk,
+        handleRestartEffect,
+        setBoxesToAdd,
+        manageIcon,
+        isOperationOk,
+        error
       );
     }
   };
