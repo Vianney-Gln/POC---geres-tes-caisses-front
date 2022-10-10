@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
-// import modal
 import Modal from 'react-modal';
-// import service
 import { deleteBundleById } from '../../services/bundle';
 import {
   runDeleteBundleById,
@@ -11,10 +9,7 @@ import {
   modalBundling,
   modalRemoveFromBundle
 } from './util';
-
-// import style css
 import './modalComponent.scss';
-// import PropTypes
 import PropTypes from 'prop-types';
 import manageIcon from './util';
 
