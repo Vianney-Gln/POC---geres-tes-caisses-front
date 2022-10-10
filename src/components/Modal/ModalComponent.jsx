@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import Modal from 'react-modal';
 // import service
 import { deleteBundleById } from '../../services/bundle';
+import { runDeleteBundleById } from './util';
 // import FontAwesome
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faInfoCircle } from '@fortawesome/free-solid-svg-icons';
@@ -79,38 +80,6 @@ const ModalComponent = ({
 
   Modal.setAppElement('#root');
 
-  const runDeleteBundleById = () => {
-    deleteBundleById(fagotId)
-      .then(() => {
-        setMessageForBundle('Défagotage en cours...');
-        setError(false);
-        setTimeout(() => {
-          setIsOperationOk(true);
-          setMessageForBundle('Défagotage effectué');
-        }, 3000);
-        setTimeout(() => {
-          handleEffect();
-          setIsOperationOk(false);
-          setMessageForBundle('');
-          closeModal();
-        }, 6000);
-      })
-      .catch(() => {
-        setMessageForBundle('Défagotage en cours...');
-        setError(true);
-        setTimeout(() => {
-          setIsOperationOk(true);
-          setMessageForBundle('Il y a eu une erreur, défagotage non effectué.');
-        }, 3000);
-        setTimeout(() => {
-          setIsOperationOk(false);
-          setMessageForBundle('');
-          closeModal();
-          setError(false);
-        }, 6000);
-      });
-  };
-
   // Function managing the content of the modal
 
   const manageModalContent = () => {
@@ -185,7 +154,20 @@ const ModalComponent = ({
               <p>Voulez défagoter?</p>
               <div className="container-duo-btn">
                 <button onClick={closeModal}>Annuler</button>
-                <button onClick={() => runDeleteBundleById()}>Défagoter</button>
+                <button
+                  onClick={() =>
+                    runDeleteBundleById(
+                      deleteBundleById,
+                      fagotId,
+                      setMessageForBundle,
+                      setError,
+                      setIsOperationOk,
+                      handleEffect,
+                      closeModal
+                    )
+                  }>
+                  Défagoter
+                </button>
               </div>
             </>
           ) : (
