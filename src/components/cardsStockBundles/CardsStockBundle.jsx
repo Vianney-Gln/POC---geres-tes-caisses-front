@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import './cardsStockBundle.scss';
 import { getCountBoxesByBundle } from '../../services/stock';
@@ -16,6 +16,8 @@ const CardsStockBundle = ({ stock, fagotId, handleEffect }) => {
 
   const param = useParams();
   const { operation } = param;
+
+  const navigate = useNavigate();
 
   const contextArticles = useContext(ContextArticles);
   const { setIdArticles } = contextArticles;
@@ -50,6 +52,7 @@ const CardsStockBundle = ({ stock, fagotId, handleEffect }) => {
         setError={setError}
         isOperationOk={isOperationOk}
         setIsOperationOk={setIsOperationOk}
+        navigate={navigate}
       />
       {operation === 'manage-bundle' ? (
         <div className="card">

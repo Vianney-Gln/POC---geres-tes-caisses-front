@@ -128,7 +128,8 @@ const ModalComponent = ({
         handleEffect,
         isOperationOk,
         error,
-        runDeleteBundleById
+        runDeleteBundleById,
+        navigate
       );
     } else if (contentLabel === 'Modal-bundling') {
       return modalBundling(
