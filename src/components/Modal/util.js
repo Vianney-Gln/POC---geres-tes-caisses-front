@@ -117,6 +117,10 @@ export const modalReception = (
  * @param {bool} errorDelete
  * @param {array} selected
  * @param {function} runOutOfStock
+ * @param {function} outOfStock
+ * @param {function} setErrorDelete
+ * @param {function} setConfirmDelete
+ * @param {function} navigate
  * @returns
  */
 export const modalOutOfStock = (
@@ -127,7 +131,11 @@ export const modalOutOfStock = (
   confirmDelete,
   errorDelete,
   selected,
-  runOutOfStock
+  runOutOfStock,
+  outOfStock,
+  setErrorDelete,
+  setConfirmDelete,
+  navigate
 ) => {
   return (
     <Modal isOpen={open} onRequestClose={closeModal} style={styleModal} contentLabel={contentLabel}>
@@ -150,7 +158,12 @@ export const modalOutOfStock = (
           <div className="duo-btn">
             {selected.length ? (
               <>
-                <button onClick={runOutOfStock}>Oui</button>
+                <button
+                  onClick={() =>
+                    runOutOfStock(selected, outOfStock, setErrorDelete, setConfirmDelete, navigate)
+                  }>
+                  Oui
+                </button>
                 <button onClick={closeModal}>Non</button>
               </>
             ) : (

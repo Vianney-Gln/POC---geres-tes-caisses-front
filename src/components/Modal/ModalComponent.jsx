@@ -40,7 +40,11 @@ const ModalComponent = ({
   setBoxesToAdd,
   updateBundleById,
   boxesToAdd,
-  currBundle
+  currBundle,
+  outOfStock,
+  navigate,
+  setConfirmDelete,
+  setErrorDelete
 }) => {
   // States
 
@@ -103,7 +107,11 @@ const ModalComponent = ({
         confirmDelete,
         errorDelete,
         selected,
-        runOutOfStock
+        runOutOfStock,
+        outOfStock,
+        setErrorDelete,
+        setConfirmDelete,
+        navigate
       );
     } else if (contentLabel === 'Modal-manage-bundle') {
       return modalManagebundle(
@@ -193,7 +201,11 @@ ModalComponent.propTypes = {
   setBoxesToAdd: PropTypes.func,
   updateBundleById: PropTypes.func,
   boxesToAdd: PropTypes.array,
-  currBundle: PropTypes.object
+  currBundle: PropTypes.object,
+  outOfStock: PropTypes.func,
+  navigate: PropTypes.func,
+  setConfirmDelete: PropTypes.func,
+  setErrorDelete: PropTypes.func
 };
 
 export default ModalComponent;

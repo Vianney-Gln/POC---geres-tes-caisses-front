@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import RowTable from '../RowTable/RowTable';
 import ModalComponent from '../Modal/ModalComponent';
 import SearchBarre from '../SearchBarre/SearchBarre';
-import manageButtons, { manageCaptionTitle } from './util';
+import manageButtons, { manageCaptionTitle, runOutOfStock } from './util';
 
 const TableStock = ({ typeStock, stock, captionName }) => {
   const [searchValue, setSearchValue] = useState('');
@@ -29,28 +29,6 @@ const TableStock = ({ typeStock, stock, captionName }) => {
     setModalIsOpen(false);
   };
 
-  // Function running the service function outOfStock, manage error or success messages and redirect stock page
-  const runOutOfStock = () => {
-    const ids = selected.map((el) => el.id);
-    outOfStock(ids)
-      .then(() => {
-        setErrorDelete(false);
-        setConfirmDelete('Les éléments sont correctements sortis du stock.');
-        setTimeout(() => {
-          setConfirmDelete('redirection page stock en cours...');
-        }, 2000);
-      })
-      .then(() => {
-        setTimeout(() => {
-          navigate('/');
-        }, 4000);
-      })
-      .catch(() => {
-        setErrorDelete(true);
-        setConfirmDelete('Il y eu une erreur durant la suppression');
-      });
-  };
-
   return (
     <>
       <ModalComponent
@@ -59,6 +37,10 @@ const TableStock = ({ typeStock, stock, captionName }) => {
         closeModal={closeModal}
         contentLabel="Modal-outOfStock"
         runOutOfStock={runOutOfStock}
+        outOfStock={outOfStock}
+        navigate={navigate}
+        setConfirmDelete={setConfirmDelete}
+        setErrorDelete={setErrorDelete}
         selected={selected}
         confirmDelete={confirmDelete}
         errorDelete={errorDelete}
