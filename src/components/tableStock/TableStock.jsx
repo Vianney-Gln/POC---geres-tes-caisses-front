@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import RowTable from '../RowTable/RowTable';
 import ModalComponent from '../Modal/ModalComponent';
 import SearchBarre from '../SearchBarre/SearchBarre';
-import manageButtons from './util';
+import manageButtons, { manageCaptionTitle } from './util';
 
 const TableStock = ({ typeStock, stock, captionName }) => {
   const [searchValue, setSearchValue] = useState('');
@@ -27,12 +27,6 @@ const TableStock = ({ typeStock, stock, captionName }) => {
   // Function opening the modal
   const closeModal = () => {
     setModalIsOpen(false);
-  };
-
-  // Function managin caption title
-  const manageCaptionTitle = () => {
-    if (captionName) return captionName;
-    return 'toutes caisses';
   };
 
   // Function running the service function outOfStock, manage error or success messages and redirect stock page
@@ -72,7 +66,7 @@ const TableStock = ({ typeStock, stock, captionName }) => {
       <table className="table-stock">
         {typeStock === 'caisses-vrac' ? (
           <caption>
-            <span className="title-caption">{`Stock vrac ${manageCaptionTitle()}`}</span>
+            <span className="title-caption">{`Stock vrac ${manageCaptionTitle(captionName)}`}</span>
             <div className="search-buttons">
               <SearchBarre setSearch={setSearchValue} />
               {manageButtons(setSelected, openModal)}
@@ -80,7 +74,7 @@ const TableStock = ({ typeStock, stock, captionName }) => {
           </caption>
         ) : typeStock === 'caisses-total' ? (
           <caption>
-            {`Stock total ${manageCaptionTitle()}`}
+            {`Stock total ${manageCaptionTitle(captionName)}`}
             <div className="div-total-boxes">
               <SearchBarre setSearch={setSearchValue} />
               {manageButtons()}

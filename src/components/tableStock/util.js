@@ -29,4 +29,13 @@ export const cancelSelection = (setSelected) => {
   setSelected([]);
 };
 
+/**
+ * // Function managin caption title
+ * @param {string} captionName
+ * @returns
+ */
+export const manageCaptionTitle = (captionName) => {
+  if (captionName) return captionName;
+  return 'toutes caisses';
+};
 export default manageButtons;
