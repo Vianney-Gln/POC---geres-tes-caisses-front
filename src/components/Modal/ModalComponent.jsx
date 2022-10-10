@@ -3,10 +3,8 @@ import React, { useState, useEffect } from 'react';
 import Modal from 'react-modal';
 // import service
 import { deleteBundleById } from '../../services/bundle';
-import { runDeleteBundleById, modalReception, modalOutOfStock } from './util';
-// import FontAwesome
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faInfoCircle } from '@fortawesome/free-solid-svg-icons';
+import { runDeleteBundleById, modalReception, modalOutOfStock, modalManagebundle } from './util';
+
 // import style css
 import './modalComponent.scss';
 // import PropTypes
@@ -106,45 +104,21 @@ const ModalComponent = ({
         runOutOfStock
       );
     } else if (contentLabel === 'Modal-manage-bundle') {
-      return (
-        <Modal
-          isOpen={open}
-          onRequestClose={closeModal}
-          style={styleModal}
-          contentLabel={contentLabel}>
-          {!messageForBundle ? (
-            <>
-              <i className="symbol blue">
-                <FontAwesomeIcon icon={faInfoCircle} />
-              </i>
-              <p>
-                Défagoter n&apos;entrainera pas la suppression des caisses qui lui sont associées
-              </p>
-              <p>Voulez défagoter?</p>
-              <div className="container-duo-btn">
-                <button onClick={closeModal}>Annuler</button>
-                <button
-                  onClick={() =>
-                    runDeleteBundleById(
-                      deleteBundleById,
-                      fagotId,
-                      setMessageForBundle,
-                      setError,
-                      setIsOperationOk,
-                      handleEffect,
-                      closeModal
-                    )
-                  }>
-                  Défagoter
-                </button>
-              </div>
-            </>
-          ) : (
-            ''
-          )}
-          {isOperationOk ? manageIcon(error) : ''}
-          {messageForBundle ? <p>{messageForBundle}</p> : ''}
-        </Modal>
+      return modalManagebundle(
+        open,
+        closeModal,
+        styleModal,
+        contentLabel,
+        messageForBundle,
+        deleteBundleById,
+        fagotId,
+        setMessageForBundle,
+        setError,
+        setIsOperationOk,
+        handleEffect,
+        isOperationOk,
+        error,
+        runDeleteBundleById
       );
     } else if (contentLabel === 'Modal-bundling') {
       return (
