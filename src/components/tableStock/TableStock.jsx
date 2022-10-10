@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import RowTable from '../RowTable/RowTable';
 import ModalComponent from '../Modal/ModalComponent';
 import SearchBarre from '../SearchBarre/SearchBarre';
+import manageButtons from './util';
 
 const TableStock = ({ typeStock, stock, captionName }) => {
   const [searchValue, setSearchValue] = useState('');
@@ -32,27 +33,6 @@ const TableStock = ({ typeStock, stock, captionName }) => {
   const manageCaptionTitle = () => {
     if (captionName) return captionName;
     return 'toutes caisses';
-  };
-  // Function that cancel all selection reseting selected statement
-  const cancelSelection = () => {
-    setSelected([]);
-  };
-  // Function managin the display buttons "sortir du stock" et "annuler selection"
-  const manageButtons = () => {
-    if (location.pathname.includes('/stock')) {
-      return '';
-    } else if (location.pathname.includes('/out-of-stock')) {
-      return (
-        <>
-          <button onClick={() => cancelSelection()} type="button">
-            Annuler selection
-          </button>
-          <button onClick={() => openModal()} type="button">
-            Valider sorties
-          </button>
-        </>
-      );
-    }
   };
 
   // Function running the service function outOfStock, manage error or success messages and redirect stock page
@@ -95,7 +75,7 @@ const TableStock = ({ typeStock, stock, captionName }) => {
             <span className="title-caption">{`Stock vrac ${manageCaptionTitle()}`}</span>
             <div className="search-buttons">
               <SearchBarre setSearch={setSearchValue} />
-              {manageButtons()}
+              {manageButtons(setSelected, openModal)}
             </div>
           </caption>
         ) : typeStock === 'caisses-total' ? (
