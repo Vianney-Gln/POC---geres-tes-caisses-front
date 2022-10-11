@@ -52,14 +52,8 @@ const MenuTop = ({ location, setOpenSlide }) => {
               </Link>
             </ul>
           </li>
-          <li
-            onClick={() => setOpenSlide(true)}
-            className={
-              location.includes('/bundling')
-                ? 'mobile current content-slide-down'
-                : 'mobile content-slide-down'
-            }>
-            Fagotage
+          <li onClick={() => setOpenSlide(true)} className="mobile content-slide-down">
+            <span className={location.includes('/bundling') ? 'current' : ''}>Fagotage</span>
           </li>
         </ul>
       </nav>
