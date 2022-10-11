@@ -1,3 +1,3 @@
-const baseUrl = 'http://localhost:3001';
+const baseUrl = 'https://api.gestioncaisses.vgeloen.fr';
 
 export default baseUrl;
