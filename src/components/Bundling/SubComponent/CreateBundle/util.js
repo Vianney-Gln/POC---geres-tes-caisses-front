@@ -23,7 +23,12 @@ const getDataInputs = (value, key, dataInput, setDataInput) => {
 export const handleForm = (e, dataInput, createBundle, setError, setMessage, setDataInput) => {
   e.preventDefault();
   const regex = /^Fag-/;
-  if (dataInput.uuid.match(regex)) {
+  const numRegex = /[0-9]+$/;
+  if (
+    dataInput.uuid.match(regex) &&
+    dataInput.uuid.match(numRegex) &&
+    dataInput.uuid.length === 7
+  ) {
     createBundle(dataInput)
       .then(() => {
         setError(false);
@@ -39,7 +44,7 @@ export const handleForm = (e, dataInput, createBundle, setError, setMessage, set
       });
   } else {
     setError(true);
-    setMessage("L'identifiant doit commencé par Fag-");
+    setMessage("L'identifiant doit être de la forme Fag-000");
   }
 };
 
