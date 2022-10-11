@@ -33,6 +33,7 @@ const manageIcon = (error) => {
  * @param {function} setIsOperationOk
  * @param {function} handleEffect
  * @param {function} closeModal
+ * @param {function} navigate
  */
 export const runDeleteBundleById = (
   deleteBundleById,
@@ -41,7 +42,8 @@ export const runDeleteBundleById = (
   setError,
   setIsOperationOk,
   handleEffect,
-  closeModal
+  closeModal,
+  navigate
 ) => {
   deleteBundleById(fagotId)
     .then(() => {
@@ -56,6 +58,7 @@ export const runDeleteBundleById = (
         setIsOperationOk(false);
         setMessageForBundle('');
         closeModal();
+        navigate('/');
       }, 6000);
     })
     .catch(() => {
@@ -179,7 +182,7 @@ export const modalOutOfStock = (
 };
 
 /**
- * Function generate the vew modal manage-bundle
+ * Function generate the view modal manage-bundle
  * @param {bool} open
  * @param {function} closeModal
  * @param {object} styleModal
@@ -194,6 +197,7 @@ export const modalOutOfStock = (
  * @param {bool} isOperationOk
  * @param {bool} error
  * @param {function} runDeleteBundleById
+ * @param {function} navigate
  * @returns
  */
 export const modalManagebundle = (
@@ -210,7 +214,8 @@ export const modalManagebundle = (
   handleEffect,
   isOperationOk,
   error,
-  runDeleteBundleById
+  runDeleteBundleById,
+  navigate
 ) => {
   return (
     <Modal isOpen={open} onRequestClose={closeModal} style={styleModal} contentLabel={contentLabel}>
@@ -232,7 +237,8 @@ export const modalManagebundle = (
                   setError,
                   setIsOperationOk,
                   handleEffect,
-                  closeModal
+                  closeModal,
+                  navigate
                 )
               }>
               Défagoter
