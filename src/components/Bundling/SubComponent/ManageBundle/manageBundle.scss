@@ -37,6 +37,9 @@ div.container-manageBundle {
 
 @media screen and (max-width: 730px) {
   div.container-manageBundle {
+    max-height: none;
+    min-height: 0;
+    overflow-y: visible;
     ul.list-cards {
       width: 100%;
 

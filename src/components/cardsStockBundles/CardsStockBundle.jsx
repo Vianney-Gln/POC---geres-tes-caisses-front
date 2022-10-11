@@ -64,15 +64,17 @@ const CardsStockBundle = ({ stock, fagotId, handleEffect }) => {
               <button onClick={() => openModal()} type="button">
                 Défagoter
               </button>
-              <Link
-                onClick={() => {
-                  setIdArticles(null);
-                  setIdArticleCountForCountFunctions(null);
-                }}
-                className="button-like"
-                to={`/bundling/bundle/${fagotId}`}>
-                Modifier
-              </Link>
+              <button type="button">
+                <Link
+                  onClick={() => {
+                    setIdArticles(null);
+                    setIdArticleCountForCountFunctions(null);
+                  }}
+                  className="button-like"
+                  to={`/bundling/bundle/${fagotId}`}>
+                  Modifier
+                </Link>
+              </button>
             </div>
           </li>
         </div>
