@@ -13,19 +13,22 @@ const manageErrorsServerReception = (errorServerMessage, setMessageError) => {
       setMessageError("L'identifiant doit être composé de 10 caratères. ");
       break;
     case errorServerMessage.includes('is required'):
-      setMessageError('Tous les champs doivent être remplis');
+      setMessageError('Tous les champs doivent être remplis.');
       break;
     case errorServerMessage.includes('is not allowed to be empty'):
-      setMessageError('Tous les champs doivent être remplis');
+      setMessageError('Tous les champs doivent être remplis.');
       break;
     case errorServerMessage.includes('fails to match the required pattern: /^[0-9]+$/'):
-      setMessageError("L'identifiant doit être constitué de caractères numériques uniquement");
+      setMessageError("L'identifiant doit être constitué de caractères numériques uniquement.");
       break;
     case errorServerMessage.includes(`fails to match the required pattern: /^${year}/i`):
-      setMessageError("L'identifiant doit commencé par l'année en cours ex:2022");
+      setMessageError("L'identifiant doit commencé par l'année en cours ex:2022.");
+      break;
+    case errorServerMessage.includes('"id_article" must be a number'):
+      setMessageError('Veuillez sélectionner un article.');
       break;
     default:
-      setMessageError("Une erreur inattendue s'est produite");
+      setMessageError("Une erreur inattendue s'est produite.");
   }
 };
 

@@ -93,6 +93,7 @@ export const findDuplicate = (dataInputs) => {
  * @param {function} setModalIsOpen
  * @param {function} navigate
  * @param {function} handleRestartEffect
+ * @param {function} setMessageServer
  */
 export const runValidateReception = (
   dataInputs,
@@ -102,23 +103,25 @@ export const runValidateReception = (
   setIsTypeBoxSelected,
   setModalIsOpen,
   navigate,
-  handleRestartEffect
+  handleRestartEffect,
+  setMessageServer
 ) => {
   const errorDup = findDuplicate(dataInputs);
-  const errorSelectEmpty = dataInputs.find((elt) => elt.id_article === '');
-  const errorRegexs = dataInputs.map((elt) => {
-    return validateInput(elt, setMessageCaracteres);
-  });
+  //const errorSelectEmpty = dataInputs.find((elt) => elt.id_article === '');
+  // const errorRegexs = dataInputs.map((elt) => {
+  //   return validateInput(elt, setMessageCaracteres);
+  // });
   if (errorDup) {
     setError(true);
     setMessage('Vous ne pouvez pas entrer plusieurs fois le même identifiant.');
     setTimeout(() => {
       setMessage('');
     }, 3000);
-  } else if (errorSelectEmpty) {
-    setError(true);
-    setIsTypeBoxSelected('Veuillez remplir le type de caisses svp');
-  } else if (!errorRegexs.includes(true)) {
+  } //else if (errorSelectEmpty) {
+  //setError(true);
+  //setIsTypeBoxSelected('Veuillez remplir le type de caisses svp');
+  //} else if (!errorRegexs.includes(true)) {
+  else {
     validateReception(dataInputs)
       .then(() => {
         setError(false);
@@ -134,7 +137,11 @@ export const runValidateReception = (
         setIsTypeBoxSelected('');
         openModal(setModalIsOpen);
         setError(true);
-        manageErrorsServer(err.response.data, setMessage);
+        if (typeof err.response.data === 'string')
+          manageErrorsServer(err.response.data, setMessageServer);
+        if (typeof err.response.data === 'object') {
+          manageErrorsServer(err.response.data[0][0].message, setMessageServer);
+        }
       });
   }
 };
