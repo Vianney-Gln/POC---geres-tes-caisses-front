@@ -18,6 +18,7 @@ const Reception = () => {
   const [error, setError] = useState(false);
   const [messageCarateres, setMessageCaracteres] = useState('');
   const [isTypeBoxSelected, setIsTypeBoxSelected] = useState('');
+  const [messageServer, setMessageServer] = useState('');
 
   const navigate = useNavigate();
 
@@ -30,7 +31,7 @@ const Reception = () => {
     <>
       <ModalComponent
         error={error}
-        message={message}
+        message={messageServer}
         open={modalIsOpen}
         openModal={openModal}
         closeModal={closeModal}
@@ -50,7 +51,8 @@ const Reception = () => {
               setIsTypeBoxSelected,
               setModalIsOpen,
               navigate,
-              handleRestartEffect
+              handleRestartEffect,
+              setMessageServer
             );
           }}
           className="form-reception">

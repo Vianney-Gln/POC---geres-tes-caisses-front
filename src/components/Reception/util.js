@@ -1,3 +1,4 @@
+import manageErrorsServer from '../../Helper/ManageErrorsServer/ManageErrorsServer';
 import validateReception from '../../services/reception';
 
 // Function opening the modal
@@ -92,6 +93,7 @@ export const findDuplicate = (dataInputs) => {
  * @param {function} setModalIsOpen
  * @param {function} navigate
  * @param {function} handleRestartEffect
+ * @param {function} setMessageServer
  */
 export const runValidateReception = (
   dataInputs,
@@ -101,7 +103,8 @@ export const runValidateReception = (
   setIsTypeBoxSelected,
   setModalIsOpen,
   navigate,
-  handleRestartEffect
+  handleRestartEffect,
+  setMessageServer
 ) => {
   const errorDup = findDuplicate(dataInputs);
   const errorSelectEmpty = dataInputs.find((elt) => elt.id_article === '');
@@ -123,17 +126,25 @@ export const runValidateReception = (
         setError(false);
         setIsTypeBoxSelected('');
         openModal(setModalIsOpen);
-        setMessage(`Réception créée avec succès! Redirection en cours...`);
+        setMessageServer(`Réception créée avec succès! Redirection en cours...`);
         setTimeout(() => {
           handleRestartEffect();
           navigate('/');
         }, 3000);
       })
-      .catch(() => {
+      .catch((err) => {
         setIsTypeBoxSelected('');
         openModal(setModalIsOpen);
         setError(true);
-        setMessage("L'application à rencontré une erreur, la réception n'a pas été créée.");
+        if (typeof err.response.data === 'string')
+          manageErrorsServer(err.response.data, setMessageServer);
+        if (typeof err.response.data === 'object') {
+          manageErrorsServer(err.response.data[0][0].message, setMessageServer);
+        }
+        setTimeout(() => {
+          setMessageServer('');
+          setModalIsOpen(false);
+        }, 3000);
       });
   }
 };
