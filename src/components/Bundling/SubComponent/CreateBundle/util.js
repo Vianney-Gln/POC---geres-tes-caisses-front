@@ -37,8 +37,7 @@ export const handleForm = (e, dataInput, createBundle, setError, setMessage, set
           setDataInput({ uuid: '', id_article: '' });
         }, 1000);
       })
-      .catch((err) => {
-        console.log(err);
+      .catch(() => {
         setError(true);
         setMessage("Il y a eu une erreur, le fagot n'a pas été créé.");
       });
