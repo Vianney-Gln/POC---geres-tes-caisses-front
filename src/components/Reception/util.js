@@ -1,3 +1,4 @@
+import manageErrorsServer from '../../Helper/ManageErrorsServer/ManageErrorsServer';
 import validateReception from '../../services/reception';
 
 // Function opening the modal
@@ -129,11 +130,11 @@ export const runValidateReception = (
           navigate('/');
         }, 3000);
       })
-      .catch(() => {
+      .catch((err) => {
         setIsTypeBoxSelected('');
         openModal(setModalIsOpen);
         setError(true);
-        setMessage("L'application à rencontré une erreur, la réception n'a pas été créée.");
+        manageErrorsServer(err.response.data, setMessage);
       });
   }
 };
