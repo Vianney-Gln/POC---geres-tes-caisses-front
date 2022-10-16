@@ -2,7 +2,7 @@ import React, { useEffect, useContext, useState } from 'react';
 import ModalComponent from '../../Modal/ModalComponent';
 import ContextArticles from '../../../context/ContextArticles';
 import ContextReception from '../../../context/ContextReception';
-import getTodaysDate from './util';
+import getTodaysDate, { getDesignationBoxes } from './util';
 import openModal, { closeModal } from '../util';
 import './recapReception.scss';
 
@@ -41,7 +41,7 @@ const RecapReception = () => {
                 <>
                   <tr>
                     <td>{elt.uuid}</td>
-                    <td>{elt.id_article}</td>
+                    <td>{getDesignationBoxes(Number(elt.id_article))}</td>
                   </tr>
                 </>
               );

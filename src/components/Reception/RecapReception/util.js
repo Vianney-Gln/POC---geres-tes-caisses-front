@@ -1,6 +1,10 @@
 import manageErrorsServer from '../../../Helper/ManageErrorsServer/ManageErrorsServer';
 import validateReception from '../../../services/reception';
 
+/**
+ * Function returning the current date
+ * @returns
+ */
 const getTodaysDate = () => {
   const date = new Date();
   console.log(date.now);
@@ -55,6 +59,27 @@ export const runValidateReception = (
         setModalIsOpen(false);
       }, 3000);
     });
+};
+
+/**
+ * Function returning the designation from a boxe as a string
+ * @param {number} id_article
+ * @returns string
+ */
+export const getDesignationBoxes = (id_article) => {
+  switch (id_article) {
+    case 1:
+      return 'caisse 4m';
+
+    case 2:
+      return 'caisse 4m20';
+
+    case 3:
+      return 'caisse 4m60';
+
+    default:
+      '';
+  }
 };
 
 export default getTodaysDate;
