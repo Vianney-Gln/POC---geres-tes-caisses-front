@@ -49,7 +49,7 @@ const ModalComponent = ({
 }) => {
   // States
   const [widthModal, setWidthModal] = useState('450px');
-  const { dataInputs, setMessageServer } = useContext(ContextReception);
+  const { dataInputs, setMessageServer, setDataInputs } = useContext(ContextReception);
   // style modal
   const styleModal = {
     content: {
@@ -98,7 +98,8 @@ const ModalComponent = ({
         navigate,
         isOperationOk,
         setIsOperationOk,
-        error
+        error,
+        setDataInputs
       );
     } else if (contentLabel === 'Modal-outOfStock') {
       return modalOutOfStock(

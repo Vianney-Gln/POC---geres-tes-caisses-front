@@ -21,6 +21,7 @@ const RecapReception = () => {
   useEffect(() => {
     setAreActivateFilters(false);
   }, []);
+
   return (
     <>
       <ModalComponent
@@ -49,7 +50,7 @@ const RecapReception = () => {
           <tbody>
             {dataInputs.map((elt) => {
               return (
-                <tr key={elt.id_article}>
+                <tr key={elt.uuid}>
                   <td>{elt.uuid}</td>
                   <td>{getDesignationBoxes(Number(elt.id_article))}</td>
                 </tr>

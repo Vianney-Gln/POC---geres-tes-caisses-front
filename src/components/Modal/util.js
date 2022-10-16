@@ -36,6 +36,7 @@ const manageIcon = (error) => {
  * @param {function} handleRestartEffect
  * @param {function} navigate
  * @param {function} setIsOperationOk
+ * @param {function} setDataInputs
  */
 export const runValidateReception = (
   dataInputs,
@@ -44,7 +45,8 @@ export const runValidateReception = (
   setMessageServer,
   handleRestartEffect,
   navigate,
-  setIsOperationOk
+  setIsOperationOk,
+  setDataInputs
 ) => {
   validateReception(dataInputs)
     .then(() => {
@@ -55,6 +57,7 @@ export const runValidateReception = (
         handleRestartEffect();
         setIsOperationOk(false);
         navigate('/');
+        setDataInputs([{ uuid: '', id_article: '' }]);
       }, 3000);
     })
     .catch((err) => {
@@ -142,6 +145,7 @@ export const runDeleteBundleById = (
  * @param {bool} isOperationOk
  * @param {function} setIsOperationOk
  * @param {bool} error
+ * @param {function} setDataInputs
  * @returns
  */
 export const modalReception = (
@@ -158,7 +162,8 @@ export const modalReception = (
   navigate,
   isOperationOk,
   setIsOperationOk,
-  error
+  error,
+  setDataInputs
 ) => {
   return (
     <Modal
@@ -180,8 +185,7 @@ export const modalReception = (
                   handleRestartEffect,
                   navigate,
                   setIsOperationOk,
-                  isOperationOk,
-                  error
+                  setDataInputs
                 )
               }
               type="button">
