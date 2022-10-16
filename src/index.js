@@ -10,6 +10,7 @@ import App from './components/App/App';
 import { ContextArticlesProvider } from './context/ContextArticles';
 import { ContextStockProvider } from './context/ContextStock';
 import { ContextBundleProvider } from './context/ContextBundles';
+import { ContextReceptionProvider } from './context/ContextReception';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -17,9 +18,11 @@ root.render(
     <ContextBundleProvider>
       <ContextStockProvider>
         <ContextArticlesProvider>
-          <BrowserRouter>
-            <App />
-          </BrowserRouter>
+          <ContextReceptionProvider>
+            <BrowserRouter>
+              <App />
+            </BrowserRouter>
+          </ContextReceptionProvider>
         </ContextArticlesProvider>
       </ContextStockProvider>
     </ContextBundleProvider>

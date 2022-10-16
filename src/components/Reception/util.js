@@ -1,6 +1,3 @@
-import manageErrorsServer from '../../Helper/ManageErrorsServer/ManageErrorsServer';
-import validateReception from '../../services/reception';
-
 // Function opening the modal
 const openModal = (setModalIsOpen) => {
   setModalIsOpen(true);
@@ -90,21 +87,15 @@ export const findDuplicate = (dataInputs) => {
  * @param {function} setError
  * @param {function} setMessage
  * @param {function} setIsTypeBoxSelected
- * @param {function} setModalIsOpen
  * @param {function} navigate
- * @param {function} handleRestartEffect
- * @param {function} setMessageServer
  */
-export const runValidateReception = (
+export const checkReception = (
   dataInputs,
   setMessageCaracteres,
   setError,
   setMessage,
   setIsTypeBoxSelected,
-  setModalIsOpen,
-  navigate,
-  handleRestartEffect,
-  setMessageServer
+  navigate
 ) => {
   const errorDup = findDuplicate(dataInputs);
   const errorSelectEmpty = dataInputs.find((elt) => elt.id_article === '');
@@ -121,31 +112,7 @@ export const runValidateReception = (
     setError(true);
     setIsTypeBoxSelected('Veuillez remplir le type de caisses svp');
   } else if (!errorRegexs.includes(true)) {
-    validateReception(dataInputs)
-      .then(() => {
-        setError(false);
-        setIsTypeBoxSelected('');
-        openModal(setModalIsOpen);
-        setMessageServer(`Réception créée avec succès! Redirection en cours...`);
-        setTimeout(() => {
-          handleRestartEffect();
-          navigate('/');
-        }, 3000);
-      })
-      .catch((err) => {
-        setIsTypeBoxSelected('');
-        openModal(setModalIsOpen);
-        setError(true);
-        if (typeof err.response.data === 'string')
-          manageErrorsServer(err.response.data, setMessageServer);
-        if (typeof err.response.data === 'object') {
-          manageErrorsServer(err.response.data[0][0].message, setMessageServer);
-        }
-        setTimeout(() => {
-          setMessageServer('');
-          setModalIsOpen(false);
-        }, 3000);
-      });
+    navigate('./recap');
   }
 };
 
