@@ -1,4 +1,5 @@
 import React, { useEffect, useContext, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import ModalComponent from '../../Modal/ModalComponent';
 import ContextArticles from '../../../context/ContextArticles';
 import ContextReception from '../../../context/ContextReception';
@@ -10,6 +11,8 @@ const RecapReception = () => {
   const { setAreActivateFilters } = useContext(ContextArticles);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const { error, messageServer, dataInputs } = useContext(ContextReception);
+
+  const navigate = useNavigate();
 
   // Desactivate the MenuLeft on component mounting
   useEffect(() => {
@@ -50,7 +53,13 @@ const RecapReception = () => {
         </table>
         <div className="duo-btn">
           <button type="button">Confirmer la réception</button>
-          <button type="button">Annuler</button>
+          <button
+            onClick={() => {
+              navigate('../reception');
+            }}
+            type="button">
+            Annuler
+          </button>
         </div>
       </div>
     </>

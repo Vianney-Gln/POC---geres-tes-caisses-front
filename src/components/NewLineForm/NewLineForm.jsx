@@ -38,6 +38,7 @@ const NewLineForm = ({
       <label htmlFor="articleBoxe">
         <span>type de caisse:</span>
         <select
+          value={line.id_article}
           onChange={(e) =>
             getInputData(dataInputs, setDataInputs, e.target.value, 'id_article', index)
           }>
