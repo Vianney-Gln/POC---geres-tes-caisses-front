@@ -52,7 +52,9 @@ const RecapReception = () => {
           </tbody>
         </table>
         <div className="duo-btn">
-          <button type="button">Confirmer la réception</button>
+          <button onClick={() => setModalIsOpen(true)} type="button">
+            Confirmer la réception
+          </button>
           <button
             onClick={() => {
               navigate('../reception');
