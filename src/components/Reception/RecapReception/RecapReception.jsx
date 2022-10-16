@@ -48,6 +48,10 @@ const RecapReception = () => {
             })}
           </tbody>
         </table>
+        <div className="duo-btn">
+          <button type="button">Confirmer la réception</button>
+          <button type="button">Annuler</button>
+        </div>
       </div>
     </>
   );
