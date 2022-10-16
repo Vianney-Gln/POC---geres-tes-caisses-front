@@ -19,3 +19,14 @@ div.container-recap-reception {
     }
   }
 }
+
+@media screen and (max-width: 730px) {
+  div.container-recap-reception {
+    width: 100vw;
+    table.table-reception {
+      caption {
+        font-size: 1.2rem;
+      }
+    }
+  }
+}
