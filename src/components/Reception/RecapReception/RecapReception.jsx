@@ -1,11 +1,19 @@
-import React from 'react';
+import React, { useEffect, useContext } from 'react';
+import ContextArticles from '../../../context/ContextArticles';
+import getTodaysDate from './util';
 import './recapReception.scss';
 
 const RecapReception = () => {
+  const { setAreActivateFilters } = useContext(ContextArticles);
+
+  // Desactivate the MenuLeft on component mounting
+  useEffect(() => {
+    setAreActivateFilters(false);
+  }, []);
   return (
     <div className="container-recap-reception">
       <table className="table-reception">
-        <caption>Réception du .../.../... à telle heure</caption>
+        <caption>Réception du {getTodaysDate()}</caption>
         <thead>
           <tr align="center">
             <th>identifiant</th>
