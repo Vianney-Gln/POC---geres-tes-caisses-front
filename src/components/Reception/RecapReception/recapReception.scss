@@ -1,0 +1,21 @@
+div.container-recap-reception {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+
+  table.table-reception {
+    width: 80%;
+    margin-top: 20px;
+    border-collapse: collapse;
+    background-color: whitesmoke;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 0px 8px;
+    font-size: 0.8rem;
+
+    caption {
+      padding: 15px;
+      font-size: 1.4rem;
+      font-family: 'Chakra Petch', sans-serif;
+      position: relative;
+    }
+  }
+}

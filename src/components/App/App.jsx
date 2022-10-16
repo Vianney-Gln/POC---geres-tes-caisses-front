@@ -6,6 +6,7 @@ import MenuLeft from '../Menu-left/MenuLeft';
 import MenuTop from '../Menu-top/MenuTop';
 import Stock from '../stock/Stock';
 import Reception from '../Reception/Reception';
+import RecapReception from '../Reception/RecapReception/RecapReception';
 import Redirect from '../../Redirect/Redirect';
 import Bundling from '../Bundling/Bundling';
 import MenuSlideMobile from '../MenuSlideMobile/MenuSlideMobile';
@@ -30,6 +31,7 @@ const App = () => {
           <Route exact path="/stock/:articleName" element={<Stock />} />
           <Route exact path="/fagot-content/:id" element={<ContentBundle />} />
           <Route exact path="/reception" element={<Reception />} />
+          <Route exact path="/reception/recap" element={<RecapReception />} />
           <Route exact path="/out-of-stock" element={<Stock />} />
           <Route exact path="/out-of-stock/:articleName" element={<Stock />} />
           <Route exact path="/bundling/:operation/" element={<Bundling />} />
