@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import Modal from 'react-modal';
 import { deleteBundleById } from '../../services/bundle';
 import {
@@ -12,6 +12,7 @@ import {
 import './modalComponent.scss';
 import PropTypes from 'prop-types';
 import manageIcon from './util';
+import ContextReception from '../../context/ContextReception';
 
 const ModalComponent = ({
   error,
@@ -47,9 +48,8 @@ const ModalComponent = ({
   setErrorDelete
 }) => {
   // States
-
   const [widthModal, setWidthModal] = useState('450px');
-
+  const { dataInputs, setMessageServer } = useContext(ContextReception);
   // style modal
   const styleModal = {
     content: {
@@ -64,7 +64,6 @@ const ModalComponent = ({
       transform: 'translate(-50%, -50%)'
     }
   };
-
   // Function managing size of modal depending the size of the device
   useEffect(() => {
     if (window.matchMedia('(max-width:730px)').matches) {
@@ -73,7 +72,6 @@ const ModalComponent = ({
       setWidthModal('450px');
     }
   }, []);
-
   window.addEventListener('resize', () => {
     if (window.matchMedia('(max-width:730px)').matches) {
       setWidthModal('80%');
@@ -81,11 +79,9 @@ const ModalComponent = ({
       setWidthModal('450px');
     }
   });
-
   Modal.setAppElement('#root');
 
   // Function managing the content of the modal
-
   const manageModalContent = () => {
     if (contentLabel === 'Modal-reception') {
       return modalReception(
@@ -93,10 +89,16 @@ const ModalComponent = ({
         closeModal,
         styleModal,
         contentLabel,
-        manageIcon,
-        error,
+        setModalIsOpen,
+        dataInputs,
+        setError,
         message,
-        setModalIsOpen
+        setMessageServer,
+        handleRestartEffect,
+        navigate,
+        isOperationOk,
+        setIsOperationOk,
+        error
       );
     } else if (contentLabel === 'Modal-outOfStock') {
       return modalOutOfStock(

@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import ModalComponent from '../../Modal/ModalComponent';
 import ContextArticles from '../../../context/ContextArticles';
 import ContextReception from '../../../context/ContextReception';
+import ContextBundles from '../../../context/ContextBundles';
 import getTodaysDate, { getDesignationBoxes } from './util';
 import openModal, { closeModal } from '../util';
 import './recapReception.scss';
@@ -10,7 +11,9 @@ import './recapReception.scss';
 const RecapReception = () => {
   const { setAreActivateFilters } = useContext(ContextArticles);
   const [modalIsOpen, setModalIsOpen] = useState(false);
-  const { error, messageServer, dataInputs } = useContext(ContextReception);
+  const [isOperationOk, setIsOperationOk] = useState(false);
+  const { error, setError, messageServer, dataInputs } = useContext(ContextReception);
+  const { handleRestartEffect } = useContext(ContextBundles);
 
   const navigate = useNavigate();
 
@@ -22,6 +25,11 @@ const RecapReception = () => {
     <>
       <ModalComponent
         error={error}
+        setError={setError}
+        isOperationOk={isOperationOk}
+        setIsOperationOk={setIsOperationOk}
+        handleRestartEffect={handleRestartEffect}
+        navigate={navigate}
         message={messageServer}
         open={modalIsOpen}
         openModal={openModal}
@@ -41,12 +49,10 @@ const RecapReception = () => {
           <tbody>
             {dataInputs.map((elt) => {
               return (
-                <>
-                  <tr>
-                    <td>{elt.uuid}</td>
-                    <td>{getDesignationBoxes(Number(elt.id_article))}</td>
-                  </tr>
-                </>
+                <tr key={elt.id_article}>
+                  <td>{elt.uuid}</td>
+                  <td>{getDesignationBoxes(Number(elt.id_article))}</td>
+                </tr>
               );
             })}
           </tbody>

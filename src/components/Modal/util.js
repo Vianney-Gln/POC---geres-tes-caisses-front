@@ -1,4 +1,6 @@
 import Modal from 'react-modal';
+import manageErrorsServer from '../../Helper/ManageErrorsServer/ManageErrorsServer';
+import validateReception from '../../services/reception';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faTriangleExclamation,
@@ -23,6 +25,53 @@ const manageIcon = (error) => {
       <FontAwesomeIcon icon={faSquareCheck} />
     </i>
   );
+};
+
+/**
+ * Function running validateReception and then manage messages,verify the good conformity from user's input, then redirect to stock page IF no duplicates elements in dataInputs
+ * @param {array} dataInputs
+ * @param {function} setError
+ * @param {function} setModalIsOpen
+ * @param {function} setMessageServer
+ * @param {function} handleRestartEffect
+ * @param {function} navigate
+ * @param {function} setIsOperationOk
+ */
+export const runValidateReception = (
+  dataInputs,
+  setError,
+  setModalIsOpen,
+  setMessageServer,
+  handleRestartEffect,
+  navigate,
+  setIsOperationOk
+) => {
+  validateReception(dataInputs)
+    .then(() => {
+      setIsOperationOk(true);
+      setError(false);
+      setMessageServer(`Réception créée avec succès! Redirection en cours...`);
+      setTimeout(() => {
+        handleRestartEffect();
+        setIsOperationOk(false);
+        navigate('/');
+      }, 3000);
+    })
+    .catch((err) => {
+      setIsOperationOk(true);
+      setModalIsOpen(true);
+      setError(true);
+      if (typeof err.response.data === 'string')
+        manageErrorsServer(err.response.data, setMessageServer);
+      if (typeof err.response.data === 'object') {
+        manageErrorsServer(err.response.data[0][0].message, setMessageServer);
+      }
+      setTimeout(() => {
+        setMessageServer('');
+        setModalIsOpen(false);
+        setIsOperationOk(false);
+      }, 3000);
+    });
 };
 /**
  * Function deleting a bundle without deleteting boxes inside, then manage error or success messages
@@ -83,10 +132,16 @@ export const runDeleteBundleById = (
  * @param {function} closeModal
  * @param {object} styleModal
  * @param {string} contentLabel
- * @param {function} manageIcon
- * @param {bool} error
- * @param {string} message
  * @param {function} setModalIsOpen
+ * @param {array} dataInputs
+ * @param {function} setError
+ * @param {function} setErrormessageServer
+ * @param {function} setMessageServer
+ * @param {function} handleRestartEffect
+ * @param {function} navigate
+ * @param {bool} isOperationOk
+ * @param {function} setIsOperationOk
+ * @param {bool} error
  * @returns
  */
 export const modalReception = (
@@ -94,18 +149,52 @@ export const modalReception = (
   closeModal,
   styleModal,
   contentLabel,
-  manageIcon,
-  error,
-  message,
-  setModalIsOpen
+  setModalIsOpen,
+  dataInputs,
+  setError,
+  messageServer,
+  setMessageServer,
+  handleRestartEffect,
+  navigate,
+  isOperationOk,
+  setIsOperationOk,
+  error
 ) => {
   return (
-    <Modal isOpen={open} onRequestClose={closeModal} style={styleModal} contentLabel={contentLabel}>
-      {manageIcon(error)}
-      <p>{message}</p>
-      <button className="button-close" onClick={() => closeModal(setModalIsOpen)}>
-        Fermer
-      </button>
+    <Modal
+      isOpen={open}
+      onRequestClose={() => closeModal(setModalIsOpen)}
+      style={styleModal}
+      contentLabel={contentLabel}>
+      {!isOperationOk && (
+        <>
+          <p>Etes vous sûr de vouloir valider cette réception?</p>
+          <div className="duo-btn">
+            <button
+              onClick={() =>
+                runValidateReception(
+                  dataInputs,
+                  setError,
+                  setModalIsOpen,
+                  setMessageServer,
+                  handleRestartEffect,
+                  navigate,
+                  setIsOperationOk,
+                  isOperationOk,
+                  error
+                )
+              }
+              type="button">
+              Oui
+            </button>
+            <button onClick={() => closeModal(setModalIsOpen)} type="button">
+              Non
+            </button>
+          </div>
+        </>
+      )}
+      {isOperationOk && manageIcon(error)}
+      <p>{isOperationOk && messageServer}</p>
     </Modal>
   );
 };

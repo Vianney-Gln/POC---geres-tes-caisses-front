@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ContextArticles from '../../context/ContextArticles';
-import ContextBundles from '../../context/ContextBundles';
 import ContextReception from '../../context/ContextReception';
 import './reception.scss';
 import NewLineForm from '../NewLineForm/NewLineForm';
@@ -12,8 +11,7 @@ const Reception = () => {
   document.title = 'Gestion des caisses - réception';
   const contextArticles = useContext(ContextArticles);
   const { setAreActivateFilters } = contextArticles;
-  const { handleRestartEffect } = useContext(ContextBundles);
-  const { dataInputs, setDataInputs, setError, setMessageServer } = useContext(ContextReception);
+  const { dataInputs, setDataInputs, setError } = useContext(ContextReception);
   const [message, setMessage] = useState('');
   const [messageCarateres, setMessageCaracteres] = useState('');
   const [isTypeBoxSelected, setIsTypeBoxSelected] = useState('');
@@ -24,10 +22,6 @@ const Reception = () => {
   useEffect(() => {
     setAreActivateFilters(false);
   }, []);
-
-  // delete this
-  console.log(handleRestartEffect);
-  console.log(setMessageServer);
 
   return (
     <div className="container-reception">
